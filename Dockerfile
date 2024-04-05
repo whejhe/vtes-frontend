@@ -1,13 +1,14 @@
-FROM node:20-alpine
-
-WORKDIR /app
-
-COPY package.json yarn.lock . /app/
+FROM node:alpine
  
-RUN yarn install --frozen-lockfile
-
+WORKDIR /app
+ 
+COPY package.json yarn.lock ./
+ 
+RUN yarn install --frozen-lockfile && \
+    yarn cache clean
+ 
 COPY . .
-
+ 
 EXPOSE 4200
-
-CMD ["npm", "run", "start"]
+ 
+CMD ["ng", "serve"]
