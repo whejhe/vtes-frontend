@@ -1,0 +1,107 @@
+.formulario{
+  background-color: #d8d7d7;
+}
+
+.container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 5em;
+}
+
+.custom-card{
+  border: 1px solid black;
+  border-radius: 8px;
+  width: 500px;
+  height: 700px;
+  background-image: url('../../../../../assets/img/plantilla.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  // z-index: 1;
+  .card-name{
+    position: absolute;
+    top: 4%;
+    left: 5%;
+    font-size: 2em;
+  }
+  .icono-clan{
+    position: absolute;
+    top: 10%;
+    left: 6%;
+    width: 50px;
+    height: 50px;
+  }
+  .icono-capacidad{
+    background-image: url('../../../../../assets/img/icons-vtes/others/capacity.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    top: 87%;
+    right: 5%;
+    width: 60px;
+    height: 80px;
+    .texto-capacidad{
+      position: absolute;
+      color: antiquewhite;
+      top: 45%;
+      left: 38%;
+      font-size: 2em;
+    }
+  }
+  .iconos-disciplina{
+    position: absolute;
+    background-color: rgba(255, 145, 10, 0);
+    top: 88%;
+    left: 4%;
+    .disciplina-container{
+      position: absolute;
+    }
+  }
+
+  .discipline-icon{
+    width: 60px;
+    height: 60px;
+  }
+
+  .icono-logo{
+    width: 90px;
+    position: absolute;
+    right: 5%;
+  }
+  .texto-carta{
+    position: absolute;
+    bottom: 7%;
+    left: 18%;
+    width: 70%;
+    height: auto;
+    background-color: rgba($color: #000000, $alpha: 0.2);
+    color: black;
+    padding: 1em;
+  }
+  #grupo{
+    position: absolute;
+  }
+}
+
+.spacio{
+  width: 20px;
+}
+
+.formulario{
+  border: 5px solid black;
+  border-radius: 8px;
+  width: 40%;
+  padding: 1em;
+}
+
+.description{
+  margin-top: 1em;
+}
+
+.guardar{
+  background-color: #222121;
+  border: 1px solid red;
+}

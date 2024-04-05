@@ -1,0 +1,150 @@
+h4{
+  font-weight: bold;
+}
+
+.imagenDestacada{
+  width: 150px;
+  height: auto;
+  position: fixed;
+  top: 120px;
+  right: 200px;
+}
+
+.filtro-header{
+  margin-top: 2em;
+}
+
+label{
+  font-weight: bold;
+}
+
+.container-image{
+  display: inline-block;
+  width: auto;
+  margin: 0 0.5em ;
+  padding: 0.3em 0;
+}
+
+.imageIcons{
+  height: auto;
+  margin: -0.5em;
+  width: 30px;
+}
+
+.icon-filter{
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.icon-filter.clicked{
+  opacity: 1;
+}
+
+thead{
+  tr{
+    text-align: center;
+  }
+}
+
+tr{
+  width: 100%;
+  td{
+    width: 30%, 15%, 10%, 30%, 15%;
+    padding-left: 2em;
+  }
+}
+
+td:nth-child(1),
+td:nth-child(3),
+td:nth-child(4) {
+  text-align: left;
+}
+
+td:nth-child(2),
+td:nth-child(5) {
+  text-align: center;
+}
+
+.all-disciplines{
+  display: inline-flex;
+  img{
+    margin: auto;
+  }
+}
+
+aside{
+  background-color: rgb(226, 224, 224);
+  border-radius: 8px;
+  height: fit-content;
+  padding: 1em;
+  margin-left: 1.5em;
+}
+
+.title{
+  padding-top: 1em;
+  padding-bottom: 1em;
+  align-items: center;
+}
+
+.content-title{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+}
+.content-title > div{
+  display: flex;
+  align-items: center;
+  margin-right: 1em;
+}
+
+.content-title > div > input{
+  margin-right: 0.5em;
+}
+
+.traits{
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.content-traits{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+}
+.content-traits > div{
+  display: flex;
+  align-items: center;
+  margin-right: 1em;
+}
+
+.content-traits > div > input{
+  margin-right: 0.5em;
+}
+
+.enlaces{
+  background-color: rgb(36, 35, 35);
+  color: antiquewhite;
+  font-size: larger;
+  font-weight: bold;
+  margin-top: 2em;
+  margin-left: 1.5em;
+  padding: 1em;
+  border-radius: 8px;
+  h4{
+    text-decoration: underline;
+    text-align: center;
+  }
+  li:hover{
+    color: rgb(153, 6, 6);
+  }
+}
+
+.disciplines{
+  margin-top: 1em;
+}
+
+.group-styles{
+  font-weight: bold;
+  border: 2px solid black;
+  padding: 0.3em;
+}

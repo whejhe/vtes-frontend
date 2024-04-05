@@ -1,0 +1,222 @@
+<nav class="navbar navbar-dark bg-dark" aria-label="Dark offcanvas navbar">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarDark"
+      aria-controls="offcanvasNavbarDark" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbarDark"
+      aria-labelledby="offcanvasNavbarDarkLabel">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <!-- <form class="d-flex mt-3" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-danger" type="submit">Search</button>
+        </form> -->
+        <app-search-imput></app-search-imput>
+
+
+        <form action="">
+          <div class="row">
+            <div class="col-6">
+              <h4 class="titulo-select">Type</h4>
+              <select name="type" class="form-select" id="type">
+                <option value="type">Any</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <h4 class="titulo-select">Disciplines</h4>
+              <select name="disciplines" class="form-select" id="disciplines">
+                <option value="disciplines">Any</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+              <h4 class="titulo-select">Clan</h4>
+              <select name="clan" class="form-select" id="clan">
+                <option value="type">Any</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <h4 class="titulo-select">Sect</h4>
+              <select name="sect" class="form-select" id="sect">
+                <option value="sect">Any</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+              <h4 class="titulo-select">Title</h4>
+              <select name="title" class="form-select" id="title">
+                <option value="title">Any</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <h4 class="titulo-select">Capacity</h4>
+              <select name="capacity" class="form-select" id="capacity">
+                <option value="capacity">Any</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+              <h4 class="titulo-select">Blood Cost</h4>
+              <select name="blood-cost" class="form-select" id="blood-cost">
+                <option value="blood-cost">Any</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <h4 class="titulo-select">Pool Cost</h4>
+              <select name="pool-cost" class="form-select" id="pool-cost">
+                <option value="pool-cost">Any</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="titulo-select">Traits</h4>
+            <div class="content-traits">
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-intercept" value="intercept">
+                <label for="-traits-intercept">+Intercept / -Stealth</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-stealth" value="stealth">
+                <label for="-traits-stealth">+Stealth / -Intercept</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-bleed" value="bleed">
+                <label for="-traits-bleed">+Bleed</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-votes-title" value="votes-title">
+                <label for="-traits-votes-title">+Votes / Title</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-strength" value="strength">
+                <label for="-traits-strength">+Strength</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-dodge" value="dodge">
+                <label for="-traits-dodge">Dodge</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-maneuver" value="maneuver">
+                <label for="-traits-maneuver">Maneuver</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-additional strike"
+                  value="additional strike">
+                <label for="-traits-additional strike">Additional Strike</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-aggravated" value="aggravated">
+                <label for="-traits-aggravated">Aggravated</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-prevent" value="prevent">
+                <label for="-traits-prevent">Prevent</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-press" value="press">
+                <label for="-traits-press">Press</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-combat ends" value="combat ends">
+                <label for="-traits-combat ends">Combat Ends</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-multi-type" value="multi-type">
+                <label for="-traits-multi-type">Multi-Type</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-multi-discipline"
+                  value="multi-discipline">
+                <label for="-traits-multi-discipline">Multi-Discipline</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-enter combat"
+                  value="enter combat">
+                <label for="-traits-enter combat">Enter Combat</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-embrace" value="embrace">
+                <label for="-traits-embrace">Create Vampire</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-bloat" value="bloat">
+                <label for="-traits-bloat">Blood to Uncontrolled</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-bounce bleed"
+                  value="bounce bleed">
+                <label for="-traits-bounce bleed">Bounce Bleed</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-reduce bleed"
+                  value="reduce bleed">
+                <label for="-traits-reduce bleed">Reduce Bleed</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-unlock" value="unlock">
+                <label for="-traits-unlock">Wake / Unlock</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-black hand" value="black hand">
+                <label for="-traits-black hand">Black Hand</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-seraph" value="seraph">
+                <label for="-traits-seraph">Seraph</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-infernal" value="infernal">
+                <label for="-traits-infernal">Infernal</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-burn" value="burn">
+                <label for="-traits-burn">Burn Option</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-banned" value="banned">
+                <label for="-traits-banned">Banned</label>
+              </div>
+              <div>
+                <input name="traits" type="checkbox" class="form-checkbox" id="-traits-no-requirements"
+                  value="no-requirements">
+                <label for="-traits-no-requirements">No Requirement</label>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-6">
+              <h4 class="titulo-select">Set</h4>
+              <select name="set" class="form-select" id="set">
+                <option value="set">Any</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <h4 class="titulo-select">Precon</h4>
+              <select name="precon" class="form-select" id="precon">
+                <option value="precon">Any</option>
+              </select>
+            </div>
+          </div>
+
+
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+
+</nav>

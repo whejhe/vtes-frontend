@@ -1,0 +1,65 @@
+nav{
+  position: fixed;
+  right: 0;
+  top:50px;
+}
+
+.disciplines{
+  padding-top: 1em;
+  padding-bottom: 1em;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.title{
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.content-title{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+}
+.content-title > div{
+  display: flex;
+  align-items: center;
+  margin-right: 1em;
+}
+
+.content-title > div > input{
+  margin-right: 0.5em;
+}
+
+.powers{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+img{
+  height: 38px;
+}
+
+.img-opacidad {
+  opacity: 0.5;
+}
+
+.traits{
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.content-traits{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+}
+.content-traits > div{
+  display: flex;
+  align-items: center;
+  margin-right: 1em;
+}
+
+.content-traits > div > input{
+  margin-right: 0.5em;
+}

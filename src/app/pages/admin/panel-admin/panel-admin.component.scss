@@ -1,0 +1,24 @@
+.panel-admin{
+  h1{
+    text-align: center;
+    font-weight: bold;
+    font-size: 2.5em;
+    text-decoration: underline;
+  }
+
+  nav{
+    ul{
+      display: flex;
+      justify-content: center;
+      li{
+        margin: 0 1em;
+        list-style: none;
+        a{
+          font-weight: bold;
+          font-size: 1.5em;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

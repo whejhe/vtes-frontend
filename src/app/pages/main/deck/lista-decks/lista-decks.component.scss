@@ -1,0 +1,31 @@
+table{
+    margin-top: 3em;
+    tr{
+        cursor: pointer;
+    }
+}
+
+
+.pagination-content{
+    margin-top: 4em;
+    a:hover{
+        background-color: rgb(117, 5, 5);
+        color: aliceblue;
+    }
+    a:focus{
+        background-color: rgb(117, 5, 5);
+        color: aliceblue;
+    }
+
+}
+
+.page-link{
+    color: rgb(117, 5, 5);
+}
+
+.page-item.active .page-link
+{
+    background-color: rgb(117, 5, 5);
+    color: aliceblue;
+    border-color: rgb(117, 5, 5);
+}

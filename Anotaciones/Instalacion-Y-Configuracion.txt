@@ -1,0 +1,37 @@
+node -v
+npm -v
+
+npm install -g @angular/cli
+
+ng new nombre-aplication
+
+ng generate service services/json-service
+ng generate guard guards
+ng generate component components/header
+ng generate component pages/main
+ng generate module pages/pages
+ng generate module components --module=app
+ng generate pipe pipes/my-custom
+ng g environments
+
+LANZAR APLICACION
+ng serve
+
+ELIMINAR DEPENDENCIAS
+npm uninstall nombre
+
+DEPENDENCIAS:
+npm install yarn
+npm install hammerjs
+ng add @angular/material
+npm install @ngx-translate/core @ngx-translate/http-loader --save
+npm install boostrap --save
+npm i bootstrap@5.3.3
+npm install ngx-infinite-scroll --save
+npm install http-auth-interceptor --save
+
+
+
+npm install -g json-ts (generar interface apartir de archivo.json)
+con el comando: json-ts vtes.json -o vtes.d.ts
+

@@ -1,0 +1,34 @@
+nav{
+  position: fixed;
+  right: 0;
+  top:50px;
+}
+
+img{
+  height: 38px;
+}
+
+.titulo-select{
+  padding: 1em 0 0 0;
+  margin: 0;
+}
+
+.traits{
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.content-traits{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+}
+.content-traits > div{
+  display: flex;
+  align-items: center;
+  margin-right: 1em;
+}
+
+.content-traits > div > input{
+  margin-right: 0.5em;
+}

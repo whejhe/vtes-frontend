@@ -1,0 +1,41 @@
+<div class="container">
+   <span class="close" (click)="closeModal()">X</span>
+    <div>
+        <div class="image">
+            <!-- <img src="../../../assets/img/plantilla.png" alt=""> -->
+            <img src="{{data.card.url}}" alt="">
+        </div>
+        <div class="info-details">
+            <h2 class="underline">{{data.card.name }}</h2>
+            <div *ngIf="data.card.pool_cost !== undefined">
+              <!-- <h2>Pool Cost: {{data.card.pool_cost}}</h2> -->
+              <span class="coste">
+                <h2>Pool Cost: </h2>
+                <img [src]="getPoolCostImage(data.card.pool_cost)" alt="Pool Cost Image">
+              </span>
+            </div>
+            <div>
+              <h2>Type: {{data.card.types }}</h2>
+            </div>
+            <div *ngIf="data.card.blood_cost !== undefined">
+              <!-- <h2>Blood cost: {{data.card.blood_cost}}</h2> -->
+              <span class="coste">
+                <h2>Bood cost: </h2>
+                <img [src]="getBloodCostImage(data.card.blood_cost)" alt="Blood Cost Image">
+              </span>
+            </div>
+            <div *ngIf="data.card.clans !== undefined">
+              <h2>Clan: {{data.card.clans }}</h2>
+            </div>
+            <div *ngIf="data.card.disciplines !== undefined">
+              <h2>Disciplinas: {{data.card.disciplines }}</h2>
+            </div>
+            <br>
+            <p class="underline">Desciption:</p>
+            <p>{{data.card.card_text }}</p>
+            <div *ngIf="data.card.rulings !== undefined">
+              <p>Rulings: {{data.card.rulings.text }}</p>
+            </div>
+        </div>
+    </div>
+</div>

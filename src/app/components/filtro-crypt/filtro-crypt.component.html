@@ -1,0 +1,252 @@
+<nav class="navbar navbar-dark bg-dark" aria-label="Dark offcanvas navbar">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarDark"
+      aria-controls="offcanvasNavbarDark" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbarDark"
+      aria-labelledby="offcanvasNavbarDarkLabel">
+      <div class="offcanvas-header">
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+
+
+        <form class="d-flex mt-3" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-danger" type="submit">Search</button>
+        </form>
+        
+
+        <div class="space-y-2">
+
+          <div class="disciplines">
+            <div *ngFor="let discipline of disciplines">
+              <img [src]="DisciplinesUrl + '/' + discipline + '.svg'" [id]="discipline" [title]="discipline"
+                (click)="cambiarImagen(discipline)" [class.img-opacidad]="imagenSeleccionada !== discipline">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6 capacity-min">
+              <input type="number" class="form-control" min="1" max="11" placeholder="Capacidad minima">
+            </div>
+            <div class="col-6 capacity-max">
+              <input type="number" class="form-control" min="1" max="11" placeholder="Capacidad maxima">
+            </div>
+          </div>
+
+          <br>
+
+          <div class="row">
+            <div class="col-6 clan">
+              <select name="clan" id="clan" class="form-select">
+                <option value="clan">Clan</option>
+              </select>
+            </div>
+            <div class="col-6 sect">
+              <select name="sect" id="sect" class="form-select">
+                <option value="sect">Sect</option>
+              </select>
+            </div>
+          </div>
+
+
+          <div class="title">
+            <h4>Title:</h4>
+            <div class="content-title">
+              <div>
+                <input name="titles" type="checkbox" class="form-checkbox" id="-titles-primogen" value="primogen">
+                <label for="-titles-primogen">Primogen</label>
+              </div>
+              <div>
+                <input name="titles" type="checkbox" class="form-checkbox" id="-titles-prince" value="prince">
+                <label for="-titles-prince">Prince</label>
+              </div>
+              <div>
+                <input name="titles" type="checkbox" class="form-checkbox" id="-titles-justicar" value="justicar">
+                <label for="-titles-justicar">Justicar</label>
+              </div>
+              <div>
+                <input name="titles" type="checkbox" class="form-checkbox" id="-titles-inner circle"
+                  value="inner circle">
+                <label for="-titles-inner circle">Inner Circle</label>
+              </div>
+              <div>
+                <input name="titles" type="checkbox" class="form-checkbox" id="-titles-baron" value="baron">
+                <label for="-titles-baron">Baron</label>
+              </div>
+              <div>
+                <input name="titles" type="checkbox" class="form-checkbox" id="-titles-1 vote" value="1 vote">
+                <label for="-titles-1 vote">1 vote (titled)</label>
+              </div>
+              <div>
+                <input name="titles" type="checkbox" class="form-checkbox" id="-titles-2 votes" value="2 votes">
+                <label for="-titles-2 votes">2 votes (titled)</label>
+              </div>
+              <div>
+                <input name="titles" type="checkbox" class="form-checkbox" id="-titles-bishop" value="bishop">
+                <label for="-titles-bishop">Bishop</label>
+              </div>
+              <div>
+                <input name="titles" type="checkbox" class="form-checkbox" id="-titles-archbishop" value="archbishop">
+                <label for="-titles-archbishop">Archbishop</label>
+              </div>
+              <div>
+                <input name="titles" type="checkbox" class="form-checkbox" id="-titles-priscus" value="priscus">
+                <label for="-titles-priscus">Priscus</label>
+              </div>
+              <div>
+                <input name="titles" type="checkbox" class="form-checkbox" id="-titles-cardinal" value="cardinal">
+                <label for="-titles-cardinal">Cardinal</label>
+              </div>
+              <div>
+                <input name="titles" type="checkbox" class="form-checkbox" id="-titles-regent" value="regent">
+                <label for="-titles-regent">Regent</label>
+              </div>
+              <div>
+                <input name="titles" type="checkbox" class="form-checkbox" id="-titles-magaji" value="magaji">
+                <label for="-titles-magaji">Magaji</label>
+              </div>
+              <div>
+                <input name="titles" type="checkbox" class="form-checkbox" id="-titles-none" value="none">
+                <label for="-titles-none">Non-titled</label>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-6 group">
+              <select name="group" id="group" class="form-select">
+                <option value="1">Grupo 1</option>
+                <option value="2">Grupo 1-2</option>
+                <option value="3">Grupo 2</option>
+                <option value="4">Grupo 2-3</option>
+                <option value="5">Grupo 3</option>
+                <option value="6">Grupo 3-4</option>
+                <option value="7">Grupo 4</option>
+                <option value="8">Grupo 4-5</option>
+                <option value="9">Grupo 5</option>
+                <option value="10">Grupo 5-6</option>
+                <option value="11">Grupo 6</option>
+                <option value="12">Grupo 6-7</option>
+                <option value="13">Grupo 7</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="traits">
+            <h4>Traits:</h4>
+            <div class="flex">
+              <div class="content-traits">
+                <div class="flex items-center space-x-1.5 ">
+                  <input name="traits" type="checkbox" class="form-checkbox" id="-traits-1 intercept"
+                    value="1 intercept">
+                  <label for="-traits-1 intercept">+1 intercept</label>
+                </div>
+                <div class="flex items-center space-x-1.5 ">
+                  <input name="traits" type="checkbox" class="form-checkbox" id="-traits-1 stealth" value="1 stealth">
+                  <label for="-traits-1 stealth">+1 stealth</label>
+                </div>
+                <div class="flex items-center space-x-1.5 ">
+                  <input name="traits" type="checkbox" class="form-checkbox" id="-traits-1 bleed" value="1 bleed">
+                  <label for="-traits-1 bleed">+1 bleed</label>
+                </div>
+                <div class="flex items-center space-x-1.5 ">
+                  <input name="traits" type="checkbox" class="form-checkbox" id="-traits-2 bleed" value="2 bleed">
+                  <label for="-traits-2 bleed">+2 bleed</label>
+                </div>
+                <div class="flex items-center space-x-1.5 ">
+                  <input name="traits" type="checkbox" class="form-checkbox" id="-traits-1 strength" value="1 strength">
+                  <label for="-traits-1 strength">+1 strength</label>
+                </div>
+                <div class="flex items-center space-x-1.5 ">
+                  <input name="traits" type="checkbox" class="form-checkbox" id="-traits-2 strength" value="2 strength">
+                  <label for="-traits-2 strength">+2 strength</label>
+                </div>
+                <div class="flex items-center space-x-1.5 ">
+                  <input name="traits" type="checkbox" class="form-checkbox" id="-traits-maneuver" value="maneuver">
+                  <label for="-traits-maneuver">Maneuver</label>
+                </div>
+                <div class="flex items-center space-x-1.5 ">
+                  <input name="traits" type="checkbox" class="form-checkbox" id="-traits-additional strike"
+                    value="additional strike">
+                  <label for="-traits-additional strike">Additional Strike</label>
+                </div>
+                <div class="flex items-center space-x-1.5 ">
+                  <input name="traits" type="checkbox" class="form-checkbox" id="-traits-aggravated" value="aggravated">
+                  <label for="-traits-aggravated">Aggravated</label>
+                </div>
+                <div class="flex items-center space-x-1.5 ">
+                  <input name="traits" type="checkbox" class="form-checkbox" id="-traits-prevent" value="prevent">
+                  <label for="-traits-prevent">Prevent</label>
+                </div>
+                <div class="flex items-center space-x-1.5 ">
+                  <input name="traits" type="checkbox" class="form-checkbox" id="-traits-press" value="press">
+                  <label for="-traits-press">Press</label>
+                </div>
+                <div class="flex items-center space-x-1.5 ">
+                  <input name="traits" type="checkbox" class="form-checkbox" id="-traits-enter combat"
+                    value="enter combat">
+                  <label for="-traits-enter combat">Enter combat</label>
+                </div>
+                <div class="flex items-center space-x-1.5 ">
+                  <input name="traits" type="checkbox" class="form-checkbox" id="-traits-unlock" value="unlock">
+                  <label for="-traits-unlock">Unlock</label>
+                </div>
+                <div class="flex items-center space-x-1.5 ">
+                  <input name="traits" type="checkbox" class="form-checkbox" id="-traits-black hand" value="black hand">
+                  <label for="-traits-black hand">Black Hand</label>
+                </div>
+                <div class="flex items-center space-x-1.5 ">
+                  <input name="traits" type="checkbox" class="form-checkbox" id="-traits-seraph" value="seraph">
+                  <label for="-traits-seraph">Seraph</label>
+                </div>
+                <div class="flex items-center space-x-1.5 ">
+                  <input name="traits" type="checkbox" class="form-checkbox" id="-traits-infernal" value="infernal">
+                  <label for="-traits-infernal">Infernal</label>
+                </div>
+                <div class="flex items-center space-x-1.5 ">
+                  <input name="traits" type="checkbox" class="form-checkbox" id="-traits-red list" value="red list">
+                  <label for="-traits-red list">Red List</label>
+                </div>
+                <div class="flex items-center space-x-1.5 ">
+                  <input name="traits" type="checkbox" class="form-checkbox" id="-traits-flight" value="flight">
+                  <label for="-traits-flight">Flight</label>
+                </div>
+                <div class="flex items-center space-x-1.5 ">
+                  <input name="traits" type="checkbox" class="form-checkbox" id="-traits-advancement"
+                    value="advancement">
+                  <label for="-traits-advancement">Advancement</label>
+                </div>
+                <div class="flex items-center space-x-1.5 ">
+                  <input name="traits" type="checkbox" class="form-checkbox" id="-traits-banned" value="banned">
+                  <label for="-traits-banned">Banned</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- <h5>Paginas Amigas</h5>
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item"><a class="nav-link" target="_blank"
+                                href="https://vdb.im/decks/2080511d5c0c42358d4193a6a5dc869f">VDB</a></li>
+                        <li class="nav-item"><a class="nav-link" target="_blank"
+                                href="https://www.blackchantry.com/vampire-the-eternal-struggle-fifth-edition/">Black
+                                Chantry</a></li>
+                        <li class="nav-item"><a class="nav-link" target="_blank"
+                                href="https://www.gamepod.es/">Gamepod</a></li>
+                        <li class="nav-item"><a class="nav-link" target="_blank"
+                                href="https://getbootstrap.com/">Bootstrap</a></li>
+                    </ul> -->
+
+
+
+      </div>
+    </div>
+  </div>
+</nav>
