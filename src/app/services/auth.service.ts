@@ -12,7 +12,7 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'https://vtesapp.duckdns.org';
   private token:string | null = localStorage.getItem('token');
 
   //TOKEN
