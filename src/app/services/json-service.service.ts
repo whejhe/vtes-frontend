@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Card } from '../models/vtes.model';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { Card } from '../models/vtes.model';
 export class JsonServiceService {
 
   private apiUrl = 'https://static.krcg.org/data/vtes.json';
+  // private apiUrl = environment.apiUrl + '/data/vtes.json';
 
   constructor(
     private http: HttpClient

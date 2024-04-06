@@ -4,6 +4,7 @@ import { Card, Clan, Discipline, DisciplineName } from '../../../../models/vtes.
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CustomCardsService } from '../../../../services/custom-cards.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-custom',
@@ -11,7 +12,8 @@ import { CommonModule } from '@angular/common';
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    RouterLink
   ],
   templateUrl: './custom.component.html',
   styleUrl: './custom.component.scss'
@@ -53,7 +55,7 @@ export class CustomComponent {
   }
 
   getDisciplinesNames(disciplines: string[]): string {
-    
+
     return disciplines.join(', ');
   }
 

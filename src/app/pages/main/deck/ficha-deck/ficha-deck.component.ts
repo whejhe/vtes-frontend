@@ -8,6 +8,10 @@ import { Card, Discipline } from '../../../../models/vtes.model';
 import { RouterLink } from '@angular/router';
 import { FilterPipe } from '../../../../pipes/filter.pipe';
 import { FilterMultiPipe } from '../../../../pipes/filter-multi.pipe';
+import { DeckService } from '../../../../services/deck.service';
+import { Deck } from '../../../../models/deck.model';
+import { AuthService } from '../../../../services/auth.service';
+import { User } from '../../../../models/user.model';
 
 @Component({
   selector: 'app-ficha-deck',
@@ -26,8 +30,26 @@ export class FichaDeckComponent implements OnInit {
 
   constructor(
     private iconSvc: IconService,
-    private jsonSvc: JsonServiceService
+    private jsonSvc: JsonServiceService,
+    private deckSvc: DeckService,
+    private authSvc: AuthService
   ) { }
+
+  currentUser: User | null = null;
+  title: string = '';
+  author: string = '';
+  description: string = '';
+  category: string = '';
+  newDeck: Deck = {
+    _id: '',
+    userId: '',
+    name: '',
+    description: '',
+    author: '',
+    category: '',
+    cardIds: [],
+    publico: false
+  };
 
   public cards!: Card[];
   public cardsInDeck: Card[] = [];
@@ -57,6 +79,65 @@ export class FichaDeckComponent implements OnInit {
     );
   }
 
+  // CREAR UN NUEVO MAZO
+  createDeck(): void {
+    this.newDeck.userId = this.currentUser?._id || '';
+    this.newDeck.author = this.currentUser?.nick || '';
+    this.deckSvc.createDeck(this.newDeck).subscribe(
+      (deck) => {
+        console.log('Mazo creado:', deck);
+        // Limpiar los campos del nuevo mazo
+        this.newDeck = {
+          _id: '',
+          userId: '',
+          name: '',
+          description: '',
+          author: '',
+          category: '',
+          cardIds: [],
+          publico: false
+        };
+      },
+      (error) => {
+        console.error('Error al crear el mazo:', error);
+      }
+    );
+  }
+
+  // OBTENER USUARIO ACTUAL
+  getCurrentUser(): void {
+    this.authSvc.getCurrentUser().subscribe(
+      (user) => {
+      this.currentUser = user;
+    },
+    (error) => {
+      console.error('Error al obtener el usuario actual:', error);
+    });
+  }
+
+  // OBTENER MAZO POR ID
+  getDeckById(deckId: string): void {
+    this.deckSvc.getDeckById(deckId).subscribe(
+      (deck) => {
+        console.log('Mazo encontrado:', deck);
+      },
+      (error) => {
+        console.error('Error al obtener el mazo:', error);
+      }
+    );
+  }
+
+  // ACTUALIZAR UN MAZO
+  saveDeck(): void {
+    this.deckSvc.updateDeck(this.newDeck._id, this.newDeck).subscribe(
+      (updateDeck) => {
+        console.log('Mazo actualizado:', updateDeck);
+      },
+      (error) => {
+        console.error('Error al actualizar el mazo:', error);
+      }
+    )
+  }
 
   getNumCardsInDeck(): number {
     if(this.numCardsInDeck < 60){
@@ -123,6 +204,7 @@ export class FichaDeckComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCards();
+    this.getCurrentUser();
   }
 
 }

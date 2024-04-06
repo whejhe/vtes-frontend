@@ -15,13 +15,18 @@ export class CustomCardsService {
   createCustomCard(customCard: CustomCard): Observable<CustomCard> {
     const formData = new FormData();
     formData.append('name', customCard.name);
-    formData.append('capacity', customCard.capacity.toString());
+    formData.append('author', customCard.author);
+    formData.append('capacity', customCard.capacity!.toString());
     formData.append('image', customCard.image);
     formData.append('clan', customCard.clan);
     formData.append('disciplines', customCard.disciplines.join(','));
     formData.append('group', customCard.group.toString());
+    formData.append('type', customCard.type.join(','));
     formData.append('logoColor', customCard.logoColor);
     formData.append('description', customCard.description);
+    formData.append('publico', String(customCard.publico));
+    formData.append('costBlood', customCard.costBlood.toString());
+    formData.append('costPool', customCard.costPool.toString());
 
     return this.http.post<CustomCard>(this.apiUrl, formData);
   }

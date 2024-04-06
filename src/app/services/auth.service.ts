@@ -2,6 +2,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.development';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +14,24 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
-  private apiUrl = 'https://vtesapp.duckdns.org';
+  // private apiUrl = 'https://vtesapp.duckdns.org';
+  private apiUrl = environment.apiUrl;
   private token:string | null = localStorage.getItem('token');
+
+  // OBTENER USUARIO ACTUAL
+  getCurrentUser(): Observable<User> {
+    const userId = this.getUserIdFromToken();
+    return this.http.get<any>(`${this.apiUrl}/users/${{userId}}`);
+  }
+
+  private getUserIdFromToken(): string {
+    const token = this.getToken();
+    if (token) {
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      return decodedToken._id;
+    }
+    return '';
+  }
 
   //TOKEN
   saveToken(token: string): void {
