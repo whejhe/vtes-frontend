@@ -96,5 +96,8 @@ export class AuthService {
     }
   }
 
+  getAvatarOptions(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/users/avatar-options`);
+}
 
 }

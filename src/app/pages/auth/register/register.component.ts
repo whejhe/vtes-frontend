@@ -18,15 +18,31 @@ export class RegisterComponent {
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
-  
+
   showSucessMessage: boolean = false;
   showErrorMessage: boolean = false;
   errorMesage: string = '';
 
+  avatarOptions: string[] = [];
+  selectedAvatar: string = '';
+
   constructor(
     private authSvc: AuthService,
     private router:Router
-    ) {}
+    ) {
+      this.getAvatarOptions();
+    }
+
+  getAvatarOptions() {
+    this.authSvc.getAvatarOptions().subscribe(
+      (options) =>{
+        this.avatarOptions = options;
+      },
+      (error) => {
+        console.log('Error al obtener las opciones de avatares: ', error);
+      }
+    )
+  }
 
   register() {
     const userData = {
@@ -34,7 +50,8 @@ export class RegisterComponent {
       nick: this.nick,
       email: this.email,
       password: this.password,
-      role: 'USER'
+      role: 'USER',
+      avatar: this.selectedAvatar
     };
 
     this.authSvc.registerUser(userData).subscribe(
@@ -59,5 +76,5 @@ export class RegisterComponent {
     );
   }
 
-  
+
 }
