@@ -4,10 +4,12 @@
     <form (ngSubmit)="register()">
 
       <div class="row">
+        <!--NOMBRE-->
         <div class="form-floating col-md-6 d-inline-block margin-left">
           <input type="text" class="form-control" id="floatingName" placeholder="name" [(ngModel)]="name" name="name">
           <label for="floatingName">Name</label>
         </div>
+        <!--NICK-->
         <div class=" col-md-6 form-floating d-inline-block">
           <input type="text" class="form-control" id="floatingNick" placeholder="nick-name" [(ngModel)]="nick"
             name="nick">
@@ -16,6 +18,7 @@
       </div>
 
       <div class="row">
+        <!--EMAIL-->
         <div class="form-floating">
           <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" [(ngModel)]="email"
             name="email">
@@ -24,6 +27,7 @@
       </div>
 
       <div class="row">
+        <!--PASSWORD-->
         <div class="form-floating password">
           <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
             [(ngModel)]="password" name="password">
@@ -32,6 +36,7 @@
       </div>
 
       <div class="row">
+        <!--CONFIRMAR PASSWORD-->
         <div class="form-floating password">
           <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
             [(ngModel)]="confirmPassword" name="confirmPassword">
@@ -40,6 +45,7 @@
       </div>
 
       <div class="row">
+        <!--AVATAR-->
         <div class="form-floating">
           <select class="form-control" id="floatingAvatar" [(ngModel)]="selectedAvatar" name="avatar">
             <option value="">Selecciona un avatar</option>
