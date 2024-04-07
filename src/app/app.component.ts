@@ -33,10 +33,11 @@ export class AppComponent implements OnInit {
   constructor(
     private authSvc: AuthService,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
     ){}
 
   ngOnInit(): void {
   }
-  
+
+
 }

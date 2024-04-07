@@ -30,6 +30,9 @@ npm i bootstrap@5.3.3
 npm install ngx-infinite-scroll --save
 npm install http-auth-interceptor --save
 npm install jwt-decode
+yarn add @ngx-translate/core
+yarn add @ngx-translate/http-loader
+
 
 
 npm install -g json-ts (generar interface apartir de archivo.json)
