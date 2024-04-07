@@ -1,7 +1,7 @@
 //front/src/app/services/auth.service.ts
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { User } from '../models/user.model';
 
@@ -41,6 +41,8 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem('token');
   }
+
+
   removeToken():void {
     localStorage.removeItem('token');
     this.token = null;

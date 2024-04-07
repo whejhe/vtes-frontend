@@ -29,7 +29,7 @@ npm install boostrap --save
 npm i bootstrap@5.3.3
 npm install ngx-infinite-scroll --save
 npm install http-auth-interceptor --save
-
+npm install jwt-decode
 
 
 npm install -g json-ts (generar interface apartir de archivo.json)
