@@ -1,7 +1,7 @@
 //front/src/app/services/auth.service.ts
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, of } from 'rxjs';
+import { Observable, catchError, map, of, tap } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { User } from '../models/user.model';
 
@@ -16,22 +16,8 @@ export class AuthService {
 
   // private apiUrl = 'https://vtesapp.duckdns.org';
   private apiUrl = environment.apiUrl;
+  private currentUser: User | null = null;
   private token:string | null = localStorage.getItem('token');
-
-  // OBTENER USUARIO ACTUAL
-  getCurrentUser(): Observable<User> {
-    const userId = this.getUserIdFromToken();
-    return this.http.get<any>(`${this.apiUrl}/users/${{userId}}`);
-  }
-
-  private getUserIdFromToken(): string {
-    const token = this.getToken();
-    if (token) {
-      const decodedToken = JSON.parse(atob(token.split('.')[1]));
-      return decodedToken._id;
-    }
-    return '';
-  }
 
   //TOKEN
   saveToken(token: string): void {
@@ -41,8 +27,6 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem('token');
   }
-
-
   removeToken():void {
     localStorage.removeItem('token');
     this.token = null;
@@ -52,17 +36,23 @@ export class AuthService {
   }
 
   //REGISTRO
-  registerUser(userData: any) {
-    return this.http.post<any>(`${this.apiUrl}/users/register`, userData);
+  registerUser(userData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/users/register`, userData).pipe(
+      tap((data) => {
+        this.saveToken(data.token);
+        this.currentUser = data.user;
+      })
+    );
   }
 
   //LOGIN
-  loginUser(userData: any) {
-    let token = this.http.post<any>(`${this.apiUrl}/users/login`, userData);
-    token.subscribe((data: any) => {
-      this.saveToken(data);
-    })
-    return token;
+  loginUser(userData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/users/login`, userData).pipe(
+      tap((data) => {
+        this.saveToken(data.token);
+        this.currentUser = data.user;
+      })
+    );
   }
 
   //RECUPERAR CONTRASEÑA

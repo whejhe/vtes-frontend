@@ -2,8 +2,13 @@
 
 </div>
 <div class="px-3 py-2 text-bg-dark border-bottom header">
+  <!--IMAGEN DE PERFIL-->
   <div class="profile">
-    <img src="../../../assets/img/default-perfil.png" width="60" alt="" />
+    @if(user){
+      <img src="{{user.profileImage}}" width="60" alt="" />
+    }@else{
+      <img src="../../../assets/img/default-perfil.png" width="60" alt="" />
+    }
   </div>
   <div class="container-logo">
     <img class="logo" src="../../../../assets/img/icons-vtes/logo/logo-blanco.png" alt="" />

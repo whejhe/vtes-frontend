@@ -104,17 +104,6 @@ export class FichaDeckComponent implements OnInit {
     );
   }
 
-  // OBTENER USUARIO ACTUAL
-  getCurrentUser(): void {
-    this.authSvc.getCurrentUser().subscribe(
-      (user) => {
-      this.currentUser = user;
-    },
-    (error) => {
-      console.error('Error al obtener el usuario actual:', error);
-    });
-  }
-
   // OBTENER MAZO POR ID
   getDeckById(deckId: string): void {
     this.deckSvc.getDeckById(deckId).subscribe(
@@ -204,7 +193,6 @@ export class FichaDeckComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCards();
-    this.getCurrentUser();
   }
 
 }

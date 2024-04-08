@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
-import textWeb  from '../../../models/es/textWeb';
+import textWeb from '../../../models/es/textWeb';
 
 
 @Component({
@@ -23,20 +23,13 @@ export class InicioComponent implements OnInit {
 
   constructor(
     private authSvc: AuthService,
-  ) {}
-
-  checkLoginStatus(): void {
-    const token = this.authSvc.getToken();
-    this.isLoggedIn = !!token;
-    if (this.isLoggedIn) {
-      this.decodedToken = JSON.parse(window.atob(token!.split('.')[1]));
-      this.user = this.decodedToken.username;
-    }
-  }
-
+  ) { }
   ngOnInit(): void {
-    this.checkLoginStatus();
-    console.log(textWeb);
+    throw new Error('Method not implemented.');
   }
+
 
 }
+
+
+

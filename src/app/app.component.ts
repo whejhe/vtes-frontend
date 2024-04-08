@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FormComponent } from './components/form/form.component';
 import { AuthService } from './services/auth.service';
+import { User } from './models/user.model';
 
 @Component({
     selector: 'app-root',
@@ -25,10 +26,13 @@ import { AuthService } from './services/auth.service';
         FormComponent,
         FormsModule,
     ],
-    providers: [AuthService],
+    providers: [
+      AuthService
+    ],
 })
 export class AppComponent implements OnInit {
   title = 'App-Vtes';
+  user: User | null = null;
 
   constructor(
     private authSvc: AuthService,
@@ -36,8 +40,9 @@ export class AppComponent implements OnInit {
     private http: HttpClient,
     ){}
 
-  ngOnInit(): void {
-  }
 
+  ngOnInit(): void {
+    
+  }
 
 }

@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl : 'https://vtesapp.duckdns.org',
+  apiUrl : 'http://localhost:3000',
 };
