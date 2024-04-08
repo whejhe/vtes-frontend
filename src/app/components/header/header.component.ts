@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { User } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
+import { SideBarComponent } from "../side-bar/side-bar.component";
 
 @Component({
-  selector: 'app-header',
-  standalone: true,
-  imports: [],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+    selector: 'app-header',
+    standalone: true,
+    templateUrl: './header.component.html',
+    styleUrl: './header.component.scss',
+    imports: [SideBarComponent]
 })
 export class HeaderComponent {
   constructor(
