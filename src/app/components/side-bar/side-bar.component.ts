@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-side-bar',
@@ -9,10 +10,12 @@ import { Component } from '@angular/core';
 })
 export class SideBarComponent {
 
+  user: User | null = null;
+
   constructor(){}
 
-  getNewAvatar(){
-    
+  getAvatar(){
+    return this.user?.profileImage
   }
 
   ngOnInit() {}
