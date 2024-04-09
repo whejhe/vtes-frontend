@@ -4,6 +4,8 @@ import { User } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { routes } from '../../app.routes';
 import { Observable } from 'rxjs';
+import { ImageService } from '../../services/image.service';
+import { Image } from '../../models/image.model';
 
 @Component({
   selector: 'app-side-bar',
@@ -14,25 +16,27 @@ import { Observable } from 'rxjs';
 })
 export class SideBarComponent {
 
+  public avatarImage:Image | null = null;
   user: User | null = null;
-  profileImage:string | null = '';
 
   constructor(
-    private authSvc: AuthService
-  ){}
-
-  getProfileImage(){
-    return `../../../assets/img/avatars/${this.authSvc.getProfileImage()}`;
+    private authSvc: AuthService,
+    private imageSvc: ImageService
+  ){
+    // this.getAvatarImage();
   }
 
-  getAvatar(){
-    if(!this.user){
-      this.profileImage = '../../../assets/img/avatars/default-avatar.png';
-    }
-    if(this.user){
-      this.profileImage = `../../../assets/img/avatars/${this.user.profileImage}`;
-    }
-    return this.profileImage; 
+  // getAvatarImage(){
+  //   const userId = this.user?._id;
+  //   this,this.imageSvc.getImagesByUserId(userId).subscribe((images){
+  //     this.avatarImage? = images.find((image)=>{
+  //       image.type === 'avatars'
+  //     });
+  //   })
+  // }
+
+  getProfileImage(){
+    this.imageSvc.getImageByName('Avatar-1');
   }
 
   getLoggedInUser(){
@@ -42,7 +46,6 @@ export class SideBarComponent {
   ngOnInit() {
     this.getLoggedInUser();
     console.log('Usuario actual :',this.user);
-    console.log('Avatar actual :',this.getAvatar());
   }
 
 }

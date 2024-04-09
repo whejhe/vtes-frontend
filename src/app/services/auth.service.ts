@@ -1,6 +1,6 @@
 //front/src/app/services/auth.service.ts
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Observable, catchError, map, of, tap } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { User } from '../models/user.model';
@@ -8,7 +8,7 @@ import { User } from '../models/user.model';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements OnInit{
 
   constructor(
     private http: HttpClient
@@ -129,5 +129,10 @@ export class AuthService {
   getProfileImage(): Observable<string> {
     const nameImage = this.http.get<string>(`${this.apiUrl}/users/profile-image/${this.currentUser?._id}`);
     return nameImage;
+  }
+
+
+  ngOnInit(): void {
+      console.log(this.getProfileImage());
   }
 }
