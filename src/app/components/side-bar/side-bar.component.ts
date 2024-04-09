@@ -1,5 +1,9 @@
+//front/src/app/components/side-bar/side-bar.component.ts
 import { Component } from '@angular/core';
 import { User } from '../../models/user.model';
+import { AuthService } from '../../services/auth.service';
+import { routes } from '../../app.routes';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-side-bar',
@@ -11,13 +15,34 @@ import { User } from '../../models/user.model';
 export class SideBarComponent {
 
   user: User | null = null;
+  profileImage:string | null = '';
 
-  constructor(){}
+  constructor(
+    private authSvc: AuthService
+  ){}
 
-  getAvatar(){
-    return this.user?.profileImage
+  getProfileImage(){
+    return `../../../assets/img/avatars/${this.authSvc.getProfileImage()}`;
   }
 
-  ngOnInit() {}
+  getAvatar(){
+    if(!this.user){
+      this.profileImage = '../../../assets/img/avatars/default-avatar.png';
+    }
+    if(this.user){
+      this.profileImage = `../../../assets/img/avatars/${this.user.profileImage}`;
+    }
+    return this.profileImage; 
+  }
+
+  getLoggedInUser(){
+    this.user = this.authSvc.getCurrentUser();
+  }
+
+  ngOnInit() {
+    this.getLoggedInUser();
+    console.log('Usuario actual :',this.user);
+    console.log('Avatar actual :',this.getAvatar());
+  }
 
 }

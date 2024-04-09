@@ -156,11 +156,7 @@ export class CriptaComponent implements OnInit {
       name: clan,
       url: `https://static.krcg.org/svg/clan/${clan.toLowerCase().replace(/\s/g, '')}.svg`
     }));
-    // this.clanImages = this.clans.map(clan => ({
-    //   name: clan,
-    //   url: `https://static.krcg.org/svg/clan/${clan.toLowerCase()}.svg`
-    // }));
-    console.log('clan:', this.clans)
+    // console.log('clan:', this.clans)
     // console.log('Titulos: ', this.titles)
     // console.log('getClanUrl: ', this.getClanUrl(this.clans[0]))
   }

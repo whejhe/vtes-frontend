@@ -14,7 +14,7 @@ import textWeb from '../../../models/es/textWeb';
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.scss',
 })
-export class InicioComponent implements OnInit {
+export class InicioComponent {
   public isLoggedIn: Boolean = false;
   public decodedToken: any;
   public user: string = 'invitado';
@@ -24,10 +24,6 @@ export class InicioComponent implements OnInit {
   constructor(
     private authSvc: AuthService,
   ) { }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-
 
 }
 

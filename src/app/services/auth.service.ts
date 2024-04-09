@@ -14,25 +14,49 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
-  // private apiUrl = 'https://vtesapp.duckdns.org';
+  isToken: boolean = false;
+
   private apiUrl = environment.apiUrl;
   private currentUser: User | null = null;
-  private token:string | null = localStorage.getItem('token');
+  public token: string | null = localStorage.getItem('token');
 
   //TOKEN
   saveToken(token: string): void {
     localStorage.setItem('token', token);
+    this.isToken = true;
+    this.currentUser = this.decodeToken(token);
     this.token = token;
   }
   getToken(): string | null {
-    return localStorage.getItem('token');
+    this.token = localStorage.getItem('token');
+    if (!this.token) {
+      this.token = null;
+      this.removeToken();
+      this.currentUser = null;
+      this.isToken = false;
+    }
+    return this.token;
   }
-  removeToken():void {
+  removeToken(): void {
     localStorage.removeItem('token');
     this.token = null;
+    this.currentUser = null;
+    this.isToken = false;
   }
+
   setToken(token: string) {
+    localStorage.setItem('token', token);
+    this.currentUser = this.decodeToken(token);
+    this.isToken = true;
     this.token = token;
+  }
+
+  decodeToken(token: string): User | null {
+    if (token) {
+      return JSON.parse(atob(token.split('.')[1]));
+    } else {
+      return null;
+    }
   }
 
   //REGISTRO
@@ -40,6 +64,7 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/users/register`, userData).pipe(
       tap((data) => {
         this.saveToken(data.token);
+        this.getToken();
         this.currentUser = data.user;
       })
     );
@@ -74,13 +99,13 @@ export class AuthService {
       return 'El nick debe tener un maximo de 20 caracteres';
     } else if (error.error.error.includes('El email es obligatorio')) {
       return 'El email es obligatorio';
-    }else if(error.error.error.includes('El email no es valido')){
+    } else if (error.error.error.includes('El email no es valido')) {
       return 'El email no es valido';
-    }else if(error.error.error.includes('La contraseña es obligatoria')){
+    } else if (error.error.error.includes('La contraseña es obligatoria')) {
       return 'La contraseña es obligatoria';
-    }else if(error.error.error.includes('La contraseña debe tener al menos 8 caracteres')){
+    } else if (error.error.error.includes('La contraseña debe tener al menos 8 caracteres')) {
       return 'La contraseña debe tener al menos 8 caracteres';
-    }else if(error.error.error.includes('La contraseña debe contener al menos 8 caracteres, una mayuscula, una minuscula, un numero y un caracter especial de entre !@#$%^&*')){
+    } else if (error.error.error.includes('La contraseña debe contener al menos 8 caracteres, una mayuscula, una minuscula, un numero y un caracter especial de entre !@#$%^&*')) {
       return 'La contraseña debe contener al menos 8 caracteres, una mayuscula, una minuscula, un numero y un caracter especial de entre !@#$%^&*';
     }
     else {
@@ -90,6 +115,19 @@ export class AuthService {
 
   getAvatarOptions(): Observable<string[]> {
     return this.http.get<string[]>(`${this.apiUrl}/users/avatar-options`);
-}
+  }
 
+  getCurrentUser(): User | null {
+    if (!this.currentUser) {
+      this.currentUser = this.decodeToken(this.getToken()!);
+      console.log(this.currentUser);
+    }
+    return this.currentUser;
+  }
+
+  //Obtener imagen de Perfil
+  getProfileImage(): Observable<string> {
+    const nameImage = this.http.get<string>(`${this.apiUrl}/users/profile-image/${this.currentUser?._id}`);
+    return nameImage;
+  }
 }

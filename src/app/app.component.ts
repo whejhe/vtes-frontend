@@ -35,14 +35,21 @@ export class AppComponent implements OnInit {
   user: User | null = null;
 
   constructor(
-    private authSvc: AuthService,
+    public authSvc: AuthService,
     private router: Router,
     private http: HttpClient,
     ){}
-
-
-  ngOnInit(): void {
-    
+  
+  public token = this.authSvc.getToken() || null;
+  
+  
+  //Almacenar Usuario en localStorage
+  ngOnInit() {
+    if (this.user) {
+      localStorage.setItem('user', JSON.stringify(this.user));
+      console.log('Usuario actual :',this.user);
+      console.log(this.token);
+    }
   }
 
 }
