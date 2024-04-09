@@ -15,14 +15,16 @@ export class ImageService {
 
   image: Image | null = null;
 
-  private apiUrl = 'http://localhost:3000/vtes-backend/uploads/';
+  // private apiUrl = 'http://localhost:3000/vtes-backend/uploads/';
+  private apiUrl = 'http://localhost:3000/vtes-backend/public/data/vtes.json';
 
   createImage(image: Image): Observable<Image> {
     return this.http.post<Image>(this.apiUrl, image);
   }
 
   getImages(): Observable<Image[]> {
-    return this.http.get<Image[]>(this.apiUrl);
+    const data = this.http.get<Image[]>(this.apiUrl);
+    return data;
   }
 
   getImageById(id: string): Observable<Image> {
