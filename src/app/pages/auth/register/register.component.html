@@ -46,12 +46,8 @@
 
       <div class="row">
         <!--AVATAR-->
-        <div class="form-floating">
-          <select class="form-control" id="floatingAvatar" [(ngModel)]="selectedAvatar" name="avatar">
-            <option value="">Selecciona un avatar</option>
-            <option *ngFor="let avatar of avatarOptions" value="{{ avatar }}">{{ avatar }}</option>
-          </select>
-          <label for="floatingAvatar">Avatar</label>
+        <div class="form-floating" (click)="openModal()">
+          <img class="choose-image" src="../../../../assets/img/default-avatar.png" width="60px" alt="">
         </div>
       </div>
 

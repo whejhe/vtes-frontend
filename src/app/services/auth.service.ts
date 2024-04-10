@@ -119,7 +119,7 @@ export class AuthService implements OnInit{
   }
 
   getAvatarOptions(): Observable<string[]> {
-    return this.http.get<string[]>(`${this.apiUrl}/users/avatar-options`);
+    return this.http.get<string[]>(`${this.apiUrl}/vtes-backend/uploads/avatars/${name}`);
   }
 
   getCurrentUser(): User | null {

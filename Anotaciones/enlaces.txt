@@ -30,9 +30,9 @@ https://www.youtube.com/watch?v=wSrGSNYikEk
 
 DESPLIEGUE
 https://front-vtes.vercel.app/
+https://vtesapp.duckdns.org/
 https://aws.amazon.com/es/
 https://cloud.mongodb.com/v2/65f7eb073f265f287debd21a#/overview
-https://console.cloudinary.com/pm/c-6dc37d32fdbb0bb5da05d0cad6a57d/getting-started
 
 INTEGRACION BOOTSTRAP EN ANGULAR
 https://fbellod.medium.com/como-integrar-el-framework-bootstrap-en-un-proyecto-angular-a5d53fa79e03

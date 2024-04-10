@@ -1,8 +1,12 @@
 //front/src/app/pages/auth/register/register.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Image } from '../../../models/image.model';
+import { ImageService } from '../../../services/image.service';
+import { ChooseAvatarComponent } from '../../../components/choose-avatar/choose-avatar.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +15,9 @@ import { Router } from '@angular/router';
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
+
+  public image!: Image[];
 
   name: string = '';
   nick: string = '';
@@ -23,26 +29,14 @@ export class RegisterComponent {
   showErrorMessage: boolean = false;
   errorMesage: string = '';
 
-  avatarOptions: string[] = [];
-  avatar:string = "";
-  selectedAvatar: string = '';
-
   constructor(
     private authSvc: AuthService,
-    private router:Router
-    ) {
-      this.getAvatarOptions();
-    }
+    private router:Router,
+    private imageSvc: ImageService,
+    public dialog: MatDialog
+    ) {}
 
-  getAvatarOptions() {
-    this.authSvc.getAvatarOptions().subscribe(
-      (options) =>{
-        this.avatarOptions = options;
-      },
-      (error) => {
-        console.log('Error al obtener las opciones de avatares: ', error);
-      }
-    )
+  getImages(){
   }
 
   register() {
@@ -52,7 +46,7 @@ export class RegisterComponent {
       email: this.email,
       password: this.password,
       role: 'USER',
-      avatar: this.selectedAvatar
+      image: this.image
     };
 
     this.authSvc.registerUser(userData).subscribe(
@@ -77,5 +71,15 @@ export class RegisterComponent {
     );
   }
 
+  openModal():void{
+    this.dialog.open(ChooseAvatarComponent, {
+      data: { },
+    })
+  }
+
+
+  ngOnInit(): void {
+    console.log('this.image', this.image);
+  }
 
 }
