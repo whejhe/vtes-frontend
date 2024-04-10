@@ -20,7 +20,6 @@ import { IconService } from '../../../../services/icon.service';
 import { __values } from 'tslib';
 import { FilterMultiPipe } from '../../../../pipes/filter-multi.pipe';
 import { User } from '../../../../models/user.model';
-import { LocalStorageService } from '../../../../services/local-storage.service';
 
 @Component({
   selector: 'app-biblioteca',
@@ -36,28 +35,10 @@ export class BibliotecaComponent implements OnInit {
     private jsonSvc: JsonServiceService,
     public dialog: MatDialog,
     public iconSvc: IconService,
-    public localtorageSvc: LocalStorageService
   ) {}
 
   // Guardar datos del usuario
-  setItem(key: string, value: string): void {
-    this.localtorageSvc.setItem('user', JSON.stringify(this.user));
-  }
 
-  // Obtener datos del usuario
-  getItem(key: string): string | null {
-    return this.localtorageSvc.getItem(key);
-  }
-
-  // Eliminar datos del usuario
-  removeItem(key: string): void {
-    this.localtorageSvc.removeItem(key);
-  }
-
-  // Limpiar local storage
-  clear(): void {
-    this.localtorageSvc.clear();
-  }
 
   public cards!: Card[];
   public filter!: string;

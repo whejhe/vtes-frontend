@@ -17,12 +17,14 @@ import { Image } from '../../models/image.model';
 export class SideBarComponent {
 
   public avatarImage:Image | null = null;
-  user: User | null = null;
+  user: any | null = null;
 
   constructor(
     private authSvc: AuthService,
     private imageSvc: ImageService
   ){
+    this.user = this.authSvc.getCurrentUser();
+    console.log(this.user)
     // this.getAvatarImage();
   }
 
@@ -36,7 +38,7 @@ export class SideBarComponent {
   // }
 
   getProfileImage(){
-    this.imageSvc.getImageByName('Avatar-1');
+    return this.imageSvc.getAvatarByName(this.user?.image!);
   }
 
   getLoggedInUser(){

@@ -17,6 +17,7 @@ export class ImageService {
 
   // private apiUrl = 'http://localhost:3000/vtes-backend/uploads/';
   private apiUrl = 'http://localhost:3000/vtes-backend/public/data/vtes.json';
+  private avatarsUrl = 'http://localhost:3000/vtes-backend/uploads/avatars/'
 
   createImage(image: Image): Observable<Image> {
     return this.http.post<Image>(this.apiUrl, image);
@@ -44,6 +45,10 @@ export class ImageService {
     }else{
       return this.http.get<Image>(`${this.apiUrl}/${name}`);
     }
+  }
+
+  getAvatarByName(name: string): string{
+    return `${this.avatarsUrl}${name}`;
   }
 
   updateImage(image: Image): Observable<Image> {
