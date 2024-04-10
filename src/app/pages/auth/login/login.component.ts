@@ -25,10 +25,10 @@ export class LoginComponent {
 
   constructor(
     private authSvc: AuthService,
-    private router:Router
-  ){}
+    private router: Router
+  ) { }
 
-  login(){
+  login() {
     const userData = {
       email: this.email,
       password: this.password
@@ -42,7 +42,9 @@ export class LoginComponent {
         setTimeout(() => {
           this.showSucessMessage = false;
         }, 5000);
-        this.router.navigate(['/']);
+        this.router.navigateByUrl('/').then(() => {
+          window.location.reload();
+        });
       },
       (error: any) => {
         console.log('error', error);

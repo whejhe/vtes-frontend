@@ -70,6 +70,11 @@ export class AuthService implements OnInit{
     );
   }
 
+  //LOGOUT
+  logoutUser(): void {
+    this.removeToken();
+  }
+
   //LOGIN
   loginUser(userData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/users/login`, userData).pipe(

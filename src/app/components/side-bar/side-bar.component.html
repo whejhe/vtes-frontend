@@ -24,13 +24,14 @@
                 <hr class="dropdown-divider">
             </li>
             <li>
-                <a class="dropdown-item" href="#">Sign out</a>
+                <a class="dropdown-item" href="#" (click)="logout()">Sign out</a>
             </li>
         </ul>
     </div>
     }@else {
         <div class="sidebar">
-            <img class="defaultImage" src="http://localhost:3000/vtes-backend/uploads/avatars/default-avatar.png" alt="">
+            <img class="defaultImage" src="http://localhost:3000/vtes-backend/uploads/avatars/default-avatar.png" alt="" (click)="login()"
+            style="cursor:pointer"    >
             <!-- <img [src]="getProfileImage()" class="profileImage" alt=""> -->
         </div>
     }

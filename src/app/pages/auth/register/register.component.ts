@@ -24,6 +24,7 @@ export class RegisterComponent {
   errorMesage: string = '';
 
   avatarOptions: string[] = [];
+  avatar:string = "";
   selectedAvatar: string = '';
 
   constructor(

@@ -6,6 +6,7 @@ import { routes } from '../../app.routes';
 import { Observable } from 'rxjs';
 import { ImageService } from '../../services/image.service';
 import { Image } from '../../models/image.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-side-bar',
@@ -21,7 +22,8 @@ export class SideBarComponent {
 
   constructor(
     private authSvc: AuthService,
-    private imageSvc: ImageService
+    private imageSvc: ImageService,
+    private router: Router,
   ){
     this.user = this.authSvc.getCurrentUser();
     console.log(this.user)
@@ -36,6 +38,15 @@ export class SideBarComponent {
   //     });
   //   })
   // }
+
+  logout(){
+    this.authSvc.logoutUser();
+    window.location.reload();
+  }
+
+  login(){
+    this.router.navigateByUrl('/auth');
+  }
 
   getProfileImage(){
     return this.imageSvc.getAvatarByName(this.user?.image!);

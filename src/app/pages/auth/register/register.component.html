@@ -49,7 +49,7 @@
         <div class="form-floating">
           <select class="form-control" id="floatingAvatar" [(ngModel)]="selectedAvatar" name="avatar">
             <option value="">Selecciona un avatar</option>
-            <option *ngFor="let avatar of avatarOptions" [value]="avatar">{{ avatar }}</option>
+            <option *ngFor="let avatar of avatarOptions" value="{{ avatar }}">{{ avatar }}</option>
           </select>
           <label for="floatingAvatar">Avatar</label>
         </div>
