@@ -1,7 +1,7 @@
 <!--front/src/app/pages/auth/register/register.component.html-->
 <div class="portada">
   <div class="container">
-    <form (ngSubmit)="register()">
+    <form (ngSubmit)="register()" class="form-container">
 
       <div class="row">
         <!--NOMBRE-->
@@ -46,8 +46,8 @@
 
       <div class="row">
         <!--AVATAR-->
-        <div class="form-floating" (click)="openModal()">
-          <img class="choose-image" src="../../../../assets/img/default-avatar.png" width="60px" alt="">
+        <div class="choose-image" (click)="openModal()">
+          <img src="../../../../assets/img/default-avatar.png" width="60px" alt="">
         </div>
       </div>
 

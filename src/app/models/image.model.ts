@@ -5,7 +5,8 @@ export interface Image{
     customCardId?: string;
     name: string;
     type: string;
-    extension: string;
-    publico: boolean;
     imageUrl: string;
+    extension: string;
+    public: boolean;
+    __v?: number;
 }

@@ -18,19 +18,14 @@ export class ImageService {
   // private apiUrl = 'http://localhost:3000/vtes-backend/uploads/';
   private jsonVtesUrl = 'http://localhost:3000/vtes-backend/public/data/vtes.json';
   private apiUrl = 'http://localhost:3000/vtes-backend/uploads/';
-
+  private jsonImage = 'http://localhost:3000/data/image.json';
 
   createImage(image: Image): Observable<Image> {
     return this.http.post<Image>(this.apiUrl, image);
   }
 
-  // getImages(): Observable<Image[]> {
-  //   const data = this.http.get<Image[]>('http://localhost:3000/data/image.json');
-  //   return data;
-  // }
-
   getAvatars(): Observable<Image[]> {
-    return this.http.get<Image[]>(`${this.apiUrl}/avatars`);
+    return this.http.get<Image[]>(`${this.apiUrl}avatars`);
   }
 
   getImageById(id: string): Observable<Image> {
@@ -52,9 +47,18 @@ export class ImageService {
     }
   }
 
+  getJsonImages(): Observable<Image[]> {
+    return this.http.get<Image[]>(this.jsonImage);
+  }
+
   getAvatarByName(name: string): string{
     return `http://localhost:3000/vtes-backend/uploads/avatars/${name}`;
   }
+
+  getAvatarInRegister(name: string, extension: string): string{
+    return `${this.apiUrl}avatars/${name}${extension}`;
+  }
+
 
   updateImage(image: Image): Observable<Image> {
     return this.http.put<Image>(`${this.apiUrl}/${image._id}`, image);
