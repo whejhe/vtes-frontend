@@ -1,4 +1,10 @@
 
 table{
   border: 2px solid rgb(36, 35, 35);
+  td{
+    background-color: rgba($color: rgb(255, 255, 255), $alpha: 0);
+  }
+  button{
+    margin-left: 0.4em;
+  }
 }

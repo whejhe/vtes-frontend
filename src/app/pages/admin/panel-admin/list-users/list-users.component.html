@@ -1,42 +1,33 @@
+<!--front/src/app/pages/admin/panel-admin/list-users/list-users.component.html-->
 <div class="container">
-  <h2>Gestión de Usuarios</h2>
   <table class="table table-hover">
     <thead>
       <tr class="table-dark">
-        <th>ID</th>
         <th>Nombre</th>
+        <th>Nick</th>
         <th>Email</th>
         <th>Rol</th>
         <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <!-- <tr *ngFor="let user of users">
-        
-      </tr> -->
-      <tr>
-        <td>1</td>
-        <td>Usuario 1</td>
-        <td>usuario1</td>
-        <td>Administrador</td>
+      <tr *ngFor="let user of user">
+        <td>{{user.name}}</td>
+        <td>{{user.nick}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.role}}</td>
         <td>
-          <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
-          <button type="button" class="btn btn-warning btn-sm">Bloquear</button>
-          <button type="button" class="btn btn-info btn-sm">Permisos</button>
+          <button type="button" class="btn btn-danger btn-sm" 
+          (click)="deleteUser(user._id)">Eliminar</button>
+          @if(user.blocked){
+            <button type="button" class="btn btn-warning btn-sm"
+            (click)="unblockUser(user._id)">DesBloquear</button>
+          }@else {
+            <button type="button" class="btn btn-warning btn-sm"
+            (click)="blockUser(user._id)">Bloquear</button>
+          }
         </td>
       </tr>
-      <tr>
-        <td>2</td>
-        <td>Usuario 2</td>
-        <td>email</td>
-        <td>Usuario</td>
-        <td>
-          <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
-          <button type="button" class="btn btn-warning btn-sm">Bloquear</button>
-          <button type="button" class="btn btn-info btn-sm">Permisos</button>
-        </td>
-      </tr>
-      <!-- Agregar más filas según sea necesario -->
     </tbody>
   </table>
 </div>

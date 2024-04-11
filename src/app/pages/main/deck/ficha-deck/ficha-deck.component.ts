@@ -60,8 +60,7 @@ export class FichaDeckComponent implements OnInit {
   public disciplineImages = this.iconSvc.disciplineImages;
 
 
-  public searchNameCrypt: string = '';
-  public searchNameLibrary: string = '';
+  public searchName: string = '';
   public filteredCards: Card[] = [];
   public filter!: string;
 
@@ -75,7 +74,7 @@ export class FichaDeckComponent implements OnInit {
 
   filterCards(): void {
     this.filteredCards = this.cards.filter(card =>
-      card._name.toLowerCase().includes(this.searchNameLibrary.toLowerCase())
+      card._name.toLowerCase().includes(this.searchName.toLowerCase())
     );
   }
 
@@ -147,7 +146,7 @@ export class FichaDeckComponent implements OnInit {
     }else{
       this.showErrorMessage = false;
     }
-    this.searchNameLibrary = '';
+    this.searchName = '';
     this.filteredCards = [];
   }
 

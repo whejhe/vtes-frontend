@@ -62,10 +62,8 @@ export class AuthService implements OnInit{
   //REGISTRO
   registerUser(userData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/users/register`, userData).pipe(
-      tap((data) => {
-        this.saveToken(data.token);
+      tap(() => {
         this.getToken();
-        this.currentUser = data.user;
       })
     );
   }
@@ -136,6 +134,25 @@ export class AuthService implements OnInit{
     return nameImage;
   }
 
+  // LISTAR USUARIOS
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/users`);
+  }
+
+  // ELIMINAR USUARIOS
+  deleteUser(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/users/${id}`, { headers: { 'Authorization': `Bearer ${this.getToken()}` } });
+  }
+
+  // BLOQUEAR USUARIOS
+  blockUser(id: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/users/blockUser/${id}`, { headers: { 'Authorization': `Bearer ${this.getToken()}` } });
+  }
+
+  // DESBLOQUEAR USUARIOS
+  unblockUser(id: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/users/unblockUser/${id}`, { headers: { 'Authorization': `Bearer ${this.getToken()}` } });
+  }
 
   ngOnInit(): void {
       console.log(this.getProfileImage());

@@ -7,5 +7,7 @@ export interface Deck {
   author: string;
   category: string;
   publico: boolean;
-  cardIds: string[];
+  cardIds:{
+    type: string[]
+  };
 }

@@ -40,14 +40,19 @@
       <div class="col-md-5 crypt">
         <div class="search col-md-12">
           <label class="form-label">Search By Name: </label>
-          <input name="filter" [(ngModel)]="searchNameCrypt"
+          <input name="filter" [(ngModel)]="searchName"
           class="form-control me-2" type="search"
           placeholder="Search" aria-label="Search"
           (input)="filterCards()"/>
           @if(filteredCards.length > 0){
             <div class="dropdown">
               <ul class="dropdown-menu show">
-                <li *ngFor="let card of filteredCards" (click)="addCardToDeck(card)">
+                <li *ngFor="let card of cards
+                | filter: ['Vampire', 'Imbued']:false
+                | filterMulti: {
+                  searchName: searchName
+                }" 
+                (click)="addCardToDeck(card)">
                   <a class="dropdown-item">{{ card._name }}</a>
                 </li>
               </ul>
@@ -110,14 +115,20 @@
       <div class="col-md-5 library">
         <div class="search col-md-12">
           <label class="form-label">Search By Name:</label>
-          <input name="search" [(ngModel)]="searchNameLibrary"
+          <input name="search" [(ngModel)]="searchName"
           class="form-control me-2" type="search"
           placeholder="Search" aria-label="Search"
           (input)="filterCards()"/>
           @if(filteredCards.length > 0){
             <div class="dropdown">
               <ul class="dropdown-menu show">
-                <li *ngFor="let card of filteredCards" (click)="addCardToDeck(card)">
+                <li *ngFor="let card of cards
+                |filter: ['Vampire', 'Imbued']:true
+                | filterMulti: {
+                  searchName: searchName
+                }" 
+                (click)="addCardToDeck(card)"
+                >
                   <a class="dropdown-item">{{ card._name }}</a>
                 </li>
               </ul>

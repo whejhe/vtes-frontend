@@ -48,8 +48,9 @@ export class RegisterComponent implements OnInit {
       email: this.email,
       password: this.password,
       role: 'USER',
-      image: this.selectedAvatar
+      profileImage: this.selectedAvatar?.name! + this.selectedAvatar?.extension!
     };
+
 
     this.authSvc.registerUser(userData).subscribe(
       (response: any) => {

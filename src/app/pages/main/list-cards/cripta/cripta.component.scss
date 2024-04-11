@@ -1,3 +1,10 @@
+// .backgroud-image{
+//   background-image: url('../../../../../assets/img/fondo-logo.svg');
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   background-size: contain;
+// }
+
 h4{
   font-weight: bold;
 }
@@ -51,6 +58,7 @@ tr{
   td{
     width: 30%, 15%, 10%, 30%, 15%;
     padding-left: 2em;
+    background-color: rgba($color: #ffffff, $alpha: 0);
   }
 }
 

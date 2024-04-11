@@ -41,8 +41,6 @@ export class CriptaComponent implements OnInit {
   public clans = Object.values(Clan);
   public searchClan: string = '';
   public clan = '';
-  // public clanSelected: { [key: string]: boolean } = {};
-  // public selectedClan: Clan[] = [];
 
   public disciplines = Object.values(Discipline)
   public disciplineSelected: { [key: string]: boolean } = {};
@@ -156,8 +154,5 @@ export class CriptaComponent implements OnInit {
       name: clan,
       url: `https://static.krcg.org/svg/clan/${clan.toLowerCase().replace(/\s/g, '')}.svg`
     }));
-    // console.log('clan:', this.clans)
-    // console.log('Titulos: ', this.titles)
-    // console.log('getClanUrl: ', this.getClanUrl(this.clans[0]))
   }
 }

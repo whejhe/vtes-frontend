@@ -17,33 +17,34 @@ export class ImageService {
 
   // private apiUrl = 'http://localhost:3000/vtes-backend/uploads/';
   private jsonVtesUrl = 'http://localhost:3000/vtes-backend/public/data/vtes.json';
-  private apiUrl = 'http://localhost:3000/vtes-backend/uploads/';
+  private apiUrl = 'http://localhost:3000/';
   private jsonImage = 'http://localhost:3000/data/image.json';
+  private uploadUrl = 'http://localhost:3000/vtes-backend/uploads/';
 
   createImage(image: Image): Observable<Image> {
-    return this.http.post<Image>(this.apiUrl, image);
+    return this.http.post<Image>(this.uploadUrl, image);
   }
 
   getAvatars(): Observable<Image[]> {
-    return this.http.get<Image[]>(`${this.apiUrl}avatars`);
+    return this.http.get<Image[]>(`${this.uploadUrl}avatars`);
   }
 
   getImageById(id: string): Observable<Image> {
-    return this.http.get<Image>(`${this.apiUrl}/${id}`);
+    return this.http.get<Image>(`${this.uploadUrl}/${id}`);
   }
 
   getImagesByUserId(userId: string): Observable<Image[]> {
-    return this.http.get<Image[]>(`${this.apiUrl}/users/${userId}`);
+    return this.http.get<Image[]>(`${this.uploadUrl}/avatars/${Image.prototype.name}${this.image?.extension}`);
   }
 
   getImageByName(name: string): Observable<Image> {
     if(this.image?.type === 'avatars') {
-      return this.http.get<Image>(`${this.apiUrl}/avatars/${name}${this.image?.extension}`);
+      return this.http.get<Image>(`${this.uploadUrl}/avatars/${name}${this.image?.extension}`);
     }
     else if(this.image?.type === 'customCards') {
-      return this.http.get<Image>(`${this.apiUrl}/customCards/${name}${this.image?.extension}`);
+      return this.http.get<Image>(`${this.uploadUrl}/customCards/${name}${this.image?.extension}`);
     }else{
-      return this.http.get<Image>(`${this.apiUrl}/${name}`);
+      return this.http.get<Image>(`${this.uploadUrl}/${name}`);
     }
   }
 
@@ -55,17 +56,22 @@ export class ImageService {
     return `http://localhost:3000/vtes-backend/uploads/avatars/${name}`;
   }
 
+  getAvatarByUserId(userId: string): Observable<Image[]> {
+    return this.http.get<Image[]>(`${this.apiUrl}images/avatars/${userId}`);
+    
+  }
+
   getAvatarInRegister(name: string, extension: string): string{
     return `${this.apiUrl}avatars/${name}${extension}`;
   }
 
 
   updateImage(image: Image): Observable<Image> {
-    return this.http.put<Image>(`${this.apiUrl}/${image._id}`, image);
+    return this.http.put<Image>(`${this.uploadUrl}/${image._id}`, image);
   }
 
   deleteImage(image: Image): Observable<Image> {
-    return this.http.delete<Image>(`${this.apiUrl}/${image._id}`);
+    return this.http.delete<Image>(`${this.uploadUrl}/${image._id}`);
   }
 
   ngOnInit() {

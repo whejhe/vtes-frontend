@@ -47,7 +47,11 @@
       <div class="row">
         <!--AVATAR-->
         <div class="choose-image" (click)="openModal()">
-          <img src="../../../../assets/img/default-avatar.png" width="60px" alt="">
+          @if (selectedAvatar) {
+            <img class="rounded-circle" src="{{selectedAvatar.imageUrl}}" width="60px" alt="">
+          }@else {
+            <img src="../../../../assets/img/default-avatar.png" width="60px" alt="">
+          }
         </div>
       </div>
 

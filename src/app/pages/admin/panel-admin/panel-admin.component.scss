@@ -1,24 +1,30 @@
 .panel-admin{
+  background-image: url('../../../../assets/img/fondo-logo.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
   h1{
     text-align: center;
     font-weight: bold;
     font-size: 2.5em;
     text-decoration: underline;
-  }
-
-  nav{
-    ul{
-      display: flex;
-      justify-content: center;
-      li{
-        margin: 0 1em;
-        list-style: none;
-        a{
-          font-weight: bold;
-          font-size: 1.5em;
-          text-decoration: none;
-        }
-      }
-    }
+    padding: 1em 0;
   }
 }
+
+//   nav{
+//     ul{
+//       display: flex;
+//       justify-content: center;
+//       li{
+//         margin: 0 1em;
+//         list-style: none;
+//         a{
+//           font-weight: bold;
+//           font-size: 1.5em;
+//           text-decoration: none;
+//         }
+//       }
+//     }
+//   }
+// }
