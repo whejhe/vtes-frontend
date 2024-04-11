@@ -39,6 +39,8 @@ export class RegisterComponent implements OnInit {
   getImages(){
   }
 
+  selectedAvatar:Image | null = null;
+
   register() {
     const userData = {
       name: this.name,
@@ -46,7 +48,7 @@ export class RegisterComponent implements OnInit {
       email: this.email,
       password: this.password,
       role: 'USER',
-      image: this.image
+      image: this.selectedAvatar
     };
 
     this.authSvc.registerUser(userData).subscribe(
@@ -73,8 +75,10 @@ export class RegisterComponent implements OnInit {
 
   openModal():void{
     this.dialog.open(ChooseAvatarComponent, {
-      data: { },
-    })
+      data: {avatar: this.selectedAvatar },
+    }).afterClosed().subscribe((avatar: Image | null) => {
+      this.selectedAvatar = avatar;
+    });
   }
 
 

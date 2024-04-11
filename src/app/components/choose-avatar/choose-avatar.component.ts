@@ -21,23 +21,28 @@ export class ChooseAvatarComponent implements OnInit{
     public dialogRef: MatDialogRef<ChooseAvatarComponent>,
     public imageSvc: ImageService
   ){
-    // this.loadAvatars();
   }
 
   avatars: Image[] = [];
+  selectedAvatar: Image | null = null;
 
   closeModal(): void {
     this.dialogRef.close();
   }
 
-  // loadAvatars(){
-  //   this.imageSvc.getAvatars().subscribe((avatars)=>{
-  //     this.avatars = avatars;
-  //   })
-  // }
+  selectAvatar(avatar: Image): void {
+    this.selectedAvatar = avatar;
+    // this.dialogRef.close(this.selectedAvatar);
+  }
+
+
+  saveAvatar(): void {
+    if (this.selectedAvatar) {
+      this.dialogRef.close(this.selectedAvatar);
+    }
+  }
 
   ngOnInit(): void {
-    // this.loadAvatars();
     this.imageSvc.getJsonImages().subscribe((images)=>{
       this.avatars = images;
     })
