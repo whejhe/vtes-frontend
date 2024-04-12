@@ -1,11 +1,11 @@
 // front/src/app/pages/main/deck/ficha-deck/ficha-deck.component.ts
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IconService } from '../../../../services/icon.service';
 import { JsonServiceService } from '../../../../services/json-service.service';
 import { Card, Discipline } from '../../../../models/vtes.model';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FilterPipe } from '../../../../pipes/filter.pipe';
 import { FilterMultiPipe } from '../../../../pipes/filter-multi.pipe';
 import { DeckService } from '../../../../services/deck.service';
@@ -28,12 +28,20 @@ import { User } from '../../../../models/user.model';
 })
 export class FichaDeckComponent implements OnInit {
 
+  private id!: string;
+
   constructor(
     private iconSvc: IconService,
     private jsonSvc: JsonServiceService,
     private deckSvc: DeckService,
-    private authSvc: AuthService
-  ) { }
+    private authSvc: AuthService,
+    private route: ActivatedRoute,
+  ) { 
+    this.route.queryParams.subscribe(params => {
+      this.id = params['id'];
+    })
+
+  }
 
   currentUser: User | null = null;
   title: string = '';
@@ -46,9 +54,16 @@ export class FichaDeckComponent implements OnInit {
     name: '',
     description: '',
     author: '',
+    type: '',
     category: '',
-    cardIds: [],
-    publico: false
+    cardIds: {
+      type: [
+        {
+          _id: '',
+          cantidad: 0
+        }
+      ]
+    },    publico: false
   };
 
   public cards!: Card[];
@@ -85,15 +100,22 @@ export class FichaDeckComponent implements OnInit {
     this.deckSvc.createDeck(this.newDeck).subscribe(
       (deck) => {
         console.log('Mazo creado:', deck);
-        // Limpiar los campos del nuevo mazo
         this.newDeck = {
           _id: '',
           userId: '',
           name: '',
           description: '',
           author: '',
+          type: '',
           category: '',
-          cardIds: [],
+          cardIds: {
+            type: [
+              {
+                _id: '',
+                cantidad: 0
+              }
+            ],
+          },
           publico: false
         };
       },
@@ -192,6 +214,7 @@ export class FichaDeckComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCards();
+    console.log('ID PROP: ', this.id)
   }
 
 }

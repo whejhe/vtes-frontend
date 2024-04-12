@@ -9,9 +9,12 @@ import { Deck } from '../models/deck.model';
 })
 export class DeckService {
 
-  private apiUrl = 'https://vtesapp.duckdns.org/users/libraries/decks';
+  private apiUrl = 'http://localhost:3000/decks/';
 
-  constructor(private http: HttpClient) {}
+
+  constructor(
+    private http: HttpClient,
+  ) {}
 
   // Crear un nuevo mazo
   createDeck(deck: Deck): Observable<Deck> {
@@ -19,6 +22,13 @@ export class DeckService {
   }
 
   // Obtener todos los mazos
+  // getDecks(page: number = 1, itemsPerPage: number = 15): Observable<{ decks: Deck[]; totalItems: number }> {
+  //   const params = {
+  //     page: page.toString(),
+  //     limit: itemsPerPage.toString()
+  //   };
+  //   return this.http.get<{ decks: Deck[]; totalItems: number }>(`${this.apiUrl}`, { params });
+  // }
   getDecks(): Observable<Deck[]> {
     return this.http.get<Deck[]>(this.apiUrl);
   }

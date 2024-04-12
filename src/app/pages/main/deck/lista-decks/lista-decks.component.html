@@ -1,4 +1,28 @@
 <div class="container">
+
+    <div class="row">
+        <!--AUTHOR-->
+        <div class="col-6">
+            <h4 class="titulo-select">Author</h4>
+            <select name="" class="form-select" id="">
+                <option value="author" *ngFor="let user of user"
+                >{{user.nick}}</option>
+            </select>
+        </div>
+        <!--TYPE-->
+        <div class="col-6">
+            <h4 class="titulo-select">Type</h4>
+            <select name="" class="form-select" id="">
+                <option value="Ally">Ally</option>
+                <option value="Bleed">Bleed</option>
+                <option value="Combat">Combat</option>
+                <option value="Toolbox">Toolbox</option>
+                <option value="Wall">Wall</option>
+                <option value="Vote">Vote</option>
+            </select>
+        </div>
+    </div>
+
     <table class="table table-hover">
         <thead>
             <tr class="table-dark">
@@ -9,89 +33,16 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="table-light" [routerLink]="['/ficha-deck']">
-                <th>Active</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr class="table-secondary">
-                <th>Default</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr class="table-light">
-                <th>Primary</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr class="table-secondary">
-                <th>Secondary</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr class="table-light">
-                <th>Success</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr class="table-secondary">
-                <th>Danger</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr class="table-light">
-                <th>Warning</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr class="table-secondary">
-                <th>Info</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr class="table-light">
-                <th>Light</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr class="table-secondary">
-                <th>Dark</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr class="table-light">
-                <th>Warning</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr class="table-secondary">
-                <th>Info</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr class="table-light">
-                <th>Light</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr class="table-secondary">
-                <th>Dark</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
+            <tr class="table-light" 
+            [routerLink]="['/ficha-deck']" *ngFor="let deck of decks
+            let i=index"
+            [class.table-light] = "i % 2 === 0"
+            [class.table-secondary] = "i % 2 !== 0"
+            >
+                <th>{{deck.name}}</th>
+                <td>{{deck.type}}</td>
+                <td>{{deck.description}}</td>
+                <td>{{deck.author}}</td>
             </tr>
         </tbody>
     </table>

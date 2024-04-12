@@ -2,12 +2,18 @@
 export interface Deck {
   _id: string;
   userId: string;
+  type: string;
   name: string;
   description: string;
   author: string;
   category: string;
   publico: boolean;
   cardIds:{
-    type: string[]
-  };
+    type:[
+      {
+        _id: string;
+        cantidad: number;
+      }
+    ]
+  }
 }

@@ -6,13 +6,6 @@
 
 <div class="px-3 py-2 text-bg-dark border-bottom header">
   <!--IMAGEN DE PERFIL-->
-  <!-- <div class="profile">
-    @if(user){
-      <img src="{{user.profileImage}}" width="60" alt="" />
-    }@else{
-      <img src="../../../assets/img/default-perfil.png" width="60" alt="" />
-    }
-  </div> -->
   <div class="container-logo">
     <img class="logo" src="../../../../assets/img/icons-vtes/logo/logo-blanco.png" alt="" />
     <a class="navbar-brand" href="#">Elysium Eternal</a>
@@ -67,7 +60,10 @@
             Decks
           </a>
           <ul class="dropdown-menu decks">
-            <li><a class="dropdown-item" href="/ficha-deck">New Deck</a></li>
+            <!--CREAR UN NUEVO MAZO-->
+            <li><a class="dropdown-item" href="/ficha-deck"
+            >New Deck</a></li>
+            <!--LISTA DE MAZOS-->
             <li><a class="dropdown-item" href="/lista-decks">List of Decks</a></li>
           </ul>
         </li>

@@ -8,4 +8,5 @@ export interface User{
     password: string;
     profileImage: string;
     blocked: boolean;
+    avatarUrl: string;
 }

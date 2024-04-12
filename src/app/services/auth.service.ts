@@ -154,6 +154,11 @@ export class AuthService implements OnInit{
     return this.http.post(`${this.apiUrl}/users/unblockUser/${id}`, { headers: { 'Authorization': `Bearer ${this.getToken()}` } });
   }
 
+  // ACTUALIZAR USUARIOS
+  updateUser(id: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/users/${id}`, { headers: { 'Authorization': `Bearer ${this.getToken()}` } });
+  }
+
   ngOnInit(): void {
       console.log(this.getProfileImage());
   }

@@ -5,6 +5,7 @@ import { AuthService } from '../../../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { Image } from '../../../../models/image.model';
 import { ImageService } from '../../../../services/image.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-users',
@@ -19,7 +20,8 @@ export class ListUsersComponent implements OnInit {
 
   constructor(
     public authSvc : AuthService,
-    public imageSvc: ImageService
+    public imageSvc: ImageService,
+    private router: Router
   ){}
 
   user: User[] =[];
@@ -64,10 +66,11 @@ export class ListUsersComponent implements OnInit {
     }
   }
 
-  unblockUser(id: string){
+  unblockUser(user: User){
     if(confirm('¿Estas seguro de desbloquear este usuario?')){
-      this.authSvc.unblockUser(id).subscribe(
+      this.authSvc.unblockUser(user._id).subscribe(
         () => {
+          this.user = this.user.filter(u => u._id !== user._id);
           console.log('Usuario desbloqueado');
           this.getUsers();
         },
@@ -76,6 +79,18 @@ export class ListUsersComponent implements OnInit {
         }
       );
     }
+  }
+
+  updateUser(){
+    this.authSvc.updateUser(this.user[this.user.length - 1]._id).subscribe(
+      (updateUser) => {
+        console.log('Usuario actualizado: ', updateUser);
+        this.getUsers();
+      },
+      (error) => {
+        console.log('Error al actualizar el usuario: ', error);
+      }
+    )
   }
 
   ngOnInit(): void {
