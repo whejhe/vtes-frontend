@@ -7,12 +7,12 @@ export const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./pages/auth/auth.route').then( m => m.AUTH_ROUTE),
-    canActivate: [noAuthGuard]
+    // canActivate: [noAuthGuard]
   },
   {
     path: '',
     loadChildren: () => import('./pages/main/main.route').then( m => m.MAIN_ROUTE),
-    canActivate: [authGuard]
+    // canActivate: [authGuard]
   },
   {
     path:'admin',
