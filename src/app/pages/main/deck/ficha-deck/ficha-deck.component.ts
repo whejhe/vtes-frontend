@@ -36,7 +36,7 @@ export class FichaDeckComponent implements OnInit {
     private deckSvc: DeckService,
     private authSvc: AuthService,
     private route: ActivatedRoute,
-  ) { 
+  ) {
     this.route.queryParams.subscribe(params => {
       this.id = params['id'];
     })

@@ -25,7 +25,7 @@ export const MAIN_ROUTE:Routes = [
   {path: 'upload-card', component: UploadCardComponent},
   {path: 'gallery', component: GalleryComponent},
   {path: 'events', component: EventsComponent},
-  {path: 'ficha-deck', component: FichaDeckComponent},
+  {path: 'ficha-deck/:id', component: FichaDeckComponent},
   {path: 'lista-decks', component: ListaDecksComponent},
   {path: 'listar-eventos', component: ListarEventosComponent},
   {path: 'list-foros', component: ListForosComponent},

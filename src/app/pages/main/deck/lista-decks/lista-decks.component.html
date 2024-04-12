@@ -5,8 +5,11 @@
         <div class="col-6">
             <h4 class="titulo-select">Author</h4>
             <select name="" class="form-select" id="">
-                <option value="author" *ngFor="let user of user"
-                >{{user.nick}}</option>
+                @for(user of user; track user._id){
+                    <option value="{{user.nick}}">{{user.nick}}</option>
+                }
+                <!-- <option value="author" *ngFor="let user of user"
+                >{{user.nick}}</option> -->
             </select>
         </div>
         <!--TYPE-->
@@ -33,7 +36,16 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="table-light" 
+          @for(deck of decks; track deck._id){
+            <tr class="table-light" [routerLink]="['/ficha-deck/'+deck._id]"
+            >
+                <th>{{deck.name}}</th>
+                <td>{{deck.type}}</td>
+                <td>{{deck.description}}</td>
+                <td>{{deck.author}}</td>
+            </tr>
+          }
+            <!-- <tr class="table-light"
             [routerLink]="['/ficha-deck']" *ngFor="let deck of decks
             let i=index"
             [class.table-light] = "i % 2 === 0"
@@ -43,7 +55,7 @@
                 <td>{{deck.type}}</td>
                 <td>{{deck.description}}</td>
                 <td>{{deck.author}}</td>
-            </tr>
+            </tr> -->
         </tbody>
     </table>
 

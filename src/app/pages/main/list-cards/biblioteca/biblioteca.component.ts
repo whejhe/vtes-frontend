@@ -1,6 +1,5 @@
 //src/app/pages/main/list-cards/biblioteca/biblioteca.component.ts
-import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Component, OnInit, inject } from '@angular/core';
 import { AsyncPipe, CommonModule, NgOptimizedImage } from '@angular/common';
 import {
   Card,
@@ -15,11 +14,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { DetailsCardLibraryComponent } from '../../../../components/details-card-library/details-card-library.component';
 import { FormsModule } from '@angular/forms';
 import { FilterPipe } from '../../../../pipes/filter.pipe';
-// import { ImageStoreService } from '../../../../services/image-store.service';
 import { IconService } from '../../../../services/icon.service';
 import { __values } from 'tslib';
 import { FilterMultiPipe } from '../../../../pipes/filter-multi.pipe';
 import { User } from '../../../../models/user.model';
+// import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-biblioteca',
@@ -36,6 +35,8 @@ export class BibliotecaComponent implements OnInit {
     public dialog: MatDialog,
     public iconSvc: IconService,
   ) {}
+
+  // private httpClient = inject(HttpClient);
 
   // Guardar datos del usuario
 
