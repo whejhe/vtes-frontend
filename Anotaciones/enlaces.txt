@@ -1,22 +1,12 @@
-FILTRO
-https://github.com/elena-in-code/Angular-Photo-Gallery-App
-
 GENERAR INTERFACE APARTIR DE JSON
 https://app.quicktype.io/
 
 BOOTSTRAP
 https://getbootstrap.com/
-
 https://bootswatch.com/
-
-ANGULAR MATERIAL
-https://material.angular.io/
 
 JSON VTES
 https://static.krcg.org/data/vtes.json
-
-BOOTSTRAP EN ANGULAR
-https://www.youtube.com/watch?v=9-5gnL9Hiv0
 
 OBSERVABLES
 https://www.youtube.com/watch?v=96HouMe0o5M
@@ -26,7 +16,6 @@ https://www.youtube.com/watch?v=VDfvkWrjzXE&t=151s
 
 TRANSICIONES
 https://www.youtube.com/watch?v=wSrGSNYikEk
-
 
 DESPLIEGUE
 https://front-vtes.vercel.app/

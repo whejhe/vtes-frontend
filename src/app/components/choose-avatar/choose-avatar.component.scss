@@ -27,3 +27,11 @@
         border: 1px solid rgb(168, 8, 8);
     }
 }
+button{
+  margin-left: 1em;
+}
+
+button:hover{
+    cursor: pointer;
+    background-color: rgb(168, 8, 8);
+}

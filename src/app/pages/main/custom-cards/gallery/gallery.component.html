@@ -9,10 +9,12 @@
       placeholder="Search By Name" aria-label="Search"
       >
     </div>
-    <!--FILTRADO POR AUTOR-->
+    <!--AUTHOR-->
     <div class="col-md-4 auth-search">
       <select name="auth" class="form-select" id="auth">
-        <option value="auth">Search Auth</option>
+        @for(user of user; track user._id){
+          <option value="{{user.nick}}">{{user.nick}}</option>
+        }
       </select>
     </div>
   </div>
