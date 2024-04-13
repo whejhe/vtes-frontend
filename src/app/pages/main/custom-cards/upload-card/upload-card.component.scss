@@ -1,0 +1,34 @@
+.container{
+  margin: auto;
+  width: 80%;
+  border: 2px solid rgb(88, 88, 88);
+  padding: 1em;
+  border-radius: 8px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.disciplines{
+  margin-top: 1em;
+}
+
+.all-disciplines{
+  display: inline-flex;
+  img{
+    margin: auto;
+  }
+}
+
+.imageIcons{
+  height: auto;
+  margin: -0.5em;
+  width: 30px;
+}
+
+.icon-filter{
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.icon-filter.clicked{
+  opacity: 1;
+}
