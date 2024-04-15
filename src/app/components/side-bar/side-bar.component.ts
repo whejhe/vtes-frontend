@@ -26,18 +26,9 @@ export class SideBarComponent {
     private router: Router,
   ){
     this.user = this.authSvc.getCurrentUser();
-    console.log(this.user)
+    // console.log(this.user)
     // this.getAvatarImage();
   }
-
-  // getAvatarImage(){
-  //   const userId = this.user?._id;
-  //   this,this.imageSvc.getImagesByUserId(userId).subscribe((images){
-  //     this.avatarImage? = images.find((image)=>{
-  //       image.type === 'avatars'
-  //     });
-  //   })
-  // }
 
   logout(){
     this.authSvc.logoutUser();
@@ -58,7 +49,7 @@ export class SideBarComponent {
 
   ngOnInit() {
     this.getLoggedInUser();
-    console.log('Usuario actual :',this.user);
+    // console.log('Usuario actual :',this.user);
   }
 
 }

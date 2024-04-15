@@ -2,7 +2,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
-import textWeb from '../../../models/es/textWeb';
 
 
 @Component({
@@ -19,7 +18,6 @@ export class InicioComponent {
   public decodedToken: any;
   public user: string = 'invitado';
 
-  public text: any = textWeb;
 
   constructor(
     private authSvc: AuthService,

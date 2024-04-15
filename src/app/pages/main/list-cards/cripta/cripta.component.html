@@ -103,7 +103,7 @@
                 let i = index
               " (click)="openModal(card)" [class.table-light]="i % 2 === 0" [class.table-secondary]="i % 2 !== 0">
               <td style="cursor: pointer" (mouseenter)="setUrlImage(card.url)" (mouseleave)="clearUrlImage()">
-                {{ card._name }}
+                {{ card.name }}
               </td>
               <!-- <td>{{ card.clans }}</td> -->
             <td>

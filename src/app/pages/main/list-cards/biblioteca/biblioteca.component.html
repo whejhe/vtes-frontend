@@ -99,7 +99,7 @@
             <td class="imageFloat" style="cursor: pointer"
             (mouseenter)="setUrlImage(card.url)"
             (mouseleave)="clearUrlImage()">
-            {{card._name}}</td>
+            {{card.name}}</td>
             <td>
               <div class="container-image" *ngFor="let discipline of card.disciplines">
                 @defer (on viewport){

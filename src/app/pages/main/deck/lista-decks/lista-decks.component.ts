@@ -41,6 +41,15 @@ export class ListaDecksComponent implements OnInit {
             });
     }
 
+    //CONTAR TOTAL DE CAARTAS Y SU CANTIDAD
+    countTotal(deck: Deck){
+        let total = 0;
+        for (let card of deck.cardIds) {
+            total += card.cantidad;
+        }
+        return total
+    }
+
     getDecks() {
         this.deckSvc.getDecks().subscribe(
             (decks: Deck[]) => {

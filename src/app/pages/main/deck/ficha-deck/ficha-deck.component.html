@@ -3,7 +3,7 @@
   <div class="data-container">
 
     <button class="btn btn-dark back-button"
-    [routerLink]="['/lista-decks']">Back to list</button><br>
+    [routerLink]="['/lista-decks/']">Back to list</button><br>
 
     <div class="row">
       <!--TITULO DECK-->
@@ -147,7 +147,9 @@
           <tbody>
             <tr (click)="addCardToDeck(card)"
             >
+              <!--NAME OF CARD-->
               <td>{{card._name}}</td>
+              <!--DISCIPLINES-->
               <td>
                 <div class="container-image" *ngFor="let discipline of card.disciplines">
                   @defer (on viewport){
@@ -157,6 +159,7 @@
                   }
                 </div>
               </td>
+              <!--COST-->
               <td>
                 <div class="container-image">
                   @defer (on viewport) {
@@ -166,6 +169,7 @@
                   }
                 </div>
               </td>
+              <!--QUANTITY-->
               <td class="quantity">
                 <input name="quantity" value="1" min="1" type="number">
                 <svg class="trash" id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -179,7 +183,7 @@
 
       <!--OPCIONES PARA GUARDADO-->
       <div class="col-md-2 botones">
-        <button class="btn btn-dark" (click)="createDeck()">
+        <button class="btn btn-dark">
           <svg id="i-file" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
             <path d="M6 2 L6 30 26 30 26 10 18 2 Z M18 2 L18 10 26 10" />
           </svg> Create Deck

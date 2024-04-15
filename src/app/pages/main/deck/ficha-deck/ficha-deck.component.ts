@@ -28,8 +28,6 @@ import { User } from '../../../../models/user.model';
 })
 export class FichaDeckComponent implements OnInit {
 
-  private id!: string;
-
   constructor(
     private iconSvc: IconService,
     private jsonSvc: JsonServiceService,
@@ -37,9 +35,6 @@ export class FichaDeckComponent implements OnInit {
     private authSvc: AuthService,
     private route: ActivatedRoute,
   ) {
-    this.route.queryParams.subscribe(params => {
-      this.id = params['id'];
-    })
 
   }
 
@@ -48,23 +43,10 @@ export class FichaDeckComponent implements OnInit {
   author: string = '';
   description: string = '';
   category: string = '';
-  newDeck: Deck = {
-    _id: '',
-    userId: '',
-    name: '',
-    description: '',
-    author: '',
-    type: '',
-    category: '',
-    cardIds: {
-      type: [
-        {
-          _id: '',
-          cantidad: 0
-        }
-      ]
-    },    publico: false
-  };
+
+
+  public decks: Deck[] = [];
+  public currentDeckId: string = '';
 
   public cards!: Card[];
   public cardsInDeck: Card[] = [];
@@ -93,68 +75,21 @@ export class FichaDeckComponent implements OnInit {
     );
   }
 
-  // CREAR UN NUEVO MAZO
-  createDeck(): void {
-    this.newDeck.userId = this.currentUser?._id || '';
-    this.newDeck.author = this.currentUser?.nick || '';
-    this.deckSvc.createDeck(this.newDeck).subscribe(
-      (deck) => {
-        console.log('Mazo creado:', deck);
-        this.newDeck = {
-          _id: '',
-          userId: '',
-          name: '',
-          description: '',
-          author: '',
-          type: '',
-          category: '',
-          cardIds: {
-            type: [
-              {
-                _id: '',
-                cantidad: 0
-              }
-            ],
-          },
-          publico: false
-        };
-      },
-      (error) => {
-        console.error('Error al crear el mazo:', error);
-      }
-    );
-  }
-
-  // OBTENER MAZO POR ID
-  getDeckById(deckId: string): void {
-    this.deckSvc.getDeckById(deckId).subscribe(
-      (deck) => {
-        console.log('Mazo encontrado:', deck);
-      },
-      (error) => {
-        console.error('Error al obtener el mazo:', error);
-      }
-    );
+  getCurrentUser() {
+    this.authSvc.getCurrentUser()
   }
 
   // ACTUALIZAR UN MAZO
   saveDeck(): void {
-    this.deckSvc.updateDeck(this.newDeck._id, this.newDeck).subscribe(
-      (updateDeck) => {
-        console.log('Mazo actualizado:', updateDeck);
-      },
-      (error) => {
-        console.error('Error al actualizar el mazo:', error);
-      }
-    )
+
   }
 
   getNumCardsInDeck(): number {
-    if(this.numCardsInDeck < 60){
+    if (this.numCardsInDeck < 60) {
       this.showErrorMessage = true;
-    }else if(this.numCardsInDeck > 90){
+    } else if (this.numCardsInDeck > 90) {
       this.showErrorMessage = true;
-    }else{
+    } else {
       this.showErrorMessage = false;
     }
     return this.numCardsInDeck;
@@ -163,9 +98,9 @@ export class FichaDeckComponent implements OnInit {
   addCardToDeck(card: Card): void {
     this.cardsInDeck.push(card);
     this.numCardsInDeck++;
-    if(this.numCardsInDeck > 90){
+    if (this.numCardsInDeck > 90) {
       this.showErrorMessage = true;
-    }else{
+    } else {
       this.showErrorMessage = false;
     }
     this.searchName = '';
@@ -178,43 +113,53 @@ export class FichaDeckComponent implements OnInit {
     return discipline ? discipline.url : '';
   }
 
-
   //URL IMAGENES COSTES BOOD
-  getBloodCostImage(bloodCost: string | undefined){
+  getBloodCostImage(bloodCost: string | undefined) {
     this.iconSvc.getBloodCostImage(bloodCost);
     return this.iconSvc.getBloodCostImage(bloodCost);
   }
 
   //URL IMAGENES COSTES POOL
-  getPoolCostImage(poolCost: string | undefined){
+  getPoolCostImage(poolCost: string | undefined) {
     this.iconSvc.getPoolCostImage(poolCost);
     return this.iconSvc.getPoolCostImage(poolCost);
   }
 
   //URL IMAGENES COSTES PERSONAJES
-  getCapacityCostImage(capacityCost: number | undefined){
+  getCapacityCostImage(capacityCost: number | undefined) {
     this.iconSvc.getCapacityCostImage(capacityCost);
     return this.iconSvc.getCapacityCostImage(capacityCost);
   }
 
   removeCardsInDeck(card: Card): void {
     const index = this.cardsInDeck.indexOf(card);
-    if(index !== -1) {
+    if (index !== -1) {
       this.cardsInDeck.splice(index, 1);
       this.numCardsInDeck--;
-      if(this.numCardsInDeck < 60){
+      if (this.numCardsInDeck < 60) {
         this.showErrorMessage = true;
-      }else if(this.numCardsInDeck > 90){
+      } else if (this.numCardsInDeck > 90) {
         this.showErrorMessage = true;
-      }else{
+      } else {
         this.showErrorMessage = false;
       }
     }
   }
 
+  getDecks() {
+    this.deckSvc.getDecks().subscribe(
+      (decks: Deck[]) => {
+        this.decks = decks;
+        console.log('Decks: ', this.decks);
+      },
+      (error) => {
+        console.log('Error al obtener los decks: ', error);
+      });
+  }
+
   ngOnInit(): void {
     this.loadCards();
-    console.log('ID PROP: ', this.id)
+    this.getDecks();
   }
 
 }

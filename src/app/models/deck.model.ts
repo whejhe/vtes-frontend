@@ -8,12 +8,11 @@ export interface Deck {
   author: string;
   category: string;
   publico: boolean;
-  cardIds:{
-    type:[
-      {
-        _id: string;
-        cantidad: number;
-      }
-    ]
-  }
+  cardIds: [
+    {
+      _id: string;
+      cantidad: number;
+    }
+  ]
+
 }

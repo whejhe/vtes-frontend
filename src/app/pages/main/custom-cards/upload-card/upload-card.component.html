@@ -46,11 +46,8 @@
     <div class="row">
       <!--NOMBRE CARTA-->
       <div class="col-md-6">
+        <label for="title" class="form-label">Name:</label>
         <input placeholder="Nombre" type="text" class="form-control" id="title" required>
-      </div>
-      <!--DESCRIPCION-->
-      <div class="col-md-6">
-        <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
       </div>
       <!--CLAN-->
       <div class="col-md-6">
@@ -62,22 +59,23 @@
       </select>
       </div>
     </div>
-
-
+    
+    
     <div class="row">
       <!--IMAGEN-->
       <div class="col-md-3">
+        <label for="image" class="form-label">Image:</label>
         <input type="file" class="form-control" id="image" required>
       </div>
+      
       <!--CAPACIDAD-->
       <div class="col-md-3">
+        <label for="capacity">Capacity:</label>
         <input type="number" class="form-control" min="1" max="11" placeholder="Capacidad minima"
         [(ngModel)]="searchCapacity"
         />
       </div>
-    </div>
 
-    <div class="row">
       <!--GRUPO-->
       <div class="col-md-3">
         <label for="marca" class="form-label">Group:</label>
@@ -93,6 +91,7 @@
         <option value="7">Grupo 7</option>
       </select>
       </div>
+      
       <!--TIPO-->
       <div class="col-md-3">
         <label for="marca" class="form-label">Type:</label>
@@ -103,19 +102,31 @@
       >{{type}}</option>
       </select>
       </div>
+    
     </div>
+    
 
     <div class="row">
+    </div>
+    
+    <div class="row">
+      <!--DESCRIPCION-->
+      <div class="col-md-6">
+        <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
+      </div>
       <!--PUBLICO-->
-      <div class="col-md-4">
+      <div class="col-md-3 end">
         <select class="form-select" name="visibility" id="">
           <option value="publico">Publico</option>
           <option value="privado">Privado</option>
         </select>
       </div>
+      <!--GUARDADO-->
+      <div class="col-md-3 end">
+        <button class="btn btn-dark" type="submit">Guardar</button>
+      </div>
     </div>
 
 
-    <button class="btn btn-dark" type="submit">Guardar</button>
   </form>
 </div>

@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterPipe } from '../../../../pipes/filter.pipe';
 import { IconService } from '../../../../services/icon.service';
 import { FilterMultiPipe } from '../../../../pipes/filter-multi.pipe';
+import { CardService } from '../../../../services/card.service';
 
 @Component({
   selector: 'app-cripta',
@@ -30,6 +31,7 @@ export class CriptaComponent implements OnInit {
     private jsonSvc: JsonServiceService,
     public dialog: MatDialog,
     public iconSvc: IconService,
+    public cardSvc: CardService
   ) { }
 
   public cards!: Card[];
@@ -65,7 +67,6 @@ export class CriptaComponent implements OnInit {
   public maxCapacity: number = 11;
   public searchCapacity = null;
   public capacity: number = 0;
-
 
   setUrlImage(url: string): void {
     this.url = url;
@@ -145,11 +146,17 @@ export class CriptaComponent implements OnInit {
     this.maxCapacity = 11;
   }
 
-
-  ngOnInit(): void {
-    this.jsonSvc.getJsonData().subscribe((cards) => {
+  loadCards(): void {
+    this.cardSvc.getCards().subscribe((cards) => {
       this.cards = cards;
     });
+  }
+
+  ngOnInit(): void {
+    this.loadCards();
+    // this.jsonSvc.getJsonData().subscribe((cards) => {
+    //   this.cards = cards;
+    // });
     this.clanImages = this.clans.map(clan => ({
       name: clan,
       url: `https://static.krcg.org/svg/clan/${clan.toLowerCase().replace(/\s/g, '')}.svg`

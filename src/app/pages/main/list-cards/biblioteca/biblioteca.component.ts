@@ -18,6 +18,8 @@ import { IconService } from '../../../../services/icon.service';
 import { __values } from 'tslib';
 import { FilterMultiPipe } from '../../../../pipes/filter-multi.pipe';
 import { User } from '../../../../models/user.model';
+import { HttpClient } from '@angular/common/http';
+import { CardService } from '../../../../services/card.service';
 // import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -34,12 +36,10 @@ export class BibliotecaComponent implements OnInit {
     private jsonSvc: JsonServiceService,
     public dialog: MatDialog,
     public iconSvc: IconService,
+    public cardSvc: CardService
   ) {}
 
-  // private httpClient = inject(HttpClient);
-
-  // Guardar datos del usuario
-
+  private httpClient = inject(HttpClient);
 
   public cards!: Card[];
   public filter!: string;
@@ -52,7 +52,7 @@ export class BibliotecaComponent implements OnInit {
 
   public disciplineImages = this.iconSvc.disciplineImages;
 
-  public disciplines = Object.values(Discipline);
+  // public disciplines = Object.values(Discipline);
   public disciplineSelected: { [key: string]: boolean } = {};
   public selectedDisciplines: Discipline[] = [];
 
@@ -202,9 +202,16 @@ export class BibliotecaComponent implements OnInit {
       .map((poolCost) => poolCost);
   }
 
-  ngOnInit(): void {
-    this.jsonSvc.getJsonData().subscribe((cards) => {
+  loadCards(): void {
+    this.cardSvc.getCards().subscribe((cards) => {
       this.cards = cards;
     });
+  }
+
+  ngOnInit(): void {
+    this.loadCards();
+    // this.jsonSvc.getJsonData().subscribe((cards) => {
+    //   this.cards = cards;
+    // });
   }
 }
