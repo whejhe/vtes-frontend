@@ -8,7 +8,8 @@
 }
 
 .disciplines{
-  margin-top: 1em;
+  margin: 1em auto;
+  width: 100%;
 }
 
 .all-disciplines{
@@ -31,4 +32,9 @@
 
 .icon-filter.clicked{
   opacity: 1;
+}
+
+button{
+  width: 300px;
+  margin: auto;
 }

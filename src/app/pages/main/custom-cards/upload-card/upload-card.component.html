@@ -43,26 +43,37 @@
       </div>
     </div>
 
-
     <div class="row">
       <!--NOMBRE CARTA-->
-      <div class="col-md-3">
+      <div class="col-md-6">
         <input placeholder="Nombre" type="text" class="form-control" id="title" required>
       </div>
-      <!--CAPACIDAD-->
-      <div class="col-md-3">
-        <input type="number" class="form-control" min="1" max="11" placeholder="Capacidad minima"
-        [(ngModel)]="searchCapacity"
-        />
+      <!--DESCRIPCION-->
+      <div class="col-md-6">
+        <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
       </div>
       <!--CLAN-->
-      <div class="col-md-3">
+      <div class="col-md-6">
         <label for="marca" class="form-label">Clan:</label>
       <select name="clan" id="clan" class="form-select"
       [(ngModel)]="searchClan">
         <option value="{{clan}}" *ngFor="let clan of clans"
         >{{ clan }}</option>
       </select>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <!--IMAGEN-->
+      <div class="col-md-3">
+        <input type="file" class="form-control" id="image" required>
+      </div>
+      <!--CAPACIDAD-->
+      <div class="col-md-3">
+        <input type="number" class="form-control" min="1" max="11" placeholder="Capacidad minima"
+        [(ngModel)]="searchCapacity"
+        />
       </div>
     </div>
 
@@ -95,17 +106,6 @@
     </div>
 
     <div class="row">
-      <!--DESCRIPCION-->
-      <div class="col-md-6">
-        <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
-      </div>
-      <!--IMAGEN-->
-      <div class="col-md-6">
-        <input type="file" class="form-control" id="image" required>
-      </div>
-    </div>
-
-    <div class="row">
       <!--PUBLICO-->
       <div class="col-md-4">
         <select class="form-select" name="visibility" id="">
@@ -114,5 +114,8 @@
         </select>
       </div>
     </div>
+
+
+    <button class="btn btn-dark" type="submit">Guardar</button>
   </form>
 </div>
