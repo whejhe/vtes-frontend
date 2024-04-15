@@ -150,8 +150,8 @@ export class AuthService implements OnInit{
   }
 
   // DESBLOQUEAR USUARIOS
-  unblockUser(id: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/users/unblockUser/${id}`, { headers: { 'Authorization': `Bearer ${this.getToken()}` } });
+  unblockUser(userId: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/users/unblockUser/${userId}`, { headers: { 'Authorization': `Bearer ${this.getToken()}` } });
   }
 
   // ACTUALIZAR USUARIOS

@@ -29,10 +29,10 @@
           (click)="deleteUser(user._id)">Eliminar</button>
           @if(user.blocked){
             <button type="button" class="btn btn-warning btn-sm"
-            (click)="unblockUser(user)">DesBloquear</button>
+            (click)="unblockUser(this.user)">DesBloquear</button>
           }@else {
             <button type="button" class="btn btn-warning btn-sm"
-            (click)="blockUser(user._id)">Bloquear</button>
+            (click)="blockUser(this.user._id)">Bloquear</button>
           }
         </td>
       </tr>
