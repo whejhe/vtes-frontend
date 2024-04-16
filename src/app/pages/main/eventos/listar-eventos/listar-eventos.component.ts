@@ -32,6 +32,7 @@ export class ListarEventosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('Lista de Eventos: ', this.events);
     this.getEvents();
   }
 

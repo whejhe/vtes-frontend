@@ -53,7 +53,7 @@
                   searchName: searchName
                 }" 
                 (click)="addCardToDeck(card)">
-                  <a class="dropdown-item">{{ card._name }}</a>
+                  <a class="dropdown-item">{{ card.name }}</a>
                 </li>
               </ul>
             </div>
@@ -69,8 +69,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr (click)="addCardToDeck(card)">
-              <td>{{card._name}}</td>
+            <tr (click)="addCardToDeck(card)" *ngFor="let card of cards">
+              <td>{{card.name}}</td>
               <td>
                 <div class="container-image" *ngFor="let discipline of card.disciplines">
                   @defer (on viewport){
@@ -145,10 +145,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr (click)="addCardToDeck(card)"
+            <tr (click)="addCardToDeck(card)" *ngFor="let card of cards"
             >
               <!--NAME OF CARD-->
-              <td>{{card._name}}</td>
+              <td>{{card.name}}</td>
               <!--DISCIPLINES-->
               <td>
                 <div class="container-image" *ngFor="let discipline of card.disciplines">
