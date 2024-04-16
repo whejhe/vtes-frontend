@@ -12,7 +12,6 @@ import { environment } from '../../environments/environment';
 export class DeckService {
 
   private apiUrl = environment.apiUrl + '/decks';
-  // private apiUrl = 'http://localhost:3000/decks/';
 
   constructor(
     private http: HttpClient,

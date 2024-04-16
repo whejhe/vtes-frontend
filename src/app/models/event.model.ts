@@ -1,10 +1,13 @@
 export interface Event{
-    id: number,
+    _id: string,
+    creatorId: string,
     name:string,
     email:string,
-    date:Date,
     provincia:String,
-    ciudad:string,
-    type: String,
-    comment:string
+    localidad:string,
+    direccion:string,
+    description: String,
+    fecha:Date,
+    hora:String,
+    numMaxParticipantes:Number
 }
