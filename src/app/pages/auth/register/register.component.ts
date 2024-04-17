@@ -1,7 +1,7 @@
 //front/src/app/pages/auth/register/register.component.ts
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Image } from '../../../models/image.model';
 import { ImageService } from '../../../services/image.service';
@@ -11,7 +11,10 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -19,11 +22,19 @@ export class RegisterComponent implements OnInit {
 
   public image!: Image[];
 
-  name: string = '';
-  nick: string = '';
-  email: string = '';
-  password: string = '';
-  confirmPassword: string = '';
+  registerForm:FormGroup = new FormGroup({
+    name: new FormControl('', Validators.required),
+    nick: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+    confirmPassword: new FormControl('', Validators.required)
+  });
+
+  // name: string = '';
+  // nick: string = '';
+  // email: string = '';
+  // password: string = '';
+  // confirmPassword: string = '';
 
   showSucessMessage: boolean = false;
   showErrorMessage: boolean = false;
@@ -42,36 +53,37 @@ export class RegisterComponent implements OnInit {
   selectedAvatar:Image | null = null;
 
   register() {
-    const userData = {
-      name: this.name,
-      nick: this.nick,
-      email: this.email,
-      password: this.password,
-      role: 'USER',
-      profileImage: this.selectedAvatar?.name! + this.selectedAvatar?.extension!
-    };
+    if(this.registerForm.valid){
+      const userData = {
+        name: this.registerForm.get('name')?.value,
+        nick: this.registerForm.get('nick')?.value,
+        email: this.registerForm.get('email')?.value,
+        password: this.registerForm.get('password')?.value,
+        role: 'USER',
+        profileImage: this.selectedAvatar?.name! + this.selectedAvatar?.extension!
+      };
 
-
-    this.authSvc.registerUser(userData).subscribe(
-      (response: any) => {
-        console.log('response', response);
-        this.showSucessMessage = true;
-        this.showErrorMessage = false;
-        setTimeout(() => {
-          this.showSucessMessage = false;
-        }, 5000);
-        this.router.navigate(['/auth']);
-      },
-      (error: any) => {
-        console.log('error', error);
-        this.showErrorMessage = true;
-        this.showSucessMessage = false;
-        this.errorMesage = this.authSvc.handleRegistrationError(error);
-        setTimeout(() => {
+      this.authSvc.registerUser(userData).subscribe(
+        (response: any) => {
+          console.log('response', response);
+          this.showSucessMessage = true;
           this.showErrorMessage = false;
-        }, 5000);
-      }
-    );
+          setTimeout(() => {
+            this.showSucessMessage = false;
+          }, 5000);
+          this.router.navigate(['/auth']);
+        },
+        (error: any) => {
+          console.log('error', error);
+          this.showErrorMessage = true;
+          this.showSucessMessage = false;
+          this.errorMesage = this.authSvc.handleRegistrationError(error);
+          setTimeout(() => {
+            this.showErrorMessage = false;
+          }, 5000);
+        }
+      );
+    }
   }
 
   openModal():void{

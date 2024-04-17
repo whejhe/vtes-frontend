@@ -1,3 +1,6 @@
+ANGULAR
+https://angular.dev/
+
 GENERAR INTERFACE APARTIR DE JSON
 https://app.quicktype.io/
 

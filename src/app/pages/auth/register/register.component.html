@@ -1,18 +1,20 @@
 <!--front/src/app/pages/auth/register/register.component.html-->
 <div class="portada">
   <div class="container">
-    <form (ngSubmit)="register()" class="form-container">
+    <form (ngSubmit)="register()" class="form-container"
+      [formGroup]="registerForm">
 
       <div class="row">
         <!--NOMBRE-->
         <div class="form-floating col-md-6 d-inline-block margin-left">
-          <input type="text" class="form-control" id="floatingName" placeholder="name" [(ngModel)]="name" name="name">
+          <input type="text" class="form-control" id="floatingName" placeholder="name"
+          formControlName="name">
           <label for="floatingName">Name</label>
         </div>
         <!--NICK-->
         <div class=" col-md-6 form-floating d-inline-block">
-          <input type="text" class="form-control" id="floatingNick" placeholder="nick-name" [(ngModel)]="nick"
-            name="nick">
+          <input type="text" class="form-control" id="floatingNick" placeholder="nick-name"
+            formControlName="nick">
           <label for="floatingNick">Nick-Name</label>
         </div>
       </div>
@@ -20,8 +22,8 @@
       <div class="row">
         <!--EMAIL-->
         <div class="form-floating">
-          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" [(ngModel)]="email"
-            name="email">
+          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+            formControlName="email">
           <label for="floatingInput">Email</label>
         </div>
       </div>
@@ -30,7 +32,7 @@
         <!--PASSWORD-->
         <div class="form-floating password">
           <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
-            [(ngModel)]="password" name="password">
+            formControlName="password">
           <label for="floatingPassword">Password</label>
         </div>
       </div>
@@ -39,7 +41,7 @@
         <!--CONFIRMAR PASSWORD-->
         <div class="form-floating password">
           <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
-            [(ngModel)]="confirmPassword" name="confirmPassword">
+            formControlName="confirmPassword">
           <label for="floatingPassword">Confirmar Password</label>
         </div>
       </div>
@@ -62,7 +64,9 @@
         </label>
       </div>
 
-      <button class="btn btn-dark w-100 py-2" type="submit">Registrarse</button>
+      <button class="btn btn-dark w-100 py-2" type="submit"
+      [disabled]="!registerForm.valid"
+      >Registrarse</button>
     </form>
 
     <br>

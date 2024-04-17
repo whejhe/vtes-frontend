@@ -3,7 +3,6 @@ import { Routes } from "@angular/router";
 
 import { InicioComponent } from "./inicio/inicio.component";
 
-import { PortadaCustomCardComponent } from "./portada-custom-card/portada-custom-card.component";
 import { CustomComponent } from "./custom-cards/custom/custom.component";
 import { GalleryComponent } from "./custom-cards/gallery/gallery.component";
 import { EventsComponent } from "./eventos/events/events.component";
@@ -15,20 +14,21 @@ import { BibliotecaComponent } from "./list-cards/biblioteca/biblioteca.componen
 import { ListForosComponent } from "./foro/list-foros/list-foros.component";
 import { NewForoComponent } from "./foro/new-foro/new-foro.component";
 import { UploadCardComponent } from "./custom-cards/upload-card/upload-card.component";
+import { ContactComponent } from "./contact/contact.component";
 
 export const MAIN_ROUTE:Routes = [
-  {path: '', component: InicioComponent},
-  {path: 'cripta', component: CriptaComponent},
-  {path: 'biblioteca', component: BibliotecaComponent},
-  {path: 'portada-custom-card', component: PortadaCustomCardComponent},
-  {path: 'custom', component: CustomComponent},
-  {path: 'upload-card', component: UploadCardComponent},
-  {path: 'gallery', component: GalleryComponent},
-  {path: 'events', component: EventsComponent},
-  {path: 'ficha-deck/:id', component: FichaDeckComponent},
-  {path: 'ficha-deck', component: FichaDeckComponent},
-  {path: 'lista-decks', component: ListaDecksComponent},
-  {path: 'listar-eventos', component: ListarEventosComponent},
-  {path: 'list-foros', component: ListForosComponent},
-  {path: 'new-foro', component: NewForoComponent},
+  {path: '', title: 'Inicio',component: InicioComponent},
+  {path: 'cripta',title: 'Crypta', component: CriptaComponent},
+  {path: 'biblioteca',title: 'Biblioteca', component: BibliotecaComponent},
+  {path: 'custom',title: 'Custom Cards', component: CustomComponent},
+  {path: 'upload-card', title: 'Upload Card',component: UploadCardComponent},
+  {path: 'gallery',title: 'Gallery', component: GalleryComponent},
+  {path: 'events', title: 'Events',component: EventsComponent},
+  {path: 'ficha-deck/:id',title: 'Ficha Deck', component: FichaDeckComponent},
+  {path: 'ficha-deck',title: 'Ficha Deck', component: FichaDeckComponent},
+  {path: 'lista-decks',title: 'Lista Decks', component: ListaDecksComponent},
+  {path: 'listar-eventos',title: 'Lista de Eventos', component: ListarEventosComponent},
+  {path: 'list-foros',title: 'Lista de Foros', component: ListForosComponent},
+  {path: 'new-foro',title: 'New Foro', component: NewForoComponent},
+  {path: 'contact',title: 'Contact', component: ContactComponent}
 ]
