@@ -32,7 +32,6 @@ export class ChooseAvatarComponent implements OnInit{
 
   selectAvatar(avatar: Image): void {
     this.selectedAvatar = avatar;
-    // this.dialogRef.close(this.selectedAvatar);
   }
 
 

@@ -58,7 +58,6 @@ export class ImageService {
 
   getAvatarByUserId(userId: string): Observable<Image[]> {
     return this.http.get<Image[]>(`${this.apiUrl}images/avatars/${userId}`);
-    
   }
 
   getAvatarInRegister(name: string, extension: string): string{
