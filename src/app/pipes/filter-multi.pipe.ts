@@ -14,7 +14,7 @@ export class FilterMultiPipe implements PipeTransform {
       let match = true;
 
       // Filtrar por nombre
-      if (filters.searchName && !card._name.toLowerCase().includes(filters.searchName.toLowerCase())) {
+      if (filters.searchName && !card.name.toLowerCase().includes(filters.searchName.toLowerCase())) {
         match = false;
       }
 

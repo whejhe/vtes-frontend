@@ -51,7 +51,7 @@
                 | filter: ['Vampire', 'Imbued']:false
                 | filterMulti: {
                   searchName: searchName
-                }" 
+                }"
                 (click)="addCardToDeck(card)">
                   <a class="dropdown-item">{{ card.name }}</a>
                 </li>
@@ -69,7 +69,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr (click)="addCardToDeck(card)" *ngFor="let card of cards">
+            <tr (click)="addCardToDeck(card)" *ngFor="let deck of decks">
               <td>{{card.name}}</td>
               <td>
                 <div class="container-image" *ngFor="let discipline of card.disciplines">
@@ -126,7 +126,7 @@
                 |filter: ['Vampire', 'Imbued']:true
                 | filterMulti: {
                   searchName: searchName
-                }" 
+                }"
                 (click)="addCardToDeck(card)"
                 >
                   <a class="dropdown-item">{{ card._name }}</a>
@@ -145,7 +145,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr (click)="addCardToDeck(card)" *ngFor="let card of cards"
+            <tr (click)="addCardToDeck(card)" *ngFor="let deck of decks"
             >
               <!--NAME OF CARD-->
               <td>{{card.name}}</td>

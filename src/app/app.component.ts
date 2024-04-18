@@ -3,11 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { NavBarComponent } from "./components/nav-bar/nav-bar.component";
 import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from "./components/footer/footer.component";
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { FormComponent } from './components/form/form.component';
 import { AuthService } from './services/auth.service';
 import { User } from './models/user.model';
 
@@ -22,8 +20,6 @@ import { User } from './models/user.model';
         CommonModule,
         NavBarComponent,
         HeaderComponent,
-        FooterComponent,
-        FormComponent,
         FormsModule,
     ],
     providers: [
@@ -39,10 +35,10 @@ export class AppComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     ){}
-  
+
   public token = this.authSvc.getToken() || null;
-  
-  
+
+
   //Almacenar Usuario en localStorage
   ngOnInit() {
     if (this.user) {
