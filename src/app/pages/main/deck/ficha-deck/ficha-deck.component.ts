@@ -28,44 +28,46 @@ import { User } from '../../../../models/user.model';
 })
 export class FichaDeckComponent implements OnInit {
 
-  constructor(
-    private iconSvc: IconService,
-    private jsonSvc: JsonServiceService,
-    private deckSvc: DeckService,
-    private authSvc: AuthService,
-    private route: ActivatedRoute,
-  ) {
+  @Input() currentUser: User | null = null;
+  @Input() decks: Deck[] = [];
 
-  }
+  cards!: Card[];
+  cardsInDeck: Card[] = [];
+  numCardsInDeck: number = 0;
+  showErrorMessage: boolean = false;
+  searchName: string = '';
+  filteredCards: Card[] = [];
 
-  currentUser: User | null = null;
   title: string = '';
   author: string = '';
   description: string = '';
   category: string = '';
 
 
-  public decks: Deck[] = [];
   public currentDeckId: string = '';
 
-  public cards!: Card[];
-  public cardsInDeck: Card[] = [];
-  public numCardsInDeck: number = 0;
   public card = {} as Card;
 
   public disciplines = Object.values(Discipline);
   public disciplineImages = this.iconSvc.disciplineImages;
 
 
-  public searchName: string = '';
-  public filteredCards: Card[] = [];
   public filter!: string;
 
-  public showErrorMessage: boolean = false;
+
+  constructor(
+    private iconSvc: IconService,
+    private jsonSvc: JsonServiceService,
+    private deckSvc: DeckService,
+    private authSvc: AuthService,
+    private route: ActivatedRoute,
+  ) {}
 
   loadCards(): void {
     this.jsonSvc.getJsonData().subscribe((cards) => {
       this.cards = cards;
+    },(error) =>{
+      console.log('Error al cargar las cartas:',error);
     })
   }
 
@@ -98,13 +100,17 @@ export class FichaDeckComponent implements OnInit {
   addCardToDeck(card: Card): void {
     this.cardsInDeck.push(card);
     this.numCardsInDeck++;
-    if (this.numCardsInDeck > 90) {
+    this.updateErrorMessage();
+    this.searchName = '';
+    this.filteredCards = [];
+  }
+
+  updateErrorMessage(): void {
+    if (this.numCardsInDeck < 60 || this.numCardsInDeck > 90) {
       this.showErrorMessage = true;
     } else {
       this.showErrorMessage = false;
     }
-    this.searchName = '';
-    this.filteredCards = [];
   }
 
   //URL IMAGENES DISCIPLINAS
@@ -131,18 +137,12 @@ export class FichaDeckComponent implements OnInit {
     return this.iconSvc.getCapacityCostImage(capacityCost);
   }
 
-  removeCardsInDeck(card: Card): void {
+  removeCardFromDeck(card: Card): void {
     const index = this.cardsInDeck.indexOf(card);
     if (index !== -1) {
       this.cardsInDeck.splice(index, 1);
       this.numCardsInDeck--;
-      if (this.numCardsInDeck < 60) {
-        this.showErrorMessage = true;
-      } else if (this.numCardsInDeck > 90) {
-        this.showErrorMessage = true;
-      } else {
-        this.showErrorMessage = false;
-      }
+      this.updateErrorMessage();
     }
   }
 

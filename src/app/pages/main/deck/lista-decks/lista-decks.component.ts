@@ -1,3 +1,4 @@
+//front/src/app/pages/main/deck/lista-decks/lista-decks.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FichaDeckComponent } from "../ficha-deck/ficha-deck.component";
 import { RouterLink } from '@angular/router';
@@ -30,7 +31,7 @@ export class ListaDecksComponent implements OnInit {
     decks: Deck[] = [];
     user: User[] = [];
 
-    getUsers() {
+    getUsers():void {
         this.authSvc.getUsers().subscribe(
             (users: User[]) => {
                 this.user = users;
@@ -42,15 +43,15 @@ export class ListaDecksComponent implements OnInit {
     }
 
     //CONTAR TOTAL DE CAARTAS Y SU CANTIDAD
-    countTotal(deck: Deck){
+    countTotal(deck: Deck):number {
         let total = 0;
-        for (let card of deck.cardIds) {
+        deck.cards.forEach(card => {
             total += card.cantidad;
-        }
+        });
         return total
     }
 
-    getDecks() {
+    getDecks():void {
         this.deckSvc.getDecks().subscribe(
             (decks: Deck[]) => {
                 this.decks = decks;

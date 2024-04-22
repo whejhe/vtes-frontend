@@ -18,8 +18,8 @@ export class DeckService {
   ) {}
 
   // Crear un nuevo mazo
-  createDeck(deck: Deck): Observable<Deck> {
-    return this.http.post<Deck>(this.apiUrl, deck);
+  createDeck(deck: any): Observable<any> {
+    return this.http.post(this.apiUrl, deck);
   }
 
   getDecks(): Observable<Deck[]> {
@@ -37,8 +37,8 @@ export class DeckService {
   }
 
   // Obtener todas las cartas de un mazo
-  getCardsByDeckId(deckId: string): Observable<Deck> {
-    return this.http.get<Deck>(`${this.apiUrl}/${deckId}/cards`);
+  getCardsByDeckId(deckId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${deckId}/cards`);
   }
 
   // Actualizar un mazo
@@ -52,13 +52,13 @@ export class DeckService {
   }
 
   // Agregar una carta a un mazo
-  addCardToDeck(deckId: string, cardId: string): Observable<Deck> {
-    return this.http.post<Deck>(`${this.apiUrl}/${deckId}/cards`, { cardId });
+  addCardToDeck(deckId: string, cardId: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/${deckId}/cards`, { cardId });
   }
 
   // Eliminar una carta de un mazo
-  deleteCardFromDeck(deckId: string, cardId: string): Observable<Deck> {
-    return this.http.delete<Deck>(`${this.apiUrl}/${deckId}/cards/${cardId}`);
+  deleteCardFromDeck(deckId: string, cardId: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${deckId}/cards/${cardId}`);
   }
 
   // Eliminar un mazo
