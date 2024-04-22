@@ -104,12 +104,18 @@ export class NewDeckComponent implements OnInit {
 
   updateDeck(): void {
     const deck = this.deckForm.value;
+    deck._id = this.currentDeckId;
+    console.log('Deck to update:', deck);
+  if (!deck._id) {
+    console.error('Error: deck._id is undefined');
+  }
     this.deckSvc.updateDeck(this.currentDeckId, deck).subscribe(
       (response) => {
         console.log('Carta personalizada actualizada:', response);
       },
       (error) => {
         console.error('Error al actualizar la carta personalizada:', error);
+        console.error('Error details:', error.error);
       }
     );
   }

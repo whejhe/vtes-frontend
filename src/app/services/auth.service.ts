@@ -1,5 +1,5 @@
 //front/src/app/services/auth.service.ts
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable, catchError, map, of, tap } from 'rxjs';
 import { environment } from '../../environments/environment.development';
@@ -19,6 +19,15 @@ export class AuthService implements OnInit{
   private apiUrl = environment.apiUrl;
   private currentUser: User | null = null;
   public token: string | null = localStorage.getItem('token');
+
+
+  addAuthHeader(headers:HttpHeaders): HttpHeaders {
+    const token = this.getToken();
+    if (token) {
+      headers = headers.append('Authorization', `Bearer ${token}`);
+    }
+    return headers;
+  }
 
   //TOKEN
   saveToken(token: string): void {
@@ -144,7 +153,9 @@ export class AuthService implements OnInit{
 
   // ELIMINAR USUARIOS
   deleteUser(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/users/${id}`, { headers: { 'Authorization': `Bearer ${this.getToken()}` } });
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    return this.http.delete(`${this.apiUrl}/users/${id}`,{headers}); /*{ headers: { 'Authorization': `Bearer ${this.getToken()}` } });*/
   }
 
   // BLOQUEAR USUARIOS
