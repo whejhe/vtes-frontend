@@ -4,46 +4,53 @@ import { Component } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Card } from '../../../../models/card.model';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FilterPipe } from "../../../../pipes/filter.pipe";
 import { FilterMultiPipe } from "../../../../pipes/filter-multi.pipe";
 import { DeckService } from '../../../../services/deck.service';
+import { AuthService } from '../../../../services/auth.service';
+import { User } from '../../../../models/user.model';
 
 @Component({
-    selector: 'app-new-deck',
-    standalone: true,
-    templateUrl: './new-deck.component.html',
-    styleUrl: './new-deck.component.scss',
-    imports: [
-        ReactiveFormsModule,
-        CommonModule,
-        RouterLink,
-        FilterPipe,
-        FilterMultiPipe
-    ]
+  selector: 'app-deck',
+  standalone: true,
+  templateUrl: './deck.component.html',
+  styleUrl: './deck.component.scss',
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    RouterLink,
+    FilterPipe,
+    FilterMultiPipe
+  ]
 })
 export class NewDeckComponent {
 
   apiUrl = 'http://localhost:3000/decks';
   deckForm: FormGroup<any> = new FormGroup({});
-  newDeckId:string = '';
+  newDeckId: string = '';
   cards: Card[] = [];
+  user: User = this.authSvc.getCurrentUser()!;
 
   constructor(
     private http: HttpClient,
-    private deckSvc: DeckService
+    private deckSvc: DeckService,
+    private router: Router,
+    private authSvc: AuthService
   ) { }
 
   ngOnInit(): void {
+
     this.deckForm = new FormGroup({
+      userId: new FormControl(''),
       type: new FormControl('', Validators.required),
       name: new FormControl('', Validators.required),
       description: new FormControl(''),
-      author: new FormControl(''),
       category: new FormControl(''),
       publico: new FormControl(true),
       cards: new FormControl([])
     });
+    console.log('Id deck: ', this.newDeckId);
   }
 
   addCard(): void {
@@ -63,18 +70,22 @@ export class NewDeckComponent {
   }
 
   createDeck(): void {
+    this.deckForm.get('userId')!.setValue(this.authSvc.getCurrentUser()?._id);
+    if (this.deckForm.get('name')?.value == '') {
+      this.deckForm.get('name')!.setValue('Sin nombre');
+    }
     const deck = this.deckForm.value;
     this.deckSvc.createDeck(deck).subscribe(
-      (deck) => {
-        console.log(deck);
-        this.newDeckId = deck._id;
-        this.updateView();
+      (response: any) => {
+        this.newDeckId = response.id;
+        this.router.navigate([`/ficha-deck/${this.newDeckId}`]);
+        // this.updateView();
       },
       (error) => console.error(error)
     )
   }
 
   updateView(): void {
-    this.router.navigate(['/ficha-deck/', this.newDeckId]);
+    this.router.navigate([`/ficha-deck/${this.newDeckId}`]);
   }
 }

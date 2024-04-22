@@ -10,7 +10,7 @@
       </div>
       <!--AUTOR-->
       <div class="col-md-6">
-        <input class="form-control" placeholder="Author" type="text" formControlName="author">
+        <input class="form-control" placeholder="Author" type="text" disabled="true" [value]="user.nick">
       </div>
       <!--DESCRIPCION DE MAZO-->
       <div class="col-md-6">
@@ -129,7 +129,10 @@
 
       <!--OPCIONES PARA GUARDADO-->
       <div class="col-md-2 botones">
-        <button class="btn btn-dark" (click)="createDeck()">Create Deck</button><br>
+        <button class="btn btn-dark" 
+        (click)="createDeck()"
+        [routerLink]="['/ficha-deck/', newDeckId]"
+        >Create Deck</button><br>
         <button class="btn btn-dark">Save change</button><br>
         <button class="btn btn-dark">
           <svg id="i-print" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">

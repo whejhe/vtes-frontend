@@ -30,6 +30,7 @@ export class FichaDeckComponent implements OnInit {
 
   @Input() currentUser: User | null = null;
   @Input() decks: Deck[] = [];
+  user: User = this.authSvc.getCurrentUser()!;
 
   cards!: Card[];
   cardsInDeck: Card[] = [];
@@ -160,6 +161,7 @@ export class FichaDeckComponent implements OnInit {
   ngOnInit(): void {
     this.loadCards();
     this.getDecks();
+    console.log(this.decks);
   }
 
 }

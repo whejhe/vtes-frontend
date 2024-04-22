@@ -15,7 +15,7 @@ import { ListForosComponent } from "./foro/list-foros/list-foros.component";
 import { NewForoComponent } from "./foro/new-foro/new-foro.component";
 import { UploadCardComponent } from "./custom-cards/upload-card/upload-card.component";
 import { ContactComponent } from "./contact/contact.component";
-import { NewDeckComponent } from "./deck/new-deck/new-deck.component";
+import { NewDeckComponent } from "./deck/deck/deck.component";
 
 export const MAIN_ROUTE:Routes = [
   {path: '', title: 'Inicio',component: InicioComponent},
@@ -25,7 +25,7 @@ export const MAIN_ROUTE:Routes = [
   {path: 'upload-card', title: 'Upload Card',component: UploadCardComponent},
   {path: 'gallery',title: 'Gallery', component: GalleryComponent},
   {path: 'events', title: 'Events',component: EventsComponent},
-  {path: 'new-deck',title: 'New Deck', component: NewDeckComponent},
+  {path: 'deck',title: 'Deck', component: NewDeckComponent},
   {path: 'ficha-deck/:id',title: 'Ficha Deck', component: FichaDeckComponent},
   {path: 'ficha-deck',title: 'Ficha Deck', component: FichaDeckComponent},
   {path: 'lista-decks',title: 'Lista Decks', component: ListaDecksComponent},

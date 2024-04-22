@@ -8,11 +8,11 @@
     <div class="row">
       <!--TITULO DECK-->
       <div class="col-md-6">
-        <input class="form-control" placeholder="Title" type="text" id="title" value="" >
+        <input class="form-control" placeholder="Title" type="text" id="title" [value]="" >
       </div>
       <!--AUTOR-->
       <div class="col-md-6">
-        <input class="form-control" placeholder="Author" type="text" id="author" value="">
+        <input class="form-control" placeholder="Author" type="text" id="author" disabled="true" [value]="user.nick">
       </div>
       <!--DESCRIPCION DE MAZO-->
       <div class="col-md-6">
