@@ -1,6 +1,5 @@
 //front/src/app/pages/main/deck/lista-decks/lista-decks.component.ts
 import { Component, OnInit } from '@angular/core';
-import { FichaDeckComponent } from "../ficha-deck/ficha-deck.component";
 import { RouterLink } from '@angular/router';
 import { DeckService } from '../../../../services/deck.service';
 import { Deck } from '../../../../models/deck.model';
@@ -15,7 +14,6 @@ import { FilterDecksPipe } from '../../../../pipes/filter-decks.pipe';
     templateUrl: './lista-decks.component.html',
     styleUrl: './lista-decks.component.scss',
     imports: [
-        FichaDeckComponent,
         RouterLink,
         CommonModule,
         FilterDecksPipe

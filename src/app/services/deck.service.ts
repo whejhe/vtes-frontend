@@ -1,7 +1,7 @@
 //front/src/app/services/deck.service.ts
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, of, throwError } from 'rxjs';
 import { Deck } from '../models/deck.model';
 import { environment } from '../../environments/environment';
 
@@ -12,6 +12,8 @@ import { environment } from '../../environments/environment';
 export class DeckService {
 
   private apiUrl = environment.apiUrl + '/decks';
+  private currentDeckId: string = '';
+  private currentDeckSubject: BehaviorSubject<string> = new BehaviorSubject('');
 
   constructor(
     private http: HttpClient,
@@ -22,13 +24,51 @@ export class DeckService {
     return this.http.post(this.apiUrl, deck);
   }
 
+  getCurrentDeck(): Observable<Deck | null> {
+    const currentDeckId = localStorage.getItem('currentDeckId');
+    if (currentDeckId) {
+      return this.getDeckById(currentDeckId);
+    } else {
+      return of(null);
+    }
+  }
+  
+
   getDecks(): Observable<Deck[]> {
     return this.http.get<Deck[]>(this.apiUrl);
   }
 
   // Obtener un mazo por ID
+  // getDeckById(id: string): Observable<Deck> {
+  //   return this.http.get<Deck>(`${this.apiUrl}/${id}`);
+  // }
   getDeckById(id: string): Observable<Deck> {
-    return this.http.get<Deck>(`${this.apiUrl}/${id}`);
+    return this.http.get<Deck>(`${this.apiUrl}/${id}`)
+      .pipe(
+        catchError(error => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
+  }
+
+  setCurrentDeckId(id: string): void {
+    this.currentDeckId = id;
+    this.setLastDeckId(this.currentDeckId);
+    this.currentDeckSubject.next(id);
+  }
+
+  getCurrentDeckId(): Observable<string> {
+    return this.currentDeckSubject.asObservable();
+  }
+
+  getLastDeckId(): String{
+    return localStorage.getItem('lastDeck')!;
+  }
+
+  setLastDeckId(id: string): String{
+    localStorage.setItem('lastDeck', id);
+    return localStorage.getItem('lastDeck')!; 
   }
 
   // Obtener todos los mazos de un usuario

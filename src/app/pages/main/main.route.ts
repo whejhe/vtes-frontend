@@ -6,7 +6,6 @@ import { InicioComponent } from "./inicio/inicio.component";
 import { CustomComponent } from "./custom-cards/custom/custom.component";
 import { GalleryComponent } from "./custom-cards/gallery/gallery.component";
 import { EventsComponent } from "./eventos/events/events.component";
-import { FichaDeckComponent } from "./deck/ficha-deck/ficha-deck.component";
 import { ListaDecksComponent } from "./deck/lista-decks/lista-decks.component";
 import { ListarEventosComponent } from "./eventos/listar-eventos/listar-eventos.component";
 import { CriptaComponent } from "./list-cards/cripta/cripta.component";
@@ -26,8 +25,7 @@ export const MAIN_ROUTE:Routes = [
   {path: 'gallery',title: 'Gallery', component: GalleryComponent},
   {path: 'events', title: 'Events',component: EventsComponent},
   {path: 'deck',title: 'Deck', component: NewDeckComponent},
-  {path: 'ficha-deck/:id',title: 'Ficha Deck', component: FichaDeckComponent},
-  {path: 'ficha-deck',title: 'Ficha Deck', component: FichaDeckComponent},
+  {path: 'deck/:id',title: 'Deck', component: NewDeckComponent},
   {path: 'lista-decks',title: 'Lista Decks', component: ListaDecksComponent},
   {path: 'listar-eventos',title: 'Lista de Eventos', component: ListarEventosComponent},
   {path: 'list-foros',title: 'Lista de Foros', component: ListForosComponent},

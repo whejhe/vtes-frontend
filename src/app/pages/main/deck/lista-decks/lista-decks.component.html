@@ -38,7 +38,7 @@
         </thead>
         <tbody>
           @for(deck of decks; track deck._id){
-            <tr class="table-light" [routerLink]="['/ficha-deck/'+deck._id]"
+            <tr class="table-light" [routerLink]="['/deck/'+deck._id]"
             >
                 <th>{{deck.name}}</th>
                 <td>{{deck.type}}</td>
@@ -48,7 +48,7 @@
             </tr>
           }
             <!-- <tr class="table-light"
-            [routerLink]="['/ficha-deck']" *ngFor="let deck of decks
+            [routerLink]="['/deck']" *ngFor="let deck of decks
             let i=index"
             [class.table-light] = "i % 2 === 0"
             [class.table-secondary] = "i % 2 !== 0"
