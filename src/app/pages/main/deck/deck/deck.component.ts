@@ -29,11 +29,18 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class NewDeckComponent implements OnInit {
 
   apiUrl = 'http://localhost:3000/decks';
-  deckForm: FormGroup<any> = new FormGroup({});
+  deckForm: FormGroup = new FormGroup({
+    userId: new FormControl(''),
+    name: new FormControl('Mazo nuevo'),
+    description: new FormControl('Descripcion'),
+    category: new FormControl(''),
+    publico: new FormControl(true),
+    cards: new FormControl([]),
+  });
   newDeckId: string = '';
-  cards: Card[] = [];
+  cards: any[] = [];
   user: User = this.authSvc.getCurrentUser()!;
-  deck$!: Observable<Deck | null>;
+  deck$!: Deck;
 
   private currentDeckId: string = '';
   private currentDeckSubject: BehaviorSubject<string> = new BehaviorSubject('');
@@ -48,30 +55,22 @@ export class NewDeckComponent implements OnInit {
   ngOnInit(): void {
     this.currentDeckId = window.location.pathname.split('/')[2];
     this.deckSvc.setCurrentDeckId(this.currentDeckId);
-    this.deckForm = new FormGroup({
-      userId: new FormControl(''),
-      type: new FormControl('', Validators.required),
-      name: new FormControl('', Validators.required),
-      description: new FormControl(''),
-      category: new FormControl(''),
-      publico: new FormControl(true),
-      cards: new FormControl([])
+    this.deckSvc.getDeckById(this.currentDeckId).subscribe((deck) => {
+      this.deck$ = deck
+      deck.category != '' ? this.deckForm.get('category')?.setValue(deck.category) : null
+      deck.name != '' ? this.deckForm.get('name')?.setValue(deck.name) : null
+      deck.cards.length != 0 ? this.deckForm.get('cards')?.setValue(deck.cards) : this.deckForm.get('cards')?.setValue(deck.cards)
+      deck.description != '' ? this.deckForm.get('description')?.setValue(deck.description) : null
+      this.deckForm.get('category')?.setValue(deck.category)
+      this.cards = deck.cards;
+      console.log(deck.cards);
     });
-    // this.createDeck();
-    console.log('Mazo actulamente abierto: ', this.deckSvc.getCurrentDeck());
-    this.deckSvc.getDeckById(this.currentDeckSubject.value).subscribe(
-      (response) => {
-        this.deckForm.patchValue(response);
-        console.log('Mazo actualizado: ', response);
-      },
-      (error) => console.error(error)
-    )
   }
 
   addCard(): void {
     const cardForm = new FormGroup({
       card: new FormControl('', Validators.required),
-      cantidad: new FormControl(1, Validators.required)
+      quantity: new FormControl(1, Validators.required)
     });
     if (this.deckForm) {
       (this.deckForm.get('cards') as FormArray).push(cardForm);
@@ -84,28 +83,9 @@ export class NewDeckComponent implements OnInit {
     }
   }
 
-  // createDeck(): void {
-  //   this.deckForm.get('userId')!.setValue(this.authSvc.getCurrentUser()?._id);
-  //   if (this.deckForm.get('name')?.value == '') {
-  //     console.log('Paso x aquiiii');
-
-  //     this.deckForm.get('name')!.setValue('Sin nombre');
-  //   }
-  //   const deck = this.deckForm.value;
-  //   this.deckSvc.createDeck(deck).subscribe(
-  //     (response: any) => {
-  //       this.newDeckId = response.id;
-  //       this.router.navigate([`/deck/${this.newDeckId}`]);
-  //       console.log('Id deck: ', this.newDeckId);
-  //       console.log('CurrentDeck: ', this.deckSvc.getCurrentDeck());
-  //     },
-  //     (error) => console.error(error)
-  //   )
-  // }
   createDeck(): void {
     this.deckForm.get('userId')!.setValue(this.authSvc.getCurrentUser()?._id);
     if (this.deckForm.get('name')?.value == '') {
-      console.log('Paso x aquiiii');
       this.deckForm.get('name')!.setValue('Sin nombre');
     }
     const deck = this.deckForm.value;
@@ -124,7 +104,7 @@ export class NewDeckComponent implements OnInit {
 
   updateDeck(): void {
     const deck = this.deckForm.value;
-    this.deckSvc.updateDeck(this.newDeckId, deck).subscribe(
+    this.deckSvc.updateDeck(this.currentDeckId, deck).subscribe(
       (response) => {
         console.log('Carta personalizada actualizada:', response);
       },

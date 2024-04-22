@@ -10,6 +10,6 @@ export interface Deck {
   publico: boolean;
   cards: Array<{
     card: string;
-    cantidad: number;
+    quantity: number;
   }>
 }
