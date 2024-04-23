@@ -10,4 +10,5 @@ export interface Card {
     card_text: string;
     sets: string[];
     group: number;
+    quantity: number;
 }

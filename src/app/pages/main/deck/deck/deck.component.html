@@ -6,10 +6,8 @@
     <div class="row">
       <!--TITULO DECK-->
       <div class="col-md-6">
-        <input class="form-control" placeholder="Title" type="text" 
-        formControlName="name"
-        >
-        </div>
+        <input class="form-control" placeholder="Title" type="text" formControlName="name">
+      </div>
       <!--AUTOR-->
       <div class="col-md-6">
         <input class="form-control" placeholder="Author" type="text" disabled="true" [value]="user.nick">
@@ -38,10 +36,26 @@
     <div class="row">
       <!--CARTAS CRYPT-->
       <div class="col-md-5 crypt">
+        <!--BUSCADOR-->
         <div class="search col-md-12">
           <label class="form-label">Search By Name: </label>
-          <input name="filter" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+          <input name="filter" class="form-control me-2" type="search" 
+          placeholder="Search" aria-label="Search" 
+          [(ngModel)]="searchNameCard"
+          [ngModelOptions]="{standalone: true}"
+          (ngModelChange)="filtrado()"
+          />
         </div>
+
+        <!--LISTADO DE CARTAS POR BUSQUEDA-->
+        <!-- <div *ngIf="filteredCards.length > 0">
+          <ul>
+            <li *ngFor="let card of cards">
+              {{ card.name }}
+            </li>
+          </ul>
+        </div> -->
+        
         <table class="table table-hover">
           <thead>
             <tr class="table-dark">
@@ -53,32 +67,21 @@
           </thead>
           <tbody>
             <tr *ngFor="let card of cards">
-              <td>{{card.card.name}}</td>
-              <td>
-                <div class="container-image" *ngFor="let discipline of card.disciplines">
-                  @defer (on viewport){
-                    <img class="imageIcons" alt="">
-                  }@placeholder{
-                    <p>{{ discipline }}</p>
-                  }
-                </div>
-              </td>
-              <td>
-                <div class="container-image">
-                  @defer (on viewport) {
-                    <img class="imageIcons" loading="lazy">
-                  }@placeholder{
-                    <p>{{ card.capacity }} {{ card.group }}</p>
-                  }
-                </div>
+              <td style="cursor: pointer" (mouseenter)="setUrlImage(card.url)" (mouseleave)="clearUrlImage()">
+                {{ card.card.name }}
               </td>
               <td class="quantity">
-                <input name="quantity" value="1" min="1" type="number"
-                cardForm="quantity">
-                <svg class="trash" id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                  <path d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
+                <input name="quantity" value="1" min="1" type="number" cardForm="quantity">
+                <svg class="trash" id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24"
+                  height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
+                  stroke-width="2">
+                  <path
+                    d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
                 </svg>
               </td>
+              <span *ngIf="card.card.types.includes('Vampire')">
+                
+              </span>
             </tr>
           </tbody>
         </table>
@@ -87,10 +90,26 @@
 
       <!--CARTAS LIBRARY-->
       <div class="col-md-5 library">
+        <!--BUSCADOR-->
         <div class="search col-md-12">
           <label class="form-label">Search By Name:</label>
-          <input name="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+          <input name="search" 
+          class="form-control me-2" type="search" 
+          placeholder="Search" aria-label="Search" 
+          [(ngModel)]="searchNameCard"
+          (ngModelChange)="filtrado()"
+          />
         </div>
+
+        <!--LISTADO DE CARTAS POR BUSQUEDA-->
+        <!-- <div *ngIf="filteredCards.length > 0">
+          <ul>
+            <li *ngFor="let card of filteredCards">
+              {{ card.name }}
+            </li>
+          </ul>
+        </div> -->
+
         <table class="table table-hover">
           <thead>
             <tr class="table-dark">
@@ -101,30 +120,25 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let card of cards">
-              <!--NAME OF CARD-->
-              <td>{{card.name}}</td>
-              <!--DISCIPLINES-->
-              <td>
-                <div class="container-image" *ngFor="let discipline of card.disciplines">
-                  @defer (on viewport){
-                    <img class="imageIcons" alt="">
-                  }@placeholder{
-                    <p>{{ discipline }}</p>
-                  }
-                </div>
-              </td>
-              <!--COST-->
-              <td>
+            <tr *ngFor="let card of cards
+            | filterDeck: {
+              searchNameCard: searchNameCard,
+             };">
+              <span *ngIf="!card.card.types.includes('Vampire')">
+                <!--NAME OF CARD-->
+                <td>{{card.card.name}}</td>
 
-              </td>
-              <!--QUANTITY-->
-              <td class="quantity">
-                <input name="quantity" value="1" min="1" type="number">
-                <svg class="trash" id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                  <path d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
-                </svg>
-              </td>
+                <!--QUANTITY-->
+                <td class="quantity">
+                  <input name="quantity" value="1" min="1" type="number">
+                    <svg class="trash" id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24"
+                      height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-width="2">
+                      <path
+                        d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
+                    </svg>
+                </td>
+              </span>
             </tr>
           </tbody>
         </table>
@@ -133,27 +147,27 @@
       <!--OPCIONES PARA GUARDADO-->
       <div class="col-md-2 botones">
         <!--CREATE-->
-        <button class="btn btn-dark" 
-        (click)="createDeck()"
-        [routerLink]="['/ficha-deck/', newDeckId]"
-        >Create Deck</button><br>
-        
+        <button class="btn btn-dark" (click)="createDeck()" [routerLink]="['/ficha-deck/', newDeckId]">Create
+          Deck</button><br>
+
         <!--SAVE-->
-        <button class="btn btn-dark"
-        (click)="updateDeck()" type="submit">
-          <svg id="i-file" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+        <button class="btn btn-dark" (click)="updateDeck()" type="submit">
+          <svg id="i-file" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none"
+            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
             <path d="M6 2 L6 30 26 30 26 10 18 2 Z M18 2 L18 10 26 10" />
           </svg> Save change</button><br>
 
         <!--PRINT TXT-->
         <button class="btn btn-dark">
-          <svg id="i-print" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <svg id="i-print" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none"
+            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
             <path d="M7 25 L2 25 2 9 30 9 30 25 25 25 M7 19 L7 30 25 30 25 19 Z M25 9 L25 2 7 2 7 9 M22 14 L25 14" />
           </svg> .txt</button><br>
 
         <!--PRINT PDF-->
         <button class="btn btn-dark">
-          <svg id="i-print" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <svg id="i-print" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none"
+            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
             <path d="M7 25 L2 25 2 9 30 9 30 25 25 25 M7 19 L7 30 25 30 25 19 Z M25 9 L25 2 7 2 7 9 M22 14 L25 14" />
           </svg> pdf</button><br>
 
@@ -162,19 +176,22 @@
 
         <!--IMPORT-->
         <button class="btn btn-dark">
-          <svg id="i-import" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <svg id="i-import" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none"
+            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
             <path d="M28 22 L28 30 4 30 4 22 M16 4 L16 24 M8 16 L16 24 24 16" />
           </svg> Import deck</button><br>
 
         <!--EXPORT-->
         <button class="btn btn-dark">
-          <svg id="i-export" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <svg id="i-export" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none"
+            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
             <path d="M28 22 L28 30 4 30 4 22 M16 4 L16 24 M8 12 L16 4 24 12" />
           </svg> Export deck</button><br>
 
         <!--DELETE-->
         <button class="btn btn-dark">
-          <svg class="trash" id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <svg class="trash" id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24"
+            fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
             <path d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
           </svg> Delete
         </button><br>
@@ -185,8 +202,23 @@
 </form>
 
 
+<!--MENSAJES DE ERROR O EXITO-->
+@if (showSucessMessage) {
+<div class="alert alert-dismissible alert-success">
+  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  <strong>{{errorMesage}}</strong><br>
+  <p>Cambios guardados con exito</p>
+</div>
+}
+@if(showErrorMessage){
+<div class="alert alert-dismissible alert-danger">
+  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  <strong>Se produjo algun error al guardar los cambios</strong><br>
+</div>
+}
 
 
-
-
-
+<!--IMAGEN DESTACADA-->
+<div class="imagenDestacada" *ngIf="url">
+  <img [src]="url" alt="Imagen destacada" />
+</div>

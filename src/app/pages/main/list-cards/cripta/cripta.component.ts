@@ -2,7 +2,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Observable, map, of } from 'rxjs';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { Card, Clan, Discipline, Title, Traits, Type } from '../../../../models/vtes.model';
+// import { Card} from '../../../../models/card.model';
+import {Card, Clan, Discipline, Title, Traits, Type } from '../../../../models/vtes.model';
 import { JsonServiceService } from '../../../../services/json-service.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DetailsCardVampireComponent } from '../../../../components/details-card-vampire/details-card-vampire.component';
