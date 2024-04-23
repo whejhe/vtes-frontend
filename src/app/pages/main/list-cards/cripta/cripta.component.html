@@ -1,20 +1,25 @@
 <!--front/src/app/pages/main/list-cards/cripta/cripta.component.html-->
 <div class="container">
   <!-- <span class="backgroud-image"></span> -->
-  <form class="row filtro-header" role="search">
+  <form class="row filtro-header" role="search"
+    action=""
+    [formGroup]="cryptForm"
+    >
 
     <!--NOMBRES-->
     <div class="col-md-4">
       <label for="marca" class="form-label">Search By Name:</label>
       <input name="filter"  class="form-control me-2" type="search" placeholder="Search"
-        aria-label="Search" />
+        aria-label="Search"
+        formControlName="searchName"/>
     </div>
 
     <!--GRUPOS-->
     <div class="col-4 group">
       <label for="marca" class="form-label">Group:</label>
-      <select name="group" id="group" class="form-select"
-      [(ngModel)]="searchGroup">
+      <select id="group" class="form-select"
+      formControlName="searchGroup"
+      >
         <option value="*">All</option>
         <option value="1">Grupo 1</option>
         <option value="2">Grupo 2</option>
@@ -29,8 +34,9 @@
     <!--CLAN-->
     <div class="col-md-4">
       <label for="marca" class="form-label">Clan:</label>
-      <select name="clan" id="clan" class="form-select"
-      [(ngModel)]="searchClan">
+      <select id="clan" class="form-select"
+      formControlName="clan"
+      >
         <option value="*" (click)="resetFiterClan()">All Clans</option>
         <option value="{{clan || 'All Clans'}}" *ngFor="let clan of clans"
         (click)="onSearchClanChange(clan)">{{ clan }}</option>
@@ -92,15 +98,15 @@
             <tr *ngFor="let card of cards
             | filter: ['Vampire', 'Imbued']: false
                   | filterMulti: {
-              searchName: searchName,
-              searchGroup: searchGroup,
-              searchClan: searchClan,
-              selectedDisciplines: selectedDisciplines,
-              selectedTitles: selectedTitles,
-              selectedTraits: selectedTraits,
+              searchName: cryptForm.value.searchName,
+              searchGroup: cryptForm.value.searchGroup,
+              searchClan: cryptForm.value.searchClan,
+              selectedDisciplines: cryptForm.value.selectedDisciplines,
+              selectedTitles: cryptForm.value.selectedTitles,
+              selectedTraits: cryptForm.value.selectedTraits,
               searchCapacity: searchCapacity
              };
-                let i = index" 
+                let i = index"
                 (click)="openModal(card)" [class.table-light]="i % 2 === 0" [class.table-secondary]="i % 2 !== 0">
               <td style="cursor: pointer" (mouseenter)="setUrlImage(card.url)" (mouseleave)="clearUrlImage()">
                 {{ card.name }}
@@ -148,7 +154,6 @@
               <div *ngFor="let title of titles">
                 <input name="titles" type="checkbox" class="form-checkbox"
                 [id]="'-titles-' + title" [value]="title"
-                [(ngModel)]="titlesSelected[title]"
                 (change)="onTitlesChange()"
                 />
                 <label [for]="'-titles-' + title">{{ title }}</label>
@@ -157,27 +162,30 @@
           </div>
 
           <!--CAPACITY-->
-          <!-- <div class="row capacity"> -->
+          <div class="row capacity">
             <!--CAPACITY MIN-->
-            <!-- <div class="col-6 capacity-min">
-              <input type="number" class="form-control" min="1" max="11" placeholder="Capacidad minima"
-              [(ngModel)]="searchCapacity"
+            <div class="col-6 capacity-min">
+              <input type="number" class="form-control" min="1" max="11"
+              placeholder="Capacidad minima"
+              formGroupName="capacityMin"
               (change)="onChangeMinCapacity()"/>
-            </div> -->
+            </div>
             <!--CAPACITY MAX-->
-            <!-- <div class="col-6 capacity-max">
-              <input type="number" class="form-control" min="1" max="11" placeholder="Capacidad maxima"
-              [(ngModel)]="searchCapacity"
+            <div class="col-6 capacity-max">
+              <input type="number" class="form-control" min="1" max="11"
+              placeholder="Capacidad maxima"
+              formGroupName="capacityMax"
               (change)="onChangeMaxCapacity()"/>
             </div>
-          </div> -->
+          </div>
           <br>
 
           <!--SECTA-->
-          <!-- <div class="col-6">
+          <div class="col-6">
             <h4 class="titulo-select">Sect</h4>
-            <select name="sect" class="form-select" id="sect"
-            [(ngModel)]="searchSect">
+            <select class="form-select" id="sect"
+            formGroupName="sect"
+            >
               <option value="any">Any</option>
               <option value="camarilla">Camarilla</option>
               <option value="sabbat">Sabbat</option>
@@ -185,16 +193,16 @@
               <option value="laibon">Laibon</option>
               <option value="independent">Independent</option>
             </select>
-          </div> -->
+          </div>
 
           <!--TRAIT-->
           <div class="traits">
             <h4>Traits:</h4>
               <div class="content-traits">
                 <div *ngFor="let trait of traits">
-                    <input name="traits" type="checkbox" class="form-checkbox"
+                    <input type="checkbox" class="form-checkbox"
                     [id]="'-traits-' + trait" [value]="trait"
-                    [(ngModel)]="traitsSelected[trait]"
+                    name="traits"
                     (change)="onTraitsChange()"
                     />
                     <label [for]="'-traits-' + trait">{{ trait }}</label>
