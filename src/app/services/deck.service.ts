@@ -23,7 +23,7 @@ export class DeckService {
     private http: HttpClient,
     private authSvc: AuthService
   ) {
-    this.getTokenData();
+    // this.getTokenData();
   }
 
   getTokenData():void{

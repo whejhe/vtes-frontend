@@ -8,8 +8,5 @@ export interface Deck {
   author: string;
   category: string;
   publico: boolean;
-  cards: Array<{
-    card: string;
-    quantity: number;
-  }>
+  cards:string[];
 }

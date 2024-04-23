@@ -9,36 +9,34 @@ h3 {
 }
 
 tr {
+    span{
+        padding: 0;
+    }
     width: 100%;
-
+    // border: 1px solid black;
+    display: inline-block;
     th {
-        width: 45%, 40%, 5%, 10%;
-        padding-left: 1em;
+        width: 100%;
+        // padding-left: 1em;
     }
 
     td {
-        width: auto;
-        padding-left: 1em;
-        margin: auto;
+        width: 100%;
+        margin: 0;
         text-align: left;
-
+        // background-color: aqua;
         input {
             width: 50px;
+            padding-right: 1em;
         }
-
         .trash {
             cursor: pointer;
-            margin-left: 1em;
-            margin-right: -4em;
         }
     }
 
     .quantity {
-        text-align: center;
-
-        input {
-            margin-right: -0.7em;
-        }
+        text-align: right;
+        min-width: 100px;
     }
 }
 
@@ -59,28 +57,6 @@ tr {
     // border-bottom: 2px solid rgb(54, 54, 54);
     padding-bottom: 1em;
     padding-top: 3em;
-}
-
-.crypt {
-    // position: relative;
-
-    // span {
-    //   border-radius: 50%;
-    //   position: absolute;
-    //   top: 0;
-    //   right: 5px;
-    // }
-}
-
-.library {
-    // position: relative;
-
-    // span {
-    //   border-radius: 50%;
-    //   position: absolute;
-    //   top: 0;
-    //   right: 5px;
-    // }
 }
 
 h1 {
@@ -132,3 +108,12 @@ h1 {
     margin: 0 0.5em;
     padding: 0.3em 0;
 }
+
+.imagenDestacada{
+    width: 150px;
+    height: auto;
+    position: fixed;
+    top: 120px;
+    right: 200px;
+  }
+  
