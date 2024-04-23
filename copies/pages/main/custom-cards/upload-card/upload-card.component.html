@@ -1,0 +1,132 @@
+<div class="container">
+  <form action="" class="row" role="search">
+    <!--AUTOR (campo oculto)-->
+    <div class="col-md-4">
+      <input placeholder="Autor" type="hidden" class="form-control" id="author" value="{{getCurrentUser()?._id}}" required>
+    </div>
+
+    <!--DISCIPLINAS-->
+    <div class="disciplines">
+      <div class="all-disciplines"
+      *ngFor="let discipline of disciplineImages"
+      >
+        @if(discipline.type === 'inf') {
+        <img class="imageIcons icon-filter"
+        [src]="discipline.url"
+        [alt]="discipline.name"
+        (click)="toggleOpacity($event)"
+        />
+      }
+      </div>
+      <br />
+      <div class="all-disciplines"
+      *ngFor="let discipline of disciplineImages">
+        @if(discipline.type === 'sup') {
+        <img class="imageIcons icon-filter"
+        [src]="discipline.url"
+        [alt]="discipline.name"
+        (click)="toggleOpacity($event)"
+        [class.clicked]="disciplineSelected[discipline.name]"
+          />
+        }
+      </div>
+      <br />
+      <div class="all-disciplines"
+      *ngFor="let discipline of disciplineImages">
+        @if(discipline.type === 'others') {
+        <img class="imageIcons icon-filter"
+        [src]="discipline.url"
+        [alt]="discipline.name"
+        (click)="toggleOpacity($event)"
+          />
+        }
+      </div>
+    </div>
+
+    <div class="row">
+      <!--NOMBRE CARTA-->
+      <div class="col-md-6">
+        <label for="title" class="form-label">Name:</label>
+        <input placeholder="Nombre" type="text" class="form-control" id="title" required>
+      </div>
+      <!--CLAN-->
+      <div class="col-md-6">
+        <label for="marca" class="form-label">Clan:</label>
+      <select name="clan" id="clan" class="form-select"
+      [(ngModel)]="searchClan">
+        <option value="{{clan}}" *ngFor="let clan of clans"
+        >{{ clan }}</option>
+      </select>
+      </div>
+    </div>
+    
+    
+    <div class="row">
+      <!--IMAGEN-->
+      <div class="col-md-3">
+        <label for="image" class="form-label">Image:</label>
+        <input type="file" class="form-control" id="image" required>
+      </div>
+      
+      <!--CAPACIDAD-->
+      <div class="col-md-3">
+        <label for="capacity">Capacity:</label>
+        <input type="number" class="form-control" min="1" max="11" placeholder="Capacidad minima"
+        [(ngModel)]="searchCapacity"
+        />
+      </div>
+
+      <!--GRUPO-->
+      <div class="col-md-3">
+        <label for="marca" class="form-label">Group:</label>
+      <select name="group" id="group" class="form-select"
+      [(ngModel)]="searchGroup">
+        <option value="*">All</option>
+        <option value="1">Grupo 1</option>
+        <option value="2">Grupo 2</option>
+        <option value="3">Grupo 3</option>
+        <option value="4">Grupo 4</option>
+        <option value="5">Grupo 5</option>
+        <option value="6">Grupo 6</option>
+        <option value="7">Grupo 7</option>
+      </select>
+      </div>
+      
+      <!--TIPO-->
+      <div class="col-md-3">
+        <label for="marca" class="form-label">Type:</label>
+      <select name="type" id="type" class="form-select"
+      [(ngModel)]="selectedTypes"
+      >
+      <option value="{{type}}" *ngFor="let type of types"
+      >{{type}}</option>
+      </select>
+      </div>
+    
+    </div>
+    
+
+    <div class="row">
+    </div>
+    
+    <div class="row">
+      <!--DESCRIPCION-->
+      <div class="col-md-6">
+        <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
+      </div>
+      <!--PUBLICO-->
+      <div class="col-md-3 end">
+        <select class="form-select" name="visibility" id="">
+          <option value="publico">Publico</option>
+          <option value="privado">Privado</option>
+        </select>
+      </div>
+      <!--GUARDADO-->
+      <div class="col-md-3 end">
+        <button class="btn btn-dark" type="submit">Guardar</button>
+      </div>
+    </div>
+
+
+  </form>
+</div>

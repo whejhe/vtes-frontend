@@ -1,0 +1,239 @@
+<!--front/src/app/pages/main/list-cards/cripta/cripta.component.html-->
+<div class="container">
+  <!-- <span class="backgroud-image"></span> -->
+  <form class="row filtro-header" role="search">
+
+    <!--NOMBRES-->
+    <div class="col-md-4">
+      <label for="marca" class="form-label">Search By Name:</label>
+      <input name="filter" [(ngModel)]="searchName" class="form-control me-2" type="search" placeholder="Search"
+        aria-label="Search" />
+    </div>
+
+    <!--GRUPOS-->
+    <div class="col-4 group">
+      <label for="marca" class="form-label">Group:</label>
+      <select name="group" id="group" class="form-select"
+      [(ngModel)]="searchGroup">
+        <option value="*">All</option>
+        <option value="1">Grupo 1</option>
+        <option value="2">Grupo 2</option>
+        <option value="3">Grupo 3</option>
+        <option value="4">Grupo 4</option>
+        <option value="5">Grupo 5</option>
+        <option value="6">Grupo 6</option>
+        <option value="7">Grupo 7</option>
+      </select>
+    </div>
+
+    <!--CLAN-->
+    <div class="col-md-4">
+      <label for="marca" class="form-label">Clan:</label>
+      <select name="clan" id="clan" class="form-select"
+      [(ngModel)]="searchClan">
+        <option value="*" (click)="resetFiterClan()">All Clans</option>
+        <option value="{{clan || 'All Clans'}}" *ngFor="let clan of clans"
+        (click)="onSearchClanChange(clan)">{{ clan }}</option>
+      </select>
+    </div>
+
+    <!--DISCIPLINAS-->
+    <div class="disciplines">
+      <div class="all-disciplines"
+      *ngFor="let discipline of disciplineImages"
+      >
+        @if(discipline.type === 'inf') {
+        <img class="imageIcons icon-filter"
+        [src]="discipline.url"
+        [alt]="discipline.name"
+        (click)="toggleOpacity($event)"
+        />
+      }
+      </div>
+      <br />
+      <div class="all-disciplines"
+      *ngFor="let discipline of disciplineImages">
+        @if(discipline.type === 'sup') {
+        <img class="imageIcons icon-filter"
+        [src]="discipline.url"
+        [alt]="discipline.name"
+        (click)="toggleOpacity($event)"
+        [class.clicked]="disciplineSelected[discipline.name]"
+          />
+        }
+      </div>
+      <br />
+      <div class="all-disciplines"
+      *ngFor="let discipline of disciplineImages">
+        @if(discipline.type === 'others') {
+        <img class="imageIcons icon-filter"
+        [src]="discipline.url"
+        [alt]="discipline.name"
+        (click)="toggleOpacity($event)"
+          />
+        }
+      </div>
+    </div>
+
+    <!--LISTA DE CARTAS-->
+    <main class="row">
+      <section class="col-md-8">
+        <table class="table table-hover">
+          <thead>
+            <tr class="table-dark">
+              <th>Nombre</th>
+              <th>Clan</th>
+              <th>Capacidad</th>
+              <th>Disciplinas</th>
+              <th>Grupo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let card of cards
+            | filter: ['Vampire', 'Imbued']: false
+                  | filterMulti: {
+              searchName: searchName,
+              searchGroup: searchGroup,
+              searchClan: searchClan,
+              selectedDisciplines: selectedDisciplines,
+              selectedTitles: selectedTitles,
+              selectedTraits: selectedTraits,
+              searchCapacity: searchCapacity
+             };
+                let i = index
+              " (click)="openModal(card)" [class.table-light]="i % 2 === 0" [class.table-secondary]="i % 2 !== 0">
+              <td style="cursor: pointer" (mouseenter)="setUrlImage(card.url)" (mouseleave)="clearUrlImage()">
+                {{ card.name }}
+              </td>
+              <!-- <td>{{ card.clans }}</td> -->
+            <td>
+              <div class="container-image clan-icon" *ngFor="let clan of card.clans">
+                @defer (on viewport){
+                  <img class="imageIcons" [src]="getClanUrl(clan)" alt="" />
+                }@placeholder {
+                  <p>{{ clan }}</p>}
+              </div>
+            </td>
+           <td>
+            <div class="container-image">
+              @defer(on viewport){
+                <img class="imageIcons" [src]="getCapacityCostImage(card.capacity)" alt="" />
+              }@placeholder {
+                <p>{{ card.capacity }}</p>
+              }
+            </div>
+           </td>
+            <td>
+              <div class="container-image" *ngFor="let discipline of card.disciplines">
+                @defer (on viewport){
+                  <img class="imageIcons" [src]="getDisciplineUrl(discipline)" alt="" />
+                }@placeholder{
+                  <p>{{ discipline }}</p>
+                }
+              </div>
+            </td>
+              <td><span class="group-styles">{{ card.group }}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="col-md-4">
+        <aside>
+
+          <!--TITLES-->
+          <div class="title">
+            <h4>Title:</h4>
+            <div class="content-title">
+              <div *ngFor="let title of titles">
+                <input name="titles" type="checkbox" class="form-checkbox"
+                [id]="'-titles-' + title" [value]="title"
+                [(ngModel)]="titlesSelected[title]"
+                (change)="onTitlesChange()"
+                />
+                <label [for]="'-titles-' + title">{{ title }}</label>
+              </div>
+            </div>
+          </div>
+
+          <!--CAPACITY-->
+          <!-- <div class="row capacity"> -->
+            <!--CAPACITY MIN-->
+            <!-- <div class="col-6 capacity-min">
+              <input type="number" class="form-control" min="1" max="11" placeholder="Capacidad minima"
+              [(ngModel)]="searchCapacity"
+              (change)="onChangeMinCapacity()"/>
+            </div> -->
+            <!--CAPACITY MAX-->
+            <!-- <div class="col-6 capacity-max">
+              <input type="number" class="form-control" min="1" max="11" placeholder="Capacidad maxima"
+              [(ngModel)]="searchCapacity"
+              (change)="onChangeMaxCapacity()"/>
+            </div>
+          </div> -->
+          <br>
+
+          <!--SECTA-->
+          <!-- <div class="col-6">
+            <h4 class="titulo-select">Sect</h4>
+            <select name="sect" class="form-select" id="sect"
+            [(ngModel)]="searchSect">
+              <option value="any">Any</option>
+              <option value="camarilla">Camarilla</option>
+              <option value="sabbat">Sabbat</option>
+              <option value="anarch">Anarch</option>
+              <option value="laibon">Laibon</option>
+              <option value="independent">Independent</option>
+            </select>
+          </div> -->
+
+          <!--TRAIT-->
+          <div class="traits">
+            <h4>Traits:</h4>
+              <div class="content-traits">
+                <div *ngFor="let trait of traits">
+                    <input name="traits" type="checkbox" class="form-checkbox"
+                    [id]="'-traits-' + trait" [value]="trait"
+                    [(ngModel)]="traitsSelected[trait]"
+                    (change)="onTraitsChange()"
+                    />
+                    <label [for]="'-traits-' + trait">{{ trait }}</label>
+                </div>
+            </div>
+          </div>
+        </aside>
+
+        <!--ENLACES-->
+        <div class="enlaces">
+          <h4>Pages</h4>
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" href="https://vdb.im/decks/2080511d5c0c42358d4193a6a5dc869f">VDB</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" target="_blank"
+                href="https://www.blackchantry.com/vampire-the-eternal-struggle-fifth-edition/">Black Chantry</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" href="https://www.gamepod.es/">Gamepod</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" href="https://getbootstrap.com/">Bootstrap</a>
+            </li>
+          </ul>
+        </div>
+
+
+      </section>
+
+    </main>
+
+  </form>
+  <br />
+
+
+
+  <div class="imagenDestacada" *ngIf="url">
+    <img [src]="url" alt="Imagen destacada" />
+  </div>
+</div>

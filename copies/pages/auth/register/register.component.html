@@ -1,0 +1,92 @@
+<!--front/src/app/pages/auth/register/register.component.html-->
+<div class="portada">
+  <div class="container">
+    <form (ngSubmit)="register()" class="form-container"
+      [formGroup]="registerForm">
+
+      <div class="row">
+        <!--NOMBRE-->
+        <div class="form-floating col-md-6 d-inline-block margin-left">
+          <input type="text" class="form-control" id="floatingName" placeholder="name"
+          formControlName="name">
+          <label for="floatingName">Name</label>
+        </div>
+        <!--NICK-->
+        <div class=" col-md-6 form-floating d-inline-block">
+          <input type="text" class="form-control" id="floatingNick" placeholder="nick-name"
+            formControlName="nick">
+          <label for="floatingNick">Nick-Name</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <!--EMAIL-->
+        <div class="form-floating">
+          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+            formControlName="email">
+          <label for="floatingInput">Email</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <!--PASSWORD-->
+        <div class="form-floating password">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+            formControlName="password">
+          <label for="floatingPassword">Password</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <!--CONFIRMAR PASSWORD-->
+        <div class="form-floating password">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+            formControlName="confirmPassword">
+          <label for="floatingPassword">Confirmar Password</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <!--AVATAR-->
+        <div class="choose-image" (click)="openModal()">
+          @if (selectedAvatar) {
+            <img class="rounded-circle" width="60px" alt="">
+          }@else {
+            <img src="../../../../assets/img/default-avatar.png" width="60px" alt="">
+          }
+        </div>
+      </div>
+
+      <div class="form-check text-start my-3">
+        <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">
+          Remember me
+        </label>
+      </div>
+
+      <button class="btn btn-dark w-100 py-2" type="submit"
+      [disabled]="!registerForm.valid"
+      >Registrarse</button>
+    </form>
+
+    <br>
+
+    @if(showSucessMessage){
+    <div class="alert alert-dismissible alert-success">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert
+        message</a>.
+    </div>
+    }
+
+    @if(showErrorMessage){
+    <div class="alert alert-dismissible alert-danger">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong>{{errorMesage}}</strong><br>
+      <p>Please, check your credentials and try submitting again.</p>
+    </div>
+    }
+
+  </div>
+
+</div>

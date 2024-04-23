@@ -1,0 +1,48 @@
+<div class="container">
+    <table class="table table-hover">
+      <thead>
+        <tr class="table-dark">
+          <th scope="col">Evento</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Provincia</th>
+          <th scope="col">Localidad</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(event of events; track event._id){
+          <tr class="table-light" [routerLink]="['/ficha-evento/'+event._id]">
+            <td>{{event.name}}</td>
+            <td>{{event.fecha}}</td>
+            <td>{{event.provincia}}</td>
+            <td>{{event.localidad}}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center">
+      <ul class="pagination pagination-lg">
+        <li class="page-item disabled">
+          <a class="page-link" href="#">&laquo;</a>
+        </li>
+        <li class="page-item active">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">4</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">5</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">&raquo;</a>
+        </li>
+      </ul>
+    </div>
+</div>
