@@ -44,7 +44,7 @@ export class ListaDecksComponent implements OnInit {
     countTotal(deck: Deck):number {
         let total = 0;
         deck.cards.forEach(card => {
-            // total += card.quantity;
+            total += card.quantity;
         });
         return total
     }

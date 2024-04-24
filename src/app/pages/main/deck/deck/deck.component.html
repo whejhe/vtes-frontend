@@ -38,23 +38,23 @@
       <div class="col-md-5 crypt">
         <!--BUSCADOR-->
         <div class="search col-md-12">
-          <label class="form-label">Search By Name: </label>
-          <input name="filter" class="form-control me-2" type="search" 
+          <label class="form-label">Search By Name!!: </label>
+          <input
+          class="form-control me-2" type="search" 
           placeholder="Search" aria-label="Search" 
-          [(ngModel)]="searchNameCard"
-          [ngModelOptions]="{standalone: true}"
-          (ngModelChange)="filtrado()"
+          formControlName="searchNameCard"
+          (change)="filtrado()"
           />
         </div>
 
         <!--LISTADO DE CARTAS POR BUSQUEDA-->
-        <!-- <div *ngIf="filteredCards.length > 0">
+        <div *ngIf="filteredCards.length > 0">
           <ul>
-            <li *ngFor="let card of cards">
-              {{ card.name }}
+            <li *ngFor="let card of filteredCards">
+              <span (click)="addCard(card)" style="cursor: pointer;">{{ card.name }}</span>
             </li>
           </ul>
-        </div> -->
+        </div>
         
         <table class="table table-hover">
           <thead>
@@ -66,9 +66,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let card of cards">
+            <tr *ngFor="let card of deckCards">
               <td style="cursor: pointer" (mouseenter)="setUrlImage(card.url)" (mouseleave)="clearUrlImage()">
-                {{ card.card.name }}
+                {{ card._id.name }}
               </td>
               <td class="quantity">
                 <input name="quantity" value="1" min="1" type="number" cardForm="quantity">
@@ -79,9 +79,9 @@
                     d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
                 </svg>
               </td>
-              <span *ngIf="card.card.types.includes('Vampire')">
+              <!-- <span *ngIf="card.card.types.includes('Vampire')">
                 
-              </span>
+              </span> -->
             </tr>
           </tbody>
         </table>
@@ -93,18 +93,18 @@
         <!--BUSCADOR-->
         <div class="search col-md-12">
           <label class="form-label">Search By Name:</label>
-          <input name="search" 
+          <input
           class="form-control me-2" type="search" 
           placeholder="Search" aria-label="Search" 
-          [(ngModel)]="searchNameCard"
-          (ngModelChange)="filtrado()"
+          formControlName="searchNameCard"
+          (change)="filtrado()"
           />
         </div>
 
         <!--LISTADO DE CARTAS POR BUSQUEDA-->
-        <!-- <div *ngIf="filteredCards.length > 0">
+        <!-- <div *ngIf="filtereddeckCards.length > 0">
           <ul>
-            <li *ngFor="let card of filteredCards">
+            <li *ngFor="let card of filtereddeckCards">
               {{ card.name }}
             </li>
           </ul>
@@ -120,7 +120,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let card of cards
+            <tr *ngFor="let card of deckCards
             | filterDeck: {
               searchNameCard: searchNameCard,
              };">

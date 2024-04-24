@@ -40,8 +40,10 @@ export class NewDeckComponent implements OnInit {
     category: new FormControl(''),
     publico: new FormControl(true),
     cards: new FormControl([]),
+    searchNameCard: new FormControl('')
   });
   newDeckId: string = '';
+  deckCards: any = [];
   cards: any = [];
   filteredCards: any[] = [];
   user: User = this.authSvc.getCurrentUser()!;
@@ -88,25 +90,28 @@ export class NewDeckComponent implements OnInit {
       deck.cards.length != 0 ? this.deckForm.get('cards')?.setValue(deck.cards) : this.deckForm.get('cards')?.setValue(deck.cards)
       deck.description != '' ? this.deckForm.get('description')?.setValue(deck.description) : null
       this.deckForm.get('category')?.setValue(deck.category)
-      this.cards = deck.cards;
+      this.deckCards = deck.cards;
       console.log(deck.cards);
+
+      // this.filteredCards = deck.cards;
     });
 
     this.cardSvc.getCards().subscribe((cardsToDeck) => {
+      // this.deckCards = cardsToDeck;
       this.cards = cardsToDeck;
-      this.filteredCards = cardsToDeck;
+      // this.filteredCards = this.deckCards.filter((card: { card: string; quantity: number; }) => this.deck$.cards.includes(card));
     });
   }
 
-  addCard(): void {
-    const cardForm = new FormGroup({
-      card: new FormControl('', Validators.required),
-      quantity: new FormControl(1, Validators.required)
-    });
-    if (this.deckForm) {
-      (this.deckForm.get('cards') as FormArray).push(cardForm);
-    }
-  }
+  // addCard(): void {
+  //   const cardForm = new FormGroup({
+  //     card: new FormControl('', Validators.required),
+  //     quantity: new FormControl(1, Validators.required)
+  //   });
+  //   if (this.deckForm) {
+  //     (this.deckForm.get('cards') as FormArray).push(cardForm);
+  //   }
+  // }
 
   removeCard(index: number): void {
     if (this.deckForm) {
@@ -141,6 +146,7 @@ export class NewDeckComponent implements OnInit {
       this.deckForm.get('category')!.setValue('');
       this.deckForm.get('description')!.setValue('Descripcion');
       this.deckForm.get('cards')!.setValue([]);
+      this.deckForm.get('searchNameCard')
     }
   }
 
@@ -181,13 +187,17 @@ export class NewDeckComponent implements OnInit {
     return this.currentDeckSubject.asObservable();
   }
 
+  public addCard(card: any): void {
+    this.deckCards.push(card)
+  }
+
   filtrado(): void {
-    if (this.searchNameCard.trim() === '') {
+    if (this.deckForm.get('searchNameCard')?.value === '') {
       this.filteredCards = [];
     } else {
-      // this.filteredCards = this.cards.filter((card) => {
-      //   return card.name.toLowerCase().includes(this.searchNameCard.toLowerCase());
-      // }).slice(0, 10);
+      console.log(this.deckCards, ' cartas test filtrado 2')
+      this.filteredCards = this.cards.filter((card: any) => card.name.toLowerCase().includes(this.deckForm.get('searchNameCard')?.value.toLowerCase())
+      )
     }
   }
 }

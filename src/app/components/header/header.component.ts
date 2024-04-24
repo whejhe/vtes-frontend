@@ -45,7 +45,6 @@ export class HeaderComponent {
       localStorage.setItem('user', JSON.stringify(this.user));
       console.log('Usuario actual :', this.user);
     }
-    console.log('hol!!!!', this.lastDeckId)
     this.deckForm = new FormGroup({
       userId: new FormControl(''),
       type: new FormControl('', Validators.required),
