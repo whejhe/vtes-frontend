@@ -12,7 +12,7 @@ import {
 import { JsonServiceService } from '../../../../services/json-service.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailsCardLibraryComponent } from '../../../../components/details-card-library/details-card-library.component';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { FilterPipe } from '../../../../pipes/filter.pipe';
 import { IconService } from '../../../../services/icon.service';
 import { __values } from 'tslib';
@@ -38,6 +38,10 @@ export class BibliotecaComponent implements OnInit {
     public iconSvc: IconService,
     public cardSvc: CardService
   ) {}
+
+  libraryForm: FormGroup = new FormGroup({
+    searchName : new FormControl(''),
+  });
 
   private httpClient = inject(HttpClient);
 
