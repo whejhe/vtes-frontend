@@ -1,7 +1,7 @@
 <!--front/src/app/pages/main/list-cards/biblioteca/biblioteca.component.html-->
 <div class="container">
 
-  <form class="row filtro-header" role="search">
+  <form class="row filtro-header" role="search" [formGroup]="libraryForm">
 
     <!--NOMBRES-->
     <div class="col-md-4">
@@ -18,8 +18,8 @@
     <!--TIPOS-->
     <div class="col-md-4">
       <label for="marca" class="form-label">Type:</label>
-      <select name="type" id="type" class="form-select"
-      [(ngModel)]="selectedTypes"
+      <select id="type" class="form-select"
+      formControlName="selectedTypes"
       >
       <option value="*" (change)="resetFilterType()">All</option>
       <option value="{{type}}" *ngFor="let type of types"
@@ -30,8 +30,8 @@
     <!--CLAN-->
     <div class="col-md-4">
       <label for="marca" class="form-label">Clan:</label>
-      <select name="clan" id="clan" class="form-select"
-      [(ngModel)]="searchClan">
+      <select id="clan" class="form-select"
+      formControlName="searchClan">
         <option value="*" (click)="resetFiterClan()">All Clans</option>
         <option value="{{clan || 'All Clans'}}" *ngFor="let clan of clans"
         (click)="onSearchClanChange(clan)">{{clan}}</option>
@@ -81,10 +81,10 @@
           <tr *ngFor="let card of cards
           | filter:['Vampire', 'Imbued']:true
           | filterMulti: {
-            searchName:searchName,
+            searchName:libraryForm.value.searchName,
             selectedDisciplines:selectedDisciplines,
-            selectedTypes:selectedTypes,
-            searchClan:searchClan,
+            selectedTypes:libraryForm.value.selectedTypes,
+            searchClan:libraryForm.value.searchClan,
             searchSect:searchSect,
             selectedTraits: selectedTraits,
             selectedTitles: selectedTitles,
@@ -154,9 +154,9 @@
             <h4>Title:</h4>
             <div class="content-title">
               <div *ngFor="let title of titles">
-                <input name="titles" type="checkbox" class="form-checkbox"
+                <input type="checkbox" class="form-checkbox"
                 [id]="'-titles-' + title" [value]="title"
-                [(ngModel)]="titlesSelected[title]"
+                formControlName="titlesSelected"
                 (change)="onTitlesChange()"
                 />
                 <label [for]="'-titles-' + title">{{ title }}</label>
@@ -169,24 +169,22 @@
             <!--BLOOD COST-->
             <div class="col-6">
               <h4 class="titulo-select">Blood Cost</h4>
-              <select name="blood-cost" class="form-select" id="blood-cost"
-              [(ngModel)]="bloodCosts"
+              <select class="form-select" id="blood-cost"
+              formControlName="bloodCosts"
               (change)="onBloodCostsChange()">
                 <option value="any">Any</option>
-                <option value="{{bloodCosts}}" *ngFor="let bloodCost of bloodCosts"
+                <option value="libraryForm.value.bloodCosts" *ngFor="let bloodCost of libraryForm.value.bloodCosts"
                 (click)="onBloodCostsChange()">{{bloodCost}}</option>
-                <option value="X">X</option>
               </select>
             </div>
             <!--POOL COST-->
             <div class="col-6">
               <h4 class="titulo-select">Pool Cost</h4>
-              <select name="pool-cost" class="form-select" id="pool-cost">
+              <select class="form-select" id="pool-cost"
+              formControlName="poolCosts">
                 <option value="any">Any</option>
-                <option value="{{poolCosts}}" *ngFor="let poolCost of poolCosts"
+                <option value="libraryForm.value.poolCosts" *ngFor="let poolCost of libraryForm.value.poolCosts"
                 (click)="onPoolCostsChange()">{{poolCost}}</option>
-                <option value="X">X</option>
-
               </select>
             </div>
           </div>
@@ -196,9 +194,9 @@
             <h4>Traits:</h4>
               <div class="content-traits">
                 <div *ngFor="let trait of traits">
-                  <input name="traits" type="checkbox" class="form-checkbox"
+                  <input type="checkbox" class="form-checkbox"
                   [id]="'-traits-' + trait" [value]="trait"
-                  [(ngModel)]="traitsSelected[trait]"
+                  formControlName="traitsSelected" 
                   (change)="onTraitsChange()"
                   />
                   <label [for]="'-traits-' + trait">{{ trait }}</label>

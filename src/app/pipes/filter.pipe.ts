@@ -1,5 +1,6 @@
 // front/src/app/pipes/filter.pipe.ts
 import { Pipe, PipeTransform } from '@angular/core';
+// import { Card } from '../models/card.model';
 import { Card } from '../models/vtes.model';
 
 @Pipe({

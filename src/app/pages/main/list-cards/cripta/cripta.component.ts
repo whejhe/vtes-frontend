@@ -3,7 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Observable, map, of } from 'rxjs';
 import { AsyncPipe, CommonModule } from '@angular/common';
 // import { Card} from '../../../../models/card.model';
-import {Card, Clan, Discipline, Title, Traits, Type } from '../../../../models/vtes.model';
+import { Card, Clan, Discipline, Title, Traits, Type } from '../../../../models/vtes.model';
 import { JsonServiceService } from '../../../../services/json-service.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DetailsCardVampireComponent } from '../../../../components/details-card-vampire/details-card-vampire.component';
@@ -43,7 +43,7 @@ export class CriptaComponent implements OnInit {
     selectedDisciplines: new FormControl([]),
     selectedTitles: new FormControl([]),// No funciona
     selectedTraits: new FormControl([]),// No funciona
-    searchCapacity: new FormControl(11), // No funciona
+    searchCapacity: new FormControl(), // No funciona
     sect: new FormControl(''), // No funciona
   });
 
@@ -98,18 +98,29 @@ export class CriptaComponent implements OnInit {
     return clan ? clan.url : '';
   }
 
-  getCapacityCostImage(capacityCost: number | undefined){
+  getCapacityCostImage(capacityCost: number | undefined) {
     this.iconSvc.getCapacityCostImage(capacityCost);
     return this.iconSvc.getCapacityCostImage(capacityCost);
   }
 
+  // SEARCH CLAN
   onSearchClanChange(newValue: string): void {
-    this.cryptForm.value.searchClan = newValue;
-    console.log('Valor actual de searchClan:', this.cryptForm.value.searchClan);
+    // this.cryptForm.value.searchClan = newValue;
+    const searchClanControl = this.cryptForm.get('searchClan');
+    if (searchClanControl) {
+      searchClanControl.setValue(newValue);
+      searchClanControl.updateValueAndValidity();
+    }
   }
 
+  // RESET FILTER CLAN
   resetFiterClan(): void {
-    this.cryptForm.value.searchClan = '';
+    // this.cryptForm.value.searchClan = '';
+    const searchClanControl = this.cryptForm.get('searchClan');
+  if (searchClanControl) {
+    searchClanControl.setValue('');
+    searchClanControl.updateValueAndValidity();
+  }
   }
 
   toggleOpacity(event: MouseEvent): void {
@@ -131,7 +142,7 @@ export class CriptaComponent implements OnInit {
       .map(discipline => discipline as Discipline);
   }
 
-
+  // SEARCH TITLES
   onTitlesChange(): void {
     this.cryptForm.value.selectedTitles = Object.keys(this.titlesSelected)
       .filter(title => this.titlesSelected[title as Title])
@@ -159,7 +170,7 @@ export class CriptaComponent implements OnInit {
   }
 
   formSubmit() {
-    console.log('Crypt Form: ',this.cryptForm.value);
+    console.log('Crypt Form: ', this.cryptForm.value);
   }
 
 

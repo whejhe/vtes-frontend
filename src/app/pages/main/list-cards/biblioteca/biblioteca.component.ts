@@ -12,7 +12,7 @@ import {
 import { JsonServiceService } from '../../../../services/json-service.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailsCardLibraryComponent } from '../../../../components/details-card-library/details-card-library.component';
-import { FormControl, FormGroup, FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterPipe } from '../../../../pipes/filter.pipe';
 import { IconService } from '../../../../services/icon.service';
 import { __values } from 'tslib';
@@ -20,6 +20,7 @@ import { FilterMultiPipe } from '../../../../pipes/filter-multi.pipe';
 import { User } from '../../../../models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { CardService } from '../../../../services/card.service';
+// import { Card } from '../../../../models/card.model';
 // import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -27,7 +28,13 @@ import { CardService } from '../../../../services/card.service';
   standalone: true,
   templateUrl: './biblioteca.component.html',
   styleUrl: './biblioteca.component.scss',
-  imports: [AsyncPipe, CommonModule, FormsModule, FilterPipe, FilterMultiPipe],
+  imports: [
+    AsyncPipe, 
+    CommonModule, 
+    ReactiveFormsModule,
+    FilterPipe, 
+    FilterMultiPipe
+  ],
 })
 export class BibliotecaComponent implements OnInit {
   user: User | null = null;
@@ -41,6 +48,12 @@ export class BibliotecaComponent implements OnInit {
 
   libraryForm: FormGroup = new FormGroup({
     searchName : new FormControl(''),
+    selectedTypes: new FormControl([]),
+    searchClan: new FormControl(''),
+    titlesSelected: new FormControl([]),
+    bloodCosts: new FormControl(['1', '2', '3', '4', 'X']),
+    poolCosts: new FormControl(['1', '2', '3', '4', '5', '6', 'X']),
+    traitsSelected: new FormControl([]),
   });
 
   private httpClient = inject(HttpClient);
@@ -62,30 +75,30 @@ export class BibliotecaComponent implements OnInit {
 
   public checkTitle: string = '';
   public titles = Object.values(Title);
-  public titlesSelected: { [key in Title]?: boolean } = {};
+  // public titlesSelected: { [key in Title]?: boolean } = {};
   public selectedTitles: Title[] = [];
 
   public types = Object.values(Type).filter(
     (type) => type !== 'Vampire' && type !== 'Imbued'
   );
   public typeSelected: { [key: string]: boolean } = {};
-  public selectedTypes: Type[] = [];
+  // public selectedTypes: Type[] = [];
 
   public traits = Object.values(Traits);
-  public traitsSelected: { [key in Traits]?: boolean } = {};
+  // public traitsSelected: { [key in Traits]?: boolean } = {};
   public selectedTraits: Traits[] = [];
 
   public clans = Object.values(Clan);
-  public searchClan: string = '';
+  // public searchClan: string = '';
   public clan = '';
 
   public searcBloodCost: string = '';
-  public bloodCosts = ['1', '2', '3', '4'];
+  // public bloodCosts = ['1', '2', '3', '4'];
   public bloodCostSelected: { [key: string]: boolean } = {};
   public selectedBloodCosts: string[] = [];
 
   public searchPoolCost: string = '';
-  public poolCosts = ['1', '2', '3', '4', '5', '6'];
+  // public poolCosts = ['1', '2', '3', '4', '5', '6'];
   public poolCostSelected: { [key: string]: boolean } = {};
   public selectedPoolCosts: string[] = [];
 
@@ -155,7 +168,7 @@ export class BibliotecaComponent implements OnInit {
 
   //FILTRO PARA BIBLIOTECA
   onTypeChange(newValue: string): void {
-    this.selectedTypes = Object.keys(this.typeSelected)
+    this.libraryForm.value.selectedTypes = Object.keys(this.typeSelected)
       .filter(
         (type) =>
           (this.typeSelected[type as Type] && type !== 'Vampire') ||
@@ -163,32 +176,54 @@ export class BibliotecaComponent implements OnInit {
       )
       .map((type) => type as Type);
   }
+  // onTypeChange(newValue: string): void {
+  //   this.libraryForm.value.selectedTypes = Object.keys(this.typeSelected)
+  //     .filter(
+  //       (type) =>
+  //         (this.typeSelected[type as Type] && type !== 'Vampire') ||
+  //         type !== 'Imbued'
+  //     )
+  //     .map((type) => type as Type);
+  // }
 
   resetFilterType(): void {
-    this.selectedTypes = [];
+    // this.libraryForm.value.selectedTypes = [];
+    const selectedTypesControl = this.libraryForm.get('selectedTypes');
+      if (selectedTypesControl) {
+        selectedTypesControl.setValue([]);
+      }
   }
 
   //FILTROS DE CLAN
   onSearchClanChange(newValue: string): void {
-    this.searchClan = newValue;
-    console.log('Valor actual de searchClan:', this.searchClan);
+    // this.libraryForm.value.searchClan = newValue;
+    const searchClanControl = this.libraryForm.get('searchClan');
+    if (searchClanControl) {
+      searchClanControl.setValue(newValue);
+      searchClanControl.updateValueAndValidity();
+    }
   }
 
   resetFiterClan(): void {
-    this.searchClan = '';
+    // this.libraryForm.value.searchClan = '';
+    const searchClanControl = this.libraryForm.get('searchClan');
+  if (searchClanControl) {
+    searchClanControl.setValue('');
+    searchClanControl.updateValueAndValidity();
+  }
   }
 
   //FILTROS POR CARACTERISTICAS
   onTraitsChange(): void {
-    this.selectedTraits = Object.keys(this.traitsSelected)
-      .filter((trait) => this.traitsSelected[trait as Traits])
+    this.selectedTraits = Object.keys(this.libraryForm.value.traitsSelected)
+      .filter((trait) => this.libraryForm.value.traitsSelected[trait as Traits])
       .map((trait) => trait as Traits);
   }
 
   //FILTROS POR TITULOS
   onTitlesChange(): void {
-    this.selectedTitles = Object.keys(this.titlesSelected)
-      .filter((title) => this.titlesSelected[title as Title])
+    this.selectedTitles = Object.keys(this.libraryForm.value.titlesSelected)
+      .filter((title) => this.libraryForm.value.titlesSelected[title as Title])
       .map((title) => title as Title);
   }
 

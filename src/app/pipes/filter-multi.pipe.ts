@@ -1,6 +1,8 @@
 //src/app/pipes/filter-multi.pipe.ts
 import { Pipe, PipeTransform } from '@angular/core';
-import { Card, Discipline, Type } from '../models/vtes.model';
+import {Card, Discipline, Type } from '../models/vtes.model';
+// import { Card } from '../models/card.model';
+
 
 @Pipe({
   name: 'filterMulti',
@@ -34,9 +36,10 @@ export class FilterMultiPipe implements PipeTransform {
       }
 
       // Filtrar por clan
-      if (filters.searchClan && card.clans && !card.clans.includes(filters.searchClan)) {
+      if (filters.searchClan && filters.searchClan !== '*' && card.clans && !card.clans.includes(filters.searchClan)) {
         match = false;
       }
+
 
       // Filtrar por disciplina seleccionada
       if (filters.selectedDisciplines && filters.selectedDisciplines.length > 0) {
@@ -61,9 +64,10 @@ export class FilterMultiPipe implements PipeTransform {
       }
 
       //Filtrar por tipo
-      if (filters.selectedTypes && filters.selectedTypes.length > 0 && (!card.types || !filters.selectedTypes.includes(card.types))) {
+      if (filters.selectedTypes && filters.selectedTypes !== '*' && filters.selectedTypes.length > 0 && (!card.types || !filters.selectedTypes.includes(card.types))) {
         match = false;
       }
+      
 
       //Filtar por Coste en Blood
       if (filters.selectedCosts && filters.selectedCosts.length > 0 && (!card.blood_cost || !filters.selectedCosts.includes(card.blood_cost))) {
