@@ -39,17 +39,24 @@ export class NewDeckComponent implements OnInit {
     description: new FormControl('Descripcion'),
     category: new FormControl(''),
     publico: new FormControl(true),
-    cards: new FormControl([]),
-    searchNameCard: new FormControl('')
+    // cards: new FormControl([]),
+    crypt: new FormControl([]),
+    library: new FormControl([]),
+    searchCryptCard: new FormControl(''),
+    searchLibraryCard: new FormControl(''),
+    author: new FormControl(''),
   });
+  cardSelected: boolean = false
+  deckCryptCards: any = [];
+  deckLibraryCards: any = [];
   newDeckId: string = '';
-  deckCards: any = [];
   cards: any = [];
-  filteredCards: any[] = [];
+  filteredCardsCrypt: any[] = [];
+  filteredCardsLibrary: any[] = [];
   user: User = this.authSvc.getCurrentUser()!;
   deck$!: Deck;
 
-  public searchNameCard: string = '';
+  // public searchCryptCard: string = '';
 
   //IMAGEN DESTACADA
   public url: string = '';
@@ -87,31 +94,19 @@ export class NewDeckComponent implements OnInit {
       this.deck$ = deck
       deck.category != '' ? this.deckForm.get('category')?.setValue(deck.category) : null
       deck.name != '' ? this.deckForm.get('name')?.setValue(deck.name) : null
-      deck.cards.length != 0 ? this.deckForm.get('cards')?.setValue(deck.cards) : this.deckForm.get('cards')?.setValue(deck.cards)
+      deck.crypt.length != 0 ? this.deckForm.get('crypt')?.setValue(deck.crypt) : this.deckForm.get('crypt')?.setValue(deck.crypt)
+      deck.library.length != 0 ? this.deckForm.get('library')?.setValue(deck.library) : this.deckForm.get('library')?.setValue(deck.library)
       deck.description != '' ? this.deckForm.get('description')?.setValue(deck.description) : null
       this.deckForm.get('category')?.setValue(deck.category)
-      this.deckCards = deck.cards;
-      console.log(deck.cards);
-
-      // this.filteredCards = deck.cards;
+      deck.author != '' ? this.deckForm.get('author')?.setValue(deck.author) : this.deckForm.get('author')?.setValue(deck.author)
+      // console.log(deck.cards);
     });
 
     this.cardSvc.getCards().subscribe((cardsToDeck) => {
-      // this.deckCards = cardsToDeck;
       this.cards = cardsToDeck;
-      // this.filteredCards = this.deckCards.filter((card: { card: string; quantity: number; }) => this.deck$.cards.includes(card));
     });
   }
 
-  // addCard(): void {
-  //   const cardForm = new FormGroup({
-  //     card: new FormControl('', Validators.required),
-  //     quantity: new FormControl(1, Validators.required)
-  //   });
-  //   if (this.deckForm) {
-  //     (this.deckForm.get('cards') as FormArray).push(cardForm);
-  //   }
-  // }
 
   removeCard(index: number): void {
     if (this.deckForm) {
@@ -125,6 +120,7 @@ export class NewDeckComponent implements OnInit {
     if (this.deckForm.get('name')?.value == '') {
       this.deckForm.get('name')!.setValue('Sin nombre');
     }
+    this.deckForm.get('author')?.setValue(this.user.nick);
     const deck = this.deckForm.value;
     this.deckSvc.createDeck(deck).subscribe(
       (response: any) => {
@@ -146,7 +142,8 @@ export class NewDeckComponent implements OnInit {
       this.deckForm.get('category')!.setValue('');
       this.deckForm.get('description')!.setValue('Descripcion');
       this.deckForm.get('cards')!.setValue([]);
-      this.deckForm.get('searchNameCard')
+      this.deckForm.get('searchCryptCard'),
+        this.deckForm.get('searchLibraryCard')
     }
   }
 
@@ -187,16 +184,57 @@ export class NewDeckComponent implements OnInit {
     return this.currentDeckSubject.asObservable();
   }
 
-  public addCard(card: any): void {
-    this.deckCards.push(card)
+  public addCardToCrypt(card: any): void {
+    // this.deckCryptCards.push(card)
+    // (this.deckForm.get('crypt') as FormArray).push(new FormGroup({
+    //   _id: new FormControl(card),
+    //   quantity: new FormControl(1)
+    // }));
+    let valor = this.deckForm.get('crypt')?.value
+    let obj = {
+      quantity: 1,
+      _id: card
+    }
+    valor.push(obj)
+    this.deckForm.get('crypt')?.setValue(valor)
   }
 
-  filtrado(): void {
-    if (this.deckForm.get('searchNameCard')?.value === '') {
-      this.filteredCards = [];
+  public addCardToLibrary(card: any): void {
+    // this.deckLibraryCards.push(card)
+    // (this.deckForm.get('library') as FormArray).push(new FormGroup({
+    //   _id: new FormControl(card),
+    //   quantity: new FormControl(1)
+    // }));
+    let valor = this.deckForm.get('library')?.value
+    let obj = {
+      quantity: 1,
+      _id: card
+    }
+    valor.push(obj)
+    this.deckForm.get('library')?.setValue(valor)
+    console.log(card)
+  }
+
+  public changeQuantity(event: Event, item: any): void {
+    let qty = event.target as HTMLInputElement
+    item.quantity = qty.value
+    console.log(qty.value, 'FUNCIONA!!!!!!!!!!!!!!', event)
+  }
+
+  filtradoCrypt(): void {
+    if (this.deckForm.get('searchCryptCard')?.value === '') {
+      this.filteredCardsCrypt = [];
     } else {
-      console.log(this.deckCards, ' cartas test filtrado 2')
-      this.filteredCards = this.cards.filter((card: any) => card.name.toLowerCase().includes(this.deckForm.get('searchNameCard')?.value.toLowerCase())
+      this.filteredCardsCrypt = this.cards.filter((card: any) => card.name.toLowerCase().includes(this.deckForm.get('searchCryptCard')?.value.toLowerCase())
+      )
+    }
+  }
+
+  filtradoLibrary(): void {
+    if (this.deckForm.get('searchLibraryCard')?.value === '') {
+      this.filteredCardsLibrary = [];
+    } else {
+      this.filteredCardsLibrary = this.cards.filter((card: any) => card.name.toLowerCase().includes(this.deckForm.get('searchLibraryCard')?.value.toLowerCase())
       )
     }
   }

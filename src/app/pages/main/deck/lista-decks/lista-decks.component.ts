@@ -43,7 +43,10 @@ export class ListaDecksComponent implements OnInit {
     //CONTAR TOTAL DE CAARTAS Y SU CANTIDAD
     countTotal(deck: Deck):number {
         let total = 0;
-        deck.cards.forEach(card => {
+        deck.crypt.forEach(card => {
+            total += card.quantity;
+        });
+        deck.library.forEach(card => {
             total += card.quantity;
         });
         return total

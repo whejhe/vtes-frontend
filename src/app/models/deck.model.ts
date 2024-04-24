@@ -8,8 +8,12 @@ export interface Deck {
   author: string;
   category: string;
   publico: boolean;
-  cards: Array<{
-    card: string;
+  crypt: Array<{
+    _id: string;
+    quantity: number;
+  }>;
+  library: Array<{
+    _id: string;
     quantity: number;
   }>
 }

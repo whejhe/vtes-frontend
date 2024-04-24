@@ -116,4 +116,28 @@ h1 {
     top: 120px;
     right: 200px;
   }
-  
+
+.listaCrypta, .listaLibrary {
+    color: antiquewhite;
+    position: fixed;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid rgb(155, 23, 23);
+    overflow-y: scroll;
+    max-height: 500px;
+    padding: 1em;
+    li{
+        text-decoration: none;
+        list-style: none;
+    }
+}
+
+.listaCrypta{
+    top: 28em;
+    left: 18em;
+}
+
+.listaLibrary{
+    top: 28em;
+    right: 25em;
+}
