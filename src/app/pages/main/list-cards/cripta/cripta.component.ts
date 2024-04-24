@@ -43,8 +43,7 @@ export class CriptaComponent implements OnInit {
     selectedDisciplines: new FormControl([]),
     selectedTitles: new FormControl([]),// No funciona
     selectedTraits: new FormControl([]),// No funciona
-    capacityMax: new FormControl(''), // No funciona
-    capacityMin: new FormControl(''), // No funciona
+    searchCapacity: new FormControl(11), // No funciona
     sect: new FormControl(''), // No funciona
   });
 
@@ -73,7 +72,6 @@ export class CriptaComponent implements OnInit {
 
   minCapacity: number = 1;
   maxCapacity: number = 11;
-  searchCapacity = null;
   capacity: number = 0;
 
   setUrlImage(url: string): void {
