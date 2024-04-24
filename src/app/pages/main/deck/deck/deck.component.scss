@@ -68,7 +68,7 @@ h1 {
 
 .botones {
     text-align: center;
-    margin: auto;
+    margin: 0 auto;
     padding-top: 1em;
 
     button {
@@ -92,8 +92,17 @@ h1 {
 }
 
 .alert {
-    background-color: rgba(109, 8, 8, 0.7);
-    color: antiquewhite;
+    position: absolute;
+    top: 8.1em;
+    left: 25em;
+    padding: 1.5em 3em;
+    .alert-success{
+      background-color: rgb(9, 117, 23);
+      color: antiquewhite;
+    }
+    .alert-danger{
+      background-color: rgb(155, 23, 23);
+    }
 }
 
 .imageIcons {

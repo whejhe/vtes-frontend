@@ -1,7 +1,14 @@
 //front/src/app/pages/main/deck/deck/deck.component.ts
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { DeckService } from '../../../../services/deck.service';
@@ -27,11 +34,10 @@ import { FilterAnyPipe } from '../../../../pipes/filter-any.pipe';
     RouterLink,
     FilterDecksPipe,
     FormsModule,
-    FilterAnyPipe
-  ]
+    FilterAnyPipe,
+  ],
 })
 export class NewDeckComponent implements OnInit {
-
   apiUrl = 'http://localhost:3000/decks';
   deckForm: FormGroup = new FormGroup({
     userId: new FormControl(''),
@@ -46,7 +52,7 @@ export class NewDeckComponent implements OnInit {
     searchLibraryCard: new FormControl(''),
     author: new FormControl(''),
   });
-  cardSelected: boolean = false
+  cardSelected: boolean = false;
   deckCryptCards: any = [];
   deckLibraryCards: any = [];
   newDeckId: string = '';
@@ -85,20 +91,30 @@ export class NewDeckComponent implements OnInit {
     private authSvc: AuthService,
     public iconSvc: IconService,
     public cardSvc: CardService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.currentDeckId = window.location.pathname.split('/')[2];
     this.deckSvc.setCurrentDeckId(this.currentDeckId);
     this.deckSvc.getDeckById(this.currentDeckId).subscribe((deck) => {
-      this.deck$ = deck
-      deck.category != '' ? this.deckForm.get('category')?.setValue(deck.category) : null
-      deck.name != '' ? this.deckForm.get('name')?.setValue(deck.name) : null
-      deck.crypt.length != 0 ? this.deckForm.get('crypt')?.setValue(deck.crypt) : this.deckForm.get('crypt')?.setValue(deck.crypt)
-      deck.library.length != 0 ? this.deckForm.get('library')?.setValue(deck.library) : this.deckForm.get('library')?.setValue(deck.library)
-      deck.description != '' ? this.deckForm.get('description')?.setValue(deck.description) : null
-      this.deckForm.get('category')?.setValue(deck.category)
-      deck.author != '' ? this.deckForm.get('author')?.setValue(deck.author) : this.deckForm.get('author')?.setValue(deck.author)
+      this.deck$ = deck;
+      deck.category != ''
+        ? this.deckForm.get('category')?.setValue(deck.category)
+        : null;
+      deck.name != '' ? this.deckForm.get('name')?.setValue(deck.name) : null;
+      deck.crypt.length != 0
+        ? this.deckForm.get('crypt')?.setValue(deck.crypt)
+        : this.deckForm.get('crypt')?.setValue(deck.crypt);
+      deck.library.length != 0
+        ? this.deckForm.get('library')?.setValue(deck.library)
+        : this.deckForm.get('library')?.setValue(deck.library);
+      deck.description != ''
+        ? this.deckForm.get('description')?.setValue(deck.description)
+        : null;
+      this.deckForm.get('category')?.setValue(deck.category);
+      deck.author != ''
+        ? this.deckForm.get('author')?.setValue(deck.author)
+        : this.deckForm.get('author')?.setValue(deck.author);
       // console.log(deck.cards);
     });
 
@@ -106,7 +122,6 @@ export class NewDeckComponent implements OnInit {
       this.cards = cardsToDeck;
     });
   }
-
 
   removeCard(index: number): void {
     if (this.deckForm) {
@@ -131,7 +146,7 @@ export class NewDeckComponent implements OnInit {
         console.log('CurrentDeck: ', this.deckSvc.getCurrentDeck());
       },
       (error) => console.error(error)
-    )
+    );
   }
 
   resetForm(): void {
@@ -143,10 +158,9 @@ export class NewDeckComponent implements OnInit {
       this.deckForm.get('description')!.setValue('Descripcion');
       this.deckForm.get('cards')!.setValue([]);
       this.deckForm.get('searchCryptCard'),
-        this.deckForm.get('searchLibraryCard')
+        this.deckForm.get('searchLibraryCard');
     }
   }
-
 
   updateDeck(): void {
     const deck = this.deckForm.value;
@@ -184,58 +198,74 @@ export class NewDeckComponent implements OnInit {
     return this.currentDeckSubject.asObservable();
   }
 
+  // AGREGAR CARTAS A LA CRYPT
   public addCardToCrypt(card: any): void {
-    // this.deckCryptCards.push(card)
-    // (this.deckForm.get('crypt') as FormArray).push(new FormGroup({
-    //   _id: new FormControl(card),
-    //   quantity: new FormControl(1)
-    // }));
-    let valor = this.deckForm.get('crypt')?.value
+    let valor = this.deckForm.get('crypt')?.value;
     let obj = {
       quantity: 1,
-      _id: card
-    }
-    valor.push(obj)
-    this.deckForm.get('crypt')?.setValue(valor)
+      _id: card,
+    };
+    valor.push(obj);
+    this.deckForm.get('crypt')?.setValue(valor);
   }
 
+  // AGREGAR CARTAS A LA LIBRERIA
   public addCardToLibrary(card: any): void {
-    // this.deckLibraryCards.push(card)
-    // (this.deckForm.get('library') as FormArray).push(new FormGroup({
-    //   _id: new FormControl(card),
-    //   quantity: new FormControl(1)
-    // }));
-    let valor = this.deckForm.get('library')?.value
+    let valor = this.deckForm.get('library')?.value;
     let obj = {
       quantity: 1,
-      _id: card
+      _id: card,
+    };
+    valor.push(obj);
+    this.deckForm.get('library')?.setValue(valor);
+    console.log(card);
+  }
+
+
+  // ELIMINAR CARTAS
+  deleteCardCrypt(card: any) {
+    const index = this.deckForm.get('crypt')?.value.indexOf(card);
+    if (index !== -1) {
+      this.deckForm.get('crypt')?.value.splice(index, 1);
     }
-    valor.push(obj)
-    this.deckForm.get('library')?.setValue(valor)
-    console.log(card)
+  }
+  deleteCardLibrary(card: any) {
+    const index = this.deckForm.get('library')?.value.indexOf(card);
+    if (index !== -1) {
+      this.deckForm.get('library')?.value.splice(index, 1);
+    }
   }
 
+
+  // MODIFICAR CANTIDAD
   public changeQuantity(event: Event, item: any): void {
-    let qty = event.target as HTMLInputElement
-    item.quantity = qty.value
-    console.log(qty.value, 'FUNCIONA!!!!!!!!!!!!!!', event)
+    let qty = event.target as HTMLInputElement;
+    item.quantity = qty.value;
+    console.log(qty.value, 'FUNCIONA!!!!!!!!!!!!!!', event);
   }
 
+  // FILTRADO DE CARTAS CRYPT
   filtradoCrypt(): void {
     if (this.deckForm.get('searchCryptCard')?.value === '') {
       this.filteredCardsCrypt = [];
     } else {
-      this.filteredCardsCrypt = this.cards.filter((card: any) => card.name.toLowerCase().includes(this.deckForm.get('searchCryptCard')?.value.toLowerCase())
-      )
+      this.filteredCardsCrypt = this.cards.filter((card: any) =>
+        card.name
+          .toLowerCase()
+          .includes(this.deckForm.get('searchCryptCard')?.value.toLowerCase())
+      );
     }
   }
-
+  // FILTRADO DE CARTAS LIBRERIA
   filtradoLibrary(): void {
     if (this.deckForm.get('searchLibraryCard')?.value === '') {
       this.filteredCardsLibrary = [];
     } else {
-      this.filteredCardsLibrary = this.cards.filter((card: any) => card.name.toLowerCase().includes(this.deckForm.get('searchLibraryCard')?.value.toLowerCase())
-      )
+      this.filteredCardsLibrary = this.cards.filter((card: any) =>
+        card.name
+          .toLowerCase()
+          .includes(this.deckForm.get('searchLibraryCard')?.value.toLowerCase())
+      );
     }
   }
 }

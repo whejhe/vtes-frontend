@@ -120,9 +120,9 @@ export class IconService {
     {name: 'vin',type: 'others',url: 'https://static.krcg.org/svg/disc/inf/vin.svg',},
     {name: 'ven',type: 'others',url: 'https://static.krcg.org/svg/disc/inf/ven.svg',},
 
-    {name: 'fli',type: 'others',url: 'https://static.krcg.org/svg/disc/inf/flight.svg',},
-    {name: 'mal',type: 'others',url: 'https://static.krcg.org/svg/disc/inf/mal.svg',},
-    {name: 'str',type: 'others',url: 'https://static.krcg.org/svg/disc/inf/str.svg',},
+    // {name: 'fli',type: 'others',url: 'https://static.krcg.org/svg/disc/inf/flight.svg',},
+    // {name: 'mal',type: 'others',url: 'https://static.krcg.org/svg/disc/inf/mal.svg',},
+    // {name: 'str',type: 'others',url: 'https://static.krcg.org/svg/disc/inf/str.svg',},
 
     {name: 'ABO',type: 'sup',url: 'https://static.krcg.org/svg/disc/sup/abo.svg',},
     {name: 'ANI',type: 'sup',url: 'https://static.krcg.org/svg/disc/sup/ani.svg',},

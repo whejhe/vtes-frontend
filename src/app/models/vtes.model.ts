@@ -343,8 +343,8 @@ export enum DisciplineName {
   valeren = 'valeren',
   vicissitude = 'vicissitude',
   visceratika = 'visceratika',
-  
-  
+
+
   vision = 'vision',
   vengeance = 'vengeance',
   defense = 'defense',
