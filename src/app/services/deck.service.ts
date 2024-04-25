@@ -26,9 +26,9 @@ export class DeckService {
     // this.getTokenData();
   }
 
-  getTokenData():void{
+  getTokenData(): void {
     const token = this.authSvc.getToken();
-    if(token){
+    if (token) {
       this.tokenData = jwtDecode(token);
     }
   }
@@ -47,7 +47,7 @@ export class DeckService {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
     // deck.userId = this.tokenData.userId;
-    return this.http.post(this.apiUrl, deck, {headers});
+    return this.http.post(this.apiUrl, deck, { headers });
   }
 
   getCurrentDeck(): Observable<Deck | null> {
@@ -85,11 +85,11 @@ export class DeckService {
     return this.currentDeckSubject.asObservable();
   }
 
-  getLastDeckId(): String{
+  getLastDeckId(): String {
     return localStorage.getItem('lastDeck')!;
   }
 
-  setLastDeckId(id: string): String{
+  setLastDeckId(id: string): String {
     localStorage.setItem('lastDeck', id);
     return localStorage.getItem('lastDeck')!;
   }
@@ -109,7 +109,7 @@ export class DeckService {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
     console.log('Deck to update(Service):', deck);
-    return this.http.put<Deck>(`${this.apiUrl}/${id}`, deck, {headers});
+    return this.http.put<Deck>(`${this.apiUrl}/${id}`, deck, { headers });
   }
 
   // Actualizar la visibilidad de un mazo
@@ -130,5 +130,20 @@ export class DeckService {
   // Eliminar un mazo
   deleteDeck(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  printTxt(id: string, deckName: string, author: string): any {
+    id = this.currentDeckId;
+    return fetch(`${this.apiUrl}/printTxt/${id}`, { method: 'POST' }).then( res => res.blob()).then( blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.setAttribute('style', 'display: none');
+      a.href = url;
+      a.download = `${deckName} - ${author}.txt`;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove();
+    });
   }
 }
