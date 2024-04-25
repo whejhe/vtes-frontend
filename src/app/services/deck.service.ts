@@ -46,7 +46,7 @@ export class DeckService {
   createDeck(deck: any): Observable<any> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
-    deck.userId = this.tokenData.userId;
+    // deck.userId = this.tokenData.userId;
     return this.http.post(this.apiUrl, deck, {headers});
   }
 

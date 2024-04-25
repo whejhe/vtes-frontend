@@ -140,7 +140,7 @@ export class NewDeckComponent implements OnInit {
     this.deckSvc.createDeck(deck).subscribe(
       (response: any) => {
         this.newDeckId = response.id;
-        this.deckSvc.setCurrentDeckId(this.newDeckId); // <--- Agregué esta línea
+        this.deckSvc.setCurrentDeckId(this.newDeckId);
         this.router.navigate([`/deck/${this.newDeckId}`]);
         console.log('Id deck: ', this.newDeckId);
         console.log('CurrentDeck: ', this.deckSvc.getCurrentDeck());
@@ -150,16 +150,17 @@ export class NewDeckComponent implements OnInit {
   }
 
   resetForm(): void {
-    this.deckForm.reset();
-    if (this.deckForm.get('name')?.value == null) {
+    
+      this.deckForm.get('author')!.setValue(this.user.nick);
       this.deckForm.get('name')!.setValue('Sin nombre');
       this.deckForm.get('publico')!.setValue(true);
       this.deckForm.get('category')!.setValue('');
       this.deckForm.get('description')!.setValue('Descripcion');
-      this.deckForm.get('cards')!.setValue([]);
-      this.deckForm.get('searchCryptCard'),
-        this.deckForm.get('searchLibraryCard');
-    }
+      this.deckForm.get('crypt')!.setValue([]);
+      this.deckForm.get('library')!.setValue([]);
+      this.deckForm.get('searchCryptCard')!.setValue('')
+      this.deckForm.get('searchLibraryCard')!.setValue('');
+    
   }
 
   updateDeck(): void {

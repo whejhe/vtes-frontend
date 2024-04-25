@@ -138,15 +138,20 @@ h1 {
     li{
         text-decoration: none;
         list-style: none;
+        padding: 0.5em;
+        cursor: pointer;
+        &:hover{
+            background-color: rgb(155, 23, 23);
+        }
     }
 }
 
 .listaCrypta{
     top: 28em;
-    left: 18em;
+    left: 25em;
 }
 
 .listaLibrary{
     top: 28em;
-    right: 25em;
+    right: 28em;
 }

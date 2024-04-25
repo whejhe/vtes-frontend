@@ -10,7 +10,7 @@
       </div>
       <!--AUTOR-->
       <div class="col-md-6">
-        <input class="form-control" placeholder="Author" type="text" disabled="true" [value]="deck$.author">
+        <input class="form-control" placeholder="Author" type="text" disabled="true" [value]="deckForm.get('author')!.value ? deckForm.get('author')!.value : 'Anonymous'">
       </div>
       <!--DESCRIPCION DE MAZO-->
       <div class="col-md-6">
