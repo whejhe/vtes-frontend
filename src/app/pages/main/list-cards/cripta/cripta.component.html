@@ -130,6 +130,27 @@
       <section class="col-md-4">
         <aside>
           <!--TITLES-->
+          <div>
+            <h4 class="title">Title:</h4>
+            <select class="form-select form-select-sm">
+              <option selected>Any</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+          <!--CAPACITY MAX-->
+          <div class="capacity">
+            <label for="customRange2" class="form-label">Max. Capacity</label>
+            <input type="range" class="form-range" min="1" max="11" id="customRange2">
+          </div>
+          <!--CAPACITY MIN-->
+          <div class="capacity">
+            <label for="customRange2" class="form-label">Min. Capacity</label>
+            <input type="range" value="1" class="form-range" min="1" max="11" id="customRange2">
+          </div>
+
+
           <div class="title">
             <h4>Title:</h4>
             <div class="content-title">
@@ -140,34 +161,6 @@
               </div>
             </div>
           </div>
-
-          <!--CAPACITY-->
-          <div class="row capacity">
-            <!--CAPACITY MIN-->
-            <div class="col-6 capacity-min">
-              <input type="number" class="form-control" min="1" max="11" placeholder="Capacidad minima"
-                formGroupName="searchCapacity" (change)="onChangeMinCapacity()" />
-            </div>
-            <!--CAPACITY MAX-->
-            <div class="col-6 capacity-max">
-              <input type="number" class="form-control" min="1" max="11" placeholder="Capacidad maxima"
-                formGroupName="searchCapacity" (change)="onChangeMaxCapacity()" />
-            </div>
-          </div>
-          <br />
-
-          <!--SECTA-->
-          <!-- <div class="col-6">
-            <h4 class="titulo-select">Sect</h4>
-            <select class="form-select" id="sect" formGroupName="sect">
-              <option value="any">Any</option>
-              <option value="camarilla">Camarilla</option>
-              <option value="sabbat">Sabbat</option>
-              <option value="anarch">Anarch</option>
-              <option value="laibon">Laibon</option>
-              <option value="independent">Independent</option>
-            </select>
-          </div> -->
 
           <!--TRAIT-->
           <div class="traits">

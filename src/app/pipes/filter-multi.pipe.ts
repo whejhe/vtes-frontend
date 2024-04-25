@@ -67,7 +67,7 @@ export class FilterMultiPipe implements PipeTransform {
       if (filters.selectedTypes && filters.selectedTypes !== '*' && filters.selectedTypes.length > 0 && (!card.types || !filters.selectedTypes.includes(card.types))) {
         match = false;
       }
-      
+
 
       //Filtar por Coste en Blood
       if (filters.selectedCosts && filters.selectedCosts.length > 0 && (!card.blood_cost || !filters.selectedCosts.includes(card.blood_cost))) {

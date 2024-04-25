@@ -1,89 +1,82 @@
 <div class="container">
-
+  <form action="" role="search" [formGroup]="listDeckForm">
     <div class="row">
-        <!--AUTHOR-->
-        <div class="col-6">
-            <h4 class="titulo-select">Author</h4>
-            <select name="" class="form-select" id="">
-                @for(user of user; track user._id){
-                    <option value="{{user.nick}}">{{user.nick}}</option>
-                }
-                <!-- <option value="author" *ngFor="let user of user"
+      <!--AUTHOR-->
+      <div class="col-6">
+        <h4 class="titulo-select">Author</h4>
+        <select name="" class="form-select" id="">
+          @for(user of user; track user._id){
+          <option value="{{ user.nick }}">{{ user.nick }}</option>
+          }
+          <!-- <option value="author" *ngFor="let user of user"
                 >{{user.nick}}</option> -->
-            </select>
-        </div>
-        <!--TYPE-->
-        <div class="col-6">
-            <h4 class="titulo-select">Type</h4>
-            <select name="" class="form-select" id="">
-                <option value="Ally">Ally</option>
-                <option value="Bleed">Bleed</option>
-                <option value="Combat">Combat</option>
-                <option value="Toolbox">Toolbox</option>
-                <option value="Wall">Wall</option>
-                <option value="Vote">Vote</option>
-            </select>
-        </div>
+        </select>
+      </div>
+      <!--TYPE-->
+      <div class="col-6">
+        <h4 class="titulo-select">Type</h4>
+        <select class="form-select" id="category"
+        formControlName="category"
+        (change)="filterByCategory()"
+        >
+          <option value="*">All</option>
+          <option value="Bleed">Bleed</option>
+          <option value="Combat">Combat</option>
+          <option value="Toolbox">Toolbox</option>
+          <option value="Wall">Wall</option>
+          <option value="Ally">Ally</option>
+          <option value="Vote">Vote</option>
+        </select>
+      </div>
     </div>
 
     <table class="table table-hover">
-        <thead>
-            <tr class="table-dark">
-                <th>Name</th>
-                <th>Type</th>
-                <th>Description</th>
-                <th>Author</th>
-                <th>Nº Cards</th>
-            </tr>
-        </thead>
-        <tbody>
-          @for(deck of decks; track deck._id){
-            <tr class="table-light" [routerLink]="['/deck/'+deck._id]"
-            >
-                <th>{{deck.name}}</th>
-                <td>{{deck.category}}</td>
-                <td>{{deck.description}}</td>
-                <td>{{deck.author}}</td>
-                <td>{{countTotal(deck)}}</td>
-            </tr>
-          }
-            <!-- <tr class="table-light"
-            [routerLink]="['/deck']" *ngFor="let deck of decks
-            let i=index"
-            [class.table-light] = "i % 2 === 0"
-            [class.table-secondary] = "i % 2 !== 0"
-            >
-                <th>{{deck.name}}</th>
-                <td>{{deck.type}}</td>
-                <td>{{deck.description}}</td>
-                <td>{{deck.author}}</td>
-            </tr> -->
-        </tbody>
+      <thead>
+        <tr class="table-dark">
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Author</th>
+          <th>Nº Cards</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(deck of decks; track deck._id){
+        <tr class="table-light" [routerLink]="['/deck/' + deck._id]">
+          <th>{{ deck.name }}</th>
+          <td>{{ deck.category }}</td>
+          <td>{{ deck.description }}</td>
+          <td>{{ deck.author }}</td>
+          <td>{{ countTotal(deck) }}</td>
+        </tr>
+        }
+      </tbody>
     </table>
 
     <div class="d-flex justify-content-center pagination-content">
-        <ul class="pagination pagination-lg">
-            <li class="page-item disabled">
-                <a class="page-link" href="#">&laquo;</a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">4</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">5</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">&raquo;</a>
-            </li>
-        </ul>
+      <ul class="pagination pagination-lg">
+        <li class="page-item disabled">
+          <a class="page-link" href="#">&laquo;</a>
+        </li>
+        <li class="page-item active">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">4</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">5</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">&raquo;</a>
+        </li>
+      </ul>
     </div>
+  </form>
 </div>

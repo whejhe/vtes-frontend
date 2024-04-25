@@ -29,10 +29,10 @@ import { CardService } from '../../../../services/card.service';
   templateUrl: './biblioteca.component.html',
   styleUrl: './biblioteca.component.scss',
   imports: [
-    AsyncPipe, 
-    CommonModule, 
+    AsyncPipe,
+    CommonModule,
     ReactiveFormsModule,
-    FilterPipe, 
+    FilterPipe,
     FilterMultiPipe
   ],
 })
@@ -176,15 +176,6 @@ export class BibliotecaComponent implements OnInit {
       )
       .map((type) => type as Type);
   }
-  // onTypeChange(newValue: string): void {
-  //   this.libraryForm.value.selectedTypes = Object.keys(this.typeSelected)
-  //     .filter(
-  //       (type) =>
-  //         (this.typeSelected[type as Type] && type !== 'Vampire') ||
-  //         type !== 'Imbued'
-  //     )
-  //     .map((type) => type as Type);
-  // }
 
   resetFilterType(): void {
     // this.libraryForm.value.selectedTypes = [];

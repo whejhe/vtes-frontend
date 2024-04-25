@@ -172,7 +172,6 @@
               <select class="form-select" id="blood-cost"
               formControlName="bloodCosts"
               (change)="onBloodCostsChange()">
-                <option value="any">Any</option>
                 <option value="libraryForm.value.bloodCosts" *ngFor="let bloodCost of libraryForm.value.bloodCosts"
                 (click)="onBloodCostsChange()">{{bloodCost}}</option>
               </select>
@@ -196,7 +195,7 @@
                 <div *ngFor="let trait of traits">
                   <input type="checkbox" class="form-checkbox"
                   [id]="'-traits-' + trait" [value]="trait"
-                  formControlName="traitsSelected" 
+                  formControlName="traitsSelected"
                   (change)="onTraitsChange()"
                   />
                   <label [for]="'-traits-' + trait">{{ trait }}</label>

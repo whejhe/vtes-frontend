@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { User } from '../../../../models/user.model';
 import { AuthService } from '../../../../services/auth.service';
 import { FilterDecksPipe } from '../../../../pipes/filter-decks.pipe';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-lista-decks',
@@ -16,7 +17,8 @@ import { FilterDecksPipe } from '../../../../pipes/filter-decks.pipe';
     imports: [
         RouterLink,
         CommonModule,
-        FilterDecksPipe
+        FilterDecksPipe,
+        ReactiveFormsModule
     ]
 })
 export class ListaDecksComponent implements OnInit {
@@ -28,6 +30,11 @@ export class ListaDecksComponent implements OnInit {
 
     decks: Deck[] = [];
     user: User[] = [];
+
+
+    listDeckForm: FormGroup = new FormGroup({
+      category: new FormControl('*'),
+    })
 
     getUsers():void {
         this.authSvc.getUsers().subscribe(
@@ -62,6 +69,21 @@ export class ListaDecksComponent implements OnInit {
                 console.log('Error al obtener los decks: ', error);
             });
     }
+
+
+    //FILTRAR POR CATEGORIA
+    filterByCategory(): void {
+      let selectedCategory: string = '*';
+      selectedCategory = this.listDeckForm.get('category')?.value;
+      if (selectedCategory === '*') {
+          this.getDecks();
+      } else if(selectedCategory !== '*'){
+        this.decks = this.decks.filter(deck => deck.category === selectedCategory);
+        console.log('Categoria Actual: ',selectedCategory);
+      }
+  }
+
+
 
     ngOnInit(): void {
         this.getDecks();
