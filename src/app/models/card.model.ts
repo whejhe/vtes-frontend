@@ -3,19 +3,26 @@ export interface Card {
   _id: string;
   name: string;
   url: string;
-  types: string[];
-  title: string;
-  clans: string[];
+  types: Type[];
+  title: Title;
+  clans: Clan[];
   capacity: number;
-  disciplines: string[];
+  disciplines: Discipline[];
   multidisc: boolean;
   card_text: string;
   ordered_sets: string[];
   blood_cost: string;
   pool_cost: string;
-  rulings: string;
+  rulings: Rulings;
   sets: string[];
   group: number;
+  traits?:string[];
+  disciplineNames?: string[];
+}
+
+export interface Rulings {
+  text:  string[];
+  links: { [key: string]: string };
 }
 
 export enum Clan {
