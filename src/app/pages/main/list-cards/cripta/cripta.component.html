@@ -156,23 +156,29 @@
             </select>
           </div>
           <!--ACTION-->
-          <h4 class="select">Action:</h4>
+          <div>
+            <h4 class="select">Action:</h4>
           <select id="action" class="form-select form-select-sm">
             <option selected>Any</option>
             <option *ngFor="let item of action" [value]="item.name">{{ item.name }}</option>
           </select>
+          </div>
           <!--REACTION-->
+         <div>
           <h4 class="select">Reaction::</h4>
           <select id="reaction" class="form-select form-select-sm">
             <option selected>Any</option>
             <option *ngFor="let item of reaction" [value]="item.name">{{ item.name }}</option>
           </select>
+         </div>
           <!--OTHERS-->
-          <h4 class="select">Reaction::</h4>
+          <div>
+            <h4 class="select">Reaction::</h4>
           <select id="others" class="form-select form-select-sm">
             <option selected>Any</option>
             <option *ngFor="let item of others" [value]="item.name">{{ item.name }}</option>
           </select>
+          </div>
         </aside>
 
         <!--ENLACES-->

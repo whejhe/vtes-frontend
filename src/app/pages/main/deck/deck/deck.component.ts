@@ -90,6 +90,7 @@ export class NewDeckComponent implements OnInit {
   showSucessMessage: boolean = false;
   showErrorMessage: boolean = false;
   errorMesage: string = '';
+  successMessage: string = '';
 
   private currentDeckId: string = '';
   private currentDeckSubject: BehaviorSubject<string> = new BehaviorSubject('');
@@ -195,8 +196,9 @@ export class NewDeckComponent implements OnInit {
     this.deckSvc.updateDeck(this.currentDeckId, deck).subscribe(
       (response) => {
         console.log('Carta personalizada actualizada:', response);
-        this.showSucessMessage = true;
         this.showErrorMessage = false;
+        this.showSucessMessage = true;
+        this.successMessage = 'Carta personalizada actualizada correctamente';
         setTimeout(() => {
           this.showSucessMessage = false;
         }, 5000);
@@ -204,6 +206,7 @@ export class NewDeckComponent implements OnInit {
       (error) => {
         this.showErrorMessage = true;
         this.showSucessMessage = false;
+        this.errorMesage = 'Error al actualizar la carta personalizada';
         setTimeout(() => {
           this.showErrorMessage = false;
         }, 5000);
@@ -218,6 +221,11 @@ export class NewDeckComponent implements OnInit {
       (response) => {
         console.log('Mazo eliminado:', response);
         this.router.navigate(['/lista-decks']);
+        this.showSucessMessage = true;
+          this.successMessage = 'Mazo eliminado correctamente';
+          setTimeout(() => {
+            this.showErrorMessage = false;
+          }, 5000);
       },
       (error) => {
         if (error.status === 401) {
