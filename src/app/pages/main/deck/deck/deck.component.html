@@ -178,7 +178,7 @@
           </svg> pdf</button><br>
 
         <!--COPY-->
-        <button class="btn btn-dark">Make a Copy</button>
+        <button class="btn btn-dark" (click)="copyDeck()">Make a Copy</button>
 
         <!--IMPORT-->
         <button class="btn btn-dark">
@@ -195,7 +195,7 @@
           </svg> Export deck</button><br>
 
         <!--DELETE-->
-        <button class="btn btn-dark">
+        <button class="btn btn-dark" (click)="deleteDeck()">
           <svg class="trash" id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24"
             fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
             <path d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />

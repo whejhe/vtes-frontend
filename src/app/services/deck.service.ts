@@ -129,7 +129,7 @@ export class DeckService {
 
   // Eliminar un mazo
   deleteDeck(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.addAuthHeader(new HttpHeaders()) });
   }
 
   printTxt(id: string, deckName: string, author: string): any {

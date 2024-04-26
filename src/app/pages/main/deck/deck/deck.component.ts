@@ -149,8 +149,31 @@ export class NewDeckComponent implements OnInit {
     );
   }
 
+  copyDeck(): void {
+    this.resetForm();
+    this.deckForm.get('userId')!.setValue(this.authSvc.getCurrentUser()?._id);
+    if (this.deckForm.get('name')?.value == '') {
+      this.deckForm.get('name')!.setValue('Sin nombre');
+    }
+    this.deckForm.get('name')?.setValue(`Copy of ${this.deck$.name}`);
+    this.deckForm.get('author')?.setValue(this.user.nick);
+    this.deckForm.get('description')?.setValue(`${this.deck$.description}`);
+    this.deckForm.get('category')?.setValue(this.deck$.category);
+    this.deckForm.get('publico')?.setValue(this.deck$.publico);
+    this.deckForm.get('crypt')?.setValue(this.deck$.crypt);
+    this.deckForm.get('library')?.setValue(this.deck$.library);
+    const deck = this.deckForm.value;
+    this.deckSvc.createDeck(deck).subscribe(
+      (response: any) => {
+        this.newDeckId = response.id;
+        this.deckSvc.setCurrentDeckId(this.newDeckId);
+        this.router.navigate([`/deck/${this.newDeckId}`]);
+      },
+      (error) => console.error(error)
+    );
+  }
+  
   resetForm(): void {
-    
       this.deckForm.get('author')!.setValue(this.user.nick);
       this.deckForm.get('name')!.setValue('Sin nombre');
       this.deckForm.get('publico')!.setValue(true);
@@ -159,8 +182,7 @@ export class NewDeckComponent implements OnInit {
       this.deckForm.get('crypt')!.setValue([]);
       this.deckForm.get('library')!.setValue([]);
       this.deckForm.get('searchCryptCard')!.setValue('')
-      this.deckForm.get('searchLibraryCard')!.setValue('');
-    
+      this.deckForm.get('searchLibraryCard')!.setValue(''); 
   }
 
   updateDeck(): void {
@@ -187,6 +209,27 @@ export class NewDeckComponent implements OnInit {
         }, 5000);
         console.error('Error al actualizar la carta personalizada:', error);
         console.error('Error details:', error.error);
+      }
+    );
+  }
+
+  deleteDeck(): void {
+    this.deckSvc.deleteDeck(this.currentDeckId).subscribe(
+      (response) => {
+        console.log('Mazo eliminado:', response);
+        this.router.navigate(['/lista-decks']);
+      },
+      (error) => {
+        if (error.status === 401) {
+          this.showErrorMessage = true;
+          this.errorMesage = 'No tienes permiso para eliminar este mazo.';
+          setTimeout(() => {
+            this.showErrorMessage = false;
+          }, 5000);
+        } else {
+          console.error('Error al eliminar el Mazo:', error);
+          console.error('Error details:', error.error);
+        }
       }
     );
   }
