@@ -11,7 +11,7 @@ export class IconService {
     if (capacityCost) {
       switch (capacityCost) {
         case 1:
-          return '/assets/img/icons-vtes/others/capacity/capacitypng';
+          return '/assets/img/icons-vtes/others/capacity/capacity.png';
         case 2:
           return '/assets/img/icons-vtes/others/capacity/capacity2.png';
         case 3:

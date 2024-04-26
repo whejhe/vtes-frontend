@@ -125,84 +125,44 @@
 
     <section class="col-md-4">
       <aside>
-          <!-- <div class="row"> -->
-            <!--SECTA-->
-            <!-- <div class="col-6">
-              <h4 class="titulo-select">Sect</h4>
-              <select name="sect" class="form-select" id="sect"
-              [(ngModel)]="searchSect">
-                <option value="any">Any</option>
-                <option value="camarilla">Camarilla</option>
-                <option value="sabbat">Sabbat</option>
-                <option value="anarch">Anarch</option>
-                <option value="laibon">Laibon</option>
-                <option value="independent">Independent</option>
-              </select>
-            </div> -->
-
-            <!--CAPACITY-->
-            <!-- <div class="col-6">
-              <h4 class="titulo-select">Capacity</h4>
-              <select name="capacity" class="form-select" id="capacity">
-                <option value="capacity">Any</option>
-              </select>
-            </div>
-          </div> -->
-
-          <!--TITLES-->
-          <div class="title">
-            <h4>Title:</h4>
-            <div class="content-title">
-              <div *ngFor="let title of titles">
-                <input type="checkbox" class="form-checkbox"
-                [id]="'-titles-' + title" [value]="title"
-                formControlName="titlesSelected"
-                (change)="onTitlesChange()"
-                />
-                <label [for]="'-titles-' + title">{{ title }}</label>
-              </div>
-            </div>
+          <!--COMBAT-->
+          <div>
+            <h4 class="select">Combat:</h4>
+            <select class="form-select form-select-sm">
+              <option selected>Any</option>
+              <option *ngFor="let item of combat" [value]="item.name">{{ item.name }}</option>
+            </select>
           </div>
-
-
-          <div class="row">
-            <!--BLOOD COST-->
-            <div class="col-6">
-              <h4 class="titulo-select">Blood Cost</h4>
-              <select class="form-select" id="blood-cost"
-              formControlName="bloodCosts"
-              (change)="onBloodCostsChange()">
-                <option value="libraryForm.value.bloodCosts" *ngFor="let bloodCost of libraryForm.value.bloodCosts"
-                (click)="onBloodCostsChange()">{{bloodCost}}</option>
-              </select>
-            </div>
-            <!--POOL COST-->
-            <div class="col-6">
-              <h4 class="titulo-select">Pool Cost</h4>
-              <select class="form-select" id="pool-cost"
-              formControlName="poolCosts">
-                <option value="any">Any</option>
-                <option value="libraryForm.value.poolCosts" *ngFor="let poolCost of libraryForm.value.poolCosts"
-                (click)="onPoolCostsChange()">{{poolCost}}</option>
-              </select>
-            </div>
-          </div>
-
-          <!--TRAIT-->
-          <div class="traits">
-            <h4>Traits:</h4>
-              <div class="content-traits">
-                <div *ngFor="let trait of traits">
-                  <input type="checkbox" class="form-checkbox"
-                  [id]="'-traits-' + trait" [value]="trait"
-                  formControlName="traitsSelected"
-                  (change)="onTraitsChange()"
-                  />
-                  <label [for]="'-traits-' + trait">{{ trait }}</label>
-                </div>
-            </div>
-          </div>
-
+          <!--ACTION-->
+          <h4 class="select">Action:</h4>
+          <select id="action" class="form-select form-select-sm">
+            <option selected>Any</option>
+            <option *ngFor="let item of action" [value]="item.name">{{ item.name }}</option>
+          </select>
+          <!--REACTION-->
+          <h4 class="select">Reaction:</h4>
+          <select id="reaction" class="form-select form-select-sm">
+            <option selected>Any</option>
+            <option *ngFor="let item of reaction" [value]="item.name">{{ item.name }}</option>
+          </select>
+          <!--OTHERS-->
+          <h4 class="select">Others:</h4>
+          <select id="others" class="form-select form-select-sm">
+            <option selected>Any</option>
+            <option *ngFor="let item of others" [value]="item.name">{{ item.name }}</option>
+          </select>
+          <!--BLOODCOST-->
+          <h4 class="select">Blood Cost:</h4>
+          <select id="bloodCost" class="form-select form-select-sm">
+            <option selected>Any</option>
+            <option *ngFor="let item of bloodCost" [value]="item.name">{{ item.name }}</option>
+          </select>
+          <!--POOLCOST-->
+          <h4 class="select">Pool Cost:</h4>
+          <select id="poolCost" class="form-select form-select-sm">
+            <option selected>Any</option>
+            <option *ngFor="let item of poolCost" [value]="item.name">{{ item.name }}</option>
+          </select>
       </aside>
     </section>
   </main>

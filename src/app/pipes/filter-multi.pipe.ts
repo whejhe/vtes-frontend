@@ -41,6 +41,7 @@ export class FilterMultiPipe implements PipeTransform {
       }
 
 
+
       // Filtrar por disciplina seleccionada
       if (filters.selectedDisciplines && filters.selectedDisciplines.length > 0) {
         const cardDisciplines = card.disciplines?.map(discipline => discipline) || [];

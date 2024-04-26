@@ -20,8 +20,6 @@ import { FilterMultiPipe } from '../../../../pipes/filter-multi.pipe';
 import { User } from '../../../../models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { CardService } from '../../../../services/card.service';
-// import { Card } from '../../../../models/card.model';
-// import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-biblioteca',
@@ -55,6 +53,14 @@ export class BibliotecaComponent implements OnInit {
     poolCosts: new FormControl(['1', '2', '3', '4', '5', '6', 'X']),
     traitsSelected: new FormControl([]),
   });
+
+  title: {name: string }[] = [];
+  combat: {name: string }[] = [];
+  action: {name: string }[] = [];
+  reaction: {name: string }[] = [];
+  others: {name: string }[] = [];
+  bloodCost: {name: string }[] = [];
+  poolCost: {name: string }[] = [];
 
   private httpClient = inject(HttpClient);
 
@@ -240,8 +246,13 @@ export class BibliotecaComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCards();
-    // this.jsonSvc.getJsonData().subscribe((cards) => {
-    //   this.cards = cards;
-    // });
+
+    this.combat = this.jsonSvc.combatData;
+    this.title = this.jsonSvc.titleData;
+    this.action = this.jsonSvc.actionData;
+    this.reaction = this.jsonSvc.reactionsData;
+    this.others = this.jsonSvc.othersData;
+    this.bloodCost = this.jsonSvc.bloodCostData;
+    this.poolCost = this.jsonSvc.poolCostData;
   }
 }

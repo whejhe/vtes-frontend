@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TodoService } from '../../../services/todo.service';
 
 @Component({
   selector: 'app-contact',
@@ -18,7 +17,6 @@ export class ContactComponent {
 
   constructor() { }
 
-  todoSvc: TodoService = Inject(TodoService);
   // todo = this.todoSvc.getMessage();
 
   // title = '';

@@ -38,6 +38,16 @@ import { FilterAnyPipe } from '../../../../pipes/filter-any.pipe';
   ],
 })
 export class NewDeckComponent implements OnInit {
+
+  constructor(
+    private http: HttpClient,
+    private deckSvc: DeckService,
+    private router: Router,
+    private authSvc: AuthService,
+    public iconSvc: IconService,
+    public cardSvc: CardService
+  ) {}
+
   apiUrl = 'http://localhost:3000/decks';
   deckForm: FormGroup = new FormGroup({
     userId: new FormControl(''),
@@ -52,6 +62,7 @@ export class NewDeckComponent implements OnInit {
     searchLibraryCard: new FormControl(''),
     author: new FormControl(''),
   });
+
   cardSelected: boolean = false;
   deckCryptCards: any = [];
   deckLibraryCards: any = [];
@@ -61,11 +72,10 @@ export class NewDeckComponent implements OnInit {
   filteredCardsLibrary: any[] = [];
   user: User = this.authSvc.getCurrentUser()!;
   deck$!: Deck;
+  url: string = '';
 
-  // public searchCryptCard: string = '';
 
   //IMAGEN DESTACADA
-  public url: string = '';
   setUrlImage(url: string): void {
     this.url = url;
   }
@@ -83,15 +93,6 @@ export class NewDeckComponent implements OnInit {
 
   private currentDeckId: string = '';
   private currentDeckSubject: BehaviorSubject<string> = new BehaviorSubject('');
-
-  constructor(
-    private http: HttpClient,
-    private deckSvc: DeckService,
-    private router: Router,
-    private authSvc: AuthService,
-    public iconSvc: IconService,
-    public cardSvc: CardService
-  ) {}
 
   ngOnInit(): void {
     this.currentDeckId = window.location.pathname.split('/')[2];
@@ -115,7 +116,6 @@ export class NewDeckComponent implements OnInit {
       deck.author != ''
         ? this.deckForm.get('author')?.setValue(deck.author)
         : this.deckForm.get('author')?.setValue(deck.author);
-      // console.log(deck.cards);
     });
 
     this.cardSvc.getCards().subscribe((cardsToDeck) => {
@@ -268,6 +268,12 @@ export class NewDeckComponent implements OnInit {
           .includes(this.deckForm.get('searchLibraryCard')?.value.toLowerCase())
       );
     }
+  }
+
+  // OBTENER ICONOS DE CLAN
+  getClanUrl(clanName: string): string {
+    const clan = this.clanImages.find(item => item.name.replace(/\s/g, '') === clanName.toLowerCase().replace(/\s/g, ''));
+    return clan ? clan.url : '';
   }
 
   printTxt(){

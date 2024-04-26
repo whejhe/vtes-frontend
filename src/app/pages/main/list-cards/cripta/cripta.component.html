@@ -4,14 +4,14 @@
   <form class="row filtro-header" role="search" action="" [formGroup]="cryptForm">
     <!--NOMBRES-->
     <div class="col-md-4">
-      <label for="marca" class="form-label">Search By Name:</label>
+      <h4 class="select">Search By Name:</h4>
       <input name="filter" class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
         formControlName="searchName" />
     </div>
 
     <!--GRUPOS-->
     <div class="col-4 group">
-      <label for="marca" class="form-label">Group:</label>
+      <h4 class="select">Group:</h4>
       <select id="group" class="form-select" formControlName="searchGroup">
         <option value="*">All</option>
         <option value="1">Grupo 1</option>
@@ -26,7 +26,7 @@
 
     <!--CLAN-->
     <div class="col-md-4">
-      <label for="marca" class="form-label">Clan:</label>
+      <h4 class="select">Clan:</h4>
       <select id="clan" class="form-select" formControlName="searchClan">
         <option value="*" (click)="resetFiterClan()">All Clans</option>
         <option value="{{ clan || 'All Clans' }}" *ngFor="let clan of clans" (click)="onSearchClanChange(clan)">
@@ -131,12 +131,10 @@
         <aside>
           <!--TITLES-->
           <div>
-            <h4 class="title">Title:</h4>
+            <h4 class="select">Title:</h4>
             <select class="form-select form-select-sm">
               <option selected>Any</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <option *ngFor="let item of title" [value]="item.name">{{ item.name }}</option>
             </select>
           </div>
           <!--CAPACITY MAX-->
@@ -149,30 +147,32 @@
             <label for="customRange2" class="form-label">Min. Capacity</label>
             <input type="range" value="1" class="form-range" min="1" max="11" id="customRange2">
           </div>
-
-
-          <div class="title">
-            <h4>Title:</h4>
-            <div class="content-title">
-              <div *ngFor="let title of titles">
-                <input type="checkbox" class="form-checkbox" [id]="'-titles-' + title"
-                  formControlName="selectedTitles" (change)="onTitlesChange()" />
-                <label [for]="'-titles-' + title">{{ title }}</label>
-              </div>
-            </div>
+          <!--COMBAT-->
+          <div>
+            <h4 class="select">Combat:</h4>
+            <select class="form-select form-select-sm">
+              <option selected>Any</option>
+              <option *ngFor="let item of combat" [value]="item.name">{{ item.name }}</option>
+            </select>
           </div>
-
-          <!--TRAIT-->
-          <div class="traits">
-            <h4>Traits:</h4>
-            <div class="content-traits">
-              <div *ngFor="let trait of traits">
-                <input type="checkbox" class="form-checkbox" [id]="'-traits-' + trait" [value]="trait"
-                  formGroupName="selectedTraits" (change)="onTraitsChange()" />
-                <label [for]="'-traits-' + trait">{{ trait }}</label>
-              </div>
-            </div>
-          </div>
+          <!--ACTION-->
+          <h4 class="select">Action:</h4>
+          <select id="action" class="form-select form-select-sm">
+            <option selected>Any</option>
+            <option *ngFor="let item of action" [value]="item.name">{{ item.name }}</option>
+          </select>
+          <!--REACTION-->
+          <h4 class="select">Reaction::</h4>
+          <select id="reaction" class="form-select form-select-sm">
+            <option selected>Any</option>
+            <option *ngFor="let item of reaction" [value]="item.name">{{ item.name }}</option>
+          </select>
+          <!--OTHERS-->
+          <h4 class="select">Reaction::</h4>
+          <select id="others" class="form-select form-select-sm">
+            <option selected>Any</option>
+            <option *ngFor="let item of others" [value]="item.name">{{ item.name }}</option>
+          </select>
         </aside>
 
         <!--ENLACES-->

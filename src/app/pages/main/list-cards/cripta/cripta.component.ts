@@ -30,16 +30,17 @@ import { CardService } from '../../../../services/card.service';
 export class CriptaComponent implements OnInit {
 
   constructor(
-    private jsonSvc: JsonServiceService,
+    public jsonSvc: JsonServiceService,
     public dialog: MatDialog,
     public iconSvc: IconService,
-    public cardSvc: CardService
+    public cardSvc: CardService,
   ) { }
 
   cryptForm: FormGroup = new FormGroup({
     searchName: new FormControl(''),
     searchGroup: new FormControl(''),
     searchClan: new FormControl(''),
+    combat: new FormControl(''),
     selectedDisciplines: new FormControl([]),
     selectedTitles: new FormControl([]),// No funciona
     selectedTraits: new FormControl([]),// No funciona
@@ -47,6 +48,11 @@ export class CriptaComponent implements OnInit {
     sect: new FormControl(''), // No funciona
   });
 
+  title: {name: string }[] = [];
+  combat: {name: string }[] = [];
+  action: {name: string }[] = [];
+  reaction: {name: string }[] = [];
+  others: {name: string }[] = [];
 
   cards: Card[] = [];
   filter: string = '';
@@ -61,18 +67,18 @@ export class CriptaComponent implements OnInit {
   clanImages = this.iconSvc.clanImages;
 
   checkTitle: string = '';
-  titles = Object.values(Title);
-  titlesSelected: { [key in Title]?: boolean } = {};
+  // titles = Object.values(Title);
+  // titlesSelected: { [key in Title]?: boolean } = {};
   // selectedTitles: Title[] = [];
-  traits = Object.values(Traits);
-  traitsSelected: { [key in Traits]?: boolean } = {};
+  // traits = Object.values(Traits);
+  // traitsSelected: { [key in Traits]?: boolean } = {};
   // selectedTraits: Traits[] = [];
   url: string = '';
 
 
-  minCapacity: number = 1;
-  maxCapacity: number = 11;
-  capacity: number = 0;
+  // minCapacity: number = 1;
+  // maxCapacity: number = 11;
+  // capacity: number = 0;
 
   setUrlImage(url: string): void {
     this.url = url;
@@ -143,25 +149,25 @@ export class CriptaComponent implements OnInit {
   }
 
   // SEARCH TITLES
-  onTitlesChange(): void {
-    this.cryptForm.value.selectedTitles = Object.keys(this.titlesSelected)
-      .filter(title => this.titlesSelected[title as Title])
-      .map(title => title as Title);
-  }
+  // onTitlesChange(): void {
+  //   this.cryptForm.value.selectedTitles = Object.keys(this.titlesSelected)
+  //     .filter(title => this.titlesSelected[title as Title])
+  //     .map(title => title as Title);
+  // }
 
-  onTraitsChange(): void {
-    this.cryptForm.value.selectedTraits = Object.keys(this.traitsSelected)
-      .filter(trait => this.traitsSelected[trait as Traits])
-      .map(trait => trait as Traits);
-  }
+  // onTraitsChange(): void {
+  //   this.cryptForm.value.selectedTraits = Object.keys(this.traitsSelected)
+  //     .filter(trait => this.traitsSelected[trait as Traits])
+  //     .map(trait => trait as Traits);
+  // }
 
-  onChangeMinCapacity(): void {
-    this.minCapacity = 1;
-  }
+  // onChangeMinCapacity(): void {
+  //   this.minCapacity = 1;
+  // }
 
-  onChangeMaxCapacity(): void {
-    this.maxCapacity = 11;
-  }
+  // onChangeMaxCapacity(): void {
+  //   this.maxCapacity = 11;
+  // }
 
   loadCards(): void {
     this.cardSvc.getCards().subscribe((cards) => {
@@ -183,5 +189,10 @@ export class CriptaComponent implements OnInit {
       name: clan,
       url: `https://static.krcg.org/svg/clan/${clan.toLowerCase().replace(/\s/g, '')}.svg`
     }));
+    this.combat = this.jsonSvc.combatData;
+    this.title = this.jsonSvc.titleData;
+    this.action = this.jsonSvc.actionData;
+    this.reaction = this.jsonSvc.reactionsData;
+    this.others = this.jsonSvc.othersData;
   }
 }
