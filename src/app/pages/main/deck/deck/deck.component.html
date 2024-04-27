@@ -1,25 +1,47 @@
 <!--front/src/app/pages/main/deck/new-deck/new-deck.component.html-->
 <form [formGroup]="deckForm">
   <div class="data-container">
-    <button class="btn btn-dark back-button" [routerLink]="['/lista-decks/']">Back to list</button><br>
+    <button class="btn btn-dark back-button" [routerLink]="['/lista-decks/']">
+      Back to list</button
+    ><br />
 
     <div class="row">
       <!--TITULO DECK-->
       <div class="col-md-6">
-        <input class="form-control" placeholder="Title" type="text" formControlName="name">
+        <input
+          class="form-control"
+          placeholder="Title"
+          type="text"
+          formControlName="name"
+        />
       </div>
       <!--AUTOR-->
       <div class="col-md-6">
-        <input class="form-control" placeholder="Author" type="text" disabled="true" [value]="deckForm.get('author')!.value ? deckForm.get('author')!.value : 'Anonymous'">
+        <input
+          class="form-control"
+          placeholder="Author"
+          type="text"
+          disabled="true"
+          [value]="
+            deckForm.get('author')!.value
+              ? deckForm.get('author')!.value
+              : 'Anonymous'
+          "
+        />
       </div>
       <!--DESCRIPCION DE MAZO-->
       <div class="col-md-6">
-        <br>
-        <input class="form-control" placeholder="Description" type="text" formControlName="description">
+        <br />
+        <input
+          class="form-control"
+          placeholder="Description"
+          type="text"
+          formControlName="description"
+        />
       </div>
       <!--CATEGORIA-->
       <div class="col-md-6">
-        <br>
+        <br />
         <select class="form-select" formControlName="category">
           <option value="Ally">Ally</option>
           <option value="Bleed">Bleed</option>
@@ -39,15 +61,24 @@
         <!--BUSCADOR-->
         <div class="search col-md-12">
           <label class="form-label">Search By Name: </label>
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-            formControlName="searchCryptCard" (change)="filtradoCrypt()" />
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            formControlName="searchCryptCard"
+            (change)="filtradoCrypt()"
+          />
         </div>
 
         <!--LISTADO DE CARTAS POR BUSQUEDA-->
         <div *ngIf="filteredCardsCrypt.length > 0" class="listaCrypta">
           <ul>
             <li *ngFor="let card of filteredCardsCrypt">
-              <span (click)="addCardToCrypt(card)" style="cursor: pointer;">{{ card.name }}</span><br />
+              <span (click)="addCardToCrypt(card)" style="cursor: pointer">{{
+                card.name
+              }}</span
+              ><br />
             </li>
           </ul>
         </div>
@@ -63,37 +94,65 @@
           </thead>
           <tbody>
             <!--LISTADO DE CARTAS CRYPT-->
-            <tr *ngFor="let card of deckForm.get('crypt')?.value;
-            let i=index"
-            [class.table-light] = "i % 2 === 0"
-            [class.table-secondary] = "i % 2 !== 0"
+            <tr
+              *ngFor="let card of deckForm.get('crypt')?.value; let i = index"
+              [class.table-light]="i % 2 === 0"
+              [class.table-secondary]="i % 2 !== 0"
             >
-              <td style="cursor: pointer" (mouseenter)="setUrlImage(card._id.url)" (mouseleave)="clearUrlImage()">
+              <td
+                style="cursor: pointer"
+                (mouseenter)="setUrlImage(card._id.url)"
+                (mouseleave)="clearUrlImage()"
+              >
                 {{ card._id.name }}
               </td>
               <td>
-                <div class="container-image clan-icon" *ngFor="let clan of card._id.clans">
+                <div
+                  class="container-image clan-icon"
+                  *ngFor="let clan of card._id.clans"
+                >
                   @defer (on viewport){
-                  <img class="imageIcons" [src]="getClanUrl(clan)" [alt]="clan" />
+                  <img
+                    class="imageIcons"
+                    [src]="getClanUrl(clan)"
+                    [alt]="clan"
+                  />
                   }@placeholder {
                   <p>{{ clan }}</p>
                   }
                 </div>
               </td>
               <td class="quantity">
-                <input name="quantity" [value]="card.quantity" (change)="changeQuantity($event, card)" min="1" type="number" cardForm="quantity">
-                <svg class="trash" id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24"
-                  height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
+                <input
+                  name="quantity"
+                  [value]="card.quantity"
+                  (change)="changeQuantity($event, card)"
+                  min="1"
+                  type="number"
+                  cardForm="quantity"
+                />
+                <svg
+                  class="trash"
+                  id="i-trash"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 32 32"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  stroke="currentcolor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
                   stroke-width="2"
-                  (click)="deleteCardCrypt(card)">
+                  (click)="deleteCardCrypt(card)"
+                >
                   <path
-                    d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
+                    d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6"
+                  />
                 </svg>
               </td>
             </tr>
           </tbody>
         </table>
-
       </div>
 
       <!--CARTAS LIBRARY-->
@@ -101,15 +160,23 @@
         <!--BUSCADOR-->
         <div class="search col-md-12">
           <label class="form-label">Search By Name:</label>
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-            formControlName="searchLibraryCard" (change)="filtradoLibrary()" />
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            formControlName="searchLibraryCard"
+            (change)="filtradoLibrary()"
+          />
         </div>
 
         <!--LISTADO DE CARTAS POR BUSQUEDA-->
         <div *ngIf="filteredCardsLibrary.length > 0" class="listaLibrary">
           <ul>
             <li *ngFor="let card of filteredCardsLibrary">
-              <span (click)="addCardToLibrary(card)" style="cursor: pointer;">{{ card.name }}</span>
+              <span (click)="addCardToLibrary(card)" style="cursor: pointer">{{
+                card.name
+              }}</span>
             </li>
           </ul>
         </div>
@@ -125,24 +192,45 @@
           </thead>
           <tbody>
             <!--LISTADO DE CARTAS LIBRARY-->
-            <tr *ngFor="let card of deckForm.get('library')?.value;
-            let i=index"
-            [class.table-light] = "i % 2 === 0"
-            [class.table-secondary] = "i % 2 !== 0"
+            <tr
+              *ngFor="let card of deckForm.get('library')?.value; let i = index"
+              [class.table-light]="i % 2 === 0"
+              [class.table-secondary]="i % 2 !== 0"
             >
-              <td style="cursor: pointer" (mouseenter)="setUrlImage(card._id.url)" (mouseleave)="clearUrlImage()">
-                {{card._id.name}}
+              <td
+                style="cursor: pointer"
+                (mouseenter)="setUrlImage(card._id.url)"
+                (mouseleave)="clearUrlImage()"
+              >
+                {{ card._id.name }}
               </td>
 
               <!--QUANTITY-->
               <td class="quantity">
-                <input name="quantity" [value]="card.quantity" (change)="changeQuantity($event, card)" min="1" type="number">
-                <svg class="trash" id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24"
-                  height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
+                <input
+                  name="quantity"
+                  [value]="card.quantity"
+                  (change)="changeQuantity($event, card)"
+                  min="1"
+                  type="number"
+                />
+                <svg
+                  class="trash"
+                  id="i-trash"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 32 32"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  stroke="currentcolor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
                   stroke-width="2"
-                  (click)="deleteCardLibrary(card)">
+                  (click)="deleteCardLibrary(card)"
+                >
                   <path
-                    d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
+                    d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6"
+                  />
                 </svg>
               </td>
             </tr>
@@ -153,29 +241,74 @@
       <!--OPCIONES PARA GUARDADO-->
       <div class="col-md-2 botones">
         <!--CREATE-->
-        <button class="btn btn-dark" (click)="createDeck()" [routerLink]="['/ficha-deck/', newDeckId]">Create
-          Deck</button><br>
+        <button
+          class="btn btn-dark"
+          (click)="createDeck()"
+          [routerLink]="['/ficha-deck/', newDeckId]"
+        >
+          Create Deck</button
+        ><br />
 
         <!--SAVE-->
         <button class="btn btn-dark" (click)="updateDeck()" type="submit">
-          <svg id="i-file" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none"
-            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <svg
+            id="i-file"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 32 32"
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentcolor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          >
             <path d="M6 2 L6 30 26 30 26 10 18 2 Z M18 2 L18 10 26 10" />
-          </svg> Save change</button><br>
+          </svg>
+          Save change</button
+        ><br />
 
         <!--PRINT TXT-->
         <button class="btn btn-dark" (click)="printTxt()">
-          <svg id="i-print" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none"
-            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-            <path d="M7 25 L2 25 2 9 30 9 30 25 25 25 M7 19 L7 30 25 30 25 19 Z M25 9 L25 2 7 2 7 9 M22 14 L25 14" />
-          </svg> .txt</button><br>
+          <svg
+            id="i-print"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 32 32"
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentcolor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          >
+            <path
+              d="M7 25 L2 25 2 9 30 9 30 25 25 25 M7 19 L7 30 25 30 25 19 Z M25 9 L25 2 7 2 7 9 M22 14 L25 14"
+            />
+          </svg>
+          .txt</button
+        ><br />
 
         <!--PRINT PDF-->
         <button class="btn btn-dark">
-          <svg id="i-print" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none"
-            stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-            <path d="M7 25 L2 25 2 9 30 9 30 25 25 25 M7 19 L7 30 25 30 25 19 Z M25 9 L25 2 7 2 7 9 M22 14 L25 14" />
-          </svg> pdf</button><br>
+          <svg
+            id="i-print"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 32 32"
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentcolor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          >
+            <path
+              d="M7 25 L2 25 2 9 30 9 30 25 25 25 M7 19 L7 30 25 30 25 19 Z M25 9 L25 2 7 2 7 9 M22 14 L25 14"
+            />
+          </svg>
+          pdf</button
+        ><br />
 
         <!--COPY-->
         <button class="btn btn-dark" (click)="copyDeck()">Make a Copy</button>
@@ -196,34 +329,48 @@
 
         <!--DELETE-->
         <button class="btn btn-dark" (click)="deleteDeck()">
-          <svg class="trash" id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24"
-            fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-            <path d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
-          </svg> Delete
-        </button><br>
+          <svg
+            class="trash"
+            id="i-trash"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 32 32"
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentcolor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          >
+            <path
+              d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6"
+            />
+          </svg>
+          Delete</button
+        ><br />
 
+        <!--MAKE PUBLIC OR PRIVATE-->
+        <button class="btn btn-dark">Make Private</button><br />
       </div>
     </div>
   </div>
 </form>
 
-
 <!--MENSAJES DE ERROR O EXITO-->
 @if (showSucessMessage) {
-  <div class="alert alert-dismissible alert-success">
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    <!-- <strong>Cambios guardados con exito</strong> -->
-    <strong>{{successMessage}}</strong>
-  </div>
+<div class="alert alert-dismissible alert-success">
+  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  <!-- <strong>Cambios guardados con exito</strong> -->
+  <strong>{{ successMessage }}</strong>
+</div>
+} @if(showErrorMessage){
+<div class="alert alert-dismissible alert-danger">
+  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  <!-- <strong>Se produjo algun error al guardar los cambios</strong><br> -->
+  <strong>{{ errorMesage }}</strong
+  ><br />
+</div>
 }
-@if(showErrorMessage){
-  <div class="alert alert-dismissible alert-danger">
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    <!-- <strong>Se produjo algun error al guardar los cambios</strong><br> -->
-    <strong>{{errorMesage}}</strong><br>
-  </div>
-}
-
 
 <!--IMAGEN DESTACADA-->
 <div class="imagenDestacada" *ngIf="url">
