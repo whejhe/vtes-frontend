@@ -20,6 +20,11 @@ export class FilterMultiPipe implements PipeTransform {
         match = false;
       }
 
+      // Filtar por texto de cartas
+      if (filters.searchByCardText && !card.card_text.toLowerCase().includes(filters.searchByCardText.toLowerCase())) {
+        match = false;
+      }
+
       // Filtrar por capacidad minima
       if (filters.searchCapacity !== undefined && filters.searchCapacity !== null && card.capacity !== undefined && card.capacity !== null && card.capacity !== filters.searchCapacity) {
         match = false;

@@ -65,6 +65,7 @@
           | filter:['Vampire', 'Imbued']:true
           | filterMulti: {
             searchName:libraryForm.value.searchName,
+            searchByCardText:libraryForm.value.searchByCardText,
             selectedDisciplines:selectedDisciplines,
             selectedTypes:libraryForm.value.selectedTypes,
             searchClan:libraryForm.value.searchClan,
@@ -105,6 +106,12 @@
 
       <section class="col-md-4">
         <aside>
+          <!--SEARCH BY CARD TEXT-->
+          <div>
+            <h4 class="select">Search By Card Text:</h4>
+            <input name="filter" class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+              formControlName="searchByCardText" />
+          </div>
           <!--COMBAT-->
           <div>
             <h4 class="select">Combat:</h4>

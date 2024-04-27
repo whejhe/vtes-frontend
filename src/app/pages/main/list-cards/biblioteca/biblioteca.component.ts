@@ -46,6 +46,7 @@ export class BibliotecaComponent implements OnInit {
 
   libraryForm: FormGroup = new FormGroup({
     searchName : new FormControl(''),
+    searchByCardText: new FormControl(''),
     selectedTypes: new FormControl([]),
     searchClan: new FormControl(''),
     titlesSelected: new FormControl([]),

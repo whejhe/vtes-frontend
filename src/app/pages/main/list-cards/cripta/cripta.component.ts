@@ -38,6 +38,7 @@ export class CriptaComponent implements OnInit {
 
   cryptForm: FormGroup = new FormGroup({
     searchName: new FormControl(''),
+    searchByCardText: new FormControl(''),
     searchGroup: new FormControl(''),
     searchClan: new FormControl(''),
     combat: new FormControl(''),

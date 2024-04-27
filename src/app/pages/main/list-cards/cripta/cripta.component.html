@@ -1,23 +1,12 @@
 <!--front/src/app/pages/main/list-cards/cripta/cripta.component.html-->
 <div class="container">
   <!-- <span class="backgroud-image"></span> -->
-  <form
-    class="row filtro-header"
-    role="search"
-    action=""
-    [formGroup]="cryptForm"
-  >
-    <!--NOMBRES-->
+  <form class="row filtro-header" role="search" action="" [formGroup]="cryptForm">
+    <!--SEARCH BY NAME-->
     <div class="col-md-4">
       <h4 class="select">Search By Name:</h4>
-      <input
-        name="filter"
-        class="form-control me-2"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-        formControlName="searchName"
-      />
+      <input name="filter" class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+        formControlName="searchName" />
     </div>
 
     <!--GRUPOS-->
@@ -40,11 +29,7 @@
       <h4 class="select">Clan:</h4>
       <select id="clan" class="form-select" formControlName="searchClan">
         <option value="*" (click)="resetFiterClan()">All Clans</option>
-        <option
-          value="{{ clan || 'All Clans' }}"
-          *ngFor="let clan of clans"
-          (click)="onSearchClanChange(clan)"
-        >
+        <option value="{{ clan || 'All Clans' }}" *ngFor="let clan of clans" (click)="onSearchClanChange(clan)">
           {{ clan }}
         </option>
       </select>
@@ -54,35 +39,22 @@
     <div class="disciplines">
       <div class="all-disciplines" *ngFor="let discipline of disciplineImages">
         @if(discipline.type === 'inf') {
-        <img
-          class="imageIcons icon-filter"
-          [src]="discipline.url"
-          [alt]="discipline.name"
-          (click)="toggleOpacity($event)"
-        />
+        <img class="imageIcons icon-filter" [src]="discipline.url" [alt]="discipline.name"
+          (click)="toggleOpacity($event)" />
         }
       </div>
       <br />
       <div class="all-disciplines" *ngFor="let discipline of disciplineImages">
         @if(discipline.type === 'sup') {
-        <img
-          class="imageIcons icon-filter"
-          [src]="discipline.url"
-          [alt]="discipline.name"
-          (click)="toggleOpacity($event)"
-          [class.clicked]="disciplineSelected[discipline.name]"
-        />
+        <img class="imageIcons icon-filter" [src]="discipline.url" [alt]="discipline.name"
+          (click)="toggleOpacity($event)" [class.clicked]="disciplineSelected[discipline.name]" />
         }
       </div>
       <br />
       <div class="all-disciplines" *ngFor="let discipline of disciplineImages">
         @if(discipline.type === 'others') {
-        <img
-          class="imageIcons icon-filter"
-          [src]="discipline.url"
-          [alt]="discipline.name"
-          (click)="toggleOpacity($event)"
-        />
+        <img class="imageIcons icon-filter" [src]="discipline.url" [alt]="discipline.name"
+          (click)="toggleOpacity($event)" />
         }
       </div>
     </div>
@@ -101,13 +73,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr
-              *ngFor="
+            <tr *ngFor="
                 let card of cards
                   | filter : ['Vampire', 'Imbued'] : false
                   | filterMulti
                     : {
                         searchName: cryptForm.value.searchName,
+                        searchByCardText: cryptForm.value.searchByCardText,
                         searchGroup: cryptForm.value.searchGroup,
                         searchClan: cryptForm.value.searchClan,
                         selectedDisciplines:
@@ -117,24 +89,13 @@
                         searchCapacity: cryptForm.value.searchCapacity
                       };
                 let i = index
-              "
-              (click)="openModal(card)"
-              [class.table-light]="i % 2 === 0"
-              [class.table-secondary]="i % 2 !== 0"
-            >
-              <td
-                style="cursor: pointer"
-                (mouseenter)="setUrlImage(card.url)"
-                (mouseleave)="clearUrlImage()"
-              >
+              " (click)="openModal(card)" [class.table-light]="i % 2 === 0" [class.table-secondary]="i % 2 !== 0">
+              <td style="cursor: pointer" (mouseenter)="setUrlImage(card.url)" (mouseleave)="clearUrlImage()">
                 {{ card.name }}
               </td>
               <!-- <td>{{ card.clans }}</td> -->
               <td>
-                <div
-                  class="container-image clan-icon"
-                  *ngFor="let clan of card.clans"
-                >
+                <div class="container-image clan-icon" *ngFor="let clan of card.clans">
                   @defer (on viewport){
                   <img class="imageIcons" [src]="getClanUrl(clan)" alt="" />
                   }@placeholder {
@@ -145,27 +106,16 @@
               <td>
                 <div class="container-image">
                   @defer(on viewport){
-                  <img
-                    class="imageIcons"
-                    [src]="getCapacityCostImage(card.capacity)"
-                    alt=""
-                  />
+                  <img class="imageIcons" [src]="getCapacityCostImage(card.capacity)" alt="" />
                   }@placeholder {
                   <p>{{ card.capacity }}</p>
                   }
                 </div>
               </td>
               <td>
-                <div
-                  class="container-image"
-                  *ngFor="let discipline of card.disciplines"
-                >
+                <div class="container-image" *ngFor="let discipline of card.disciplines">
                   @defer (on viewport){
-                  <img
-                    class="imageIcons"
-                    [src]="getDisciplineUrl(discipline)"
-                    alt=""
-                  />
+                  <img class="imageIcons" [src]="getDisciplineUrl(discipline)" alt="" />
                   }@placeholder{
                   <p>{{ discipline }}</p>
                   }
@@ -181,6 +131,12 @@
 
       <section class="col-md-4">
         <aside>
+          <!--SEARCH BY CARD TEXT-->
+          <div>
+            <h4 class="select">Search By Card Text:</h4>
+            <input name="filter" class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+              formControlName="searchByCardText" />
+          </div>
           <!--TITLES-->
           <div>
             <h4 class="select">Title:</h4>
@@ -194,25 +150,12 @@
           <!--CAPACITY MAX-->
           <div class="capacity">
             <label for="customRange2" class="form-label">Max. Capacity</label>
-            <input
-              type="range"
-              class="form-range"
-              min="1"
-              max="11"
-              id="customRange2"
-            />
+            <input type="range" class="form-range" min="1" max="11" id="customRange2" />
           </div>
           <!--CAPACITY MIN-->
           <div class="capacity">
             <label for="customRange2" class="form-label">Min. Capacity</label>
-            <input
-              type="range"
-              value="1"
-              class="form-range"
-              min="1"
-              max="11"
-              id="customRange2"
-            />
+            <input type="range" value="1" class="form-range" min="1" max="11" id="customRange2" />
           </div>
           <!--COMBAT-->
           <div>
@@ -236,7 +179,7 @@
           </div>
           <!--REACTION-->
           <div>
-            <h4 class="select">Reaction::</h4>
+            <h4 class="select">Reaction:</h4>
             <select id="reaction" class="form-select form-select-sm">
               <option selected>Any</option>
               <option *ngFor="let item of reaction" [value]="item.name">
@@ -246,7 +189,7 @@
           </div>
           <!--OTHERS-->
           <div>
-            <h4 class="select">Reaction::</h4>
+            <h4 class="select">Others:</h4>
             <select id="others" class="form-select form-select-sm">
               <option selected>Any</option>
               <option *ngFor="let item of others" [value]="item.name">
@@ -260,36 +203,17 @@
             <h4>Pages</h4>
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item">
-                <a
-                  class="nav-link"
-                  target="_blank"
-                  href="https://vdb.im/decks/2080511d5c0c42358d4193a6a5dc869f"
-                  >VDB</a
-                >
+                <a class="nav-link" target="_blank" href="https://vdb.im/decks/2080511d5c0c42358d4193a6a5dc869f">VDB</a>
               </li>
               <li class="nav-item">
-                <a
-                  class="nav-link"
-                  target="_blank"
-                  href="https://www.blackchantry.com/vampire-the-eternal-struggle-fifth-edition/"
-                  >Black Chantry</a
-                >
+                <a class="nav-link" target="_blank"
+                  href="https://www.blackchantry.com/vampire-the-eternal-struggle-fifth-edition/">Black Chantry</a>
               </li>
               <li class="nav-item">
-                <a
-                  class="nav-link"
-                  target="_blank"
-                  href="https://www.gamepod.es/"
-                  >Gamepod</a
-                >
+                <a class="nav-link" target="_blank" href="https://www.gamepod.es/">Gamepod</a>
               </li>
               <li class="nav-item">
-                <a
-                  class="nav-link"
-                  target="_blank"
-                  href="https://getbootstrap.com/"
-                  >Bootstrap</a
-                >
+                <a class="nav-link" target="_blank" href="https://getbootstrap.com/">Bootstrap</a>
               </li>
             </ul>
           </div>
