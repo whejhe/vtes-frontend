@@ -2,17 +2,19 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../../models/user.model';
 import { AuthService } from '../../../../services/auth.service';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Clan, Discipline, Type } from '../../../../models/vtes.model';
 import { IconService } from '../../../../services/icon.service';
 import { MatDialog } from '@angular/material/dialog';
+import { CustomCardsService } from '../../../../services/custom-cards.service';
 
 @Component({
   selector: 'app-upload-card',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: './upload-card.component.html',
   styleUrl: './upload-card.component.scss',
@@ -22,8 +24,21 @@ export class UploadCardComponent implements OnInit {
     public authSvc: AuthService,
     public iconSvc: IconService,
     public dialog: MatDialog,
-
+    public customCardSvc: CustomCardsService
   ) {}
+
+  updateCardForm: FormGroup = new FormGroup({
+    name: new FormControl('', Validators.required),
+    author: new FormControl(''),
+    disciplines: new FormControl([]),
+    clan: new FormControl('not defined'),
+    capacity: new FormControl('1'),
+    group: new FormControl('not defined'),
+    type: new FormControl('not defined'),
+    isPublic: new FormControl('true'),
+    description: new FormControl('not defined'),
+    image: new FormControl(''),
+  });
 
   public searchGroup: string = '';
   public searchClan: string = '';
@@ -53,13 +68,13 @@ export class UploadCardComponent implements OnInit {
   }
 
   updateDisciplineSelection(discipline: Discipline): void {
-    this.disciplineSelected[discipline] = !this.disciplineSelected[discipline];
+    this.updateCardForm.value.disciplines[discipline] = !this.updateCardForm.value.disciplines[discipline];
     this.onDisciplinesChange();
   }
 
   onDisciplinesChange(): void {
-    this.selectedDisciplines = Object.keys(this.disciplineSelected)
-      .filter(discipline => this.disciplineSelected[discipline as Discipline])
+    this.selectedDisciplines = Object.keys(this.updateCardForm.value.disciplines)
+      .filter(discipline => this.updateCardForm.value.disciplines[discipline as Discipline])
       .map(discipline => discipline as Discipline);
   }
 
@@ -68,11 +83,15 @@ export class UploadCardComponent implements OnInit {
     return clan ? clan.url : '';
   }
 
+  uploadCard(): void {
+  }
+
   ngOnInit(): void {
     this.getCurrentUser();
     this.clanImages = this.clans.map(clan => ({
       name: clan,
       url: `https://static.krcg.org/svg/clan/${clan.toLowerCase().replace(/\s/g, '')}.svg`
     }));
+
   }
 }

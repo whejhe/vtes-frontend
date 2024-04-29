@@ -30,12 +30,6 @@ export class RegisterComponent implements OnInit {
     confirmPassword: new FormControl('', Validators.required)
   });
 
-  // name: string = '';
-  // nick: string = '';
-  // email: string = '';
-  // password: string = '';
-  // confirmPassword: string = '';
-
   showSucessMessage: boolean = false;
   showErrorMessage: boolean = false;
   errorMesage: string = '';

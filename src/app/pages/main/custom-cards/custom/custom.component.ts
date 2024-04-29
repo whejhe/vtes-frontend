@@ -54,8 +54,12 @@ export class CustomComponent {
     return `assets/img/icons-vtes/disciplinas/svg/${disciplineIcon}.svg`;
   }
 
-  getDisciplinesNames(disciplines: string[]): string {
+  getClanIcon(clan: string): string {
+    const clanIcon = Clan[clan as keyof typeof Clan];
+    return `assets/img/icons-vtes/clans/${clanIcon}.gif`;
+  }
 
+  getDisciplinesNames(disciplines: string[]): string {
     return disciplines.join(', ');
   }
 

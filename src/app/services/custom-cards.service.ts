@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CustomCardsService {
-  private apiUrl = 'http://localhost:3000/customCards';
+  private apiUrl = 'http://localhost:3000/custom-cards';
 
   constructor(private http: HttpClient) {}
 
@@ -29,6 +29,10 @@ export class CustomCardsService {
     formData.append('costPool', customCard.costPool.toString());
 
     return this.http.post<CustomCard>(this.apiUrl, formData);
+  }
+
+  uploadCustomCardImage(): Observable<CustomCard> {
+    return this.http.get<CustomCard>(`${this.apiUrl}/upload`);
   }
 
   getAllCustomCards(): Observable<CustomCard[]> {
