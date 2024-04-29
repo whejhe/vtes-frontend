@@ -7,7 +7,7 @@ export interface Deck {
   description: string;
   author: string;
   category: string;
-  publico: boolean;
+  isPublic: boolean;
   crypt: Array<{
     _id: string;
     quantity: number;

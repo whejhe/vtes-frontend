@@ -113,8 +113,10 @@ export class DeckService {
   }
 
   // Actualizar la visibilidad de un mazo
-  updateDeckVisibility(id: string, publico: boolean): Observable<Deck> {
-    return this.http.patch<Deck>(`${this.apiUrl}/${id}/visibility`, { publico });
+  updateDeckVisibility(id: string, isPublic: boolean): Observable<Deck> {
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    return this.http.put<Deck>(`${this.apiUrl}/${id}/visibility`, { isPublic },{headers});
   }
 
   // Agregar una carta a un mazo

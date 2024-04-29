@@ -46,7 +46,7 @@ export class NewDeckComponent implements OnInit {
     private authSvc: AuthService,
     public iconSvc: IconService,
     public cardSvc: CardService
-  ) {}
+  ) { }
 
   apiUrl = 'http://localhost:3000/decks';
   deckForm: FormGroup = new FormGroup({
@@ -61,6 +61,7 @@ export class NewDeckComponent implements OnInit {
     searchCryptCard: new FormControl(''),
     searchLibraryCard: new FormControl(''),
     author: new FormControl(''),
+    isPublic: new FormControl(true),
   });
 
   cardSelected: boolean = false;
@@ -117,6 +118,7 @@ export class NewDeckComponent implements OnInit {
       deck.author != ''
         ? this.deckForm.get('author')?.setValue(deck.author)
         : this.deckForm.get('author')?.setValue(deck.author);
+        deck.isPublic ? this.deckForm.get('isPublic')?.setValue(true) : this.deckForm.get('isPublic')?.setValue(false);
     });
 
     this.cardSvc.getCards().subscribe((cardsToDeck) => {
@@ -160,7 +162,7 @@ export class NewDeckComponent implements OnInit {
     this.deckForm.get('author')?.setValue(this.user.nick);
     this.deckForm.get('description')?.setValue(`${this.deck$.description}`);
     this.deckForm.get('category')?.setValue(this.deck$.category);
-    this.deckForm.get('publico')?.setValue(this.deck$.publico);
+    this.deckForm.get('isPublic')?.setValue(this.deck$.isPublic);
     this.deckForm.get('crypt')?.setValue(this.deck$.crypt);
     this.deckForm.get('library')?.setValue(this.deck$.library);
     const deck = this.deckForm.value;
@@ -173,17 +175,17 @@ export class NewDeckComponent implements OnInit {
       (error) => console.error(error)
     );
   }
-  
+
   resetForm(): void {
-      this.deckForm.get('author')!.setValue(this.user.nick);
-      this.deckForm.get('name')!.setValue('Sin nombre');
-      this.deckForm.get('publico')!.setValue(true);
-      this.deckForm.get('category')!.setValue('');
-      this.deckForm.get('description')!.setValue('Descripcion');
-      this.deckForm.get('crypt')!.setValue([]);
-      this.deckForm.get('library')!.setValue([]);
-      this.deckForm.get('searchCryptCard')!.setValue('')
-      this.deckForm.get('searchLibraryCard')!.setValue(''); 
+    this.deckForm.get('author')!.setValue(this.user.nick);
+    this.deckForm.get('name')!.setValue('Sin nombre');
+    this.deckForm.get('isPublic')!.setValue(true);
+    this.deckForm.get('category')!.setValue('');
+    this.deckForm.get('description')!.setValue('Descripcion');
+    this.deckForm.get('crypt')!.setValue([]);
+    this.deckForm.get('library')!.setValue([]);
+    this.deckForm.get('searchCryptCard')!.setValue('')
+    this.deckForm.get('searchLibraryCard')!.setValue('');
   }
 
   updateDeck(): void {
@@ -222,10 +224,10 @@ export class NewDeckComponent implements OnInit {
         console.log('Mazo eliminado:', response);
         this.router.navigate(['/lista-decks']);
         this.showSucessMessage = true;
-          this.successMessage = 'Mazo eliminado correctamente';
-          setTimeout(() => {
-            this.showErrorMessage = false;
-          }, 5000);
+        this.successMessage = 'Mazo eliminado correctamente';
+        setTimeout(() => {
+          this.showErrorMessage = false;
+        }, 5000);
       },
       (error) => {
         if (error.status === 401) {
@@ -239,6 +241,18 @@ export class NewDeckComponent implements OnInit {
           console.error('Error details:', error.error);
         }
       }
+    );
+  }
+
+  // CAMBIAR ESTADO DE MAZO PUBLICO O PRIVADO
+  public changeDeckVisibility(): void {
+    console.log('isPublic: ', this.deckForm.get('isPublic')?.value, ' Opuesto:', !this.deckForm.get('isPublic')?.value);
+    this.deckSvc.updateDeckVisibility(this.currentDeckId, !this.deckForm.get('isPublic')?.value).subscribe(
+      (response) => {
+        console.log('Mazo actualizado:', response);
+        this.deckForm.get('isPublic')?.setValue(!this.deckForm.get('isPublic')?.value);
+      },
+      (error) => console.error(error)
     );
   }
 
@@ -327,7 +341,7 @@ export class NewDeckComponent implements OnInit {
     return clan ? clan.url : '';
   }
 
-  printTxt(){
+  printTxt() {
     this.deckSvc.printTxt(this.currentDeckId, this.deckForm.get('name')?.value, this.deckForm.get('author')?.value);
   }
 }
