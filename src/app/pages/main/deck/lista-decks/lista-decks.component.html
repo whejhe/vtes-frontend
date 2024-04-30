@@ -4,13 +4,14 @@
       <!--AUTHOR-->
       <div class="col-6">
         <h4 class="titulo-select">Author</h4>
-        <select name="" class="form-select" id="">
-          <option value="" selected>All Authors</option>
+        <select name="" class="form-select" id=""
+        formControlName="author"
+        (change)="filterByAuthor()">
+          <option value="*" selected>All Authors</option>
           @for(user of user; track user._id){
-          <option value="{{ user.nick }}">{{ user.nick }}</option>
+          <option value="{{ user.nick }}"
+          >{{ user.nick }}</option>
           }
-          <!-- <option value="author" *ngFor="let user of user"
-                >{{user.nick}}</option> -->
         </select>
       </div>
       <!--TYPE-->
@@ -43,7 +44,8 @@
       </thead>
       <tbody>
         @for(deck of decks; track deck._id){
-        <tr class="table-light" [routerLink]="['/deck/' + deck._id]">
+        <tr class="table-light" [routerLink]="['/deck/' + deck._id]"
+        >
           <th>{{ deck.name }}</th>
           <td>{{ deck.category }}</td>
           <td>{{ deck.description }}</td>

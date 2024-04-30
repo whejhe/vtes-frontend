@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { NavBarComponent } from "./components/nav-bar/nav-bar.component";
 import { HeaderComponent } from './components/header/header.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { User } from './models/user.model';
+import { authInterceptor } from './interceptors/auth.interceptor';
 
 @Component({
     selector: 'app-root',
@@ -23,7 +24,8 @@ import { User } from './models/user.model';
         FormsModule,
     ],
     providers: [
-      AuthService
+      AuthService,
+      {provide: HTTP_INTERCEPTORS, useValue: authInterceptor, multi: true}
     ],
 })
 export class AppComponent implements OnInit {

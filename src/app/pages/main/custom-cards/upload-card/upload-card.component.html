@@ -1,5 +1,8 @@
 <div class="container">
-  <form action="" class="row" role="search" [formGroup]="updateCardForm">
+  <form action="" class="row" role="search" 
+  [formGroup]="updateCardForm"
+  (ngSubmit)="uploadCard()"
+  >
     <!--AUTOR (campo oculto)-->
     <div class="col-md-4">
       <input placeholder="Autor" type="hidden" class="form-control" id="author" value="{{getCurrentUser()?._id}}"
@@ -50,7 +53,7 @@
       <!--IMAGEN-->
       <div class="col-md-3">
         <label for="image" class="form-label">Image:</label>
-        <input type="file" class="form-control" id="image" required formControlName="image">
+        <input type="file" class="form-control" id="image" required formControlName="image" (change)="handleFileChange($event)">
       </div>
 
       <!--CAPACIDAD-->
@@ -104,7 +107,7 @@
       <!--GUARDADO-->
       <div class="col-md-3 button">
         <button class="btn btn-dark" type="submit"
-        [disabled]="!updateCardForm.valid">Guardar</button>
+        >Guardar</button>
       </div>
 
       <div class="col-md-3 end"></div>

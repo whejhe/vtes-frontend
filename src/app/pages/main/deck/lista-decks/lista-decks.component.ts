@@ -33,10 +33,11 @@ export class ListaDecksComponent implements OnInit {
 
 
     listDeckForm: FormGroup = new FormGroup({
-      category: new FormControl('*'),
+        category: new FormControl('*'),
+        author: new FormControl('*'),
     })
 
-    getUsers():void {
+    getUsers(): void {
         this.authSvc.getUsers().subscribe(
             (users: User[]) => {
                 this.user = users;
@@ -48,7 +49,7 @@ export class ListaDecksComponent implements OnInit {
     }
 
     //CONTAR TOTAL DE CAARTAS Y SU CANTIDAD
-    countTotal(deck: Deck):number {
+    countTotal(deck: Deck): number {
         let total = 0;
         deck.crypt.forEach(card => {
             total += card.quantity;
@@ -59,7 +60,7 @@ export class ListaDecksComponent implements OnInit {
         return total
     }
 
-    getDecks():void {
+    getDecks(): void {
         this.deckSvc.getDecks().subscribe(
             (decks: Deck[]) => {
                 this.decks = decks;
@@ -73,15 +74,27 @@ export class ListaDecksComponent implements OnInit {
 
     //FILTRAR POR CATEGORIA
     filterByCategory(): void {
-      let selectedCategory: string = '*';
-      selectedCategory = this.listDeckForm.get('category')?.value;
-      if (selectedCategory === '*') {
-          this.getDecks();
-      } else if(selectedCategory !== '*'){
-        this.decks = this.decks.filter(deck => deck.category === selectedCategory);
-        console.log('Categoria Actual: ',selectedCategory);
-      }
-  }
+        let selectedCategory: string = '*';
+        selectedCategory = this.listDeckForm.get('category')?.value;
+        if (selectedCategory === '*') {
+            this.getDecks();
+        } else if (selectedCategory !== '*') {
+            this.decks = this.decks.filter(deck => deck.category === selectedCategory);
+            console.log('Categoria Actual: ', selectedCategory);
+        }
+    }
+
+    //FILTRAR POR AUTHOR
+    filterByAuthor(): void {
+        let selectedAuthor: string = '*';
+        selectedAuthor = this.listDeckForm.get('author')?.value;
+        if (selectedAuthor === '*') {
+            this.getDecks();
+        } else if (selectedAuthor !== '*') {
+            this.decks = this.decks.filter(deck => deck.author === selectedAuthor);
+            console.log('Author Actual: ', selectedAuthor);
+        }
+    }
 
 
 

@@ -25,7 +25,7 @@ export class UploadCardComponent implements OnInit {
     public iconSvc: IconService,
     public dialog: MatDialog,
     public customCardSvc: CustomCardsService
-  ) {}
+  ) { }
 
   updateCardForm: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -37,7 +37,7 @@ export class UploadCardComponent implements OnInit {
     type: new FormControl('not defined'),
     isPublic: new FormControl('true'),
     description: new FormControl('not defined'),
-    image: new FormControl(''),
+    image: new FormControl(),
   });
 
   public searchGroup: string = '';
@@ -54,6 +54,14 @@ export class UploadCardComponent implements OnInit {
 
   user: User[] = [];
   public selectedDisciplines: Discipline[] = [];
+
+  handleFileChange(event: any){
+    const file = event.target.files[0];
+    console.log(file)
+    this.updateCardForm.patchValue({
+      image: file
+    });
+  }
 
   getCurrentUser(): User | null {
     return this.authSvc.getCurrentUser();
@@ -84,7 +92,34 @@ export class UploadCardComponent implements OnInit {
   }
 
   uploadCard(): void {
+    try{
+      const formData = new FormData();
+      formData.append('name', this.updateCardForm.value.name);
+      formData.append('disciplines', this.updateCardForm.value.disciplines.join(','));
+      formData.append('clan', this.updateCardForm.value.clan);
+      formData.append('capacity', this.updateCardForm.value.capacity.toString());
+      formData.append('group', this.updateCardForm.value.group);
+      formData.append('type', JSON.stringify(this.updateCardForm.value.type));
+      formData.append('isPublic', this.updateCardForm.value.isPublic);
+      formData.append('description', this.updateCardForm.value.description);
+      console.log(this.updateCardForm.value.image)
+      formData.append('image', this.updateCardForm.value.image);
+  
+      const userId = this.authSvc.getCurrentUser()?._id ?? 'defaultId';
+      this.customCardSvc.uploadCustomCardImage(formData)
+        .subscribe(
+          (response) => {
+            console.log('Carta creada:', response);
+          },
+          (error) => {
+            console.log('Error al crear la carta:', error);
+          }
+        );
+    }catch(error){
+      console.log('Error al subir la Imagen: ',error);
+    }
   }
+  
 
   ngOnInit(): void {
     this.getCurrentUser();

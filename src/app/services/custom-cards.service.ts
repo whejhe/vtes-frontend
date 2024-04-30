@@ -2,16 +2,24 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CustomCard } from '../models/custom-cards.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomCardsService {
   private apiUrl = 'http://localhost:3000/custom-cards';
-  private uploadUrl = 'http://localhost:3000/uploads/customCards/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authSvc: AuthService) { }
+
+  addAuthHeader(headers: HttpHeaders): HttpHeaders {
+    const token = this.authSvc.getToken();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+    return headers;
+  }
 
   createCustomCard(customCard: CustomCard): Observable<CustomCard> {
     const formData = new FormData();
@@ -28,20 +36,20 @@ export class CustomCardsService {
     formData.append('publico', String(customCard.publico));
     formData.append('costBlood', customCard.costBlood.toString());
     formData.append('costPool', customCard.costPool.toString());
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
 
-    return this.http.post<CustomCard>(this.apiUrl, formData);
+    return this.http.post<CustomCard>(this.apiUrl, formData, { headers });
   }
 
-  uploadCustomCardImage(): Observable<CustomCard> {
-    return this.http.get<CustomCard>(`${this.apiUrl}/upload`);
+  uploadCustomCardImage(customCard: FormData): Observable<CustomCard> {
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    return this.http.put<CustomCard>(`${this.apiUrl}/upload`, customCard, { headers });
   }
 
   getAllCustomCards(): Observable<CustomCard[]> {
     return this.http.get<CustomCard[]>(this.apiUrl);
-  }
-
-  getAllImages(): Observable<CustomCard[]> {
-    return this.http.get<CustomCard[]>(`${this.uploadUrl}`);
   }
 
   getCustomCardById(id: string): Observable<CustomCard> {
