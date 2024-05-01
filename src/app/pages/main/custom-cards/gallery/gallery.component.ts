@@ -6,6 +6,8 @@ import { User } from '../../../../models/user.model';
 import { CustomCardsService } from '../../../../services/custom-cards.service';
 import { CustomCard } from '../../../../models/custom-cards.model';
 import { CommonModule } from '@angular/common';
+import { DetailsCustomCardComponent } from '../../../../components/details-custom-card/details-custom-card.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-gallery',
@@ -23,7 +25,8 @@ export class GalleryComponent implements OnInit {
 
     constructor(
         public authSvc: AuthService,
-        public customSvc: CustomCardsService
+        public customSvc: CustomCardsService,
+        public dialog: MatDialog
     ) { }
 
     user: User[] = [];
@@ -49,6 +52,12 @@ export class GalleryComponent implements OnInit {
           console.log('Error al obtener las tarjetas personalizadas: ', error);
         }
       );
+    }
+
+    openModal(card: CustomCard): void {
+      this.dialog.open(DetailsCustomCardComponent, {
+        data: { card },
+      });
     }
 
     ngOnInit(): void {

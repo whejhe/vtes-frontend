@@ -20,10 +20,11 @@
   </div>
 
   <div class="row gallery">
-    <div class="col-md-2 customCard"
+    <div class="col-md-2 container-image"
     *ngFor="let card of customCards">
       <h4>Auth: {{card.author}}</h4>
-      <img [src]="card.url" class="img-fluid">
+      <img [src]="card.url" class="customCard"
+      (click)="openModal(card)">
       <p>{{card.name}}</p>
     </div>
   </div>

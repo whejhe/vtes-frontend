@@ -1,0 +1,27 @@
+<div class="container">
+  <span class="close" (click)="closeModal()">X</span>
+    <div>
+        <div class="image">
+            <!-- <img src="../../../assets/img/plantilla.png" alt=""> -->
+            <img src="{{data.card.url}}" alt="">
+        </div>
+        <div class="info-details">
+            <h2>Name: {{data.card.name }}</h2>
+            <div *ngIf="data.card.capacity !== undefined">
+              <h2>Capacity: {{data.card.capacity }}</h2>
+            </div>
+            <div *ngIf="data.card.clan !== undefined">
+              <h2>Clan: {{data.card.clan }}</h2>
+            </div>
+            <div *ngIf="data.card.disciplines !== undefined">
+              <h2>Disciplines: {{data.card.disciplines }}</h2>
+            </div>
+            <div *ngIf="data.card.author !== undefined">
+              <p>Author: {{data.card.author }}</p>
+            </div>
+            <br>
+            <p class="underline">Desciption:</p>
+            <p>{{data.card.description }}</p>
+        </div>
+    </div>
+</div>

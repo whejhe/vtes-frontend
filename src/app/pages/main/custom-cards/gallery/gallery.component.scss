@@ -1,11 +1,28 @@
 .gallery{
     text-align: center;
-    img{
-        min-height: 150px;
-        max-height: 300px;
-        width: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container-image{
+    margin: auto 1.3em;
+    .customCard{
+      min-height: 200px;
+      max-height: 280px;
+      width: auto;
+      cursor: pointer;
+    }
+    .customCard:hover{
+      border: 2px solid rgb(201, 13, 13);
+    }
+    p{
+      max-width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 }
+
 
 h1{
     font-weight: bold;
