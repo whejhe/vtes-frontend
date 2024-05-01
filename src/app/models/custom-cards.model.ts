@@ -15,4 +15,5 @@ export interface CustomCard {
   publico: boolean;
   costBlood: number;
   costPool: number;
+  url: string;
 }

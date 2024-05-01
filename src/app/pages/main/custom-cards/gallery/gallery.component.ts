@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterMultiPipe } from '../../../../pipes/filter-multi.pipe';
 import { AuthService } from '../../../../services/auth.service';
 import { User } from '../../../../models/user.model';
 import { CustomCardsService } from '../../../../services/custom-cards.service';
 import { CustomCard } from '../../../../models/custom-cards.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-gallery',
@@ -13,7 +14,9 @@ import { CustomCard } from '../../../../models/custom-cards.model';
     styleUrl: './gallery.component.scss',
     imports: [
         FormsModule,
-        FilterMultiPipe
+        FilterMultiPipe,
+        ReactiveFormsModule,
+        CommonModule
     ]
 })
 export class GalleryComponent implements OnInit {
@@ -24,19 +27,7 @@ export class GalleryComponent implements OnInit {
     ) { }
 
     user: User[] = [];
-    card: CustomCard[] = [];
-
-    // getAllCustomCards(){
-    //     this.customSvc.getAllImages().subscribe(
-    //         (cards: CustomCard[]) => {
-    //             this.card = cards;
-    //             console.log('Cards: ', this.card);
-    //         },
-    //         (error) => {
-    //             console.log('Error al obtener las cartas: ', error);
-    //         }
-    //     )
-    // }
+    customCards: CustomCard[] = [];
 
     getUsers() {
         this.authSvc.getUsers().subscribe(
@@ -49,11 +40,20 @@ export class GalleryComponent implements OnInit {
             });
     }
 
-
+    getCustomCards() {
+      this.customSvc.getAllCustomCards().subscribe(
+        (cards: CustomCard[]) => {
+          this.customCards = cards;
+        },
+        (error) => {
+          console.log('Error al obtener las tarjetas personalizadas: ', error);
+        }
+      );
+    }
 
     ngOnInit(): void {
         this.getUsers();
-        // this.getAllCustomCards();
+        this.getCustomCards();
     }
 
 }

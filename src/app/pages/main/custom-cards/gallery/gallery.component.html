@@ -20,13 +20,12 @@
   </div>
 
   <div class="row gallery">
-    @for (card of card; track $index) {
-      <div class="col-md-2 customCard">
-        <h4>Auth: Autor</h4>
-        <img src="../../../../../assets/img/custom-cards/custom_nergal.png" class="img-fluid">
-        <p>Nergal</p>
-      </div>
-    }
+    <div class="col-md-2 customCard"
+    *ngFor="let card of customCards">
+      <h4>Auth: {{card.author}}</h4>
+      <img [src]="card.url" class="img-fluid">
+      <p>{{card.name}}</p>
+    </div>
   </div>
 
   <div class="d-flex justify-content-center">
