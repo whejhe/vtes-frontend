@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterMultiPipe } from '../../../../pipes/filter-multi.pipe';
 import { AuthService } from '../../../../services/auth.service';
 import { User } from '../../../../models/user.model';
@@ -8,6 +8,7 @@ import { CustomCard } from '../../../../models/custom-cards.model';
 import { CommonModule } from '@angular/common';
 import { DetailsCustomCardComponent } from '../../../../components/details-custom-card/details-custom-card.component';
 import { MatDialog } from '@angular/material/dialog';
+import { FilterCustomCardsPipe } from '../../../../pipes/filter-custom-cards.pipe';
 
 @Component({
     selector: 'app-gallery',
@@ -16,9 +17,9 @@ import { MatDialog } from '@angular/material/dialog';
     styleUrl: './gallery.component.scss',
     imports: [
         FormsModule,
-        FilterMultiPipe,
         ReactiveFormsModule,
-        CommonModule
+        CommonModule,
+        FilterCustomCardsPipe
     ]
 })
 export class GalleryComponent implements OnInit {
@@ -28,6 +29,11 @@ export class GalleryComponent implements OnInit {
         public customSvc: CustomCardsService,
         public dialog: MatDialog
     ) { }
+
+    customCardForm: FormGroup = new FormGroup({
+      searchByAuthor: new FormControl(''),
+      searchByName: new FormControl(''),
+    });
 
     user: User[] = [];
     customCards: CustomCard[] = [];
