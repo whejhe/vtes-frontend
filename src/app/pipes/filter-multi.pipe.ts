@@ -26,7 +26,12 @@ export class FilterMultiPipe implements PipeTransform {
       }
 
       // Filtrar por capacidad minima
-      if (filters.searchCapacity !== undefined && filters.searchCapacity !== null && card.capacity !== undefined && card.capacity !== null && card.capacity !== filters.searchCapacity) {
+      if (filters.searchMinCapacity !== undefined && filters.searchMinCapacity !== null && card.capacity !== undefined && card.capacity !== null && card.capacity !== filters.searchMinCapacity) {
+        match = false;
+      }
+
+      // Filtrar por capacidad maxima
+      if (filters.searchMaxCapacity !== undefined && filters.searchMaxCapacity !== null && card.capacity !== undefined && card.capacity !== null && card.capacity !== filters.searchMaxCapacity) {
         match = false;
       }
 
@@ -45,7 +50,20 @@ export class FilterMultiPipe implements PipeTransform {
         match = false;
       }
 
+      // Filtrar por título
+      if (filters.searchTitle && filters.searchTitle !== '*' && !card.card_text.toLowerCase().includes(filters.searchTitle.toLowerCase())) {
+        match = false;
+      }
 
+      // Filtrar por Habilidades
+      if (filters.searchHabilities && filters.searchHabilities !== '*' && !card.card_text.toLowerCase().includes(filters.searchHabilities.toLowerCase())) {
+        match = false;
+      }
+
+      // Filtrado por combatCard
+      if (filters.searchCombatCard && filters.searchCombatCard !== '*' && !card.card_text.toLowerCase().includes(filters.searchCombatCard.toLowerCase())) {
+        match = false;
+      }
 
       // Filtrar por disciplina seleccionada
       if (filters.selectedDisciplines && filters.selectedDisciplines.length > 0) {
@@ -55,15 +73,6 @@ export class FilterMultiPipe implements PipeTransform {
         }
       }
 
-      // Filtrar por título
-      if (filters.selectedTitles && filters.selectedTitles.length > 0 && (!card.title || !filters.selectedTitles.includes(card.title))) {
-        match = false;
-      }
-
-      // Filtrar por titulo en libreria
-      if (filters.checkTitle && filters.checkTitle !== '*' && !card.card_text.toLowerCase().includes(filters.checkTitle.toLowerCase())) {
-        match = false;
-      }
       // Filtrar por rasgos
       if (filters.selectedTraits && filters.selectedTraits.length > 0 && (!card.card_text || !filters.selectedTraits.some((trait: string) => card.card_text.toLowerCase().includes(trait.toLowerCase())))) {
         match = false;

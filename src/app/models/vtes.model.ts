@@ -10,8 +10,6 @@ export interface Card {
   disciplines?:     Discipline[];
   card_text:        string;
   _set:             string;
-  // sets:             WelcomeSets;
-  scans:            { [key: string]: string };
   artists:          string[];
   group?:           string;
   ordered_sets:     string[];
@@ -20,9 +18,7 @@ export interface Card {
   printed_name:     string;
   rulings?:         Rulings;
   title?:           Title;
-  // _i18n?:           I18N;
   has_advanced?:    boolean;
-  variants?:        { [key: string]: number };
   adv?:             boolean;
   text_change?:     boolean;
   aka?:             string[];
@@ -41,6 +37,8 @@ export interface Card {
   traits_library?: string[];
   sect?:             string;
   disciplineNames?: string[];
+  combat?:           Combat;
+  habilities?:      Habilities;
 }
 
 
@@ -164,89 +162,11 @@ export enum Discipline {
 }
 
 
-
 export interface Rulings {
   text:  string[];
   links: { [key: string]: string };
 }
 
-
-export enum AnarchUnboundPrecon {
-  Akunanse = "Akunanse",
-  Alastors = "Alastors",
-  AnarchBarons = "Anarch Barons",
-  AnarchGang = "Anarch Gang",
-  Anathema = "Anathema",
-  Assamite = "Assamite",
-  Baali = "Baali",
-  BanuHaqim = "Banu Haqim",
-  Brujah = "Brujah",
-  BrujahAntitribu = "Brujah antitribu",
-  Bundle1 = "Bundle 1",
-  Bundle2 = "Bundle 2",
-  DenOfFiends = "Den of Fiends",
-  FollowersOfSet = "Followers of Set",
-  Gangrel = "Gangrel",
-  GangrelAntitribu = "Gangrel antitribu",
-  Gargoyles = "Gargoyles",
-  Giovanni = "Giovanni",
-  Guruhi = "Guruhi",
-  Ishtarri = "Ishtarri",
-  Kiasyd = "Kiasyd",
-  Lasombra = "Lasombra",
-  LibertineBall = "Libertine Ball",
-  Malkavian = "Malkavian",
-  MalkavianAntitribu = "Malkavian antitribu",
-  Ministry = "Ministry",
-  Nosferatu = "Nosferatu",
-  NosferatuAntitribu = "Nosferatu antitribu",
-  Osebo = "Osebo",
-  PactWithNephandi = "Pact with Nephandi",
-  ParliamentOfShadows = "Parliament of Shadows",
-  Ravnos = "Ravnos",
-  SalubriAntitribu = "Salubri antitribu",
-  Samedi = "Samedi",
-  StarterKitBrujahAntitribu = "Starter Kit Brujah antitribu",
-  StarterKitMalkavianAntitribu = "Starter Kit Malkavian antitribu",
-  StarterKitTremereAntitribu = "Starter Kit Tremere antitribu",
-  StarterKitTzimisce = "Starter Kit Tzimisce",
-  TinA = "Tin A",
-  TinB = "Tin B",
-  Toreador = "Toreador",
-  ToreadorAntitribu = "Toreador antitribu",
-  Tremere = "Tremere",
-  TremereAntitribu = "Tremere antitribu",
-  Tzimisce = "Tzimisce",
-  Ventrue = "Ventrue",
-  VentrueAntitribu = "Ventrue antitribu",
-}
-
-export enum Rarity {
-  Common = "Common",
-  Rare = "Rare",
-  Uncommon = "Uncommon",
-  Vampire = "Vampire",
-}
-
-export interface AncientHeart {
-  release_date: Date;
-  rarity:       Rarity;
-  frequency?:   number;
-}
-
-export interface EbonyKingdom {
-  release_date: Date;
-  rarity:       Rarity;
-}
-
-export interface PrintOnDemand {
-  precon: PrintOnDemandPrecon;
-  copies: number;
-}
-
-export enum PrintOnDemandPrecon {
-  DriveThruCards = "DriveThruCards",
-}
 
 export enum Title {
   Archbishop = "Archbishop",
@@ -264,6 +184,18 @@ export enum Title {
   The2Votes = "2 votes",
 }
 
+export enum Combat {
+  dodge = "dodge",
+  strength = "strength",
+  maneuver = "maneuver",
+  additionalStrike = "additional strike",
+  aggravated = "aggravated",
+  prevent ="prevent",
+  press = "press",
+  CombatEnd = "combat end",
+  EnterCombat = "enter combat"
+}
+
 export enum Type {
   Action = "Action",
   ActionModifier = "Action Modifier",
@@ -279,6 +211,30 @@ export enum Type {
   Reaction = "Reaction",
   Retainer = "Retainer",
   Vampire = "Vampire",
+}
+
+export enum Habilities {
+  Bleed = "Bleed",
+  Strength = "Strength",
+  Vote = "Vote",
+  Stealth = "Stealth",
+  Aggravated = "Aggravated",
+  Press = "Press",
+  CombatEnd = "Combat end",
+  EnterCombat = "Enter combat",
+  Intercept = "Intercept",
+  Dodge = "Dodge",
+  Prevent = "Prevent",
+  Maneuver = "Maneuver",
+  AdditionalStrike = "Additional strike",
+  Reduce = "Reduce",
+  Unlock = "Unlock",
+  BlackHand = "Black hand",
+  Seraph = "Seraph",
+  Infernal = "Infernal",
+  RedList = "Red list",
+  Flight = "Flight",
+  Advancement = "Advancement",
 }
 
 export enum Traits {

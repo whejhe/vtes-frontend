@@ -247,10 +247,6 @@ export class BibliotecaComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCards();
-
-    this.combat = this.jsonSvc.combatData;
-    this.title = this.jsonSvc.titleData;
-    this.action = this.jsonSvc.actionData;
     this.reaction = this.jsonSvc.reactionsData;
     this.others = this.jsonSvc.othersData;
     this.bloodCost = this.jsonSvc.bloodCostData;

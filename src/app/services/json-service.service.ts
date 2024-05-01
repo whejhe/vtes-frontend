@@ -72,42 +72,6 @@ export class JsonServiceService {
   { name: "Visionay"}
   ]
 
-  titleData = [
-    { name: "archbishop"},
-    { name: "baron"},
-    { name: "bishop"},
-    { name: "cardinal"},
-    { name: "inner circle"},
-    { name: "justicar"},
-    { name: "magaji"},
-    { name: "primogen"},
-    { name: "prince"},
-    { name: "priscus"},
-    { name: "regent"},
-    { name: "1 vote"},
-    { name: "2 votes"}
-  ]
-
-  combatData = [
-    { name: "dodge"},
-    { name: "strength"},
-    { name: "maneuver"},
-    { name: "additional strike"},
-    { name: "aggravated"},
-    { name: "prevent"},
-    { name: "press"},
-    { name: "combat end"},
-    { name: "enter combat"}
-  ]
-
-  actionData = [
-    { name: "stealth"},
-    { name: "bleed"},
-    { name: "vote"},
-    { name: "create vampire"},
-    { name: "bood to uncontrolled"},
-  ]
-
   reactionsData = [
     { name: "intercept"},
     { name: "reduce bleed"},

@@ -27,9 +27,13 @@
     <!--CLAN-->
     <div class="col-md-4">
       <h4 class="select">Clan:</h4>
-      <select id="clan" class="form-select" formControlName="searchClan">
+      <select id="clan" class="form-select"
+      formControlName="searchClan">
         <option value="*" (click)="resetFiterClan()">All Clans</option>
-        <option value="{{ clan || 'All Clans' }}" *ngFor="let clan of clans" (click)="onSearchClanChange(clan)">
+        <option
+        value="{{ clan || 'All Clans' }}"
+        *ngFor="let clan of clans"
+        (click)="onSearchClanChange(clan)">
           {{ clan }}
         </option>
       </select>
@@ -82,11 +86,11 @@
                         searchByCardText: cryptForm.value.searchByCardText,
                         searchGroup: cryptForm.value.searchGroup,
                         searchClan: cryptForm.value.searchClan,
-                        selectedDisciplines:
-                          cryptForm.value.selectedDisciplines,
-                        selectedTitles: cryptForm.value.selectedTitles,
-                        selectedTraits: cryptForm.value.selectedTraits,
-                        searchCapacity: cryptForm.value.searchCapacity
+                        searchTitle: cryptForm.value.searchTitle,
+                        searchHabilities: cryptForm.value.searchHabilities,
+                        selectedDisciplines:cryptForm.value.selectedDisciplines,
+                        searchMinCapacity: cryptForm.value.searchMinCapacity,
+                        searchMaxCapacity: cryptForm.value.searchMaxCapacity,
                       };
                 let i = index
               " (click)="openModal(card)" [class.table-light]="i % 2 === 0" [class.table-secondary]="i % 2 !== 0">
@@ -140,60 +144,48 @@
           <!--TITLES-->
           <div>
             <h4 class="select">Title:</h4>
-            <select class="form-select form-select-sm">
-              <option selected>Any</option>
-              <option *ngFor="let item of title" [value]="item.name">
-                {{ item.name }}
+            <select id="title" class="form-select form-select-sm"
+              formControlName="searchTitle">
+              <option value="*" (click)="resetFiterTitle()">Any</option>
+              <option
+              value="{{title || 'Any'}}"
+              *ngFor="let title of titles"
+              (click)="onSearchTitleChange(title)"
+              >
+                {{ title }}
               </option>
             </select>
           </div>
           <!--CAPACITY MAX-->
           <div class="capacity">
             <label for="customRange2" class="form-label">Max. Capacity</label>
-            <input type="range" class="form-range" min="1" max="11" id="customRange2" />
+            <input type="range" class="form-range" min="1" max="11" id="maxCapacity"
+            formControlName="searchMaxCapacity"
+            value="{{maxCapacity || 11}}"
+            (click)="onSearchMaxCapacityChange(newMaxCapacity)"/>
           </div>
           <!--CAPACITY MIN-->
           <div class="capacity">
             <label for="customRange2" class="form-label">Min. Capacity</label>
-            <input type="range" value="1" class="form-range" min="1" max="11" id="customRange2" />
+            <input type="range" class="form-range" min="1" max="11" id="minCapacity"
+            formControlName="searchMinCapacity"
+            value="{{minCapacity || 1}}"
+            (click)="onSearchMinCapacityChange(newMinCapacity)"
+            />
           </div>
-          <!--COMBAT-->
+
+          <!--SEARCH BY HABILITIES-->
           <div>
-            <h4 class="select">Combat:</h4>
-            <select class="form-select form-select-sm">
-              <option selected>Any</option>
-              <option *ngFor="let item of combat" [value]="item.name">
-                {{ item.name }}
-              </option>
-            </select>
-          </div>
-          <!--ACTION-->
-          <div>
-            <h4 class="select">Action:</h4>
-            <select id="action" class="form-select form-select-sm">
-              <option selected>Any</option>
-              <option *ngFor="let item of action" [value]="item.name">
-                {{ item.name }}
-              </option>
-            </select>
-          </div>
-          <!--REACTION-->
-          <div>
-            <h4 class="select">Reaction:</h4>
-            <select id="reaction" class="form-select form-select-sm">
-              <option selected>Any</option>
-              <option *ngFor="let item of reaction" [value]="item.name">
-                {{ item.name }}
-              </option>
-            </select>
-          </div>
-          <!--OTHERS-->
-          <div>
-            <h4 class="select">Others:</h4>
-            <select id="others" class="form-select form-select-sm">
-              <option selected>Any</option>
-              <option *ngFor="let item of others" [value]="item.name">
-                {{ item.name }}
+            <h4 class="select">Habilities:</h4>
+            <select id="actionModifier" class="form-select form-select-sm"
+            formControlName="searchActionModifier">
+              <option value="*" (click)="resetFiterHabilities()">Any</option>
+              <option
+              value="{{hability || 'Any'}}"
+              *ngFor="let hability of habilities"
+              (click)="onSearchHabilitiesChange(hability)"
+              >
+                {{ hability }}
               </option>
             </select>
           </div>

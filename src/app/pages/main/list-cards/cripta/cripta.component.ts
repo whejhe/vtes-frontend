@@ -3,11 +3,28 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Observable, map, of } from 'rxjs';
 import { AsyncPipe, CommonModule } from '@angular/common';
 // import { Card} from '../../../../models/card.model';
-import { Card, Clan, Discipline, Title, Traits, Type } from '../../../../models/vtes.model';
+import {
+  Card,
+  Clan,
+  Discipline,
+  Title,
+  Traits,
+  Type,
+  Habilities,
+} from '../../../../models/vtes.model';
 import { JsonServiceService } from '../../../../services/json-service.service';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { DetailsCardVampireComponent } from '../../../../components/details-card-vampire/details-card-vampire.component';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { FilterPipe } from '../../../../pipes/filter.pipe';
 import { IconService } from '../../../../services/icon.service';
 import { FilterMultiPipe } from '../../../../pipes/filter-multi.pipe';
@@ -24,16 +41,15 @@ import { CardService } from '../../../../services/card.service';
     FormsModule,
     FilterPipe,
     FilterMultiPipe,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
 })
 export class CriptaComponent implements OnInit {
-
   constructor(
     public jsonSvc: JsonServiceService,
     public dialog: MatDialog,
     public iconSvc: IconService,
-    public cardSvc: CardService,
+    public cardSvc: CardService
   ) { }
 
   cryptForm: FormGroup = new FormGroup({
@@ -41,45 +57,40 @@ export class CriptaComponent implements OnInit {
     searchByCardText: new FormControl(''),
     searchGroup: new FormControl(''),
     searchClan: new FormControl(''),
-    combat: new FormControl(''),
+    searchTitle: new FormControl(''),
+    searchHabilities: new FormControl(''),
     selectedDisciplines: new FormControl([]),
-    selectedTitles: new FormControl([]),// No funciona
-    selectedTraits: new FormControl([]),// No funciona
-    searchCapacity: new FormControl(), // No funciona
-    sect: new FormControl(''), // No funciona
+    searchMinCapacity: new FormControl(),
+    searchMaxCapacity: new FormControl(),
+    searchSect: new FormControl(''), // No funciona
   });
-
-  title: {name: string }[] = [];
-  combat: {name: string }[] = [];
-  action: {name: string }[] = [];
-  reaction: {name: string }[] = [];
-  others: {name: string }[] = [];
 
   cards: Card[] = [];
   filter: string = '';
   searchSect: string = '';
+
   clans = Object.values(Clan);
   clan: string = '';
 
-  disciplines = Object.values(Discipline)
+  titles = Object.values(Title);
+  title: string = '';
+
+  habilities = Object.values(Habilities);
+  hability: string = '';
+
+  minCapacity: number = 1;
+  newMinCapacity?: number;
+  maxCapacity: number = 11;
+  newMaxCapacity?: number;
+
+  disciplines = Object.values(Discipline);
   disciplineSelected: { [key: string]: boolean } = {};
 
   disciplineImages = this.iconSvc.disciplineImages;
   clanImages = this.iconSvc.clanImages;
 
   checkTitle: string = '';
-  // titles = Object.values(Title);
-  // titlesSelected: { [key in Title]?: boolean } = {};
-  // selectedTitles: Title[] = [];
-  // traits = Object.values(Traits);
-  // traitsSelected: { [key in Traits]?: boolean } = {};
-  // selectedTraits: Traits[] = [];
   url: string = '';
-
-
-  // minCapacity: number = 1;
-  // maxCapacity: number = 11;
-  // capacity: number = 0;
 
   setUrlImage(url: string): void {
     this.url = url;
@@ -96,12 +107,16 @@ export class CriptaComponent implements OnInit {
   }
 
   getDisciplineUrl(disciplineName: Discipline): string {
-    const discipline = this.disciplineImages.find(item => item.name === disciplineName);
+    const discipline = this.disciplineImages.find(
+      (item) => item.name === disciplineName
+    );
     return discipline ? discipline.url : '';
   }
 
   getClanUrl(clanName: Clan): string {
-    const clan = this.clanImages.find(item => item.name.replace(/\s/g, '') === clanName.replace(/\s/g, ''));
+    const clan = this.clanImages.find(
+      (item) => item.name.replace(/\s/g, '') === clanName.replace(/\s/g, '')
+    );
     return clan ? clan.url : '';
   }
 
@@ -112,7 +127,6 @@ export class CriptaComponent implements OnInit {
 
   // SEARCH CLAN
   onSearchClanChange(newValue: string): void {
-    // this.cryptForm.value.searchClan = newValue;
     const searchClanControl = this.cryptForm.get('searchClan');
     if (searchClanControl) {
       searchClanControl.setValue(newValue);
@@ -122,12 +136,65 @@ export class CriptaComponent implements OnInit {
 
   // RESET FILTER CLAN
   resetFiterClan(): void {
-    // this.cryptForm.value.searchClan = '';
     const searchClanControl = this.cryptForm.get('searchClan');
-  if (searchClanControl) {
-    searchClanControl.setValue('');
-    searchClanControl.updateValueAndValidity();
+    if (searchClanControl) {
+      searchClanControl.setValue('');
+      searchClanControl.updateValueAndValidity();
+    }
   }
+
+  // SEARCH TITLE
+  onSearchTitleChange(newValue: string): void {
+    const searchTitleControl = this.cryptForm.get('searchTitle');
+    if (searchTitleControl) {
+      searchTitleControl.setValue(newValue);
+      searchTitleControl.updateValueAndValidity();
+    }
+  }
+
+  // RESET FILTER TITLE
+  resetFiterTitle(): void {
+    const searchTitleControl = this.cryptForm.get('searchTitle');
+    if (searchTitleControl) {
+      searchTitleControl.setValue('');
+      searchTitleControl.updateValueAndValidity();
+    }
+  }
+
+  // SEARCH HABILITIES
+  onSearchHabilitiesChange(newValue: string): void {
+    const searchHabilitiesControl = this.cryptForm.get('searchHabilities');
+    if (searchHabilitiesControl) {
+      searchHabilitiesControl.setValue(newValue);
+      searchHabilitiesControl.updateValueAndValidity();
+    }
+  }
+
+  // RESET FILTER HABILITIES
+  resetFiterHabilities(): void {
+    const searchHabilitiesControl = this.cryptForm.get('searchHabilities');
+    if (searchHabilitiesControl) {
+      searchHabilitiesControl.setValue('');
+      searchHabilitiesControl.updateValueAndValidity();
+    }
+  }
+
+  // SEARCH BY MIN CAPACITY
+  onSearchMinCapacityChange(newMinCapacity?: number): void {
+    const searchMinCapacityControl = this.cryptForm.get('searchMinCapacity');
+    if (searchMinCapacityControl) {
+      searchMinCapacityControl.setValue(newMinCapacity);
+      searchMinCapacityControl.updateValueAndValidity();
+    }
+  }
+
+  // SEARCH BY MAX CAPACITY
+  onSearchMaxCapacityChange(newMaxCapacity?: number): void {
+    const searchMaxCapacityControl = this.cryptForm.get('searchMaxCapacity');
+    if (searchMaxCapacityControl) {
+      searchMaxCapacityControl.setValue(newMaxCapacity);
+      searchMaxCapacityControl.updateValueAndValidity();
+    }
   }
 
   toggleOpacity(event: MouseEvent): void {
@@ -144,31 +211,12 @@ export class CriptaComponent implements OnInit {
   }
 
   onDisciplinesChange(): void {
-    this.cryptForm.value.selectedDisciplines = Object.keys(this.disciplineSelected)
-      .filter(discipline => this.disciplineSelected[discipline as Discipline])
-      .map(discipline => discipline as Discipline);
+    this.cryptForm.value.selectedDisciplines = Object.keys(
+      this.disciplineSelected
+    )
+      .filter((discipline) => this.disciplineSelected[discipline as Discipline])
+      .map((discipline) => discipline as Discipline);
   }
-
-  // SEARCH TITLES
-  // onTitlesChange(): void {
-  //   this.cryptForm.value.selectedTitles = Object.keys(this.titlesSelected)
-  //     .filter(title => this.titlesSelected[title as Title])
-  //     .map(title => title as Title);
-  // }
-
-  // onTraitsChange(): void {
-  //   this.cryptForm.value.selectedTraits = Object.keys(this.traitsSelected)
-  //     .filter(trait => this.traitsSelected[trait as Traits])
-  //     .map(trait => trait as Traits);
-  // }
-
-  // onChangeMinCapacity(): void {
-  //   this.minCapacity = 1;
-  // }
-
-  // onChangeMaxCapacity(): void {
-  //   this.maxCapacity = 11;
-  // }
 
   loadCards(): void {
     this.cardSvc.getCards().subscribe((cards) => {
@@ -180,20 +228,13 @@ export class CriptaComponent implements OnInit {
     console.log('Crypt Form: ', this.cryptForm.value);
   }
 
-
   ngOnInit(): void {
     this.loadCards();
-    // this.jsonSvc.getJsonData().subscribe((cards) => {
-    //   this.cards = cards;
-    // });
-    this.clanImages = this.clans.map(clan => ({
+    this.clanImages = this.clans.map((clan) => ({
       name: clan,
-      url: `https://static.krcg.org/svg/clan/${clan.toLowerCase().replace(/\s/g, '')}.svg`
+      url: `https://static.krcg.org/svg/clan/${clan
+        .toLowerCase()
+        .replace(/\s/g, '')}.svg`,
     }));
-    this.combat = this.jsonSvc.combatData;
-    this.title = this.jsonSvc.titleData;
-    this.action = this.jsonSvc.actionData;
-    this.reaction = this.jsonSvc.reactionsData;
-    this.others = this.jsonSvc.othersData;
   }
 }
