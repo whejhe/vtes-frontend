@@ -149,4 +149,21 @@ export class DeckService {
       a.remove();
     });
   }
+
+  printPDF(id: string, deckName: string, author: string): any {
+    id = this.currentDeckId;
+    return fetch(`${this.apiUrl}/printPDF/${id}`, { method: 'GET', headers: { 'Authorization': `Bearer ${this.authSvc.getToken()}` } }).then(res => res.blob()).then(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.setAttribute('style', 'display: none');
+      a.href = url;
+      a.download = `${deckName} - ${author}.pdf`;
+      a.click();
+      window.URL.revokeObjectURL(url);
+      a.remove();
+    });
+  }
 }
+
+

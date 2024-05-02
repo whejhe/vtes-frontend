@@ -344,4 +344,8 @@ export class NewDeckComponent implements OnInit {
   printTxt() {
     this.deckSvc.printTxt(this.currentDeckId, this.deckForm.get('name')?.value, this.deckForm.get('author')?.value);
   }
+
+  printPDF(){
+    this.deckSvc.printPDF(this.currentDeckId, this.deckForm.get('name')?.value, this.deckForm.get('author')?.value);
+  }
 }
