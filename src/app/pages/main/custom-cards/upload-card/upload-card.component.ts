@@ -104,7 +104,7 @@ export class UploadCardComponent implements OnInit {
       formData.append('description', this.updateCardForm.value.description);
       console.log(this.updateCardForm.value.image)
       formData.append('image', this.updateCardForm.value.image);
-  
+
       const userId = this.authSvc.getCurrentUser()?._id ?? 'defaultId';
       this.customCardSvc.uploadCustomCardImage(formData)
         .subscribe(
@@ -112,6 +112,7 @@ export class UploadCardComponent implements OnInit {
             console.log('Carta creada:', response);
           },
           (error) => {
+
             console.log('Error al crear la carta:', error);
           }
         );
@@ -119,7 +120,7 @@ export class UploadCardComponent implements OnInit {
       console.log('Error al subir la Imagen: ',error);
     }
   }
-  
+
 
   ngOnInit(): void {
     this.getCurrentUser();
