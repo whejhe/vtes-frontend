@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Card } from '../models/vtes.model';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'

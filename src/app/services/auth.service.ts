@@ -2,7 +2,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable, catchError, map, of, tap } from 'rxjs';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment.prod';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class AuthService implements OnInit{
 
   isToken: boolean = false;
 
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiUrl || environment.localUrl;
   private currentUser: User | null = null;
   public token: string | null = localStorage.getItem('token');
 

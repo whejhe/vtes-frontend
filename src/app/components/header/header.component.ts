@@ -34,7 +34,7 @@ export class HeaderComponent {
   navigateToLastDeck(): void {
     const lastDeckId = localStorage.getItem('lastDeck');
     if (lastDeckId && lastDeckId != undefined) {
-      console.log('HOLA!!!!!!!!!!')
+      // console.log('HOLA!!!!!!!!!!')
       this.router.navigateByUrl(`/deck/${lastDeckId}`);
     }
   }

@@ -2,15 +2,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardService {
 
-  // private apiUrl = environment.apiUrl + '/cards';
-  private apiUrl = 'http://localhost:3000/cards';
+  private apiUrl = environment.apiUrl + '/cards' || environment.localUrl + '/cards';
+  // private apiUrl = 'http://localhost:3000/cards';
 
   constructor(
     private http: HttpClient
