@@ -116,7 +116,7 @@ export class DeckService {
   updateDeckVisibility(id: string, isPublic: boolean): Observable<Deck> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
-    return this.http.put<Deck>(`${this.apiUrl}/${id}/visibility`, { isPublic },{headers});
+    return this.http.put<Deck>(`${this.apiUrl}/${id}/visibility`, { isPublic }, { headers });
   }
 
   // Agregar una carta a un mazo
@@ -136,7 +136,8 @@ export class DeckService {
 
   printTxt(id: string, deckName: string, author: string): any {
     id = this.currentDeckId;
-    return fetch(`${this.apiUrl}/printTxt/${id}`, { method: 'POST' }).then( res => res.blob()).then( blob => {
+
+    return fetch(`${this.apiUrl}/printTxt/${id}`, { method: 'POST', headers: { 'Authorization': `Bearer ${this.authSvc.getToken()}` } }).then(res => res.blob()).then(blob => {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       document.body.appendChild(a);
