@@ -25,11 +25,11 @@ export interface Card {
   has_evolution?:   boolean;
   is_evolution?:    boolean;
   banned?:          Date;
-  pool_cost?:       PoolCost;
+  pool_cost?:       string;
+  blood_cost?:      string;
   flavor_text?:     string;
   capacity_change?: string;
   multidisc?:       boolean;
-  blood_cost?:      string;
   combo?:           boolean;
   conviction_cost?: string;
   burn_option?:     boolean;

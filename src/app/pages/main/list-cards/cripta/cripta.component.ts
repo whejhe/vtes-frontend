@@ -82,11 +82,6 @@ export class CriptaComponent implements OnInit {
   sects = Object.values(Sect);
   sect = '';
 
-  minCapacity: number = 1;
-  newMinCapacity?: number;
-  maxCapacity: number = 11;
-  newMaxCapacity?: number;
-
   disciplines = Object.values(Discipline);
   disciplineSelected: { [key: string]: boolean } = {};
 
@@ -202,23 +197,23 @@ export class CriptaComponent implements OnInit {
   }
 
   // SEARCH BY MIN CAPACITY
-  onSearchMinCapacityChange(event: any): void {
-    const searchMinCapacityControl = this.cryptForm.get('searchMinCapacity');
-    console.log(searchMinCapacityControl?.value, 'seperador', parseInt(event.target.value))
-    if (searchMinCapacityControl) {
-      searchMinCapacityControl.setValue(parseInt(event.target.value));
-      searchMinCapacityControl.updateValueAndValidity();
-    }
-  }
+  // onSearchMinCapacityChange(event: any): void {
+  //   const searchMinCapacityControl = this.cryptForm.get('searchMinCapacity');
+  //   console.log(searchMinCapacityControl?.value, 'seperador', parseInt(event.target.value))
+  //   if (searchMinCapacityControl) {
+  //     searchMinCapacityControl.setValue(parseInt(event.target.value));
+  //     searchMinCapacityControl.updateValueAndValidity();
+  //   }
+  // }
 
   // SEARCH BY MAX CAPACITY
-  onSearchMaxCapacityChange(newMaxCapacity?: number): void {
-    const searchMaxCapacityControl = this.cryptForm.get('searchMaxCapacity');
-    if (searchMaxCapacityControl) {
-      searchMaxCapacityControl.setValue(newMaxCapacity);
-      searchMaxCapacityControl.updateValueAndValidity();
-    }
-  }
+  // onSearchMaxCapacityChange(newMaxCapacity?: number): void {
+  //   const searchMaxCapacityControl = this.cryptForm.get('searchMaxCapacity');
+  //   if (searchMaxCapacityControl) {
+  //     searchMaxCapacityControl.setValue(newMaxCapacity);
+  //     searchMaxCapacityControl.updateValueAndValidity();
+  //   }
+  // }
 
   toggleOpacity(event: MouseEvent): void {
     const target = event.target as HTMLImageElement;

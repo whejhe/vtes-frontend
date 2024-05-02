@@ -54,8 +54,8 @@ export class BibliotecaComponent implements OnInit {
     searchSect: new FormControl(''),
     searchByTraits: new FormControl(''),
     searchTitle: new FormControl(''),
-    bloodCosts: new FormControl(['1', '2', '3', '4', 'X']),
-    poolCosts: new FormControl(['1', '2', '3', '4', '5', '6', 'X']),
+    searchBloodCosts: new FormControl(''),
+    searchPoolCosts: new FormControl(''),
   });
 
   sects = Object.values(Sect);
@@ -70,6 +70,10 @@ export class BibliotecaComponent implements OnInit {
   public clans = Object.values(Clan);
   public clan = '';
 
+  poolCosts = ['0', '1', '2', '3', '4', '5', '6'];
+  poolCost = '';
+  bloodCosts = ['0', '1', '2', '3', '4'];
+  booldCost = '';
 
   private httpClient = inject(HttpClient);
 
@@ -253,15 +257,17 @@ export class BibliotecaComponent implements OnInit {
     }
   }
 
-
-  //FILTROS POR COSTES
+  //FILTROS POR BOOD_COST
   onBloodCostsChange(): void {
     
   }
 
-  //FILTROS POR COSTES
-  onPoolCostsChange(): void {
-   
+  //FILTROS POR POOL_COST
+  onSearchPoolCostChange(){
+
+  }
+  resetFiterPoolCost(): void {
+    
   }
 
   loadCards(): void {
