@@ -3,9 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, of, throwError } from 'rxjs';
 import { Deck } from '../models/deck.model';
-import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
 import { jwtDecode } from 'jwt-decode';
+import { environment } from '../../environments/environment.development';
 
 
 
@@ -14,7 +14,7 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class DeckService {
 
-  private apiUrl = environment.apiUrl + '/decks';
+  private apiUrl = environment.apiUrl + '/decks' || environment.localUrl + '/decks';
   private currentDeckId: string = '';
   private currentDeckSubject: BehaviorSubject<string> = new BehaviorSubject('');
   private tokenData: any;

@@ -1,7 +1,6 @@
 //src/app/app.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { NavBarComponent } from "./components/nav-bar/nav-bar.component";
 import { HeaderComponent } from './components/header/header.component';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -19,7 +18,6 @@ import { authInterceptor } from './interceptors/auth.interceptor';
         RouterOutlet,
         HttpClientModule,
         CommonModule,
-        NavBarComponent,
         HeaderComponent,
         FormsModule,
     ],

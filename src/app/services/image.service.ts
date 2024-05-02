@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Image } from '../models/image.model';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment.prod';
+import { environment } from '../../environments/environment.development';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -15,11 +15,18 @@ export class ImageService {
 
   image: Image | null = null;
 
-  // private apiUrl = 'http://localhost:3000/vtes-backend/uploads/';
-  private jsonVtesUrl = 'http://localhost:3000/vtes-backend/public/data/vtes.json';
-  private apiUrl = 'http://localhost:3000/';
-  private jsonImage = 'http://localhost:3000/data/image.json';
-  private uploadUrl = 'http://localhost:3000/vtes-backend/uploads/';
+  private jsonVtesUrl = environment.apiUrl + '/data/vtes.json' || environment.localUrl + '/data/vtes.json';
+  private apiUrl = environment.apiUrl || environment.localUrl;
+  private jsonImage = environment.apiUrl + '/data/image.json' || environment.localUrl + '/data/image.json';
+  private uploadUrl = environment.apiUrl + '/uploads/' || environment.localUrl + '/uploads/';
+  private uploadAvatarsUrl = environment.apiUrl + '/vtes-backend/uploads/avatars/' || environment.localUrl + '/vtes-backend/uploads/avatars/';
+
+  
+  // private uploadAvatarsUrl = http://localhost:3000/vtes-backend/uploads/avatars/
+  // private jsonVtesUrl = 'http://localhost:3000/vtes-backend/public/data/vtes.json';
+  // private apiUrl = 'http://localhost:3000/';
+  // private jsonImage = 'http://localhost:3000/data/image.json';
+  // private uploadUrl = 'http://localhost:3000/vtes-backend/uploads/';
 
   createImage(image: Image): Observable<Image> {
     return this.http.post<Image>(this.uploadUrl, image);
@@ -53,7 +60,7 @@ export class ImageService {
   }
 
   getAvatarByName(name: string): string{
-    return `http://localhost:3000/vtes-backend/uploads/avatars/${name}`;
+    return `${this.uploadAvatarsUrl}${name}`;
   }
 
   getAvatarByUserId(userId: string): Observable<Image[]> {

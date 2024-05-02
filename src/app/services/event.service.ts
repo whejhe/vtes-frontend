@@ -1,8 +1,8 @@
 //front/src/app/services/event.service.ts
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class EventService {
     private http: HttpClient
   ) { }
 
-  private apiUrl = environment.apiUrl + '/events/';
+  private apiUrl = environment.apiUrl + '/events/' || environment.localUrl + '/events/';
 
   createEvent(event: Event): Observable<Event> {
     return this.http.post<Event>(`${this.apiUrl}admin/}`, event);

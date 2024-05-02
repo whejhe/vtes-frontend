@@ -4,12 +4,15 @@ import { Observable } from 'rxjs';
 import { CustomCard } from '../models/custom-cards.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomCardsService {
-  private apiUrl = 'http://localhost:3000/custom-cards';
+
+  private apiUrl = environment.apiUrl + '/custom-cards' || environment.localUrl + '/custom-cards';
+  // private apiUrl = 'http://localhost:3000/custom-cards';
 
   constructor(private http: HttpClient, private authSvc: AuthService) { }
 
