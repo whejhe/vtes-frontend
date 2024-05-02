@@ -1,6 +1,6 @@
 //src/app/pipes/filter-multi.pipe.ts
 import { Pipe, PipeTransform } from '@angular/core';
-import {Card, Discipline, Type } from '../models/vtes.model';
+import { Card, Discipline, Type } from '../models/vtes.model';
 // import { Card } from '../models/card.model';
 
 
@@ -20,33 +20,43 @@ export class FilterMultiPipe implements PipeTransform {
         match = false;
       }
 
+      // Filter by traits
+      if (filters.searchByTraits && !card.card_text.toLowerCase().includes(filters.searchByTraits.toLowerCase())) {
+        match = false;
+      }
+
       // Filtar por texto de cartas
       if (filters.searchByCardText && !card.card_text.toLowerCase().includes(filters.searchByCardText.toLowerCase())) {
         match = false;
       }
 
-      // Filtrar por capacidad minima
-      if (filters.searchMinCapacity !== undefined && filters.searchMinCapacity !== null && card.capacity !== undefined && card.capacity !== null && card.capacity !== filters.searchMinCapacity) {
+      //Filtrar entre capacidad minima y maxima
+      if (!(filters.searchMinCapacity <= card.capacity! && card.capacity! <= filters.searchMaxCapacity)) {
         match = false;
       }
 
-      // Filtrar por capacidad maxima
-      if (filters.searchMaxCapacity !== undefined && filters.searchMaxCapacity !== null && card.capacity !== undefined && card.capacity !== null && card.capacity !== filters.searchMaxCapacity) {
-        match = false;
-      }
+      // // Filtrar por capacidad minima
+      // if (filters.searchMinCapacity !== undefined && filters.searchMinCapacity !== null && card.capacity !== undefined && card.capacity !== null && card.capacity !== filters.searchMinCapacity) {
+      //   match = false;
+      // }
+
+      // // Filtrar por capacidad maxima
+      // if (filters.searchMaxCapacity !== undefined && filters.searchMaxCapacity !== null && card.capacity !== undefined && card.capacity !== null && card.capacity !== filters.searchMaxCapacity) {
+      //   match = false;
+      // }
 
       // Filtrar por grupo
       if (filters.searchGroup && filters.searchGroup !== '*' && card.group !== filters.searchGroup) {
         match = false;
       }
 
-      // Filtrar por SECTA
-      if (filters.searchSect && filters.searchSect.length > 0 && (!card.card_text || !filters.searchSect.some((sect: string) => card.card_text.toLowerCase().includes(sect.toLowerCase())))) {
+      // Filtrar por clan
+      if (filters.searchClan && filters.searchClan !== '*' && card.clans && !card.clans.includes(filters.searchClan)) {
         match = false;
       }
 
-      // Filtrar por clan
-      if (filters.searchClan && filters.searchClan !== '*' && card.clans && !card.clans.includes(filters.searchClan)) {
+      // Filtrar por SECTA
+      if (filters.searchSect && filters.searchSect !== '*' && !card.card_text.toLowerCase().includes(filters.searchSect.toLowerCase())) {
         match = false;
       }
 
@@ -60,11 +70,6 @@ export class FilterMultiPipe implements PipeTransform {
         match = false;
       }
 
-      // Filtrado por combatCard
-      if (filters.searchCombatCard && filters.searchCombatCard !== '*' && !card.card_text.toLowerCase().includes(filters.searchCombatCard.toLowerCase())) {
-        match = false;
-      }
-
       // Filtrar por disciplina seleccionada
       if (filters.selectedDisciplines && filters.selectedDisciplines.length > 0) {
         const cardDisciplines = card.disciplines?.map(discipline => discipline) || [];
@@ -73,16 +78,11 @@ export class FilterMultiPipe implements PipeTransform {
         }
       }
 
-      // Filtrar por rasgos
-      if (filters.selectedTraits && filters.selectedTraits.length > 0 && (!card.card_text || !filters.selectedTraits.some((trait: string) => card.card_text.toLowerCase().includes(trait.toLowerCase())))) {
-        match = false;
-      }
 
       //Filtrar por tipo
-      if (filters.selectedTypes && filters.selectedTypes !== '*' && filters.selectedTypes.length > 0 && (!card.types || !filters.selectedTypes.includes(card.types))) {
+      if (filters.selectedTypes && filters.selectedTypes !== '*' && filters.selectedTypes.length > 0 && (!card.types || !card.types.includes(filters.selectedTypes))) {
         match = false;
       }
-
 
       //Filtar por Coste en Blood
       if (filters.selectedCosts && filters.selectedCosts.length > 0 && (!card.blood_cost || !filters.selectedCosts.includes(card.blood_cost))) {

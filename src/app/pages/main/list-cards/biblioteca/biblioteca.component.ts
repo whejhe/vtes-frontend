@@ -4,7 +4,9 @@ import { AsyncPipe, CommonModule, NgOptimizedImage } from '@angular/common';
 import {
   Card,
   Clan,
+  Combat,
   Discipline,
+  Sect,
   Title,
   Traits,
   Type,
@@ -49,19 +51,25 @@ export class BibliotecaComponent implements OnInit {
     searchByCardText: new FormControl(''),
     selectedTypes: new FormControl([]),
     searchClan: new FormControl(''),
-    titlesSelected: new FormControl([]),
+    searchSect: new FormControl(''),
+    searchByTraits: new FormControl(''),
+    searchTitle: new FormControl(''),
     bloodCosts: new FormControl(['1', '2', '3', '4', 'X']),
     poolCosts: new FormControl(['1', '2', '3', '4', '5', '6', 'X']),
-    traitsSelected: new FormControl([]),
   });
 
-  title: {name: string }[] = [];
-  combat: {name: string }[] = [];
-  action: {name: string }[] = [];
-  reaction: {name: string }[] = [];
-  others: {name: string }[] = [];
-  bloodCost: {name: string }[] = [];
-  poolCost: {name: string }[] = [];
+  sects = Object.values(Sect);
+  sect = '';
+
+  titles = Object.values(Title);
+  title = '';
+
+  traits = Object.values(Traits);
+  trait = '';
+  
+  public clans = Object.values(Clan);
+  public clan = '';
+
 
   private httpClient = inject(HttpClient);
 
@@ -81,33 +89,13 @@ export class BibliotecaComponent implements OnInit {
   public selectedDisciplines: Discipline[] = [];
 
   public checkTitle: string = '';
-  public titles = Object.values(Title);
-  // public titlesSelected: { [key in Title]?: boolean } = {};
-  public selectedTitles: Title[] = [];
+  
 
   public types = Object.values(Type).filter(
     (type) => type !== 'Vampire' && type !== 'Imbued'
   );
-  public typeSelected: { [key: string]: boolean } = {};
-  // public selectedTypes: Type[] = [];
-
-  public traits = Object.values(Traits);
-  // public traitsSelected: { [key in Traits]?: boolean } = {};
-  public selectedTraits: Traits[] = [];
-
-  public clans = Object.values(Clan);
-  // public searchClan: string = '';
-  public clan = '';
-
-  public searcBloodCost: string = '';
-  // public bloodCosts = ['1', '2', '3', '4'];
-  public bloodCostSelected: { [key: string]: boolean } = {};
-  public selectedBloodCosts: string[] = [];
-
-  public searchPoolCost: string = '';
-  // public poolCosts = ['1', '2', '3', '4', '5', '6'];
-  public poolCostSelected: { [key: string]: boolean } = {};
-  public selectedPoolCosts: string[] = [];
+  public typeSelected: { [key: string]: boolean } = {};  
+  
 
   setUrlImage(url: string): void {
     this.url = url;
@@ -211,32 +199,69 @@ export class BibliotecaComponent implements OnInit {
   }
   }
 
-  //FILTROS POR CARACTERISTICAS
-  onTraitsChange(): void {
-    this.selectedTraits = Object.keys(this.libraryForm.value.traitsSelected)
-      .filter((trait) => this.libraryForm.value.traitsSelected[trait as Traits])
-      .map((trait) => trait as Traits);
+  //SEARCH BY TRAITS
+  onSearchTraitsChange(newValue: string): void {
+    const searchByTraitsControl = this.libraryForm.get('searchByTraits'); 
+    if(searchByTraitsControl) {
+      searchByTraitsControl.setValue(newValue);
+      searchByTraitsControl.updateValueAndValidity();
+    }
   }
 
-  //FILTROS POR TITULOS
-  onTitlesChange(): void {
-    this.selectedTitles = Object.keys(this.libraryForm.value.titlesSelected)
-      .filter((title) => this.libraryForm.value.titlesSelected[title as Title])
-      .map((title) => title as Title);
+  // RESET FILTER TRAITS
+  resetFiterTraits(): void {
+    const searchByTraitsControl = this.libraryForm.get('searchByTraits');
+    if (searchByTraitsControl) {
+      searchByTraitsControl.setValue('');
+      searchByTraitsControl.updateValueAndValidity();
+    }
   }
+
+  // SEARCH TITLE
+  onSearchTitleChange(newValue: string): void {
+    const searchTitleControl = this.libraryForm.get('searchTitle');
+    if (searchTitleControl) {
+      searchTitleControl.setValue(newValue);
+      searchTitleControl.updateValueAndValidity();
+    }
+  }
+
+  // RESET FILTER TITLE
+  resetFiterTitle(): void {
+    const searchTitleControl = this.libraryForm.get('searchTitle');
+    if (searchTitleControl) {
+      searchTitleControl.setValue('');
+      searchTitleControl.updateValueAndValidity();
+    }
+  }
+
+  // SEARCH SECT
+  onSearchSectChange(newValue: string): void {
+    const searchSectControl = this.libraryForm.get('searchSect');
+    if (searchSectControl) {
+      searchSectControl.setValue(newValue);
+      searchSectControl.updateValueAndValidity();
+    }
+  }
+
+  // RESET FILTER SECT
+  resetFiterSect(): void {
+    const searchSectControl = this.libraryForm.get('searchSect');
+    if (searchSectControl) {
+      searchSectControl.setValue('');
+      searchSectControl.updateValueAndValidity();
+    }
+  }
+
 
   //FILTROS POR COSTES
   onBloodCostsChange(): void {
-    this.selectedBloodCosts = Object.keys(this.bloodCostSelected)
-      .filter((bloodCost) => this.bloodCostSelected[bloodCost])
-      .map((bloodCost) => bloodCost);
+    
   }
 
   //FILTROS POR COSTES
   onPoolCostsChange(): void {
-    this.selectedPoolCosts = Object.keys(this.poolCostSelected)
-      .filter((poolCost) => this.poolCostSelected[poolCost])
-      .map((poolCost) => poolCost);
+   
   }
 
   loadCards(): void {
@@ -247,9 +272,6 @@ export class BibliotecaComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCards();
-    this.reaction = this.jsonSvc.reactionsData;
-    this.others = this.jsonSvc.othersData;
-    this.bloodCost = this.jsonSvc.bloodCostData;
-    this.poolCost = this.jsonSvc.poolCostData;
+
   }
 }

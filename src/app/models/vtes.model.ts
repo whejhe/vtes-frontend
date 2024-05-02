@@ -25,7 +25,7 @@ export interface Card {
   has_evolution?:   boolean;
   is_evolution?:    boolean;
   banned?:          Date;
-  pool_cost?:       string;
+  pool_cost?:       PoolCost;
   flavor_text?:     string;
   capacity_change?: string;
   multidisc?:       boolean;
@@ -33,14 +33,31 @@ export interface Card {
   combo?:           boolean;
   conviction_cost?: string;
   burn_option?:     boolean;
-  traits?:          string[];
+  traits?:          Traits;
   traits_library?: string[];
-  sect?:             string;
+  sect?:             Sect;
   disciplineNames?: string[];
   combat?:           Combat;
-  habilities?:      Habilities;
+  hability?:       Hability;
 }
 
+export enum PoolCost{
+  zero = "0",
+  one = "1",
+  two = "2",
+  three = "3",
+  four = "4",
+  five = "5",
+  six = "6",
+}
+
+export enum Sect {
+  Camarilla = "Camarilla",
+  Sabbat = "Sabbat",
+  Anarch = "Anarch",
+  Independent = "Independent",
+  Laibon = "Laibon",
+}
 
 export enum Clan {
   Abomination = "Abomination",
@@ -213,7 +230,7 @@ export enum Type {
   Vampire = "Vampire",
 }
 
-export enum Habilities {
+export enum Hability {
   Bleed = "Bleed",
   Strength = "Strength",
   Vote = "Vote",

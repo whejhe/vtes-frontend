@@ -65,15 +65,13 @@
           | filter:['Vampire', 'Imbued']:true
           | filterMulti: {
             searchName:libraryForm.value.searchName,
-            searchByCardText:libraryForm.value.searchByCardText,
-            selectedDisciplines:selectedDisciplines,
             selectedTypes:libraryForm.value.selectedTypes,
             searchClan:libraryForm.value.searchClan,
-            searchSect:searchSect,
-            selectedTraits: selectedTraits,
-            selectedTitles: selectedTitles,
-            selectedBloodCosts: selectedBloodCosts,
-            selectedPoolCosts: selectedPoolCosts
+            searchTitle: libraryForm.value.searchTitle,
+            searchByCardText:libraryForm.value.searchByCardText,
+            selectedDisciplines:selectedDisciplines,
+            searchSect: libraryForm.value.searchSect,
+            searchByTraits:libraryForm.value.searchByTraits,
             }; let i=index" (click)="openModal(card)" [class.table-light]="i % 2 === 0"
               [class.table-secondary]="i % 2 !== 0">
               <td class="imageFloat" style="cursor: pointer" (mouseenter)="setUrlImage(card.url)"
@@ -112,54 +110,91 @@
             <input name="filter" class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
               formControlName="searchByCardText" />
           </div>
-          <!--COMBAT-->
+          <!--SEARCH BY SECT-->
+           <div>
+            <h4 class="select">Sect:</h4>
+            <select id="sect" class="form-select form-select-sm"
+            formControlName="searchSect">
+              <option value="*" (click)="resetFiterSect()">Any</option>
+              <option
+              value="{{sect || 'Any'}}"
+              *ngFor="let sect of sects"
+              (click)="onSearchSectChange(sect)"
+              >
+                {{ sect }}
+              </option>
+            </select>
+          </div>
+          <!--SEARCH BY TRAITS-->
           <div>
-            <h4 class="select">Combat:</h4>
-            <select class="form-select form-select-sm">
-              <option selected>Any</option>
-              <option *ngFor="let item of combat" [value]="item.name">{{ item.name }}</option>
+            <h4 class="select">Search By Traits:</h4>
+            <select class="form-select form-select-sm"
+            formControlName="searchByTraits">
+              <option value="*" (click)="resetFiterTraits()">Any</option>
+              <option
+              value="{{ trait || 'Any' }}"
+              *ngFor="let trait of traits"
+              (click)="onSearchTraitsChange(trait)" 
+              >
+              {{ trait }}
+            </option>
+            </select>
+          </div>
+          <!--SEARCH BY TITLES-->
+          <div>
+            <h4 class="select">Title:</h4>
+            <select id="title" class="form-select form-select-sm"
+              formControlName="searchTitle">
+              <option value="*" (click)="resetFiterTitle()">Any</option>
+              <option
+              value="{{title || 'Any'}}"
+              *ngFor="let title of titles"
+              (click)="onSearchTitleChange(title)"
+              >
+                {{ title }}
+              </option>
             </select>
           </div>
           <!--ACTION-->
-          <div>
+          <!-- <div>
             <h4 class="select">Action:</h4>
             <select id="action" class="form-select form-select-sm">
               <option selected>Any</option>
               <option *ngFor="let item of action" [value]="item.name">{{ item.name }}</option>
             </select>
-          </div>
+          </div> -->
           <!--REACTION-->
-          <div>
+          <!-- <div>
             <h4 class="select">Reaction:</h4>
             <select id="reaction" class="form-select form-select-sm">
               <option selected>Any</option>
               <option *ngFor="let item of reaction" [value]="item.name">{{ item.name }}</option>
             </select>
-          </div>
+          </div> -->
           <!--OTHERS-->
-          <div>
+          <!-- <div>
             <h4 class="select">Others:</h4>
             <select id="others" class="form-select form-select-sm">
               <option selected>Any</option>
               <option *ngFor="let item of others" [value]="item.name">{{ item.name }}</option>
             </select>
-          </div>
+          </div> -->
           <!--BLOODCOST-->
-          <div>
+          <!-- <div>
             <h4 class="select">Blood Cost:</h4>
             <select id="bloodCost" class="form-select form-select-sm">
               <option selected>Any</option>
               <option *ngFor="let item of bloodCost" [value]="item.name">{{ item.name }}</option>
             </select>
-          </div>
+          </div> -->
           <!--POOLCOST-->
-          <div>
+          <!-- <div>
             <h4 class="select">Pool Cost:</h4>
             <select id="poolCost" class="form-select form-select-sm">
               <option selected>Any</option>
               <option *ngFor="let item of poolCost" [value]="item.name">{{ item.name }}</option>
             </select>
-          </div>
+          </div> -->
         </aside>
       </section>
     </main>

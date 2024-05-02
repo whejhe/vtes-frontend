@@ -10,7 +10,8 @@ import {
   Title,
   Traits,
   Type,
-  Habilities,
+  Hability,
+  Sect,
 } from '../../../../models/vtes.model';
 import { JsonServiceService } from '../../../../services/json-service.service';
 import {
@@ -60,14 +61,14 @@ export class CriptaComponent implements OnInit {
     searchTitle: new FormControl(''),
     searchHabilities: new FormControl(''),
     selectedDisciplines: new FormControl([]),
-    searchMinCapacity: new FormControl(),
-    searchMaxCapacity: new FormControl(),
-    searchSect: new FormControl(''), // No funciona
+    searchMinCapacity: new FormControl(1),
+    searchMaxCapacity: new FormControl(11),
+    searchSect: new FormControl(''),
   });
 
   cards: Card[] = [];
   filter: string = '';
-  searchSect: string = '';
+  // searchSect: string = '';
 
   clans = Object.values(Clan);
   clan: string = '';
@@ -75,8 +76,11 @@ export class CriptaComponent implements OnInit {
   titles = Object.values(Title);
   title: string = '';
 
-  habilities = Object.values(Habilities);
+  habilities = Object.values(Hability);
   hability: string = '';
+
+  sects = Object.values(Sect);
+  sect = '';
 
   minCapacity: number = 1;
   newMinCapacity?: number;
@@ -161,6 +165,24 @@ export class CriptaComponent implements OnInit {
     }
   }
 
+  // SEARCH SECT
+  onSearchSectChange(newValue: string): void {
+    const searchSectControl = this.cryptForm.get('searchSect');
+    if (searchSectControl) {
+      searchSectControl.setValue(newValue);
+      searchSectControl.updateValueAndValidity();
+    }
+  }
+
+  // RESET FILTER SECT
+  resetFiterSect(): void {
+    const searchSectControl = this.cryptForm.get('searchSect');
+    if (searchSectControl) {
+      searchSectControl.setValue('');
+      searchSectControl.updateValueAndValidity();
+    }
+  }
+
   // SEARCH HABILITIES
   onSearchHabilitiesChange(newValue: string): void {
     const searchHabilitiesControl = this.cryptForm.get('searchHabilities');
@@ -180,10 +202,11 @@ export class CriptaComponent implements OnInit {
   }
 
   // SEARCH BY MIN CAPACITY
-  onSearchMinCapacityChange(newMinCapacity?: number): void {
+  onSearchMinCapacityChange(event: any): void {
     const searchMinCapacityControl = this.cryptForm.get('searchMinCapacity');
+    console.log(searchMinCapacityControl?.value, 'seperador', parseInt(event.target.value))
     if (searchMinCapacityControl) {
-      searchMinCapacityControl.setValue(newMinCapacity);
+      searchMinCapacityControl.setValue(parseInt(event.target.value));
       searchMinCapacityControl.updateValueAndValidity();
     }
   }
@@ -236,5 +259,6 @@ export class CriptaComponent implements OnInit {
         .toLowerCase()
         .replace(/\s/g, '')}.svg`,
     }));
+
   }
 }
