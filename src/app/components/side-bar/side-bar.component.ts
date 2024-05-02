@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { ImageService } from '../../services/image.service';
 import { Image } from '../../models/image.model';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-side-bar',
@@ -17,8 +18,11 @@ import { Router } from '@angular/router';
 })
 export class SideBarComponent {
 
+  apiUrl = environment.apiUrl || environment.localUrl;
   public avatarImage:Image | null = null;
   user: any | null = null;
+  // public defaultImage = "http://localhost:3000/vtes-backend/uploads/avatars/default-avatar.png";
+  public defaultImage = `${this.apiUrl}/vtes-backend/uploads/avatars/default-avatar.png`;
 
   constructor(
     private authSvc: AuthService,
