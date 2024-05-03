@@ -7,6 +7,7 @@ import { Clan, Discipline, Type } from '../../../../models/vtes.model';
 import { IconService } from '../../../../services/icon.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomCardsService } from '../../../../services/custom-cards.service';
+import { environment } from '../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-upload-card',
@@ -39,6 +40,8 @@ export class UploadCardComponent implements OnInit {
     description: new FormControl('not defined'),
     image: new FormControl(),
   });
+
+  // apiUrl = environment.apiUrl + '/uploads/customCards/';
 
   public searchGroup: string = '';
   public searchClan: string = '';

@@ -24,16 +24,25 @@ export class ListarEventosComponent implements OnInit {
     public authSvc: AuthService
   ) { }
 
-  events: Event[] = [];
+  event: Event[] = [];
   user: User[] = [];
 
-  getEvents(){
-    this.eventSvc.getEvents();
-  }
+
+  // getEvents(){
+  //   this.eventSvc.getEvents().subscribe(
+  //     (events: Event[]) => {
+  //       this.event = events;
+  //       console.log('Eventos: ', this.event);
+  //     },
+  //     (error) => {
+  //       console.log('Error al obtener los eventos: ', error);
+  //     }
+  //   );
+  // }
 
   ngOnInit(): void {
-    console.log('Lista de Eventos: ', this.events);
-    this.getEvents();
+    this.eventSvc.getEvents();
+    console.log('Lista de Eventos: ', this.event);
   }
 
 }

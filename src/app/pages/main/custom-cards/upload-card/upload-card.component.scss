@@ -34,9 +34,20 @@
   opacity: 1;
 }
 
+.button{
+  position: relative;
+}
 button{
-  width: 260px;
+  max-width: 260px;
+  width: 100%;
   margin: auto;
+  position: absolute;
+  right: 10%;
+  bottom: 5em;
+}
+button:hover{
+  cursor: pointer;
+  background-color: rgb(105, 9, 9);
 }
 
 input{

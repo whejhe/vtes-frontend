@@ -53,7 +53,9 @@
       <!--IMAGEN-->
       <div class="col-md-3">
         <label for="image" class="form-label">Image:</label>
-        <input type="file" class="form-control" id="image" required formControlName="image" (change)="handleFileChange($event)">
+        <input type="file" class="form-control" id="image" required 
+        formControlName="image" 
+        (change)="handleFileChange($event)">
       </div>
 
       <!--CAPACIDAD-->
@@ -104,15 +106,13 @@
           <option value="false">Privado</option>
         </select>
       </div>
-      <!--GUARDADO-->
-      <div class="col-md-3 button">
-        <button class="btn btn-dark" type="submit"
-        >Guardar</button>
-      </div>
-
       <div class="col-md-3 end"></div>
     </div>
-
+    <!--GUARDADO-->
+    <div class="button">
+      <button class="btn btn-dark" type="submit"
+      >Guardar</button>
+    </div>
 
   </form>
 </div>

@@ -133,8 +133,6 @@ export class AuthService implements OnInit{
     if (!this.currentUser) {
       this.currentUser = this.decodeToken(this.getToken()!);
       console.log(this.currentUser);
-    }else{
-      console.log('Sesion iniciada');
     }
     return this.currentUser;
   }

@@ -1,52 +1,89 @@
+<!--front/src/app/pages/main/eventos/events/events.component.html-->
 <div class="container">
-    <form action="">
+    <form action="" class="form-container" 
+    [formGroup]="eventForm"
+    >
+        <!--NOMBRE-->
         <div class="row">
             <div class="col-md-6">
-                <label for="title" class="form-label">Nombre del Evento</label>
-                <input type="text" class="form-control" id="title" required>
+                <label for="name" class="form-label">Nombre del Evento</label>
+                <input type="text" class="form-control" id="name" required
+                formControlName="name">
             </div>
         </div>
         
         <div class="row">
+            <!--EMAIL-->
             <div class="col-md-6">
                 <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="name@gmail.com">
+                <input type="email" class="form-control" id="email" placeholder="name@gmail.com"
+                formControlName="email">
             </div>
 
+            <!--FECHA-->
             <div class="col-md-6">
-                <label for="nacimiento">Fecha<small></small></label><br>
-                <input type="date" id="date"  name="date"  class="sm-form-control date">
+                <label for="fecha">Fecha</label><br>
+                <input type="date" id="date" class="sm-form-control date"
+                formControlName="fecha">
             </div>
         </div>
 
         <div class="row">
+            <!--PROVINCIA-->
             <div class="col-md-6">
                 <label for="country" class="form-label">Provincia</label>
-                <select class="form-select" id="provincia" required>
+                <select class="form-select" id="provincia" required
+                formControlName="provincia">
                     <option value="">Choose...</option>
                     <option>Provincia</option>
                 </select>
             </div>
-
+            <!--LOCALIDAD-->
             <div class="col-md-6">
-                <label for="country" class="form-label">Ciudad</label>
-                <select class="form-select" id="ciudad" required>
+                <label for="localidad" class="form-label">Localidad</label>
+                <select class="form-select" id="localidad" required
+                formControlName="localidad">
                     <option value="">Choose...</option>
-                    <option>Ciudad</option>
+                    <option>Localidad</option>
                 </select>
             </div>
         </div>
         <br>
-        <select class="form-select" aria-label="Default select example">
+        <!--TYPE-->
+        <select class="form-select" aria-label="Default select example"
+        formControlName="type">
             <option selected>Tipo de Evento</option>
-            <option value="1">Torneo</option>
-            <option value="2">Pachanga</option>
+            <option value="1">Torneo Regional</option>
+            <option value="2">Torneo Nacional</option>
+            <option value="2">Torneo Europeo</option>
+            <option value="2">Torneo GP</option>
         </select>
+        <!--DESCRIPCION-->
         <div class="mb-3">
             <label for="Añade la informacion relevante" class="form-label">Añade la informacion relevante</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+            formControlName="description"
+            >Describe el evento...
+            </textarea>
         </div>
 
-        <button class="w-100 btn btn-dark btn-lg" type="submit">Enviar</button>
+        <button class="w-100 btn btn-dark btn-lg" type="submit"
+        >Enviar</button>
     </form>
+    <br>
+        @if(showSucessMessage){
+        <div class="alert alert-dismissible alert-success">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert
+            message</a>.
+        </div>
+        }
+    
+        @if(showErrorMessage){
+        <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>{{errorMesage}}</strong><br>
+            <p>Please, check your credentials and try submitting again.</p>
+        </div>
+        }
 </div>

@@ -3,6 +3,7 @@ export interface Event{
     creatorId: string,
     name:string,
     email:string,
+    type:String,
     provincia:String,
     localidad:string,
     direccion:string,

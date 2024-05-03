@@ -9,7 +9,7 @@
         </tr>
       </thead>
       <tbody>
-        @for(event of events; track event._id){
+        @for(event of event; track event._id){
           <tr class="table-light" [routerLink]="['/ficha-evento/'+event._id]">
             <td>{{event.name}}</td>
             <td>{{event.fecha}}</td>
