@@ -51,9 +51,18 @@ export class CustomCardsService {
     return this.http.put<CustomCard>(`${this.apiUrl}/upload`, customCard, { headers });
   }
 
-  getAllCustomCards(): Observable<CustomCard[]> {
-    return this.http.get<CustomCard[]>(this.apiUrl);
+  // getAllCustomCards(): Observable<CustomCard[]> {
+  //   return this.http.get<CustomCard[]>(this.apiUrl);
+  // }
+  getAllCustomCards(page: number = 1, itemsPerPage: number = 10) {
+    const params = {
+      page: page,
+      limit: itemsPerPage,
+    };
+    console.log('Params: ', params);
+    return this.http.get<{ data: CustomCard[]; total: number }>(this.apiUrl, { params });
   }
+  
 
   getCustomCardById(id: string): Observable<CustomCard> {
     return this.http.get<CustomCard>(`${this.apiUrl}/${id}`);

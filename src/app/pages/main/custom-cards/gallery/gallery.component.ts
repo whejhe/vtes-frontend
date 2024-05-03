@@ -35,6 +35,11 @@ export class GalleryComponent implements OnInit {
       searchByName: new FormControl(''),
     });
 
+    // Paginación
+    currentPage: number = 1;
+    itemsPerPage: number = 10;
+    totalItems: number = 0;
+
     user: User[] = [];
     customCards: CustomCard[] = [];
 
@@ -49,16 +54,30 @@ export class GalleryComponent implements OnInit {
             });
     }
 
-    getCustomCards() {
-      this.customSvc.getAllCustomCards().subscribe(
-        (cards: CustomCard[]) => {
-          this.customCards = cards;
+    // getCustomCards() {
+    //   this.customSvc.getAllCustomCards().subscribe(
+    //     (cards: CustomCard[]) => {
+    //       this.customCards = cards;
+    //     },
+    //     (error) => {
+    //       console.log('Error al obtener las tarjetas personalizadas: ', error);
+    //     }
+    //   );
+    // }
+
+    getCustomCards(page: number = 1) {
+      this.customSvc.getAllCustomCards(page, this.itemsPerPage).subscribe(
+        (response: { data: CustomCard[]; total: number }) => {
+          console.log('Response',response);
+          this.customCards = response.data;
+          this.totalItems = response.total;
         },
         (error) => {
           console.log('Error al obtener las tarjetas personalizadas: ', error);
         }
       );
     }
+    
 
     openModal(card: CustomCard): void {
       this.dialog.open(DetailsCustomCardComponent, {
@@ -66,9 +85,23 @@ export class GalleryComponent implements OnInit {
       });
     }
 
+    // Metodos para la paginación
+    changePage(page: number) {
+      this.currentPage = page;
+      this.getCustomCards(page);
+    }
+    getPageNumbers():number[]{
+      const pageCount = this.getPageCount();
+      return Array.from({ length: pageCount }, (_, i) => i + 1);
+    }
+    getPageCount(): number {
+      return Math.ceil(this.totalItems / this.itemsPerPage);
+    }
+
     ngOnInit(): void {
         this.getUsers();
-        this.getCustomCards();
+        this.getCustomCards(this.currentPage);
+        console.log('customCards: ', this.customCards);
     }
 
 }
