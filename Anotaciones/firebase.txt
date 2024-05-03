@@ -1,0 +1,11 @@
+npm install -g firebase-tools
+firebase init
+
+ng add @angular/fire
+
+Para el almacenamiento de Imagenes seleccionamos:
+- Cloud storege
+
+
+Para subir una imagen, puedes usar el método put() o uploadBytes().
+Para obtener la URL de descarga de una imagen, puedes usar el método getDownloadURL()
