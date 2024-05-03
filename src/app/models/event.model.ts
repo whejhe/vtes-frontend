@@ -1,3 +1,4 @@
+// front/src/app/models/event.model.ts
 export interface Event{
     _id: string,
     creatorId: string,
@@ -10,5 +11,5 @@ export interface Event{
     description: String,
     fecha:Date,
     hora:String,
-    numMaxParticipantes:Number
+    numMaxParticipantes:string
 }
