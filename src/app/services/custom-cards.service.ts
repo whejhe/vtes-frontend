@@ -11,9 +11,7 @@ import { environment } from '../../environments/environment.development';
 })
 export class CustomCardsService {
 
-  // private apiUrl = environment.apiUrl + '/custom-cards' || environment.localUrl + '/custom-cards';
-  private apiUrl = environment.localUrl + '/custom-cards';
-  // private apiUrl = 'http://localhost:3000/custom-cards';
+  private apiUrl = environment.apiUrl + '/custom-cards' || 'http://localhost:3000/custom-cards';
 
   constructor(private http: HttpClient, private authSvc: AuthService) { }
 
@@ -50,7 +48,7 @@ export class CustomCardsService {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
     console.log('Esto es apiUrl 🤣🤣 ==> ', this.apiUrl);
-    
+
     return this.http.put<CustomCard>(`${this.apiUrl}/upload`, customCard, { headers });
   }
 
@@ -65,7 +63,7 @@ export class CustomCardsService {
     console.log('Params: ', params);
     return this.http.get<any>(this.apiUrl);
   }
-  
+
 
   getCustomCardById(id: string): Observable<CustomCard> {
     return this.http.get<CustomCard>(`${this.apiUrl}/${id}`);

@@ -23,7 +23,7 @@ export class EventService {
     return headers;
   }
 
-  private apiUrl = environment.apiUrl + '/events/' || environment.localUrl + '/events/';
+  private apiUrl = environment.apiUrl + '/events/' || 'http://localhost:3000/events/';
 
   // createEvent(event: FormData): Observable<Event> {
   //   let headers = new HttpHeaders();
