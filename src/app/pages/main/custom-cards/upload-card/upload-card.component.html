@@ -1,5 +1,5 @@
 <div class="container">
-  <form action="" class="row" role="search" 
+  <form action="" class="row" role="search"
   [formGroup]="updateCardForm"
   (ngSubmit)="uploadCard()"
   >
@@ -53,8 +53,8 @@
       <!--IMAGEN-->
       <div class="col-md-3">
         <label for="image" class="form-label">Image:</label>
-        <input type="file" class="form-control" id="image" required 
-        formControlName="image" 
+        <input type="file" class="form-control" id="image" required
+        formControlName="image"
         (change)="handleFileChange($event)">
       </div>
 

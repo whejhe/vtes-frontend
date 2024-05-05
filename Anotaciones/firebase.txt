@@ -1,3 +1,55 @@
+import { Storage, ref , uploadBytes, listAll, getDownloadURL} from '@angular/fire/storage';
+
+constructor(
+  private storage:Storage
+  ){
+    this.images = [];
+  }
+
+images:string[];
+
+uploadImage($event:any){
+  const file = $event.target.file[0];
+  console.log(file)
+}
+
+const imgRef = ref(this.storage, `CustomCards/${file.name}`)
+
+uploadBytes(imgRef, file)
+  .then(response => {
+    console.log(response)
+    this.getImages();//Actualizar vista
+  })
+  .catch(error => console.log(error));
+
+//Listar Imagenes
+getImages(){
+  const imagesRef = ref(this.storage, 'CustomCards');
+
+  listAll(imagesRef){
+    .then(async response =>{
+      console.log(response);
+      this.images = []; //Para evitar que se vayan duplicando
+      for(let item of response.items){
+        const url = await getDownloadURL(item);
+        console.log(url);
+        this.images.push(url);
+      }
+    })
+    .catch(error => console.log(error));
+  }
+}
+
+ngOnInit(){
+  this.getImages();
+}
+-----------------------------------------------------------------
+<div class="images">
+  <img [src]="image" *ngFor="let image of images">
+</div>
+
+-------------------------------------------------------------------
+
 npm install -g firebase-tools
 firebase init
 

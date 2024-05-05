@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { DetailsCustomCardComponent } from '../../../../components/details-custom-card/details-custom-card.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FilterCustomCardsPipe } from '../../../../pipes/filter-custom-cards.pipe';
+import { environment } from '../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-gallery',
@@ -34,6 +35,8 @@ export class GalleryComponent implements OnInit {
     searchByAuthor: new FormControl(''),
     searchByName: new FormControl(''),
   });
+
+  apiUrl = environment.apiUrl || 'http://localhost:3000';
 
 
   // Paginación
@@ -81,7 +84,7 @@ export class GalleryComponent implements OnInit {
       }
     );
   }
-  
+
 
 
   openModal(card: CustomCard): void {
@@ -99,26 +102,26 @@ export class GalleryComponent implements OnInit {
   paginate() {
     const searchByName = this.customCardForm.get('searchByName')?.value;
     const searchByAuthor = this.customCardForm.get('searchByAuthor')?.value;
-  
+
     let filteredCards = this.customCards;
-  
+
     if (searchByName) {
       filteredCards = filteredCards.filter((card) =>
         card.name.toLowerCase().includes(searchByName.toLowerCase())
       );
     }
-  
+
     if (searchByAuthor) {
       filteredCards = filteredCards.filter((card) =>
         card.author.toLowerCase().includes(searchByAuthor.toLowerCase())
       );
     }
-  
+
     const indiceInicial = (this.currentPage - 1) * this.itemsPerPage;
     const indiceFinal = indiceInicial + this.itemsPerPage;
     this.paginatedCards = filteredCards.slice(indiceInicial, indiceFinal);
   }
-  
+
   changePage(page: number) {
     this.currentPage = page;
     this.paginate()

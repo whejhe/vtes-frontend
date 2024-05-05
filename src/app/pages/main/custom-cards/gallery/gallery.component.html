@@ -30,7 +30,7 @@
         searchByAuthor: customCardForm.value.searchByAuthor
       }">
         <h4>Auth: {{card.author}}</h4>
-        <img [src]="card.url" class="customCard"
+        <img [src]="apiUrl + card.url" class="customCard"
         (click)="openModal(card)">
         <p>{{card.name}}</p>
       </div>
@@ -54,6 +54,6 @@
         </li>
       </ul>
     </div>
-    
+
   </form>
 </div>

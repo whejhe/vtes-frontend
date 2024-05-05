@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { Storage, ref , uploadBytes, listAll, getDownloadURL} from '@angular/fire/storage';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../../models/user.model';
 import { AuthService } from '../../../../services/auth.service';
@@ -7,7 +8,6 @@ import { Clan, Discipline, Type } from '../../../../models/vtes.model';
 import { IconService } from '../../../../services/icon.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomCardsService } from '../../../../services/custom-cards.service';
-import { environment } from '../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-upload-card',
@@ -25,8 +25,10 @@ export class UploadCardComponent implements OnInit {
     public authSvc: AuthService,
     public iconSvc: IconService,
     public dialog: MatDialog,
-    public customCardSvc: CustomCardsService
-  ) { }
+    public customCardSvc: CustomCardsService,
+    // private storage:Storage
+  ) {
+  }
 
   updateCardForm: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -38,10 +40,22 @@ export class UploadCardComponent implements OnInit {
     type: new FormControl('not defined'),
     isPublic: new FormControl('true'),
     description: new FormControl('not defined'),
-    image: new FormControl(),
+    image: new FormControl(''),
   });
 
-  // apiUrl = environment.apiUrl + '/uploads/customCards/';
+
+  // uploadImage($event:any){
+  //   const file = $event.target.file[0];
+  //   console.log(file)
+  // }
+  // imgRef = ref(this.storage, `CustomCards/${this.updateCardForm.value.image.name}`);
+  // uploadBytes(imgRef: any, file: any){
+  //   uploadBytes(imgRef, file)
+  //     .then(response => {
+  //       console.log(response)
+  //     })
+  //     .catch(error => console.log(error));
+  // };
 
   public searchGroup: string = '';
   public searchClan: string = '';
