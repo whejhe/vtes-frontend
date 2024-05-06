@@ -149,6 +149,11 @@ export class AuthService implements OnInit{
     return this.http.get<User[]>(`${this.apiUrl}/users`);
   }
 
+  // OBTENER USUARIO POR ID
+  getUserById(id: string): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/users/${id}`);
+  }
+
   // ELIMINAR USUARIOS
   deleteUser(id: string): Observable<any> {
     let headers = new HttpHeaders();

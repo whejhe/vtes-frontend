@@ -1,40 +1,74 @@
-.container{
-    width: 70%;
-    border: 2px solid black;
-    height: 50vh;
-    margin: 5em auto;
-    box-shadow:  3px 0px 5px 0 rgb(63, 2, 2);
-    .back{
-        margin: 1em;
-        float: right;
-    }
-    button:hover{
-        background-color: rgb(99, 5, 5);
+.container {
+  width: 70%;
+  border: 2px solid black;
+  height: 50vh;
+  margin: 5em auto;
+  box-shadow: 3px 0px 5px 0 rgb(63, 2, 2);
+
+  .back {
+    margin: 1em;
+    float: right;
+  }
+
+  button:hover {
+    background-color: rgb(99, 5, 5);
+  }
+
+  .header {
+    margin: 2em;
+
+    .title {
+      text-decoration: underline;
+      font-size: 1.8em;
+      text-align: center;
     }
 
-    .header{
-        margin: 2em;
-        .title{
-            text-decoration: underline;
-            font-size: 1.8em;
-            text-align: center;
-        }
-        .info{
-            margin: 3em 1em;
-            font-size: 1.2em;
-        }
-        .buttons{
-            margin: 3em 1em;
-            padding-left: 5em;
-            button{
-                margin-bottom: 0.5em;
-            }
-        }
+    .info {
+      margin: 3em 1em;
+      font-size: 1.2em;
     }
 
-    .flex{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+    .buttons {
+      margin: 3em 1em;
+      padding-left: 5em;
+
+      button {
+        margin-bottom: 0.5em;
+      }
     }
+  }
+
+  .flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+
+table {
+  border: 2px solid rgb(36, 35, 35);
+
+  td {
+    background-color: rgba($color: rgb(255, 255, 255), $alpha: 0);
+  }
+
+  button {
+    margin-left: 0.4em;
+  }
+}
+
+img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+
+section{
+  .title {
+    text-decoration: underline;
+    font-size: 1.8em;
+    text-align: center;
+  }
 }

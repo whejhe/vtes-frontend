@@ -1,28 +1,56 @@
 <div class="container">
-    <header class="header">
-        <h1 class="title">
-            <strong>Titulo: {{event?.name}}</strong>
-        </h1>
-        <div class="flex">
-            <div class="info">
-                <p><strong>Type: </strong> {{event?.type}}</p>
-                <p><strong>Provincia: </strong>{{event?.provincia }}</p>
-                <p><strong>Localidad: </strong>{{event?.localidad }}</p>
-                <p><strong>Direccion: </strong>{{event?.direccion }}</p>
-                <p><strong>Fecha: </strong>{{event?.fecha }}</p>
-                <p><strong>Hora: </strong>{{event?.hora }}</p>
-                <p><strong>Max. Participantes: </strong>{{event?.numMaxParticipantes }}</p>
-                <p><strong>Description: </strong>{{event?.description}}</p>
-            </div>
-            <div class="buttons">
-                <button class="btn btn-dark">Apuntarse</button><br>
-                <button class="btn btn-dark">Subir mazo</button><br>
-                <button class="btn btn-dark">Darse de Baja</button><br>
-                <button class="btn btn-dark">Añadir comentario</button><br>
-                <button class="btn btn-dark" [routerLink]="['/listar-eventos/']">Back to list of Events</button>
+  <header class="header">
+    <h1 class="title">
+      <strong>Titulo: {{event?.name}}</strong>
+    </h1>
+    <div class="flex">
+      <div class="info">
+        <p><strong>Type: </strong> {{event?.type}}</p>
+        <p><strong>Provincia: </strong>{{event?.provincia }}</p>
+        <p><strong>Localidad: </strong>{{event?.localidad }}</p>
+        <p><strong>Direccion: </strong>{{event?.direccion }}</p>
+        <p><strong>Fecha: </strong>{{event?.fecha }}</p>
+        <p><strong>Hora: </strong>{{event?.hora }}</p>
+        <p><strong>Max. Participantes: </strong>{{event?.numMaxParticipantes }}</p>
+        <p><strong>Description: </strong>{{event?.description}}</p>
+      </div>
+      <div class="buttons">
+        <button class="btn btn-dark">Apuntarse</button><br>
+        <button class="btn btn-dark">Subir mazo</button><br>
+        <button class="btn btn-dark">Darse de Baja</button><br>
+        <button class="btn btn-dark">Añadir comentario</button><br>
+        <button class="btn btn-dark" [routerLink]="['/listar-eventos/']">Back to list of Events</button>
 
-            </div>
-        </div>
-    </header>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <h2 class="title">Participantes</h2>
+    <table class="table table-hover">
+      <thead>
+        <tr class="table-dark">
+          <th>Image</th>
+          <th>Participantes</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(eventUser of eventUsers; track eventUser._id){
+        <tr class="table-light">
+          <td><img [src]="eventUser.user.avatarUrl"></td>
+          <td>{{eventUser.user.name}}</td>
+          <td>{{eventUser.registrationStatus}}</td>
+          <td></td>
+          <th>
+            <button class="btn btn-dark">Dar de Baja</button>
+          </th>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </section>
 
 </div>
