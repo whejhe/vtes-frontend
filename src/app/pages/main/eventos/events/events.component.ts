@@ -60,54 +60,39 @@ export class EventsComponent implements OnInit {
     })
   }
 
-
-  // createEvent() {
-  //   try {
-  //     const eventForm = new FormData();
-  //     eventForm.append('creatorId', this.authSvc.getCurrentUser()?._id ?? 'defaultId');
-  //     eventForm.append('name', this.eventForm.get('name')?.value);
-  //     eventForm.append('email', this.eventForm.get('email')?.value);
-  //     eventForm.append('type', this.eventForm.get('type')?.value);
-  //     eventForm.append('provincia', this.eventForm.get('provincia')?.value);
-  //     eventForm.append('localidad', this.eventForm.get('localidad')?.value);
-  //     eventForm.append('direccion', this.eventForm.get('direccion')?.value);
-  //     eventForm.append('description', this.eventForm.get('description')?.value);
-  //     eventForm.append('fecha', this.eventForm.get('fecha')?.value);
-  //     eventForm.append('hora', this.eventForm.get('hora')?.value);
-  //     eventForm.append('numMaxParticipantes', this.eventForm.get('numMaxParticipantes')?.value);
-
-  //     this.eventSvc.createEvent(eventForm).subscribe({
-  //       next: (res) => {
-  //         this.showSucessMessage = true;
-  //         setTimeout(() => this.showSucessMessage = false, 4000);
-  //         this.eventForm.reset();
-  //       },
-  //       error: (err) => {
-  //         this.showErrorMessage = true;
-  //         setTimeout(() => this.showErrorMessage = false, 4000);
-  //         this.errorMesage = err.error.message;
-  //       }
-  //     })
-  //   } catch (err) {
-  //     console.log('Error al crear el evento: ',err);
-  //   }
-  // }
-
-  createEvent(): void{
-    this.eventSvc.createEvent(this.eventForm.value).subscribe({
-      next: (res) => {
-        this.showSucessMessage = true;
-        setTimeout(() => this.showSucessMessage = false, 4000);
-        this.eventForm.reset();
-      },
-      error: (err) => {
-        this.showErrorMessage = true;
-        setTimeout(() => this.showErrorMessage = false, 4000);
-        this.errorMesage = err.error.message;
-      }
-    })
+  createEvent() {
+    try {
+      const eventData = {
+        creatorId: this.authSvc.getCurrentUser()?._id ?? 'defaultId',
+        name: this.eventForm.get('name')?.value,
+        email: this.eventForm.get('email')?.value,
+        type: this.eventForm.get('type')?.value,
+        provincia: this.eventForm.get('provincia')?.value,
+        localidad: this.eventForm.get('localidad')?.value,
+        direccion: this.eventForm.get('direccion')?.value,
+        description: this.eventForm.get('description')?.value,
+        fecha: this.eventForm.get('fecha')?.value,
+        hora: this.eventForm.get('hora')?.value,
+        numMaxParticipantes: this.eventForm.get('numMaxParticipantes')?.value
+      };
+  
+      this.eventSvc.createEvent(eventData).subscribe({
+        next: (res) => {
+          this.showSucessMessage = true;
+          setTimeout(() => this.showSucessMessage = false, 4000);
+          this.eventForm.reset();
+        },
+        error: (err) => {
+          this.showErrorMessage = true;
+          setTimeout(() => this.showErrorMessage = false, 4000);
+          this.errorMesage = err.error.message;
+        }
+      });
+    } catch (err) {
+      console.log('Error al crear el evento: ', err);
+    }
   }
-
+  
 
   ngOnInit(): void {
     console.log('usuario actual:', this.currentUser);

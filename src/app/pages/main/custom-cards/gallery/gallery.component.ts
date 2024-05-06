@@ -10,6 +10,7 @@ import { DetailsCustomCardComponent } from '../../../../components/details-custo
 import { MatDialog } from '@angular/material/dialog';
 import { FilterCustomCardsPipe } from '../../../../pipes/filter-custom-cards.pipe';
 import { environment } from '../../../../../environments/environment.development';
+import { FirebaseStorageService } from '../../../../services/firebase-storage.service';
 
 @Component({
   selector: 'app-gallery',
@@ -28,7 +29,8 @@ export class GalleryComponent implements OnInit {
   constructor(
     public authSvc: AuthService,
     public customSvc: CustomCardsService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public firebaseSvc: FirebaseStorageService
   ) { }
 
   customCardForm: FormGroup = new FormGroup({
@@ -59,19 +61,11 @@ export class GalleryComponent implements OnInit {
       });
   }
 
-  // getCustomCards(page: number = 1) {
-  //   this.customSvc.getAllCustomCards(page, this.itemsPerPage).subscribe(
-  //     (response) => {
-  //       // console.log('Response', response);
-  //       this.customCards = response;
-  //       this.totalItems = response.length;
-  //       this.paginate()
-  //     },
-  //     (error) => {
-  //       console.log('Error al obtener las tarjetas personalizadas: ', error);
-  //     }
-  //   );
-  // }
+  onImageUpload(event: any) {
+    const file = event.target.files[0];
+    this.firebaseSvc.uploadImage(file);
+  }
+
   getCustomCards() {
     this.customSvc.getAllCustomCards().subscribe(
       (response) => {
@@ -85,8 +79,6 @@ export class GalleryComponent implements OnInit {
     );
   }
 
-
-
   openModal(card: CustomCard): void {
     this.dialog.open(DetailsCustomCardComponent, {
       data: { card },
@@ -94,11 +86,6 @@ export class GalleryComponent implements OnInit {
   }
 
   // Metodos para la paginación
-  // paginate() {
-  //   const indiceInicial = (this.currentPage - 1) * this.itemsPerPage;
-  //   const indiceFinal = indiceInicial + this.itemsPerPage;
-  //   this.paginatedCards = this.customCards.slice(indiceInicial, indiceFinal);
-  // }
   paginate() {
     const searchByName = this.customCardForm.get('searchByName')?.value;
     const searchByAuthor = this.customCardForm.get('searchByAuthor')?.value;
@@ -137,9 +124,8 @@ export class GalleryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUsers();
-    // this.getCustomCards(this.currentPage);
     this.getCustomCards();
-    // console.log('customCards: ', this.customCards);
+    // this.firebaseSvc.getImages();
   }
 
 }

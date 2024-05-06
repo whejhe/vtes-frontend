@@ -9,14 +9,13 @@
         </tr>
       </thead>
       <tbody>
-        @for(event of event; track event._id){
-          <tr class="table-light" [routerLink]="['/ficha-evento/'+event._id]">
-            <td>{{event.name}}</td>
-            <td>{{event.fecha}}</td>
-            <td>{{event.provincia}}</td>
-            <td>{{event.localidad}}</td>
-          </tr>
-        }
+        <tr *ngFor="let event of event" class="table-light" 
+        [routerLink]="['/ficha-event/'+event._id]">
+          <td>{{event.name}}</td>
+          <td>{{event.fecha}}</td>
+          <td>{{event.provincia}}</td>
+          <td>{{event.localidad}}</td>
+        </tr>
       </tbody>
     </table>
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
-import { Storage, ref , uploadBytes, listAll, getDownloadURL} from '@angular/fire/storage';
+import { Storage, ref, uploadBytes, listAll, getDownloadURL } from '@angular/fire/storage';
 
 // import { Storage, ref , uploadBytes, listAll, getDownloadURL} from '@angular/fire/storage';
 
@@ -10,23 +10,47 @@ import { Storage, ref , uploadBytes, listAll, getDownloadURL} from '@angular/fir
 })
 export class FirebaseStorageService {
 
+  images: string[] = [];
+
   constructor(
     private storage: Storage
   ) { }
 
   // Subir una imagen
-uploadImage(image: File): Promise<firebase.storage.UploadTaskSnapshot> {
-  return this.storage.upload('images', image);
-}
+  async uploadImage($event:any) {
+    const file = $event.target.files[0];
+    const imgRef = ref(this.storage, `CustomCards/${file.name}`);
+    try {
+      await uploadBytes(imgRef, file);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-// Descargar una imagen
-downloadImage(imagePath: string): Promise<firebase.storage.FileReference> {
-  return this.storage.ref(imagePath).getDownloadURL();
-}
+  async getImageDownloadUrl(imgRef: any) {
+    try {
+      const url = await getDownloadURL(imgRef);
+      this.images.push(url);
+      return url;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  }
 
-// Eliminar una imagen
-deleteImage(imagePath: string): Promise<void> {
-  return this.storage.ref(imagePath).delete();
-}
+  async getImages() {
+    const imagesRef = ref(this.storage, 'CustomCards');
+    try {
+      const response = await listAll(imagesRef);
+      this.images = [];
+      for (let item of response.items) {
+        const url = await this.getImageDownloadUrl(item);
+        console.log(url);
+      }
+      return await this.images;
+    } catch (error) {
+      return console.log(error);
+    }
+  }
 
 }

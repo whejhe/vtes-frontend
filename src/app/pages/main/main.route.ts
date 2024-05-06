@@ -15,6 +15,7 @@ import { NewForoComponent } from "./foro/new-foro/new-foro.component";
 import { UploadCardComponent } from "./custom-cards/upload-card/upload-card.component";
 import { ContactComponent } from "./contact/contact.component";
 import { NewDeckComponent } from "./deck/deck/deck.component";
+import { FichaEventComponent } from "./eventos/ficha-event/ficha-event.component";
 
 export const MAIN_ROUTE:Routes = [
   {path: '', title: 'Inicio',component: InicioComponent},
@@ -26,6 +27,7 @@ export const MAIN_ROUTE:Routes = [
   {path: 'events', title: 'Events',component: EventsComponent},
   {path: 'deck',title: 'Deck', component: NewDeckComponent},
   {path: 'deck/:id',title: 'Deck', component: NewDeckComponent},
+  {path: 'ficha-event/:id', title: 'Ficha Event',component: FichaEventComponent},
   {path: 'lista-decks',title: 'Lista Decks', component: ListaDecksComponent},
   {path: 'listar-eventos',title: 'Lista de Eventos', component: ListarEventosComponent},
   {path: 'list-foros',title: 'Lista de Foros', component: ListForosComponent},

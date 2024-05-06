@@ -9,6 +9,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class EventService {
+  events: any;
 
   constructor(
     private http: HttpClient,
@@ -25,30 +26,16 @@ export class EventService {
 
   private apiUrl = environment.apiUrl + '/events/' || 'http://localhost:3000/events/';
 
-  // createEvent(event: FormData): Observable<Event> {
-  //   let headers = new HttpHeaders();
-  //   headers = this.addAuthHeader(headers);
-  //   return this.http.post<any>(`${this.apiUrl}admin/`, event, { headers });
-  // }
-
-  createEvent(event: FormData): Observable <Event> {
-    const eventData = new FormData();
-    eventData.append('name', event.get('name') as string);
-    eventData.append('email', event.get('email') as string);
-    eventData.append('type', event.get('type') as string);
-    eventData.append('provincia', event.get('provincia') as string);
-    eventData.append('localidad', event.get('localidad') as string);
-    eventData.append('direccion', event.get('direccion') as string);
-    eventData.append('description', event.get('description') as string);
-    eventData.append('fecha', event.get('fecha') as string);
-    eventData.append('hora', event.get('hora') as string);
-    eventData.append('numMaxParticipantes', event.get('numMaxParticipantes') as string);
+  
+  createEvent(event: any): Observable<Event> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
-    return this.http.post<any>(`${this.apiUrl}admin/`, eventData, { headers });
+    return this.http.post<Event>(`${this.apiUrl}admin/`, event, { headers });
   }
+  
 
   getEvents(): Observable<Event[]> {
+    console.log(`${this.apiUrl}/users`);
     return this.http.get<Event[]>(`${this.apiUrl}users`);
   }
 
@@ -57,7 +44,9 @@ export class EventService {
   }
 
   updateEvent(id: string, event: Event): Observable<Event> {
-    return this.http.put<Event>(`${this.apiUrl}admin/${id}`, event);
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    return this.http.put<Event>(`${this.apiUrl}admin/${id}`, event, { headers });
   }
 
   deleteEvent(id: string): Observable<Event> {

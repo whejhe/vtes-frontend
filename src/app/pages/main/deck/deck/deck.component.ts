@@ -147,6 +147,7 @@ export class NewDeckComponent implements OnInit {
         this.router.navigate([`/deck/${this.newDeckId}`]);
         console.log('Id deck: ', this.newDeckId);
         console.log('CurrentDeck: ', this.deckSvc.getCurrentDeck());
+        console.log('Response: ', response);
       },
       (error) => console.error(error)
     );
