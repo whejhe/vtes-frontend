@@ -5,6 +5,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { AuthService } from '../../../../services/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Hora } from '../../../../models/evento.model';
 
 @Component({
   selector: 'app-events',
@@ -26,6 +27,7 @@ export class EventsComponent implements OnInit {
     name: new FormControl(''),
     email: new FormControl(''),
     type: new FormControl(''),
+    precio: new FormControl(''),
     provincia: new FormControl(''),
     localidad: new FormControl(''),
     direccion: new FormControl(''),
@@ -39,7 +41,6 @@ export class EventsComponent implements OnInit {
   showErrorMessage: boolean = false;
   errorMesage: string = '';
 
-
   constructor(
     private authSvc: AuthService,
     public eventSvc: EventService,
@@ -50,12 +51,13 @@ export class EventsComponent implements OnInit {
       name: ['', Validators.required],
       email: ['', Validators.required],
       type: ['', Validators.required],
+      precio: ['', Validators.required],
       provincia: ['', Validators.required],
       localidad: ['', Validators.required],
       direccion: ['', Validators.required],
       description: ['', Validators.required],
       fecha: ['', Validators.required],
-      hora: ['', Validators.required],
+      hora: ['', [Validators.required, Validators.pattern(/^([01][0-9]|2[0-3]):[0-5][0-9]$/)]],
       numMaxParticipantes: ['', Validators.required]
     })
   }
@@ -67,6 +69,7 @@ export class EventsComponent implements OnInit {
         name: this.eventForm.get('name')?.value,
         email: this.eventForm.get('email')?.value,
         type: this.eventForm.get('type')?.value,
+        precio: this.eventForm.get('precio')?.value,
         provincia: this.eventForm.get('provincia')?.value,
         localidad: this.eventForm.get('localidad')?.value,
         direccion: this.eventForm.get('direccion')?.value,

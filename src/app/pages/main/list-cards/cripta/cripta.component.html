@@ -94,7 +94,8 @@
                         searchMaxCapacity: cryptForm.value.searchMaxCapacity,
                       };
                 let i = index
-              " (click)="openModal(card)" [class.table-light]="i % 2 === 0" [class.table-secondary]="i % 2 !== 0">
+              " (click)="openModal(card)" [class.table-light]="i % 2 === 0" [class.table-secondary]="i % 2 !== 0"
+              >
               <td style="cursor: pointer" (mouseenter)="setUrlImage(card.url)" (mouseleave)="clearUrlImage()">
                 {{ card.name }}
               </td>

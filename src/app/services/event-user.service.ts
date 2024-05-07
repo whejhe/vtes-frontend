@@ -1,5 +1,5 @@
 // front/src/app/services/event-user.service.ts
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map, of, switchMap } from 'rxjs';
 import { EventUser } from '../models/event-user.model';
@@ -11,21 +11,48 @@ import { AuthService } from './auth.service';
 })
 export class EventUserService {
 
-  private apiUrl = environment.apiUrl + '/event-users' || 'http://localhost:3000/event-users';
+  private apiUrl = environment.apiUrl + '/events-users' || 'http://localhost:3000/event-users';
 
   constructor(
     public http: HttpClient,
     private authSvc: AuthService
   ) { }
 
+
+
+  addAuthHeader(headers: HttpHeaders): HttpHeaders {
+    const token = this.authSvc.getToken();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+    return headers;
+  }
+
   // Añadir Usuario a un evento
   addUserToEvent(eventId: string, userId: string):Observable<any> {
-    return this.http.post<EventUser>(`${this.apiUrl}/users/${eventId}`, { userId });;
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    return this.http.post<EventUser>(`${this.apiUrl}/users/${eventId}`, { userId }, { headers });;
   }
 
   // Obtener todos los usuarios asignados a un evento
-  getUsersForEvent(eventId: string):Observable<EventUser[]> {
-    return this.http.get<EventUser[]>(`${this.apiUrl}/users/${eventId}`);
+  getUsersForEvent(eventId: string):Observable<EventUser> {
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    return this.http.get<EventUser>(`${this.apiUrl}/${eventId}`, { headers });
   }
 
+  // Elimar al usuario actual de un evento
+  // deleteCurrentUserFromEvent(eventId: string):Observable<any> {
+  //   let headers = new HttpHeaders();
+  //   headers = this.addAuthHeader(headers);
+  //   return this.http.delete(`${this.apiUrl}/${eventId}/users/${this.authSvc.getUserById()}`, { headers });
+  // }
+
+  // Eliminar usuario de un evento
+  deleteUserFromEvent(eventId: string, userId: string):Observable<any> {
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    return this.http.delete(`${this.apiUrl}/${eventId}/users/${userId}`, { headers });
+  }
 }

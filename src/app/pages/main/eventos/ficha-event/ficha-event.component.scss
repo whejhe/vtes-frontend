@@ -1,5 +1,5 @@
 .container {
-  width: 70%;
+  // width: 70%;
   border: 2px solid black;
   height: 50vh;
   margin: 5em auto;
@@ -16,6 +16,8 @@
 
   .header {
     margin: 2em;
+    width: auto;
+    min-width: 300px;
 
     .title {
       text-decoration: underline;

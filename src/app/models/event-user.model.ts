@@ -1,11 +1,10 @@
+// front/src/app/models/event-user.model.ts
 import { User } from "./user.model";
 
-// front/src/app/models/event-user.model.ts
 export interface EventUser {
     _id: string;
     eventId: string;
-    userId: string;
-    user: User;
+    userId: User[];
     score: number;
     registrationStatus: string;
 }

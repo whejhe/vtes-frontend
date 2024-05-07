@@ -10,7 +10,7 @@ import { DetailsCustomCardComponent } from '../../../../components/details-custo
 import { MatDialog } from '@angular/material/dialog';
 import { FilterCustomCardsPipe } from '../../../../pipes/filter-custom-cards.pipe';
 import { environment } from '../../../../../environments/environment.development';
-import { FirebaseStorageService } from '../../../../services/firebase-storage.service';
+// import { FirebaseStorageService } from '../../../../services/firebase-storage.service';
 
 @Component({
   selector: 'app-gallery',
@@ -30,7 +30,7 @@ export class GalleryComponent implements OnInit {
     public authSvc: AuthService,
     public customSvc: CustomCardsService,
     public dialog: MatDialog,
-    public firebaseSvc: FirebaseStorageService
+    // public firebaseSvc: FirebaseStorageService
   ) { }
 
   customCardForm: FormGroup = new FormGroup({
@@ -61,10 +61,10 @@ export class GalleryComponent implements OnInit {
       });
   }
 
-  onImageUpload(event: any) {
-    const file = event.target.files[0];
-    this.firebaseSvc.uploadImage(file);
-  }
+  // onImageUpload(event: any) {
+  //   const file = event.target.files[0];
+  //   this.firebaseSvc.uploadImage(file);
+  // }
 
   getCustomCards() {
     this.customSvc.getAllCustomCards().subscribe(
