@@ -1,65 +1,112 @@
 <!--front/src/app/pages/main/inicio/inicio.component.html-->
-<section>
-  @if(isLoggedIn) {
-  <p></p>
-  <p></p>
-  }
-</section>
-<div class="portada">
-  <div class="container intro">
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
+<div class="container">
+  <div class="portada">
+    <div class="container line space-top"></div>
+    <section class="container line">
+      <app-intro></app-intro>
+    </section>
+    <div class="container col-xxl-8 px-4 py-5 line">
+      <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-6">
+          <img src="/assets/img/mano.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700"
+            height="500" loading="lazy" />
+        </div>
+        <div class="col-lg-6">
+          <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">
+            Listado de Todas las Cartas del juego
+          </h1>
+          <p>
+            El listado de Cartas en la página web de Elysium Eternal permite a los usuarios
+            explorar y filtrar la extensa biblioteca de cartas del juego. Los
+            visitantes podrán buscar por diversos criterios, como nombre, clan,
+            disciplina y tipo de carta, facilitando la identificación de las
+            cartas que necesitan para sus mazos.
+          </p>
+          <p>
+            Cada carta tendrá su propia página de detalles, con información relevante como imagen, descripción y
+            estadísticas.
+          </p>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <a href="/cripta" class="btn btn-dark btn-lg px-4">Crypt</a>
+            <a href="/biblioteca" class="btn btn-outline-secondary btn-lg px-4">Library</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container col-xxl-8 px-4 py-5 line">
+      <div class="row flex-lg-row align-items-center g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-6">
+          <img src="/assets/img/mano2.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700"
+            height="500" loading="lazy" />
+        </div>
+        <div class="col-lg-6">
+          <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">
+            Sección para la creación de Mazos
+          </h1>
+          <p>En este area los usuarios pueden crear y gestionar sus propios mazos de
+            cartas. Los jugadores podrán agregar y eliminar cartas de su Cripta y Biblioteca, guardando sus mazos de
+            forma
+            pública para que toda la comunidad pueda acceder a ellos o bien de manera privada si lo desean.</p>
+          <p>Además, la sección ofrecerá herramientas para imprimir los mazos y la posibilidad de importar listas
+            existentes, facilitando la organización y el intercambio de ideas entre la comunidad.</p>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <a href="/lista-decks" class="btn btn-dark btn-lg px-4">List of Decks</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="container col-xxl-8 px-4 py-5">
+
+  <div class="container col-xxl-8 px-4 py-5 line">
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
       <div class="col-10 col-sm-8 col-lg-6">
         <img src="/assets/img/mano.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700"
-          height="500" loading="lazy">
+          height="500" loading="lazy" />
       </div>
       <div class="col-lg-6">
-        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Pagina de Inicio con Imagen de Portada</h1>
-        <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most
-          popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive
-          prebuilt components, and powerful JavaScript plugins.</p>
+        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">
+          Galleria de Diseños personalizados
+        </h1>
+        <p>
+          En esta sección se presenta una galería de diseños originales
+          creados por la comunidad. Los usuarios podrán explorar y descargar estas cartas únicas, que añadirán un toque
+          de creatividad a su experiencia de juego.
+        </p>
+        <p>
+          Como tambien subir tus propios diseños.
+        </p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Custom Card</button>
-          <a routerLink="../custom/custom.component.html" class="btn btn-outline-secondary btn-lg px-4">Gallery</a>
+          <a href="/custom" class="btn btn-dark btn-lg px-4">Custom Cards</a>
+          <a href="/gallery" class="btn btn-outline-secondary btn-lg px-4">Gallery</a>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="container col-xxl-8 px-4 py-5">
+  <div class="container col-xxl-8 px-4 py-5 line">
     <div class="row flex-lg-row align-items-center g-5 py-5">
       <div class="col-10 col-sm-8 col-lg-6">
         <img src="/assets/img/mano2.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700"
-          height="500" loading="lazy">
+          height="500" loading="lazy" />
       </div>
       <div class="col-lg-6">
-        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Pagina de Inicio con Imagen de Portada</h1>
-        <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most
-          popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive
-          prebuilt components, and powerful JavaScript plugins.</p>
+        <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">
+          Organiza tus propios Torneos con la Comunidad
+        </h1>
+        <p>La sección de Eventos es el punto de encuentro para la comunidad de VTES. Aquí, los jugadores podrán
+          mantenerse al tanto de los próximos torneos y competiciones, así como inscribirse y participar en ellos.</p>
+        <p>Cada evento tendrá su propia página con detalles como fecha, hora, ubicación y número máximo de
+          participantes. Los usuarios podrán ver el listado de jugadores inscritos, así como la asignación aleatoria de
+          posiciones en las mesas.</p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-          <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Custom Card</button>
-          <a routerLink="../custom/custom.component.html" class="btn btn-outline-secondary btn-lg px-4">Gallery</a>
+          <a href="/listar-eventos" class="btn btn-dark btn-lg px-4">List of Events</a>
+          <a href="/events" class="btn btn-outline-secondary btn-lg px-4">Create Event</a>
         </div>
       </div>
     </div>
   </div>
 
+
+
 </div>
-
-
-
-<div class="portada">
-  <div class="container intro">
-    <p></p>
-    <p></p>
-    <p></p>
-    <p></p>
-  </div>
-</div>
-

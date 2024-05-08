@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
 })
 export class EventUserService {
 
-  private apiUrl = environment.apiUrl + '/events-users' || 'http://localhost:3000/event-users';
+  private apiUrl = environment.apiUrl + '/events-users' || 'https://localhost:3000/event-users';
 
   constructor(
     public http: HttpClient,

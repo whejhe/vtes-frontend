@@ -24,15 +24,15 @@ export class EventService {
     return headers;
   }
 
-  private apiUrl = environment.apiUrl + '/events/' || 'http://localhost:3000/events/';
+  private apiUrl = environment.apiUrl + '/events/' || 'https://localhost:3000/events/';
 
-  
+
   createEvent(event: any): Observable<Event> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
     return this.http.post<Event>(`${this.apiUrl}admin/`, event, { headers });
   }
-  
+
 
   getEvents(): Observable<Event[]> {
     // console.log(`${this.apiUrl}/users`);

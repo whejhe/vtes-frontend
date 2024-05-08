@@ -17,7 +17,7 @@ export class AuthService implements OnInit{
 
   isToken: boolean = false;
 
-  private apiUrl = environment.apiUrl || 'http://localhost:3000';
+  private apiUrl = environment.apiUrl || 'https://localhost:3000';
   private currentUser: User | null = null;
   public token: string | null = localStorage.getItem('token');
 

@@ -38,7 +38,7 @@ export class GalleryComponent implements OnInit {
     searchByName: new FormControl(''),
   });
 
-  apiUrl = environment.apiUrl || 'http://localhost:3000';
+  apiUrl = environment.apiUrl || 'https://localhost:3000';
 
 
   // Paginación
@@ -60,11 +60,6 @@ export class GalleryComponent implements OnInit {
         console.log('Error al obtener los usuarios: ', error);
       });
   }
-
-  // onImageUpload(event: any) {
-  //   const file = event.target.files[0];
-  //   this.firebaseSvc.uploadImage(file);
-  // }
 
   getCustomCards() {
     this.customSvc.getAllCustomCards().subscribe(

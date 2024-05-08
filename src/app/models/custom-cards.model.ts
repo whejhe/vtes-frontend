@@ -15,5 +15,5 @@ export interface CustomCard {
   publico: boolean;
   costBlood: number;
   costPool: number;
-  url: `https://vtesapp.duckdns.org/uploads/customCards/`;
+  url: string;
 }
