@@ -66,7 +66,7 @@ export class BibliotecaComponent implements OnInit {
 
   traits = Object.values(Traits);
   trait = '';
-  
+
   public clans = Object.values(Clan);
   public clan = '';
 
@@ -93,13 +93,13 @@ export class BibliotecaComponent implements OnInit {
   public selectedDisciplines: Discipline[] = [];
 
   public checkTitle: string = '';
-  
+
 
   public types = Object.values(Type).filter(
     (type) => type !== 'Vampire' && type !== 'Imbued'
   );
-  public typeSelected: { [key: string]: boolean } = {};  
-  
+  public typeSelected: { [key: string]: boolean } = {};
+
 
   setUrlImage(url: string): void {
     this.url = url;
@@ -205,7 +205,7 @@ export class BibliotecaComponent implements OnInit {
 
   //SEARCH BY TRAITS
   onSearchTraitsChange(newValue: string): void {
-    const searchByTraitsControl = this.libraryForm.get('searchByTraits'); 
+    const searchByTraitsControl = this.libraryForm.get('searchByTraits');
     if(searchByTraitsControl) {
       searchByTraitsControl.setValue(newValue);
       searchByTraitsControl.updateValueAndValidity();
@@ -258,17 +258,17 @@ export class BibliotecaComponent implements OnInit {
   }
 
   //FILTROS POR BOOD_COST
-  onBloodCostsChange(): void {
-    
-  }
+  // onBloodCostsChange(): void {
+
+  // }
 
   //FILTROS POR POOL_COST
-  onSearchPoolCostChange(){
+  // onSearchPoolCostChange(){
 
-  }
-  resetFiterPoolCost(): void {
-    
-  }
+  // }
+  // resetFiterPoolCost(): void {
+
+  // }
 
   loadCards(): void {
     this.cardSvc.getCards().subscribe((cards) => {
@@ -278,6 +278,6 @@ export class BibliotecaComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCards();
-
+    console.log('Cards: ',this.cards);
   }
 }

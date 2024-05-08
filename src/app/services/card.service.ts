@@ -10,7 +10,6 @@ import { environment } from '../../environments/environment.development';
 export class CardService {
 
   private apiUrl = environment.apiUrl + '/cards' || 'https://localhost:3000/cards';
-  // private apiUrl = 'http://localhost:3000/cards';
 
   constructor(
     private http: HttpClient
