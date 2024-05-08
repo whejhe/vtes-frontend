@@ -15,6 +15,7 @@
     </div>
     }
   <header class="header">
+    <!-- <img src="../../../../../assets/img/plantilla.png" alt=""> -->
     <h1 class="title">
       <strong>Titulo: {{evento.name}}</strong>
     </h1>
@@ -28,17 +29,18 @@
         <p><strong>Hora: </strong>{{evento.hora }}</p>
         <p><strong>Max. Participantes: </strong>{{evento.numMaxParticipantes }}</p>
         <p><strong>Description: </strong>{{evento.description}}</p>
-      </div>
-      <div class="buttons">
-        <button class="btn btn-dark"        
-        (click)="addUserToEvent()"
-        >Apuntarse</button><br>
-        <button class="btn btn-dark">Darse de Baja</button><br>
-        <button class="btn btn-dark">Subir mazo</button><br>
-        <button class="btn btn-dark">Añadir comentario</button><br>
-        <button class="btn btn-dark" [routerLink]="['/listar-eventos/']">Back to list of Events</button>
-
-
+        <div class="buttons">
+          <button class="btn btn-dark"        
+          (click)="addUserToEvent()"
+          >Apuntarse</button>
+          <button class="btn btn-dark"
+          (click)="deleteUserFromEvent()"
+          >Darse de Baja</button>
+          <input type="file" id="fileInput" style="display: none;" />
+          <button class="btn btn-dark" onclick="document.getElementById('fileInput').click()">Subir Mazo</button>
+          <span id="fileName"></span>
+          <button class="btn btn-dark" [routerLink]="['/listar-eventos/']">Back to list of Events</button>
+        </div>
       </div>
     </div>
   </header>

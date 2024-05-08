@@ -42,17 +42,11 @@ export class EventUserService {
     return this.http.get<EventUser>(`${this.apiUrl}/${eventId}`, { headers });
   }
 
-  // Elimar al usuario actual de un evento
-  // deleteCurrentUserFromEvent(eventId: string):Observable<any> {
-  //   let headers = new HttpHeaders();
-  //   headers = this.addAuthHeader(headers);
-  //   return this.http.delete(`${this.apiUrl}/${eventId}/users/${this.authSvc.getUserById()}`, { headers });
-  // }
-
   // Eliminar usuario de un evento
-  deleteUserFromEvent(eventId: string, userId: string):Observable<any> {
+  deleteUserFromEvent(eventId: string, userId: string ):Observable<any> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
-    return this.http.delete(`${this.apiUrl}/${eventId}/users/${userId}`, { headers });
+    return this.http.delete(`${this.apiUrl}/${eventId}`, { headers });
   }
+
 }

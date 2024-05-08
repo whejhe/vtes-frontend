@@ -6,6 +6,7 @@
 
 .container-image{
     margin: auto 1.3em;
+    flex-grow: 1;
     .customCard{
       min-height: 200px;
       max-height: 280px;
@@ -55,3 +56,4 @@ h4{
     background-color: rgb(53, 5, 5);
   }
 }
+

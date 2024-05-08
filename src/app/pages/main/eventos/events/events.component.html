@@ -1,5 +1,7 @@
 <!--front/src/app/pages/main/eventos/events/events.component.html-->
 <div class="container">
+    <div class="background"></div>
+    <div class="background2"></div>
     <form action="" class="form-container" 
     [formGroup]="eventForm"
     >
@@ -45,14 +47,24 @@
                     <option>Provincia</option>
                 </select>
             </div>
-            <!--LOCALIDAD-->
-            <div class="col-md-6">
+           
+        </div>
+        <div class="row">
+             <!--LOCALIDAD-->
+             <div class="col-md-6">
                 <label for="localidad" class="form-label">Localidad</label>
                 <select class="form-select" id="localidad" required
                 formControlName="localidad">
                     <option value="">Choose...</option>
                     <option>Localidad</option>
                 </select>
+            </div>
+            <div class="col-md-6">
+                <label for="precio" class="form-label">Precio</label>
+                <input type="text" class="form-control" id="precio"
+                placeholder="0.00" 
+                required
+                formControlName="precio">
             </div>
         </div>
         <br>

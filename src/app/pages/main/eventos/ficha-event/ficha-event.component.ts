@@ -27,7 +27,7 @@ export class FichaEventComponent implements OnInit {
     public eventUserSvc: EventUserService,
     private route: ActivatedRoute,
     public authSvc: AuthService
-  ) { 
+  ) {
     this.currentUser = this.authSvc.getCurrentUser()!;
   }
 
@@ -43,7 +43,7 @@ export class FichaEventComponent implements OnInit {
   ngOnInit(): void {
     this.getEventById();
     this.getCurrentUser();
-    console.log('CurrentUser: ',this.getCurrentUser());
+    console.log('CurrentUser: ', this.getCurrentUser());
   }
 
   getEventById(): void {
@@ -62,8 +62,8 @@ export class FichaEventComponent implements OnInit {
     }
   }
 
-  getUsersForEvent(){
-    if(this.evento){
+  getUsersForEvent() {
+    if (this.evento) {
       this.eventUserSvc.getUsersForEvent(this.evento._id!).subscribe(
         (eventUsers: EventUser) => {
           this.eventUsers = eventUsers;
@@ -80,9 +80,8 @@ export class FichaEventComponent implements OnInit {
     return currentUser;
   }
 
-  addUserToEvent(){
-    // this.getCurrentUser();
-    if(this.currentUser){
+  addUserToEvent() {
+    if (this.currentUser) {
       this.eventUserSvc.addUserToEvent(this.evento._id!, this.currentUser._id!).subscribe(
         (eventUsers: EventUser) => {
           this.eventUsers = eventUsers;
@@ -98,7 +97,7 @@ export class FichaEventComponent implements OnInit {
           console.log('Error al añadir usuario: ', error);
         }
       )
-    }else{
+    } else {
       console.log('No hay usuario', this.currentUser);
     }
     this.showErrorMessage = true;
@@ -109,4 +108,29 @@ export class FichaEventComponent implements OnInit {
     }, 5000);
   }
 
+  deleteUserFromEvent() {
+    if (this.currentUser) {
+      this.eventUserSvc.deleteUserFromEvent(this.evento._id!, this.currentUser._id).subscribe(
+        (eventUsers: EventUser) => {
+          this.eventUsers = eventUsers;
+          this.getUsersForEvent();
+          this.showErrorMessage = false;
+          this.showSucessMessage = true;
+          this.mesage = 'Usuario Eliminado del Evento'
+          setTimeout(() => {
+            this.showSucessMessage = false;
+          }, 5000);
+        },
+        (error) => {
+          this.showErrorMessage = true;
+          this.showSucessMessage = false;
+          this.mesage = 'Error al Eliminar el Usuario del Evento'
+          setTimeout(() => {
+            this.showErrorMessage = false;
+          }, 5000);
+        }
+      )
+    }
+  }
 }
+
