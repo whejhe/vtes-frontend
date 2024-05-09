@@ -13,7 +13,12 @@ import {
 import { JsonServiceService } from '../../../../services/json-service.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DetailsCardLibraryComponent } from '../../../../components/details-card-library/details-card-library.component';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { FilterPipe } from '../../../../pipes/filter.pipe';
 import { FilterMultiPipe } from '../../../../pipes/filter-multi.pipe';
 import { IconService } from '../../../../services/icon.service';
@@ -33,30 +38,38 @@ import { CardService } from '../../../../services/card.service';
     FormsModule,
     ReactiveFormsModule,
     FilterPipe,
-    FilterMultiPipe
+    FilterMultiPipe,
   ],
 })
 export class BibliotecaComponent implements OnInit {
-  
   constructor(
     private jsonSvc: JsonServiceService,
     public dialog: MatDialog,
     public iconSvc: IconService,
     public cardSvc: CardService
   ) {}
-  
+
   libraryForm: FormGroup = new FormGroup({
-    searchName : new FormControl(''),
+    searchName: new FormControl(''),
     selectedTypes: new FormControl([]),
+    selectedDisciplines: new FormControl([]),
     searchClan: new FormControl(''),
     searchTitle: new FormControl(''),
     searchByCardText: new FormControl(''),
     searchSect: new FormControl(''),
-    searchByTraits: new FormControl('')
+    searchByTraits: new FormControl(''),
   });
-  
+
+  //Paginación
+  // currentPage: number = 1;
+  // itemsPerPage: number = 10;
+  // totalItems: number = 0;
+  // paginatedCards: any[] = [];
+  // filteredCards!: Card[];
+
+
   // user: User | null = null;
-  
+
   sects = Object.values(Sect);
   sect = '';
 
@@ -71,7 +84,6 @@ export class BibliotecaComponent implements OnInit {
 
   public clans = Object.values(Clan);
   public clan = '';
-
 
   public cards!: Card[];
   public filter!: string;
@@ -89,12 +101,10 @@ export class BibliotecaComponent implements OnInit {
 
   public checkTitle: string = '';
 
-
   // public types = Object.values(Type).filter(
   //   (type) => type !== 'Vampire' && type !== 'Imbued'
   // );
   public typeSelected: { [key: string]: boolean } = {};
-
 
   setUrlImage(url: string): void {
     this.url = url;
@@ -137,23 +147,18 @@ export class BibliotecaComponent implements OnInit {
   }
 
   //FILTROS DE DISCIPLINAS
-
-  //MODIFICAR ICONO FILTRO
-  toggleOpacity(event: MouseEvent): void {
+    toggleOpacity(event: MouseEvent): void {
     const target = event.target as HTMLImageElement;
     if (target.classList.contains('icon-filter')) {
       target.classList.toggle('clicked');
       this.updateDisciplineSelection(target.alt as Discipline);
     }
   }
-
   //SELECCIONAR DISCIPLINAS
   updateDisciplineSelection(discipline: Discipline): void {
     this.disciplineSelected[discipline] = !this.disciplineSelected[discipline];
     this.onDisciplinesChange();
   }
-
-  //SELECCIONAR DISCIPLINAS
   onDisciplinesChange(): void {
     this.selectedDisciplines = Object.keys(this.disciplineSelected)
       .filter((discipline) => this.disciplineSelected[discipline as Discipline])
@@ -174,9 +179,9 @@ export class BibliotecaComponent implements OnInit {
   resetFilterType(): void {
     // this.libraryForm.value.selectedTypes = [];
     const selectedTypesControl = this.libraryForm.get('selectedTypes');
-      if (selectedTypesControl) {
-        selectedTypesControl.setValue([]);
-      }
+    if (selectedTypesControl) {
+      selectedTypesControl.setValue([]);
+    }
   }
 
   //FILTROS DE CLAN
@@ -192,16 +197,16 @@ export class BibliotecaComponent implements OnInit {
   resetFiterClan(): void {
     // this.libraryForm.value.searchClan = '';
     const searchClanControl = this.libraryForm.get('searchClan');
-  if (searchClanControl) {
-    searchClanControl.setValue('');
-    searchClanControl.updateValueAndValidity();
-  }
+    if (searchClanControl) {
+      searchClanControl.setValue('');
+      searchClanControl.updateValueAndValidity();
+    }
   }
 
   //SEARCH BY TRAITS
   onSearchTraitsChange(newValue: string): void {
     const searchByTraitsControl = this.libraryForm.get('searchByTraits');
-    if(searchByTraitsControl) {
+    if (searchByTraitsControl) {
       searchByTraitsControl.setValue(newValue);
       searchByTraitsControl.updateValueAndValidity();
     }

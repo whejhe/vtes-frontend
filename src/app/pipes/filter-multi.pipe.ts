@@ -11,7 +11,7 @@ export class FilterMultiPipe implements PipeTransform {
     if (!cards || !Array.isArray(cards)) return [];
 
     console.log('Cards en filtro ==> ', cards);
-    
+
     return cards.filter(card => {
       let match = true;
 
@@ -24,7 +24,7 @@ export class FilterMultiPipe implements PipeTransform {
       if (filters.searchByCardText && !card.card_text.toLowerCase().includes(filters.searchByCardText.toLowerCase())) {
         match = false;
       }
-      
+
       // Filtrar por grupo
       if (filters.searchGroup && filters.searchGroup !== '*' && card.group !== filters.searchGroup) {
         match = false;
@@ -44,7 +44,7 @@ export class FilterMultiPipe implements PipeTransform {
       if (filters.searchHabilities && filters.searchHabilities !== '*' && !card.card_text.toLowerCase().includes(filters.searchHabilities.toLowerCase())) {
         match = false;
       }
-      
+
       // Filtrar por disciplina seleccionada
       if (filters.selectedDisciplines && filters.selectedDisciplines.length > 0) {
         const cardDisciplines = card.disciplines?.map(discipline => discipline) || [];
@@ -52,7 +52,7 @@ export class FilterMultiPipe implements PipeTransform {
           match = false;
         }
       }
-      
+
       //Filtrar entre capacidad minima y maxima
       if(card.capacity){
         if (!(filters.searchMinCapacity <= card.capacity! && card.capacity! <= filters.searchMaxCapacity)) {

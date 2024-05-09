@@ -38,6 +38,8 @@ export class GalleryComponent implements OnInit {
     searchByName: new FormControl(''),
   });
 
+  filteredCards: any[] = [];
+
   apiUrl = environment.apiUrl || 'https://localhost:3000';
 
 
@@ -45,10 +47,10 @@ export class GalleryComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 10;
   totalItems: number = 0;
+  paginatedCards: any[] = [];
 
   user: User[] = [];
   customCards: any[] = [];
-  paginatedCards: any[] = [];
 
   getUsers() {
     this.authSvc.getUsers().subscribe(
@@ -65,6 +67,7 @@ export class GalleryComponent implements OnInit {
     this.customSvc.getAllCustomCards().subscribe(
       (response) => {
         this.customCards = response;
+        this.filteredCards = response;
         this.totalItems = response.length;
         this.paginate();
       },
@@ -85,24 +88,23 @@ export class GalleryComponent implements OnInit {
     const searchByName = this.customCardForm.get('searchByName')?.value;
     const searchByAuthor = this.customCardForm.get('searchByAuthor')?.value;
 
-    let filteredCards = this.customCards;
+    this.filteredCards = this.customCards.filter((card) => {
+      const nameMatch = searchByName
+        ? card.name.toLowerCase().includes(searchByName.toLowerCase())
+        : true;
+      const authorMatch = searchByAuthor
+        ? card.author.toLowerCase().includes(searchByAuthor.toLowerCase())
+        : true;
+      return nameMatch && authorMatch;
+    });
 
-    if (searchByName) {
-      filteredCards = filteredCards.filter((card) =>
-        card.name.toLowerCase().includes(searchByName.toLowerCase())
-      );
-    }
-
-    if (searchByAuthor) {
-      filteredCards = filteredCards.filter((card) =>
-        card.author.toLowerCase().includes(searchByAuthor.toLowerCase())
-      );
-    }
+    this.totalItems = this.filteredCards.length;
 
     const indiceInicial = (this.currentPage - 1) * this.itemsPerPage;
     const indiceFinal = indiceInicial + this.itemsPerPage;
-    this.paginatedCards = filteredCards.slice(indiceInicial, indiceFinal);
+    this.paginatedCards = this.filteredCards.slice(indiceInicial, indiceFinal);
   }
+
 
   changePage(page: number) {
     this.currentPage = page;

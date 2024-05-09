@@ -69,13 +69,14 @@
           | filterMulti: {
             searchName:libraryForm.value.searchName,
             selectedTypes:libraryForm.value.selectedTypes,
+            selectedDisciplines:libraryForm.value.selectedDisciplines,
             searchClan:libraryForm.value.searchClan,
             searchTitle:libraryForm.value.searchTitle,
             searchByCardText:libraryForm.value.searchByCardText,
             searchSect:libraryForm.value.searchSect,
             searchByTraits:libraryForm.value.searchByTraits
-            }; 
-            
+            };
+
             let i=index" (click)="openModal(card)" [class.table-light]="i % 2 === 0"
               [class.table-secondary]="i % 2 !== 0">
               <td class="imageFloat" style="cursor: pointer" (mouseenter)="setUrlImage(card.url)"
@@ -104,6 +105,7 @@
             </tr>
           </tbody>
         </table>
+
       </section>
 
       <section class="col-md-4">
