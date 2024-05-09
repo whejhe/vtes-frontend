@@ -10,9 +10,7 @@ import { environment } from '../../environments/environment.development';
 })
 export class JsonServiceService {
 
-  // private apiUrl = 'https://static.krcg.org/data/vtes.json';
-  private apiUrl = environment.apiUrl + '/cards' || 'https://localhost:3000/cards';
-  // private apiUrl = environment.apiUrl + '/data/vtes.json';
+  private apiUrl = environment.apiUrl + '/cards' || 'https://localhost/cards';
 
   constructor(
     private http: HttpClient

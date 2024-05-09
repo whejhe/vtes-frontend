@@ -166,3 +166,23 @@ h1 {
     top: 28em;
     right: 28em;
 }
+
+.container-logo{
+    position: fixed;
+    top: 5vh;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  .logo{
+    width: auto;
+    height: 80vh;
+    z-index: -1;
+    opacity: 0.2;
+  }
+  

@@ -9,7 +9,7 @@ import { environment } from '../../environments/environment.development';
 })
 export class CardService {
 
-  private apiUrl = environment.apiUrl + '/cards' || 'https://localhost:3000/cards';
+  private apiUrl = environment.apiUrl + '/cards' || 'https://localhost/cards';
 
   constructor(
     private http: HttpClient
@@ -24,6 +24,16 @@ export class CardService {
   getCards(): Observable<any> {
     return this.http.get<any>(this.apiUrl);
   }
+
+  //Paginación
+  // getCards(page: number = 1, pageSize: number = 10): Observable<any> {
+  //   const params = {
+  //     page: page.toString(),
+  //     pageSize: pageSize.toString()
+  //   };
+  //   return this.http.get<any>(this.apiUrl, { params });
+  // }
+
 
   // Obtener una carta por ID
   getCardById(id: string): Observable<any> {

@@ -14,7 +14,7 @@ import { environment } from '../../environments/environment.development';
 })
 export class DeckService {
 
-  private apiUrl = environment.apiUrl + '/decks' || 'https://localhost:3000/decks';
+  private apiUrl = environment.apiUrl + '/decks' || 'https://localhost/decks';
   private currentDeckId: string = '';
   private currentDeckSubject: BehaviorSubject<string> = new BehaviorSubject('');
   private tokenData: any;

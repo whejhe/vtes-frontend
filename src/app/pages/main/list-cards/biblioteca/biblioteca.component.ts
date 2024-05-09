@@ -1,13 +1,12 @@
 //src/app/pages/main/list-cards/biblioteca/biblioteca.component.ts
-import { Component, OnInit, inject } from '@angular/core';
-import { AsyncPipe, CommonModule, NgOptimizedImage } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import {
   Card,
   Clan,
-  Combat,
   Discipline,
-  Sect,
   Title,
+  Sect,
   Traits,
   Type,
 } from '../../../../models/vtes.model';
@@ -16,12 +15,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { DetailsCardLibraryComponent } from '../../../../components/details-card-library/details-card-library.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterPipe } from '../../../../pipes/filter.pipe';
-import { IconService } from '../../../../services/icon.service';
-import { __values } from 'tslib';
 import { FilterMultiPipe } from '../../../../pipes/filter-multi.pipe';
-import { User } from '../../../../models/user.model';
-// import { HttpClient } from '@angular/common/http';
+import { IconService } from '../../../../services/icon.service';
 import { CardService } from '../../../../services/card.service';
+
+// import { __values } from 'tslib';
+// import { User } from '../../../../models/user.model';
 
 @Component({
   selector: 'app-biblioteca',
@@ -31,21 +30,21 @@ import { CardService } from '../../../../services/card.service';
   imports: [
     AsyncPipe,
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     FilterPipe,
     FilterMultiPipe
   ],
 })
 export class BibliotecaComponent implements OnInit {
-  user: User | null = null;
-
+  
   constructor(
     private jsonSvc: JsonServiceService,
     public dialog: MatDialog,
     public iconSvc: IconService,
     public cardSvc: CardService
   ) {}
-
+  
   libraryForm: FormGroup = new FormGroup({
     searchName : new FormControl(''),
     selectedTypes: new FormControl([]),
@@ -55,7 +54,9 @@ export class BibliotecaComponent implements OnInit {
     searchSect: new FormControl(''),
     searchByTraits: new FormControl('')
   });
-
+  
+  // user: User | null = null;
+  
   sects = Object.values(Sect);
   sect = '';
 
@@ -65,10 +66,12 @@ export class BibliotecaComponent implements OnInit {
   traits = Object.values(Traits);
   trait = '';
 
+  types = Object.values(Type);
+  type = '';
+
   public clans = Object.values(Clan);
   public clan = '';
 
-  // private httpClient = inject(HttpClient);
 
   public cards!: Card[];
   public filter!: string;
@@ -87,9 +90,9 @@ export class BibliotecaComponent implements OnInit {
   public checkTitle: string = '';
 
 
-  public types = Object.values(Type).filter(
-    (type) => type !== 'Vampire' && type !== 'Imbued'
-  );
+  // public types = Object.values(Type).filter(
+  //   (type) => type !== 'Vampire' && type !== 'Imbued'
+  // );
   public typeSelected: { [key: string]: boolean } = {};
 
 
@@ -252,11 +255,11 @@ export class BibliotecaComponent implements OnInit {
   loadCards(): void {
     this.cardSvc.getCards().subscribe((cards) => {
       this.cards = cards;
+      console.log('Cards: ', this.cards);
     });
   }
 
   ngOnInit(): void {
     this.loadCards();
-    console.log('Cards: ',this.cards);
   }
 }

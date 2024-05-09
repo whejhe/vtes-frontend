@@ -1,34 +1,21 @@
 //src/app/pages/main/list-cards/cripta/cripta.component.ts
-import { Component, Inject, OnInit } from '@angular/core';
-import { Observable, map, of } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
-// import { Card} from '../../../../models/card.model';
 import {
   Card,
   Clan,
   Discipline,
   Title,
-  Traits,
-  Type,
-  Hability,
   Sect,
+  Hability,
 } from '../../../../models/vtes.model';
 import { JsonServiceService } from '../../../../services/json-service.service';
-import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DetailsCardVampireComponent } from '../../../../components/details-card-vampire/details-card-vampire.component';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FilterPipe } from '../../../../pipes/filter.pipe';
-import { IconService } from '../../../../services/icon.service';
 import { FilterMultiPipe } from '../../../../pipes/filter-multi.pipe';
+import { IconService } from '../../../../services/icon.service';
 import { CardService } from '../../../../services/card.service';
 
 @Component({
@@ -40,9 +27,9 @@ import { CardService } from '../../../../services/card.service';
     AsyncPipe,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     FilterPipe,
     FilterMultiPipe,
-    ReactiveFormsModule,
   ],
 })
 export class CriptaComponent implements OnInit {
@@ -67,6 +54,12 @@ export class CriptaComponent implements OnInit {
   });
 
   cards: Card[] = [];
+
+  //Paginacion
+  currentPage: number = 1;
+  pageSize: number = 10;
+  totalCards: number = 0;
+
   filter: string = '';
   // searchSect: string = '';
 
@@ -196,25 +189,6 @@ export class CriptaComponent implements OnInit {
     }
   }
 
-  // SEARCH BY MIN CAPACITY
-  // onSearchMinCapacityChange(event: any): void {
-  //   const searchMinCapacityControl = this.cryptForm.get('searchMinCapacity');
-  //   console.log(searchMinCapacityControl?.value, 'seperador', parseInt(event.target.value))
-  //   if (searchMinCapacityControl) {
-  //     searchMinCapacityControl.setValue(parseInt(event.target.value));
-  //     searchMinCapacityControl.updateValueAndValidity();
-  //   }
-  // }
-
-  // SEARCH BY MAX CAPACITY
-  // onSearchMaxCapacityChange(newMaxCapacity?: number): void {
-  //   const searchMaxCapacityControl = this.cryptForm.get('searchMaxCapacity');
-  //   if (searchMaxCapacityControl) {
-  //     searchMaxCapacityControl.setValue(newMaxCapacity);
-  //     searchMaxCapacityControl.updateValueAndValidity();
-  //   }
-  // }
-
   toggleOpacity(event: MouseEvent): void {
     const target = event.target as HTMLImageElement;
     if (target.classList.contains('icon-filter')) {
@@ -241,6 +215,26 @@ export class CriptaComponent implements OnInit {
       this.cards = cards;
     });
   }
+
+//paginacion
+// loadCards(): void {
+//   this.cardSvc.getCards(this.currentPage, this.pageSize).subscribe((response) => {
+//     this.cards = response.data;
+//     this.totalCards = response.total;
+//   });
+// }
+// nextPage(): void {
+//   this.currentPage++;
+//   this.loadCards();
+// }
+// prevPage(): void {
+//   if (this.currentPage > 1) {
+//     this.currentPage--;
+//     this.loadCards();
+//   }
+// }
+
+
 
   formSubmit() {
     console.log('Crypt Form: ', this.cryptForm.value);

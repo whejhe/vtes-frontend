@@ -1,9 +1,8 @@
 <!--front/src/app/pages/main/list-cards/cripta/cripta.component.html-->
 <div class="container">
-  <div class="background"></div>
-  <div class="background2"></div>
-  <div class="background3"></div>
-  <!-- <span class="backgroud-image"></span> -->
+  <div class="container-logo">
+    <img class="logo" src="../../../assets/img/icons-vtes/logo/logo-negro.png" alt="">
+  </div>
   <form class="row filtro-header" role="search" action="" [formGroup]="cryptForm">
     <!--SEARCH BY NAME-->
     <div class="col-md-4">
@@ -136,6 +135,10 @@
             </tr>
           </tbody>
         </table>
+
+        <!-- <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+        <button (click)="nextPage()" [disabled]="currentPage * pageSize >= totalCards">Next</button> -->
+
       </section>
 
       <section class="col-md-4">

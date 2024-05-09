@@ -1,18 +1,21 @@
 <!--front/src/app/pages/main/list-cards/biblioteca/biblioteca.component.html-->
 <div class="container">
+  <div class="container-logo">
+    <img class="logo" src="../../../assets/img/icons-vtes/logo/logo-negro.png" alt="">
+  </div>
 
   <form class="row filtro-header" role="search" [formGroup]="libraryForm">
 
     <!--NOMBRES-->
     <div class="col-md-4">
-      <label for="marca" class="form-label">Search By Name:</label>
+      <label class="form-label">Search By Name:</label>
       <input formControlName="searchName" class="form-control me-2" type="search" placeholder="Search"
         aria-label="Search">
     </div>
 
     <!--TIPOS-->
     <div class="col-md-4">
-      <label for="marca" class="form-label">Type:</label>
+      <label class="form-label">Type:</label>
       <select id="type" class="form-select" formControlName="selectedTypes">
         <option value="*" (change)="resetFilterType()">All</option>
         <option value="{{type}}" *ngFor="let type of types" (click)="onTypeChange(type)">{{type}}</option>
@@ -21,7 +24,7 @@
 
     <!--CLAN-->
     <div class="col-md-4">
-      <label for="marca" class="form-label">Clan:</label>
+      <label class="form-label">Clan:</label>
       <select id="clan" class="form-select" formControlName="searchClan">
         <option value="*" (click)="resetFiterClan()">All Clans</option>
         <option value="{{clan || 'All Clans'}}" *ngFor="let clan of clans" (click)="onSearchClanChange(clan)">{{clan}}
@@ -67,11 +70,13 @@
             searchName:libraryForm.value.searchName,
             selectedTypes:libraryForm.value.selectedTypes,
             searchClan:libraryForm.value.searchClan,
-            searchTitle: libraryForm.value.searchTitle,
+            searchTitle:libraryForm.value.searchTitle,
             searchByCardText:libraryForm.value.searchByCardText,
-            searchSect: libraryForm.value.searchSect,
+            searchSect:libraryForm.value.searchSect,
             searchByTraits:libraryForm.value.searchByTraits
-            }; let i=index" (click)="openModal(card)" [class.table-light]="i % 2 === 0"
+            }; 
+            
+            let i=index" (click)="openModal(card)" [class.table-light]="i % 2 === 0"
               [class.table-secondary]="i % 2 !== 0">
               <td class="imageFloat" style="cursor: pointer" (mouseenter)="setUrlImage(card.url)"
                 (mouseleave)="clearUrlImage()">

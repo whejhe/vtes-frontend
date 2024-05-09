@@ -24,7 +24,7 @@ export class EventService {
     return headers;
   }
 
-  private apiUrl = environment.apiUrl + '/events/' || 'https://localhost:3000/events/';
+  private apiUrl = environment.apiUrl + '/events/' || 'https://localhost/events/';
 
 
   createEvent(event: any): Observable<Event> {

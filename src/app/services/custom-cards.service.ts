@@ -11,7 +11,7 @@ import { environment } from '../../environments/environment.development';
 })
 export class CustomCardsService {
 
-  private apiUrl = environment.apiUrl + '/custom-cards' || 'https://localhost:3000/custom-cards';
+  private apiUrl = environment.apiUrl + '/custom-cards' || 'https://localhost/custom-cards';
 
   constructor(private http: HttpClient, private authSvc: AuthService) { }
 

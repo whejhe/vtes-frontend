@@ -15,11 +15,11 @@ export class ImageService {
 
   image: Image | null = null;
 
-  private jsonVtesUrl = environment.apiUrl + '/data/vtes.json' || 'https://localhost:3000/data/vtes.json';
-  private apiUrl = environment.apiUrl || 'https://localhost:3000';
-  private jsonImage = environment.apiUrl + '/data/image.json' || 'https://localhost:3000/data/image.json';
-  private uploadUrl = environment.apiUrl + '/uploads/' || 'https://localhost:3000/uploads/';
-  private uploadAvatarsUrl = environment.apiUrl + '/vtes-backend/uploads/avatars/' || 'https://localhost:3000/vtes-backend/uploads/avatars/';
+  private jsonVtesUrl = environment.apiUrl + '/data/vtes.json' || 'https://localhost/data/vtes.json';
+  private apiUrl = environment.apiUrl || 'https://localhost';
+  private jsonImage = environment.apiUrl + '/data/image.json' || 'https://localhost/data/image.json';
+  private uploadUrl = environment.apiUrl + '/uploads/' || 'https://localhost/uploads/';
+  private uploadAvatarsUrl = environment.apiUrl + '/vtes-backend/uploads/avatars/' || 'https://localhost/vtes-backend/uploads/avatars/';
 
 
   createImage(image: Image): Observable<Image> {
