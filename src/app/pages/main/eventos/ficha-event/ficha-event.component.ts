@@ -9,13 +9,14 @@ import { EventUserService } from '../../../../services/event-user.service';
 import { EventUser } from '../../../../models/event-user.model';
 import { CommonModule } from '@angular/common';
 import { User } from '../../../../models/user.model';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-ficha-event',
   standalone: true,
   imports: [
     RouterLink,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './ficha-event.component.html',
   styleUrl: './ficha-event.component.scss'
@@ -30,6 +31,8 @@ export class FichaEventComponent implements OnInit {
   ) {
     this.currentUser = this.authSvc.getCurrentUser()!;
   }
+
+  public apiUrl = environment.apiUrl || 'https://localhost'
 
   evento!: Evento;
   eventUsers!: EventUser;
@@ -107,6 +110,45 @@ export class FichaEventComponent implements OnInit {
       this.showErrorMessage = false;
     }, 5000);
   }
+
+
+  addUserByEmail() {
+    // Verifica si el usuario actual es un administrador
+    if (this.currentUser && this.currentUser.role === 'ADMIN') {
+      const email = prompt('Ingresa el correo electrónico del usuario a agregar:');
+      if (email) {
+        this.eventUserSvc.addUserByEmail(this.evento._id!, email).subscribe(
+          (eventUsers: EventUser) => {
+            this.eventUsers = eventUsers;
+            this.getUsersForEvent();
+            this.showErrorMessage = false;
+            this.showSucessMessage = true;
+            this.mesage = 'Usuario agregado correctamente.';
+            setTimeout(() => {
+              this.showSucessMessage = false;
+            }, 5000);
+          },
+          (error) => {
+            console.log('Error al añadir usuario: ', error);
+            this.showErrorMessage = true;
+            this.showSucessMessage = false;
+            this.mesage = 'Ocurrió un error al agregar el usuario.';
+            setTimeout(() => {
+              this.showErrorMessage = false;
+            }, 5000);
+          }
+        );
+      }
+    } else {
+      this.showErrorMessage = true;
+      this.showSucessMessage = false;
+      this.mesage = 'Solo los administradores pueden agregar usuarios por correo electrónico.';
+      setTimeout(() => {
+        this.showErrorMessage = false;
+      }, 5000);
+    }
+  }
+  
 
   deleteUserFromEvent() {
     if (this.currentUser) {

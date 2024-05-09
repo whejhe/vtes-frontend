@@ -35,6 +35,13 @@ export class EventUserService {
     return this.http.post<EventUser>(`${this.apiUrl}/users/${eventId}`, { userId }, { headers });;
   }
 
+  // Añadir usuarios a un evento por email
+  addUserByEmail(eventId: string, email: string):Observable<any> {
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    return this.http.post<EventUser>(`${this.apiUrl}/email/${eventId}`, { email }, { headers });
+  }
+
   // Obtener todos los usuarios asignados a un evento
   getUsersForEvent(eventId: string):Observable<EventUser> {
     let headers = new HttpHeaders();

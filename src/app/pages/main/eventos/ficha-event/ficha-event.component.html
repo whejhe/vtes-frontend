@@ -1,3 +1,8 @@
+<div class="row center">
+  <div *ngIf="currentUser && currentUser.role === 'ADMIN'" class="center">
+    <button class="btn btn-dark" (click)="addUserByEmail()">Agregar Usuario por Correo Electrónico</button>
+  </div>
+</div>
 <div class="container">
   @if(showSucessMessage){
     <div class="alert alert-dismissible alert-success">
@@ -59,7 +64,7 @@
       <tbody>
         <tr *ngFor="let eventUser of eventUsers.userId let i = index" [class.table-light]="i % 2 === 0"
           [class.table-secondary]="i % 2 !== 0">
-          <td><img [src]="eventUser.avatarUrl"></td>
+          <td><img [src]="apiUrl + eventUser.avatarUrl"></td>
           <td>{{eventUser.name}}</td>
           <td>{{eventUser.email}}</td>
           <th>
