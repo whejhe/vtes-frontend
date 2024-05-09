@@ -18,10 +18,9 @@ import { environment } from '../../../environments/environment.development';
 })
 export class SideBarComponent {
 
-  apiUrl = environment.apiUrl || 'http://localhost:3000';
+  apiUrl = environment.apiUrl || 'https://localhost:3000';
   public avatarImage:Image | null = null;
   user: any | null = null;
-  // public defaultImage = "http://localhost:3000/vtes-backend/uploads/avatars/default-avatar.png";
   public defaultImage = `${this.apiUrl}/vtes-backend/uploads/avatars/default-avatar.png`;
 
   constructor(
