@@ -20,7 +20,7 @@ import { IconService } from '../../../../services/icon.service';
 import { __values } from 'tslib';
 import { FilterMultiPipe } from '../../../../pipes/filter-multi.pipe';
 import { User } from '../../../../models/user.model';
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 import { CardService } from '../../../../services/card.service';
 
 @Component({
@@ -48,14 +48,12 @@ export class BibliotecaComponent implements OnInit {
 
   libraryForm: FormGroup = new FormGroup({
     searchName : new FormControl(''),
-    searchByCardText: new FormControl(''),
     selectedTypes: new FormControl([]),
     searchClan: new FormControl(''),
-    searchSect: new FormControl(''),
-    searchByTraits: new FormControl(''),
     searchTitle: new FormControl(''),
-    searchBloodCosts: new FormControl(''),
-    searchPoolCosts: new FormControl(''),
+    searchByCardText: new FormControl(''),
+    searchSect: new FormControl(''),
+    searchByTraits: new FormControl('')
   });
 
   sects = Object.values(Sect);
@@ -70,12 +68,7 @@ export class BibliotecaComponent implements OnInit {
   public clans = Object.values(Clan);
   public clan = '';
 
-  poolCosts = ['0', '1', '2', '3', '4', '5', '6'];
-  poolCost = '';
-  bloodCosts = ['0', '1', '2', '3', '4'];
-  booldCost = '';
-
-  private httpClient = inject(HttpClient);
+  // private httpClient = inject(HttpClient);
 
   public cards!: Card[];
   public filter!: string;
@@ -88,7 +81,6 @@ export class BibliotecaComponent implements OnInit {
 
   public disciplineImages = this.iconSvc.disciplineImages;
 
-  // public disciplines = Object.values(Discipline);
   public disciplineSelected: { [key: string]: boolean } = {};
   public selectedDisciplines: Discipline[] = [];
 
@@ -256,19 +248,6 @@ export class BibliotecaComponent implements OnInit {
       searchSectControl.updateValueAndValidity();
     }
   }
-
-  //FILTROS POR BOOD_COST
-  // onBloodCostsChange(): void {
-
-  // }
-
-  //FILTROS POR POOL_COST
-  // onSearchPoolCostChange(){
-
-  // }
-  // resetFiterPoolCost(): void {
-
-  // }
 
   loadCards(): void {
     this.cardSvc.getCards().subscribe((cards) => {

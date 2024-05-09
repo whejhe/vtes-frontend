@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 
 export const environment = {
   production: true,
-  apiUrl: 'https://vtesapp.duckdns.org:3000',
+  apiUrl: 'https://vtesapp.duckdns.org',
   firebaseConfig : {
     apiKey: "AIzaSyAQwn0Ez3iUke7plRTZhhCVT1KeCJAbHoY",
     authDomain: "vtesimage.firebaseapp.com",

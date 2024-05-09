@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 
 export const environment = {
   production: true,
-  apiUrl: 'https://localhost:3000',
+  apiUrl: 'https://localhost',
   firebaseConfig : {
     apiKey: "AIzaSyAQwn0Ez3iUke7plRTZhhCVT1KeCJAbHoY",
     authDomain: "vtesimage.firebaseapp.com",

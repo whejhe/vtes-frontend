@@ -69,11 +69,8 @@
             searchClan:libraryForm.value.searchClan,
             searchTitle: libraryForm.value.searchTitle,
             searchByCardText:libraryForm.value.searchByCardText,
-            selectedDisciplines:selectedDisciplines,
-            searchPoolCosts: libraryForm.value.searchPoolCosts,
-            searchBloodCosts: libraryForm.value.searchBloodCosts,
             searchSect: libraryForm.value.searchSect,
-            searchByTraits:libraryForm.value.searchByTraits,
+            searchByTraits:libraryForm.value.searchByTraits
             }; let i=index" (click)="openModal(card)" [class.table-light]="i % 2 === 0"
               [class.table-secondary]="i % 2 !== 0">
               <td class="imageFloat" style="cursor: pointer" (mouseenter)="setUrlImage(card.url)"
@@ -157,28 +154,7 @@
               </option>
             </select>
           </div>
-           <!--POOL COST-->
-           <!-- <div>
-            <h4 class="select">Sect:</h4>
-            <select id="pool_cost" class="form-select form-select-sm"
-            formControlName="searchPoolCosts">
-              <option value="*" (click)="resetFiterPoolCost()">Any</option>
-              <option
-              value="{{poolCost || 'Any'}}"
-              *ngFor="let poolCost of poolCosts"
-              (click)="onSearchPoolCostChange()"
-              >
-                {{ poolCost }}
-              </option>
-            </select>
-          </div> -->
-          <!--BLOOD COST-->
-          <!-- <div class="bloodCost">
-            <label for="customRange2" class="form-label">Max. Pool Cost:</label>
-            <input type="range" class="form-range" min="1" max="6" id="maxPoolCost"
-            formControlName="searchBoodCosts"
-            />
-          </div> -->
+
         </aside>
       </section>
     </main>
