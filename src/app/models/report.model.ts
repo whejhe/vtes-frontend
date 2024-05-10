@@ -7,4 +7,3 @@ export interface Report{
     authorOfCard?: string;
     nameOfCard?: string;
 }
-  

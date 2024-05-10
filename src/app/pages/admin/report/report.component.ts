@@ -17,24 +17,17 @@ export class ReportComponent implements OnInit {
 
   constructor(
     private reportSvc: ReportService
-  ) { }
+  ) { 
+    this.reportSvc.getReports();
+  }
 
-  reports!: Report[];
+  reports?: Report[];
   reportData = '';
 
   ngOnInit(): void {
-    // this.getReports();
+    console.log('Reports: ', this.reports);
+    console.log(this.reportSvc.getReports())
    }
 
-  // getReports(): void {
-  //   this.reportSvc.getReports().subscribe(
-  //     (data) => {
-  //       this.reports = data;
-  //     },
-  //     (error) => {
-  //       console.error('Error al obtener los reportes',error);
-  //     }
-  //   )
-  // }
 
 }
