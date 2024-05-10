@@ -7,4 +7,5 @@ export interface EventUser {
     userId: User[];
     score: number;
     registrationStatus: string;
+    // position?: number;
 }

@@ -1,3 +1,5 @@
+import { EventUser } from "./event-user.model";
+
 // front/src/app/models/event.model.ts
 export interface Evento {
     _id?: string,
@@ -12,7 +14,8 @@ export interface Evento {
     description?: String,
     fecha?: Date,
     hora?: Hora,
-    numMaxParticipantes?: string
+    numMaxParticipantes?: string,
+    // tables?: EventUser[][],
 }
 
 export enum Hora {

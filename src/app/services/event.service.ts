@@ -49,6 +49,7 @@ export class EventService {
     return this.http.put<Event>(`${this.apiUrl}admin/${id}`, event, { headers });
   }
 
+
   deleteEvent(id: string): Observable<Event> {
     return this.http.delete<Event>(`${this.apiUrl}admin/${id}`);
   }

@@ -148,7 +148,7 @@ export class FichaEventComponent implements OnInit {
       }, 5000);
     }
   }
-  
+
 
   deleteUserFromEvent() {
     if (this.currentUser) {
@@ -174,5 +174,77 @@ export class FichaEventComponent implements OnInit {
       )
     }
   }
+
+
+  // startTournament() {
+  //   // Lógica para repartir a los jugadores en mesas
+  //   this.assignPlayersToTables();
+  // }
+
+  // assignPlayersToTables() {
+  //   if (this.eventUsers && this.eventUsers.length > 0) {
+  //     // Ordenar los usuarios aleatoriamente
+  //     this.shuffleArray(this.eventUsers);
+
+  //     // Crear las mesas
+  //     const tables: EventUser[][] = [];
+  //     let currentTable: EventUser[] = [];
+  //     for (let i = 0; i < this.eventUsers.length; i++) {
+  //       currentTable.push(this.eventUsers[i]);
+  //       if (currentTable.length === 4 || currentTable.length === 5 || i === this.eventUsers.length - 1) {
+  //         tables.push(currentTable.slice());
+  //         currentTable = [];
+  //       }
+  //     }
+
+  //     // Asignar posiciones aleatorias a los jugadores en cada mesa
+  //     tables.forEach((table) => {
+  //       this.assignPositionsToTable(table);
+  //     });
+
+  //     // Actualizar el evento con las mesas
+  //     const eventId = this.evento._id!;
+  //     this.eventSvc.updateEvent(eventId, { tables: tables }).subscribe(
+  //       (updatedEvent) => {
+  //         this.evento = updatedEvent;
+  //         this.showSucessMessage = true;
+  //         this.message = 'Torneo iniciado correctamente.';
+  //         setTimeout(() => {
+  //           this.showSucessMessage = false;
+  //         }, 5000);
+  //       },
+  //       (error) => {
+  //         console.log('Error al actualizar el evento: ', error);
+  //         this.showErrorMessage = true;
+  //         this.message = 'Error al iniciar el torneo.';
+  //         setTimeout(() => {
+  //           this.showErrorMessage = false;
+  //         }, 5000);
+  //       }
+  //     );
+  //   } else {
+  //     this.showErrorMessage = true;
+  //     this.message = 'No hay usuarios inscritos en el evento.';
+  //     setTimeout(() => {
+  //       this.showErrorMessage = false;
+  //     }, 5000);
+  //   }
+  // }
+
+  // assignPositionsToTable(table: EventUser[]) {
+  //   table.forEach((user, index) => {
+  //     user.position = index + 1;
+  //   });
+  // }
+
+  // shuffleArray(array: EventUser[]) {
+  //   for (let i = array.length - 1; i > 0; i--) {
+  //     const j = Math.floor(Math.random() * (i + 1));
+  //     [array[i], array[j]] = [array[j], array[i]];
+  //   }
+  // }
+
+
 }
+
 
