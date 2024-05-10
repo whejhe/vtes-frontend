@@ -172,6 +172,18 @@ export class AuthService implements OnInit{
     return this.http.post(`${this.apiUrl}/users/unblockUser/${userId}`, { headers: { 'Authorization': `Bearer ${this.getToken()}` } });
   }
 
+// CAMBIAR ROL DE USUARIO
+changeRole(email: string, newRole: string): Observable<any> {
+  const body = { email, newRole };
+  return this.http.put(`${this.apiUrl}/admin/permisos`, body, {
+    headers: {
+      'Authorization': `Bearer ${this.getToken()}`
+    }
+  });
+}
+
+
+
   // ACTUALIZAR USUARIOS
   updateUser(id: string): Observable<any> {
     return this.http.put(`${this.apiUrl}/users/${id}`, { headers: { 'Authorization': `Bearer ${this.getToken()}` } });
