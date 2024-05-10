@@ -1,0 +1,31 @@
+<!-- src\app\components\send-report\send-report.component.html -->
+<div class="container">
+    <form action="" class="form-group">
+        <div>
+            <input type="hidden" class="form-control" value="{{card?.name}}">
+            <input type="hidden" class="form-control" value="{{card?.author}}">
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="" class="form-label">Name</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label for="" class="form-label">Email</label>
+                <input type="email" class="form-control">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+                <label for="" class="form-label">Comment</label>
+                <textarea name="" id="" cols="30" rows="5" 
+                class="form-control"
+                placeholder="Write your comment here..."
+                ></textarea>
+            </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-dark">Send report</button>
+    </form>
+</div>

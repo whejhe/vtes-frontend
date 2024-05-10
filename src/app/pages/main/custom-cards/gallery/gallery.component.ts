@@ -1,3 +1,4 @@
+//front/src/app/pages/main/custom-cards/gallery/gallery.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterMultiPipe } from '../../../../pipes/filter-multi.pipe';
@@ -10,6 +11,7 @@ import { DetailsCustomCardComponent } from '../../../../components/details-custo
 import { MatDialog } from '@angular/material/dialog';
 import { FilterCustomCardsPipe } from '../../../../pipes/filter-custom-cards.pipe';
 import { environment } from '../../../../../environments/environment.development';
+import { SendReportComponent } from '../../../../components/send-report/send-report.component';
 // import { FirebaseStorageService } from '../../../../services/firebase-storage.service';
 
 @Component({
@@ -81,6 +83,12 @@ export class GalleryComponent implements OnInit {
     this.dialog.open(DetailsCustomCardComponent, {
       data: { card },
     });
+  }
+
+  openModalReport(card: CustomCard): void {
+    this.dialog.open(SendReportComponent, {
+      data: { card },
+    })
   }
 
   // Metodos para la paginación

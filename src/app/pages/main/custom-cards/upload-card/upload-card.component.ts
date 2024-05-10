@@ -30,6 +30,10 @@ export class UploadCardComponent implements OnInit {
   ) {
   }
 
+  showSucessMessage: boolean = false;
+  showErrorMessage: boolean = false;
+  message: string = '';
+
   updateCardForm: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
     author: new FormControl(''),
@@ -127,10 +131,22 @@ export class UploadCardComponent implements OnInit {
         .subscribe(
           (response) => {
             console.log('Carta creada:', response);
+            this.showSucessMessage = true;
+            this.showErrorMessage = false;
+            this.message = 'Carta creada correctamente';
+            setTimeout(() => {
+              this.showSucessMessage = false;
+              this.updateCardForm.reset();
+            },5000)
           },
           (error) => {
-
             console.log('Error al crear la carta:', error);
+            this.showErrorMessage = true;
+            this.showSucessMessage = false;
+            this.message = 'Error al crear la carta';
+            setTimeout(() => {
+              this.showErrorMessage = false;
+            },5000)
           }
         );
     }catch(error){

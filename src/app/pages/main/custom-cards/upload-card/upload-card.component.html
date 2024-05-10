@@ -116,6 +116,21 @@
       <button class="btn btn-dark" type="submit"
       >Guardar</button>
     </div>
-
   </form>
+  <!--ALERTS-->
+  @if(showSucessMessage){
+    <div class="alert alert-dismissible alert-success">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong>{{message}}</strong>Custom card successfully created.<a href="#" class="alert-link">this important alert
+        message</a>.
+    </div>
+    }
+
+    @if(showErrorMessage){
+    <div class="alert alert-dismissible alert-danger">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong>{{message}}</strong><br>
+      <p>Please, check your credentials and try submitting again.</p>
+    </div>
+    }
 </div>

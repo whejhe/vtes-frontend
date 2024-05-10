@@ -37,6 +37,8 @@
         <img [src]="apiUrl + card.url" class="customCard"
         (click)="openModal(card)">
         <p>{{card.name}}</p>
+        <button class="btn-dark"
+        (click)="openModalReport(card)">Send Report</button>
       </div>
     </div>
 
