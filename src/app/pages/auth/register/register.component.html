@@ -1,5 +1,8 @@
 <!--front/src/app/pages/auth/register/register.component.html-->
 <div class="portada">
+  <div class="container-logo">
+    <img class="logo" src="../../../assets/img/icons-vtes/logo/logo-negro.png" alt="">
+  </div>
   <div class="container">
     <form (ngSubmit)="register()" class="form-container"
       [formGroup]="registerForm">
@@ -49,11 +52,7 @@
       <div class="row">
         <!--AVATAR-->
         <div class="choose-image" (click)="openModal()">
-          @if (selectedAvatar) {
-            <img class="rounded-circle" width="60px" alt="">
-          }@else {
-            <img src="../../../../assets/img/default-avatar.png" width="60px" alt="">
-          }
+          <img class="rounded-circle" alt="" [src]="selectedAvatar || '../../../../assets/img/default-avatar.png'">
         </div>
       </div>
 

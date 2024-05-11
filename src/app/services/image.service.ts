@@ -1,3 +1,4 @@
+//front/src/app/services/image.service.ts
 import { Injectable } from '@angular/core';
 import { Image } from '../models/image.model';
 import { HttpClient } from '@angular/common/http';

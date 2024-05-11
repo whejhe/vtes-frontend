@@ -10,7 +10,7 @@ export const noAuthGuard: CanActivateFn = (route, state) => {
   if (!authService.getToken()) {
     return true;
   } else {
-    router.navigate(['/auth']);
+    router.navigate(['/']);
     return false;
   }
 };

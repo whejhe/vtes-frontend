@@ -138,6 +138,10 @@ export class AuthService implements OnInit{
     return this.currentUser;
   }
 
+  setCurrentUser(user: User): void {
+    this.currentUser = user;
+  }
+
 
   //Obtener imagen de Perfil
   getProfileImage(): Observable<string> {
@@ -182,11 +186,15 @@ changeRole(email: string, newRole: string): Observable<any> {
   });
 }
 
-
-
   // ACTUALIZAR USUARIOS
   updateUser(id: string): Observable<any> {
     return this.http.put(`${this.apiUrl}/users/${id}`, { headers: { 'Authorization': `Bearer ${this.getToken()}` } });
+  }
+
+  updateUserProfile(userId: string, profileImage: string): Observable<User> {
+    const url = `${this.apiUrl}/users/${userId}`;
+    const body = { profileImage };
+    return this.http.put<User>(url, body);
   }
 
   ngOnInit(): void {
