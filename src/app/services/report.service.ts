@@ -32,10 +32,6 @@ export class ReportService {
   }
 
   getReports(): Observable<Report[]> {
-    // let headers = new HttpHeaders();
-    // headers = this.addAuthHeader(headers);
     return this.hhtp.get<Report[]>(this.apiUrl);
   }
-  
-
 }

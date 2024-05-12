@@ -176,13 +176,13 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: -1;
   }
-  
-  
+
+
   .logo{
     width: auto;
     height: 80vh;
     z-index: -1;
     opacity: 0.2;
   }
-  

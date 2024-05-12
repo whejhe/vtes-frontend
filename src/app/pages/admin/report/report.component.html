@@ -1,11 +1,13 @@
 <!--front/src/app/pages/admin/report/report.component.html-->
 <h4>List of Report</h4>
-<!-- <div class="container">
-    <div class="container-report" *ngFor="let reportData of reports">
-        <p>{{reportData.name}}</p>
-        <p>{{reportData.email}}</p>    
-        <p>{{reportData.comment}}</p>
-        <p>Usuario Reportado: {{reportData.authorOfCard}}</p>
-        <p>Carta Reportada: {{reportData.nameOfCard}}</p>
+<div class="container">
+    <div class="container-report" *ngFor="let report of reports">
+      @if(report.notification == true){
+        <p>{{report.name}}</p>
+        <p>{{report.email}}</p>
+        <p>{{report.comment}}</p>
+        <p>{{report.authorOfCard}}</p>
+        <p>{{report.nameOfCard}}</p>
+      }
     </div>
-</div> -->
+</div>

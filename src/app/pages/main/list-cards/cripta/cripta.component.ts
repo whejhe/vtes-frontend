@@ -216,26 +216,6 @@ export class CriptaComponent implements OnInit {
     });
   }
 
-//paginacion
-// loadCards(): void {
-//   this.cardSvc.getCards(this.currentPage, this.pageSize).subscribe((response) => {
-//     this.cards = response.data;
-//     this.totalCards = response.total;
-//   });
-// }
-// nextPage(): void {
-//   this.currentPage++;
-//   this.loadCards();
-// }
-// prevPage(): void {
-//   if (this.currentPage > 1) {
-//     this.currentPage--;
-//     this.loadCards();
-//   }
-// }
-
-
-
   formSubmit() {
     console.log('Crypt Form: ', this.cryptForm.value);
   }

@@ -7,34 +7,21 @@ import { Report } from '../../../models/report.model';
 @Component({
   selector: 'app-report',
   standalone: true,
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   templateUrl: './report.component.html',
-  styleUrl: './report.component.scss'
+  styleUrl: './report.component.scss',
 })
 export class ReportComponent implements OnInit {
+  constructor(private reportSvc: ReportService) {}
 
-  constructor(
-    private reportSvc: ReportService
-  ) { }
-
-  reports!: Report[];
-  reportData = '';
+  reports: Report[] = [];
 
   ngOnInit(): void {
-    // this.getReports();
-   }
+    this.getReports();
+  }
 
-  // getReports(): void {
-  //   this.reportSvc.getReports().subscribe(
-  //     (data) => {
-  //       this.reports = data;
-  //     },
-  //     (error) => {
-  //       console.error('Error al obtener los reportes',error);
-  //     }
-  //   )
-  // }
+  getReports(): void {
+    this.reportSvc.getReports().subscribe(reports => reports = reports);
+  }
 
 }
