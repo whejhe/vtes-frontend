@@ -61,6 +61,7 @@ export class AuthService implements OnInit{
     this.token = token;
   }
 
+
   decodeToken(token: string): User | null {
     if (token) {
       return JSON.parse(atob(token.split('.')[1]));
@@ -68,6 +69,7 @@ export class AuthService implements OnInit{
       return null;
     }
   }
+
 
   //REGISTRO
   registerUser(userData: any): Observable<any> {

@@ -45,10 +45,9 @@ p {
 
   .choose-image {
     cursor: pointer;
-    position: absolute;
-    bottom: 4.1em;
-    left: 18em;
+    width: fit-content;
     padding: 0.3em;
+    margin: auto;
 
     img {
       width: 60px;

@@ -13,14 +13,18 @@
   <div class="container-form">
 
     <div class="custom-card">
+      <div class="background-overlay"></div>
       <!--IMAGEN DE LA CARTA-->
       <div class="image-fondo">
-        <img [src]="imageUrl" alt="Imagen de la carta" />
+        <img class="image-card-border" src="../../../../assets/img/borde.png" alt="">
+        <img class="image-card" [src]="imageUrl" alt="Imagen de la carta" />
       </div>
       <!--NOMBRE DE LA CARTA-->
-      <h2 class="card-name">{{ customCardForm.get('name')?.value }}</h2>
+      <h1 class="card-name">{{ customCardForm.get('name')?.value }}</h1>
       <!--CLAN-->
-      <div class="icono-clan">{{ customCardForm.get('clan')?.value }}</div>
+      <div class="icono-clan" *ngFor="let clan of clanImages">
+       <img src="{{ clan.url }}" alt="">
+      </div>
       <!--LOGOTIPO-->
       <img src="../../../../assets/img/icons-vtes/logo/logo-negro.png" alt="" class="icono-logo" />
       <!--CAPACIDAD-->
@@ -33,13 +37,13 @@
           <img class="discipline-icon" [src]="getDisciplineIcon(discipline)" alt="{{ discipline }}" />
         </div>
       </div>
-      <!--GRUPO-->
-      <div class="group">
-        <span class="group-styles">{{ customCardForm.get('group')?.value }}</span>  
-      </div>
-     
+
       <!--DESCRIPCION-->
       <div>
+        <!--GRUPO-->
+        <div class="group">
+          <span class="group-styles">{{ customCardForm.get('group')?.value }}</span>
+        </div>
         <p class="texto-carta">
           <span class="description">
             {{ customCardForm.get('description')?.value }}
@@ -55,13 +59,13 @@
       <form [formGroup]="customCardForm" (ngSubmit)="onSubmit()">
         <!--NOMBRE CARTA-->
         <div class="mb-3">
-          <input placeholder="Nombre" type="text" class="form-control" formControlName="name" />
+          <input placeholder="Name" type="text" class="form-control" formControlName="name" />
         </div>
 
         <!--CAPACIDAD-->
         <div class="mb-3">
           <label for="capacity" class="form-label">Capacity:</label>
-          <input placeholder="Capacity" type="number" class="form-control" formControlName="capacity" />
+          <input placeholder="Capacity" min="1" max="11" type="number" class="form-control" formControlName="capacity" />
         </div>
         <!--IMAGEN-->
         <div class="mb-3">
@@ -87,9 +91,9 @@
           <!--GRUPO-->
           <div class="col-md-6">
             <label for="grupo" class="form-label">Grupo</label>
-            <input type="number" min="1" max="7" 
+            <input type="number" min="1" max="7"
             class="form-control" id="grupo"
-            [value]="customCardForm.get('group')?.value" 
+            [value]="customCardForm.get('group')?.value"
             formControlName="group" />
           </div>
 
@@ -110,5 +114,5 @@
       </form>
     </div>
   </div>
-  
+
   <div>
