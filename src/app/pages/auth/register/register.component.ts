@@ -1,4 +1,3 @@
-//front/src/app/pages/auth/register/register.component.ts
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';

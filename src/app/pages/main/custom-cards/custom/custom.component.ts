@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { CustomCardsService } from '../../../../services/custom-cards.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { IconService } from '../../../../services/icon.service';
 
 @Component({
   selector: 'app-custom',
@@ -27,19 +28,23 @@ export class CustomComponent {
   logoColors = ['red', 'green', 'blue', 'black', 'white'];
   imageUrl: string = '';
 
+  public disciplineImages = this.iconSvc.disciplineImages;
+  public clanImages = this.iconSvc.clanImages;
+
   constructor(
     private formBuilder: FormBuilder,
-    private customCardsService: CustomCardsService
+    private customCardsService: CustomCardsService,
+    private iconSvc: IconService
   ) {
     this.customCardForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      name: ['Choose a name', Validators.required],
       capacity: [1, [Validators.required, Validators.min(1), Validators.max(11)]],
       image: ['', Validators.required],
       clan: ['', Validators.required],
       disciplines: [[], Validators.required],
       group: [1, [Validators.required, Validators.min(1), Validators.max(7)]],
       logoColor: ['red', Validators.required],
-      description: ['', Validators.required]
+      description: ['Sect. Your description here', Validators.required]
     });
   }
 
@@ -54,10 +59,6 @@ export class CustomComponent {
     return `assets/img/icons-vtes/disciplinas/svg/${disciplineIcon}.svg`;
   }
 
-  getClanIcon(clan: string): string {
-    const clanIcon = Clan[clan as keyof typeof Clan];
-    return `assets/img/icons-vtes/clans/${clanIcon}.gif`;
-  }
 
   getDisciplinesNames(disciplines: string[]): string {
     return disciplines.join(', ');

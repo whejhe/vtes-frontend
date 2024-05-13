@@ -20,7 +20,8 @@ export class SideBarComponent {
 
   apiUrl = environment.apiUrl || 'https://localhost:3000';
   public avatarImage:Image | null = null;
-  user: any | null = null;
+  // user: any | null = null;
+  user: User | null = null;
   public defaultImage = `${this.apiUrl}/vtes-backend/uploads/avatars/default-avatar.png`;
 
   constructor(
@@ -29,8 +30,6 @@ export class SideBarComponent {
     private router: Router,
   ){
     this.user = this.authSvc.getCurrentUser();
-    // console.log(this.user)
-    // this.getAvatarImage();
   }
 
   logout(){
@@ -43,8 +42,9 @@ export class SideBarComponent {
   }
 
   getProfileImage(){
-    return this.imageSvc.getAvatarByName(this.user?.image!);
+    return this.imageSvc.getAvatarByName(this.user?.profileImage!);
   }
+
 
   getLoggedInUser(){
     this.user = this.authSvc.getCurrentUser();
@@ -52,7 +52,7 @@ export class SideBarComponent {
 
   ngOnInit() {
     this.getLoggedInUser();
-    // console.log('Usuario actual :',this.user);
+    // console.log('Usuario en sideBar:',this.user);
   }
 
 }

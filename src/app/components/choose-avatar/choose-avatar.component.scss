@@ -8,14 +8,23 @@
     }
 }
 
+.close{
+    color: aliceblue;
+    border-radius: 50%;
+    padding: 0.5em;
+    font-size: large;
+    width: 20px;
+    height: 20px;
+    &:hover{
+        cursor: pointer;
+    }
+}
+
 .image-container{
     display: inline-block;
 }
 
 .image{
-    // display: inline-flex;
-    // flex-wrap: wrap;
-    // background-color: aliceblue;
     img{
         padding: 0.3em;
         width: 80px;

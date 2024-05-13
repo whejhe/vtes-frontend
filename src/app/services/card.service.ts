@@ -1,8 +1,9 @@
 //front/src/app/services/card.service.ts
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { environment } from '../../environments/environment.development';
+import { Card } from '../models/vtes.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { environment } from '../../environments/environment.development';
 export class CardService {
 
   private apiUrl = environment.apiUrl + '/cards' || 'https://localhost/cards';
+  private cardsCache:Card[] | null = null;
 
   constructor(
     private http: HttpClient
@@ -22,18 +24,15 @@ export class CardService {
 
   // Obtener todas las cartas
   getCards(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+    if(this.cardsCache){
+      return of(this.cardsCache);
+    }
+    return this.http.get<any>(this.apiUrl).pipe(
+      tap((cards)=>{
+        this.cardsCache = cards;
+      })
+    )
   }
-
-  //Paginación
-  // getCards(page: number = 1, pageSize: number = 10): Observable<any> {
-  //   const params = {
-  //     page: page.toString(),
-  //     pageSize: pageSize.toString()
-  //   };
-  //   return this.http.get<any>(this.apiUrl, { params });
-  // }
-
 
   // Obtener una carta por ID
   getCardById(id: string): Observable<any> {
@@ -42,11 +41,13 @@ export class CardService {
 
   // Actualizar la información de una carta
   updateCard(id: string, card: any): Observable<any> {
+    this.cardsCache = null;
     return this.http.put<any>(`${this.apiUrl}/${id}`, card);
   }
 
   // Eliminar una carta
   deleteCard(id: string): Observable<any> {
+    this.cardsCache = null;
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
 }
