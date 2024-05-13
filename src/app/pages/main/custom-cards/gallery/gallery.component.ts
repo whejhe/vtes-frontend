@@ -12,7 +12,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { FilterCustomCardsPipe } from '../../../../pipes/filter-custom-cards.pipe';
 import { environment } from '../../../../../environments/environment.development';
 import { SendReportComponent } from '../../../../components/send-report/send-report.component';
-// import { FirebaseStorageService } from '../../../../services/firebase-storage.service';
 
 @Component({
   selector: 'app-gallery',
@@ -32,8 +31,8 @@ export class GalleryComponent implements OnInit {
     public authSvc: AuthService,
     public customSvc: CustomCardsService,
     public dialog: MatDialog,
-    // public firebaseSvc: FirebaseStorageService
   ) { }
+
 
   customCardForm: FormGroup = new FormGroup({
     searchByAuthor: new FormControl(''),
@@ -42,7 +41,7 @@ export class GalleryComponent implements OnInit {
 
   filteredCards: any[] = [];
 
-  apiUrl = environment.apiUrl || 'https://localhost:3000';
+  apiUrl = environment.apiUrl || 'https://localhost';
 
 
   // Paginación
@@ -71,6 +70,7 @@ export class GalleryComponent implements OnInit {
         this.customCards = response;
         this.filteredCards = response;
         this.totalItems = response.length;
+        console.log('CustomCards: ', this.customCards);
         this.paginate();
       },
       (error) => {
@@ -130,7 +130,6 @@ export class GalleryComponent implements OnInit {
   ngOnInit(): void {
     this.getUsers();
     this.getCustomCards();
-    // this.firebaseSvc.getImages();
   }
 
 }

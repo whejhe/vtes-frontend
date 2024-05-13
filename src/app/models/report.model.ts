@@ -6,5 +6,5 @@ export interface Report{
     comment: string;
     authorOfCard: string;
     nameOfCard: string;
-    notification: boolean;
+    notification?: boolean;
 }

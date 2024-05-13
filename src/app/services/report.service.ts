@@ -4,13 +4,14 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
+import { Report } from '../models/report.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportService {
 
-  private apiUrl = environment.apiUrl + '/reports' || 'https://localhost/reports';
+  private apiUrl = environment.apiUrl + '/report' || 'https://localhost/report';
 
   constructor(
     private hhtp: HttpClient,
@@ -32,12 +33,20 @@ export class ReportService {
   }
 
   getReports(): Observable<Report[]> {
-<<<<<<< HEAD
-    // let headers = new HttpHeaders();
-    // headers = this.addAuthHeader(headers);
-    return this.hhtp.get<Report[]>(`${this.apiUrl}/list`);
-=======
-    return this.hhtp.get<Report[]>(this.apiUrl);
->>>>>>> 8f19dd838ae60daa0a136f675a28e4a89e61fb7e
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    return this.hhtp.get<Report[]>(this.apiUrl + '/list', { headers });
+  }
+
+  getReportById(id: string): Observable<Report> {
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    return this.hhtp.get<Report>(this.apiUrl + '/' + id, { headers });
+  }
+
+  deleteReport(id: string): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    return this.hhtp.delete(this.apiUrl + '/' + id, { headers });
   }
 }

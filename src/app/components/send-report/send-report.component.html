@@ -1,20 +1,37 @@
 <!-- src\app\components\send-report\send-report.component.html -->
 <div class="container">
-    <form action="" class="form-group">
-        <div>
-            <input type="hidden" class="form-control" value="{{card?.name}}">
-            <input type="hidden" class="form-control" value="{{card?.author}}">
-        </div>
+    <form action="" class="form-group"
+    [formGroup]="reportForm">
         <div class="row">
             <div class="col-md-6">
-                <label for="" class="form-label">Name</label>
-                <input type="text" class="form-control">
+                <!-- NAME OF CARD (CAMPOS OCULTOS)-->
+                <!-- <label for="" class="form-label" id="nameOfCard">Name of Card</label> -->
+                <input type="hidden" class="form-control" 
+                formControlName="nameOfCard"
+                >
             </div>
             <div class="col-md-6">
-                <label for="" class="form-label">Email</label>
-                <input type="email" class="form-control">
+                <!-- AUTHOR OF CARD-->
+                <!-- <label for="" class="form-label" id="authorOfCard">Author of Card</label> -->
+                <input type="hidden" class="form-control" 
+                formControlName="authorOfCard"
+                >
             </div>
         </div>
+        <!-- NAME AND EMAIL (CAMPOS OCULTOS)-->
+        <div class="row">
+            <div class="col-md-6">
+                <!-- <label for="" class="form-label">Name</label> -->
+                <input type="hidden" class="form-control" id="name"
+                formControlName="name">
+            </div>
+            <div class="col-md-6">
+                <!-- <label for="" class="form-label">Email</label> -->
+                <input type="hidden" class="form-control" id="email"
+                formControlName="email">
+            </div>
+        </div>
+        <!-- COMMENT -->
         <div class="row">
             <div class="col-md-12">
                 <br>
@@ -22,11 +39,13 @@
                 <textarea name="" id="" cols="30" rows="5"
                 class="form-control"
                 placeholder="Write your comment here..."
+                formControlName="comment"
                 ></textarea>
             </div>
         </div>
         <br>
         <button type="submit" class="btn btn-dark"
-        (click)="sendReport()">Send report</button>
+        (click)="sendReport()"
+        >Send report</button>
     </form>
 </div>

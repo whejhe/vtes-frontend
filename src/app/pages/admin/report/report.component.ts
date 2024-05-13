@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../../../services/report.service';
 import { CommonModule } from '@angular/common';
 import { Report } from '../../../models/report.model';
+import { MatDialog } from '@angular/material/dialog';
+import { ViewReportComponent } from '../../../components/view-report/view-report.component';
 
 @Component({
   selector: 'app-report',
@@ -12,33 +14,68 @@ import { Report } from '../../../models/report.model';
   styleUrl: './report.component.scss',
 })
 export class ReportComponent implements OnInit {
-  constructor(private reportSvc: ReportService) {}
-
-<<<<<<< HEAD
   constructor(
-    private reportSvc: ReportService
-  ) { 
-    this.reportSvc.getReports();
-  }
-
-  reports?: Report[];
-  reportData = '';
-
-  ngOnInit(): void {
-    console.log('Reports: ', this.reports);
-    console.log(this.reportSvc.getReports())
+    private reportSvc: ReportService,
+    public dialog: MatDialog
+  ) {
+    // this.getReports();
+    // console.log('Reports:',this.getReports())
    }
 
-=======
-  reports: Report[] = [];
+  public reports: Report[] = [];
+  selectedReport: Report | undefined;
 
   ngOnInit(): void {
     this.getReports();
   }
 
   getReports(): void {
-    this.reportSvc.getReports().subscribe(reports => reports = reports);
+    this.reportSvc.getReports().subscribe(reports => {
+      this.reports = reports;
+    });
   }
->>>>>>> 8f19dd838ae60daa0a136f675a28e4a89e61fb7e
+
+  getReportById():void{
+    this.reportSvc.getReportById('').subscribe(
+      (response) =>{
+        console.log('Reporte:', response);
+      },
+      (error) =>{
+        console.log('Error al obtener el reporte:', error);
+      }
+    )
+  }
+
+  deleteReport():void{
+    this.reportSvc.deleteReport('').subscribe(
+      (response) =>{
+        console.log('Reporte eliminado:', response);
+      },
+      (error) =>{
+        console.log('Error al eliminar el reporte:', error);
+      }
+    );
+  }
+
+  // viewReport(report: Report): void {
+  //   this.dialog.open(ViewReportComponent, {
+  //     data: { report },
+  //   })
+  // }
+  viewReport(report: Report): void {
+    this.selectedReport = report;
+    this.reportSvc.getReportById(report._id).subscribe(
+      (reportData) => {
+        this.dialog.open(ViewReportComponent, {
+          data: { report: reportData },
+          
+        });
+        console.log('Reporte:', reportData);
+      },
+      (error) => {
+        console.log('Error al obtener el reporte:', error);
+      }
+    );
+  }
 
 }

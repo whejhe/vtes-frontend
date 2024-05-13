@@ -1,0 +1,16 @@
+.container{
+    padding: 2em;
+    border: 2px solid black;
+    max-width: 100vh;
+    min-width: 80vh;
+    max-height: 100vh;
+    overflow-y: scroll;
+    label{
+        font-weight: bold;
+    }
+
+    .check{
+        display: inline-flex;
+
+    }
+}

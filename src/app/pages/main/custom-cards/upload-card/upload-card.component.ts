@@ -48,19 +48,6 @@ export class UploadCardComponent implements OnInit {
   });
 
 
-  // uploadImage($event:any){
-  //   const file = $event.target.file[0];
-  //   console.log(file)
-  // }
-  // imgRef = ref(this.storage, `CustomCards/${this.updateCardForm.value.image.name}`);
-  // uploadBytes(imgRef: any, file: any){
-  //   uploadBytes(imgRef, file)
-  //     .then(response => {
-  //       console.log(response)
-  //     })
-  //     .catch(error => console.log(error));
-  // };
-
   public searchGroup: string = '';
   public searchClan: string = '';
   public searchCapacity = null;

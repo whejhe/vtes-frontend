@@ -1,22 +1,64 @@
 <!--front/src/app/pages/admin/report/report.component.html-->
 <h4>List of Report</h4>
 <div class="container">
-<<<<<<< HEAD
-    <div class="container-report" *ngFor="let reportData of reports">
-        <p>{{reportData.name}}</p>
-        <p>{{reportData.email}}</p>    
-        <p>{{reportData.comment}}</p>
-        <p>Usuario Reportado: {{reportData.authorOfCard}}</p>
-        <p>Carta Reportada: {{reportData.nameOfCard}}</p>
-=======
-    <div class="container-report" *ngFor="let report of reports">
-      @if(report.notification == true){
-        <p>{{report.name}}</p>
-        <p>{{report.email}}</p>
-        <p>{{report.comment}}</p>
-        <p>{{report.authorOfCard}}</p>
-        <p>{{report.nameOfCard}}</p>
-      }
->>>>>>> 8f19dd838ae60daa0a136f675a28e4a89e61fb7e
-    </div>
+  <div class="container-report">
+    <table class="table table-hover">
+      <thead>
+        <tr class="table-dark">
+          <th>Nombre Remitente</th>
+          <th>Email Remitente</th>
+          <th>Author of Card</th>
+          <th>Name of Card</th>
+          <th></th>
+          <th></th>
+          <!-- <th>ID</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let report of reports" (click)="viewReport(report)" 
+        [class.selected]="report === selectedReport">
+          <td>{{report.name}}</td>
+          <td>{{report.email}}</td>
+          <td>{{report.authorOfCard}}</td>
+          <td>{{report.nameOfCard}}</td>
+          @if(report.notification == true){
+          <td><img src="../../../../assets/img/notification.png" width="40" alt=""></td>
+          }@else{
+          <td><img src="../../../../assets/img/check.png" width="40" alt=""></td>
+          }
+          <svg class="trash" id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="40" height="40"
+            fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            (click)="deleteReport()">
+            <path d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
+          </svg>
+          <!-- <td>{{report._id}}</td> -->
+        </tr>
+    </table>
+  </div>
+  <!-- <div>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi eos ut quae, natus recusandae sed veritatis
+      ducimus asperiores nesciunt laboriosam, dolor dignissimos a reprehenderit itaque repudiandae, quia voluptate
+      maxime obcaecati.
+      Non tempora, reprehenderit maxime omnis excepturi tempore quam, alias id rerum nesciunt dolore consectetur est! Ab
+      voluptatum reiciendis dolor amet nulla officia nisi vel laudantium debitis qui. Fuga, voluptate aspernatur!
+      Magnam odio sint debitis, nostrum nisi molestiae ipsam laboriosam eum, dignissimos, dolore beatae neque dolorem
+      enim placeat exercitationem nulla quis maiores architecto et quo. Doloremque itaque alias quisquam accusamus?
+      Modi.
+      Rem aliquid repellendus perspiciatis officiis nulla quisquam debitis nemo veritatis sed est? Facilis, dolore
+      ducimus! Atque libero hic, esse dolorum maiores necessitatibus quis numquam est quo sint ipsum, suscipit autem!
+      Accusamus voluptates totam unde fugiat minus hic repellendus magni deserunt neque? Doloribus eum tenetur
+      laboriosam veniam est deleniti eius repudiandae qui reprehenderit cupiditate recusandae nostrum neque possimus,
+      modi optio amet.
+      Quam, expedita tempora rerum quos ipsam architecto enim ad aut earum dicta provident eum odit obcaecati, beatae,
+      mollitia quas dolorum unde eligendi voluptas doloremque fuga suscipit. Itaque necessitatibus minima suscipit!
+      Molestiae, maiores iure cum, dolorum ullam omnis dolore nam quidem enim ipsa, inventore perspiciatis dicta est
+      delectus rem velit excepturi pariatur expedita eum. Fugit illo eveniet placeat maxime aliquid! Laboriosam.
+      Nemo repudiandae iure sunt, repellendus vero ipsa. Modi corporis odio magni ea, nobis delectus iure ut nisi, fuga
+      repudiandae iusto voluptates nulla. Ratione consequuntur nam voluptatibus, quae quaerat distinctio maxime.
+      Sequi recusandae fugit deleniti sunt temporibus enim aliquam repudiandae tempora sint? Nobis molestiae maxime
+      exercitationem. Delectus voluptatem optio recusandae, cumque, facere quia, eos a ea possimus illum maiores
+      doloremque ipsam!
+      Iure deserunt fugit laboriosam error fugiat vero dicta ab nulla ratione rerum, incidunt saepe pariatur inventore
+      cupiditate minima. In error harum sapiente sequi explicabo. Ducimus minima dignissimos recusandae in hic?</p>
+  </div> -->
 </div>
