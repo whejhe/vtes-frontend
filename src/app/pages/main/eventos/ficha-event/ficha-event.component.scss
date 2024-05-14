@@ -21,7 +21,7 @@
     margin: 2em;
     width: auto;
     min-width: 300px;
-    // position: relative;
+    position: relative;
     // z-index: 1;
 
     .title {
@@ -64,7 +64,7 @@ table {
   }
 }
 
-img {
+.avatar {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -83,4 +83,39 @@ section{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.container-logo{
+  position: fixed;
+  top: 5vh;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -1;
+}
+
+
+.logo{
+  width: auto;
+  height: 80vh;
+  z-index: -1;
+  opacity: 0.1;
+}
+
+.reloj{
+  // background-color: rgba($color: #e49d9d, $alpha: 0.3);
+  width: fit-content;
+  // border: 2px solid black;
+  padding: 1em;
+  position : absolute;
+  top: 5px;
+  left: 5px;
+  font-family: 'Times New Roman', Times, serif;
+  .time{
+    font-weight: bold;
+    font-size: 1.5em;
+  }
 }

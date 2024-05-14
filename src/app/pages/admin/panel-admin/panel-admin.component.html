@@ -1,10 +1,16 @@
 <div class="panel-admin">
+  <div class="container-logo">
+    <img class="logo" src="../../../assets/img/icons-vtes/logo/logo-negro.png" alt="">
+  </div>
   <div class="container">
     <h1>Panel Admin</h1>
     <nav>
       <ul>
         <li><a href="#" (click)="showUserLists(); false">List of Users</a></li>
         <li><a href="#" (click)="showReportList(); false">Reports</a></li>
+        <li><a href="#" (click)="showEventList(); false">Events</a></li>
+        <li><a href="#" (click)="showCustomCardList(); false">Custom Cards</a></li>
+        <li><a href="#" (click)="showDeckList(); false">List of Decks</a></li>
       </ul>
     </nav>
 
@@ -14,6 +20,14 @@
     @if (this.showUserList) {
       <app-list-users></app-list-users>
     }
-
+    @if(this.showEventos){
+      <app-listar-eventos></app-listar-eventos>
+    }
+    @if(this.showCustomCards){
+      <app-custom-cards-list></app-custom-cards-list>
+    }
+    @if (this.showDecks) {
+      <app-lista-decks></app-lista-decks>
+    }
   </div>
 </div>

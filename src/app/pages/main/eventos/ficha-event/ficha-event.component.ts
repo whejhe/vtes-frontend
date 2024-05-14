@@ -1,5 +1,5 @@
 // front/src/app/pages/main/eventos/ficha-event/ficha-event.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EventService } from '../../../../services/event.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Evento } from '../../../../models/evento.model';
@@ -10,6 +10,7 @@ import { EventUser } from '../../../../models/event-user.model';
 import { CommonModule } from '@angular/common';
 import { User } from '../../../../models/user.model';
 import { environment } from '../../../../../environments/environment';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-ficha-event',
@@ -17,11 +18,18 @@ import { environment } from '../../../../../environments/environment';
   imports: [
     RouterLink,
     CommonModule,
+    FormsModule
   ],
   templateUrl: './ficha-event.component.html',
   styleUrl: './ficha-event.component.scss'
 })
-export class FichaEventComponent implements OnInit {
+export class FichaEventComponent implements OnInit, OnDestroy {
+
+  // eventDate: Date = new Date('2024-06-01 18:00:00');
+  eventDate: Date | null = null;
+  days: string = '';
+  timeRemaining: string = '';
+  private intervalId: any;
 
   constructor(
     public eventSvc: EventService,
@@ -46,7 +54,12 @@ export class FichaEventComponent implements OnInit {
   ngOnInit(): void {
     this.getEventById();
     this.getCurrentUser();
+    this.startCountdown();
     console.log('CurrentUser: ', this.getCurrentUser());
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.intervalId);
   }
 
   getEventById(): void {
@@ -55,6 +68,7 @@ export class FichaEventComponent implements OnInit {
       this.eventSvc.getEventById(id).subscribe(
         (newEvent) => {
           this.evento = newEvent;
+          this.eventDate = new Date(`${this.evento?.fecha!} ${this.evento?.hora!}`);
           // console.log('Evento: ',this.evento);
           this.getUsersForEvent();
         },
@@ -114,7 +128,7 @@ export class FichaEventComponent implements OnInit {
 
   addUserByEmail() {
     // Verifica si el usuario actual es un administrador
-    if (this.currentUser && this.currentUser.role === 'ADMIN') {
+    if (this.currentUser && this.currentUser.role === 'ADMIN' || this.currentUser.role === 'SUPER_ADMIN') {
       const email = prompt('Ingresa el correo electrónico del usuario a agregar:');
       if (email) {
         this.eventUserSvc.addUserByEmail(this.evento._id!, email).subscribe(
@@ -172,6 +186,35 @@ export class FichaEventComponent implements OnInit {
           }, 5000);
         }
       )
+    }
+  }
+
+  // CUENTA ATRAS
+  startCountdown() {
+    this.intervalId = setInterval(() => {
+      this.updateTimeRemaining();
+    }, 1000);
+  }
+
+  updateTimeRemaining(): void {
+    if (this.eventDate) {
+      const currentDate = new Date();
+      const timeDiff = this.eventDate!.getTime() - currentDate.getTime();
+      if (timeDiff > 0) {
+        const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+        this.days = `Comienza en ${days} Dias`;
+        this.timeRemaining = `${hours}h:${minutes}:${seconds}s`;
+      } else {
+        this.timeRemaining = 'Finalizado';
+        clearInterval(this.intervalId);
+      }
+    }else{
+      this.timeRemaining = 'Finalizado';
+      clearInterval(this.intervalId);
     }
   }
 

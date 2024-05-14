@@ -18,6 +18,7 @@ export class ReportService {
     private authSvc: AuthService
   ) { }
 
+  // AGREGAR ENCABEZADO DE AUTENTICACION
   addAuthHeader(headers: HttpHeaders): HttpHeaders {
     const token = this.authSvc.getToken();
     if (token) {
@@ -26,27 +27,38 @@ export class ReportService {
     return headers;
   }
 
+  // CREAR UN NUEVO REPORTE
   createReport(report: any): Observable<any> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
     return this.hhtp.post(this.apiUrl, report, { headers });
   }
 
+  // OBTENER TODOS LOS REPORTES
   getReports(): Observable<Report[]> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
     return this.hhtp.get<Report[]>(this.apiUrl + '/list', { headers });
   }
 
+  // OBTENER UN REPORTE POR ID
   getReportById(id: string): Observable<Report> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
     return this.hhtp.get<Report>(this.apiUrl + '/' + id, { headers });
   }
 
-  deleteReport(id: string): Observable<any> {
+  // ACTUALIZAR ESTADO DE NOTIFICACION DE UN REPORTE
+  updateReport(id: string, notification: boolean): Observable<Report> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
-    return this.hhtp.delete(this.apiUrl + '/' + id, { headers });
+    return this.hhtp.put<Report>(this.apiUrl + '/update/' + id, { notification }, { headers });
+  }
+
+  // ELIMINAR UN REPORTE
+  deleteReportById(id: string): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    return this.hhtp.delete(`${this.apiUrl}/${id}`, { headers });
   }
 }

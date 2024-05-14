@@ -1,5 +1,9 @@
+<!--front/src/app/pages/main/eventos/ficha-event/ficha-event.component.html-->
+<div class="container-logo">
+  <img class="logo" src="../../../assets/img/icons-vtes/logo/logo-negro.png" alt="">
+</div>
 <div class="row center">
-  <div *ngIf="currentUser && currentUser.role === 'ADMIN'" class="center">
+  <div *ngIf="currentUser && currentUser.role === 'ADMIN' || currentUser.role === 'SUPER_ADMIN'" class="center">
     <button class="btn btn-dark" (click)="addUserByEmail()">Agregar Usuario por Correo Electrónico</button>
   </div>
 </div>
@@ -24,6 +28,9 @@
     <h1 class="title">
       <strong>Titulo: {{evento.name}}</strong>
     </h1>
+    <div class="reloj">
+      <h3 class="time">{{days}}<br>{{timeRemaining}}</h3>
+    </div>
     <div class="flex">
       <div class="info">
         <p><strong>Type: </strong> {{evento.type}}</p>
@@ -42,9 +49,10 @@
           (click)="deleteUserFromEvent()"
           >Darse de Baja</button>
           <input type="file" id="fileInput" style="display: none;" />
-          <button class="btn btn-dark" onclick="document.getElementById('fileInput').click()">Subir Mazo</button>
+          <!-- <button class="btn btn-dark" onclick="document.getElementById('fileInput').click()">Subir Mazo</button> -->
           <span id="fileName"></span>
           <button class="btn btn-dark" [routerLink]="['/listar-eventos/']">Back to list of Events</button>
+          <button class="btn btn-dark">Comenzar torneo</button>
         </div>
       </div>
     </div>
@@ -64,7 +72,7 @@
       <tbody>
         <tr *ngFor="let eventUser of eventUsers.userId let i = index" [class.table-light]="i % 2 === 0"
           [class.table-secondary]="i % 2 !== 0">
-          <td><img [src]="apiUrl + eventUser.avatarUrl"></td>
+          <td><img class="avatar" [src]="apiUrl + eventUser.avatarUrl"></td>
           <td>{{eventUser.name}}</td>
           <td>{{eventUser.email}}</td>
           <th>

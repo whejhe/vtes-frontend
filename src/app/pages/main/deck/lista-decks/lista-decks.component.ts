@@ -25,7 +25,7 @@ export class ListaDecksComponent implements OnInit {
 
     constructor(
         public deckSvc: DeckService,
-        public authSvc: AuthService
+        public authSvc: AuthService,
     ) { }
 
     decks: Deck[] = [];
@@ -71,6 +71,17 @@ export class ListaDecksComponent implements OnInit {
             });
     }
 
+    // ELIMINAR DECK
+    deleteDeck(id: string): void {
+        this.deckSvc.deleteDeck(id).subscribe(
+            () => {
+                this.getDecks();
+            },
+            (error) => {
+                console.log('Error al eliminar el deck: ', error);
+            }
+        )
+    }
 
     //FILTRAR POR CATEGORIA
     filterByCategory(): void {
@@ -95,6 +106,15 @@ export class ListaDecksComponent implements OnInit {
             console.log('Author Actual: ', selectedAuthor);
         }
     }
+
+    // Limita el texto de la descripción
+    truncateDescription(text: string, maxLength: number = 100): string {
+        if (text.length > maxLength) {
+            return `${text.slice(0, maxLength)}...`;
+        }
+        return text;
+    }
+
 
 
 

@@ -46,10 +46,11 @@ export class ReportComponent implements OnInit {
     )
   }
 
-  deleteReport():void{
-    this.reportSvc.deleteReport('').subscribe(
+  deleteReport(reportId: string):void{
+    this.reportSvc.deleteReportById(reportId).subscribe(
       (response) =>{
         console.log('Reporte eliminado:', response);
+        this.getReports();
       },
       (error) =>{
         console.log('Error al eliminar el reporte:', error);
@@ -57,11 +58,6 @@ export class ReportComponent implements OnInit {
     );
   }
 
-  // viewReport(report: Report): void {
-  //   this.dialog.open(ViewReportComponent, {
-  //     data: { report },
-  //   })
-  // }
   viewReport(report: Report): void {
     this.selectedReport = report;
     this.reportSvc.getReportById(report._id).subscribe(

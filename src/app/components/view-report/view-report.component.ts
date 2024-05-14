@@ -4,12 +4,14 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Report } from '../../models/report.model';
 import { ReportService } from '../../services/report.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-view-report',
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule
   ],
   templateUrl: './view-report.component.html',
   styleUrl: './view-report.component.scss'
@@ -17,6 +19,7 @@ import { ReportService } from '../../services/report.service';
 export class ViewReportComponent implements OnInit{
 
   reports?: Report[];
+  notification: boolean = true;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { report: Report },
@@ -37,6 +40,17 @@ export class ViewReportComponent implements OnInit{
       },
       (error) => {
         console.log('Error al obtener el reporte:', error);
+      }
+    );
+  }
+
+  updateReport(id: string, notification: boolean): void {
+    this.reportSvc.updateReport(id, notification).subscribe(
+      (response) => {
+        console.log('Reporte actualizado:', response);
+      },
+      (error) => {
+        console.log('Error al actualizar el reporte:', error);
       }
     );
   }

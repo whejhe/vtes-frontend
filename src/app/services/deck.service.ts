@@ -61,7 +61,9 @@ export class DeckService {
 
 
   getDecks(): Observable<Deck[]> {
-    return this.http.get<Deck[]>(this.apiUrl);
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    return this.http.get<Deck[]>(this.apiUrl, { headers });
   }
 
   // Obtener un mazo por ID

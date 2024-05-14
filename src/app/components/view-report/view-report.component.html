@@ -1,3 +1,4 @@
+<!-- front/src\app\components\view-report\view-report.component.html -->
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -31,7 +32,8 @@
         <div class="col-md-3"></div>
         <div class="col-md-3 check">
             <label class="form-label">Marcar como leido:</label><br>
-            <input type="checkbox" class="form-check-input">
+            <input type="checkbox" class="form-check-input"
+            [(ngModel)]="notification" (change)="updateReport(data.report._id, notification)">
         </div>
     </div>
 </div>

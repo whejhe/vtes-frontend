@@ -78,6 +78,8 @@ export class CustomCardsService {
   }
 
   deleteCustomCard(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers });
   }
 }

@@ -27,25 +27,37 @@ export class ListarEventosComponent implements OnInit {
     public authSvc: AuthService,
   ) { }
   
-  event: Evento[] = [];
+  public events: Evento[] = [];
   user: User[] = [];
   
   getEvents(){
     console.log(this.eventSvc.getEvents());
     this.eventSvc.getEvents().subscribe(
       (events: Evento[]) => {
-      this.event = events;
+      this.events = events;
     },
     (error) => {
       console.log('Error al obtener los eventos: ', error);
     });
   }
 
+  deleteEvent(eventId: string): void {
+    this.eventSvc.deleteEvent(eventId).subscribe(
+      (response) => {
+        console.log('Evento eliminado:', response);
+        this.getEvents();
+      },
+      (error) => {
+        console.log('Error al eliminar el evento:', error);
+      }
+    );
+  }
+
 
   ngOnInit(): void {
     this.eventSvc.getEvents();
     this.getEvents();
-    console.log('Lista de Eventos: ', this.event);
+    console.log('Lista de Eventos: ', this.events);
   }
 
 }
