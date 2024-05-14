@@ -40,21 +40,46 @@ label{
   opacity: 1;
 }
 
-thead{
-  tr{
-    text-align: center;
-  }
-}
-
-tr{
+tr {
   width: 100%;
-  td{
+
+  td {
     width: 30%, 15%, 10%, 30%, 15%;
     padding-left: 2em;
-    background-color: rgba($color: #ffffff, $alpha: 0);
+    background-color: rgba(255, 255, 255, 0.5);
   }
 }
 
+table {
+  width: 100%;
+
+  tr {
+    width: 100%;
+
+    td {
+      padding-left: 2em;
+      background-color: rgba(255, 255, 255, 0.5);
+
+      &:nth-child(1) {
+        width: 30%;
+      }
+      &:nth-child(2) {
+        width: 15%;
+      }
+      &:nth-child(3) {
+        width: 10%;
+      }
+      &:nth-child(4) {
+        width: 30%;
+      }
+      &:nth-child(5) {
+        width: 15%;
+      }
+    }
+  }
+}
+
+// Otros estilos
 td:nth-child(1),
 td:nth-child(3),
 td:nth-child(4) {
@@ -66,6 +91,34 @@ td:nth-child(5) {
   text-align: center;
 }
 
+
+// thead{
+//   tr{
+//     text-align: center;
+//   }
+// }
+
+// tr{
+//   width: 100%;
+//   td{
+//     width: 30%, 15%, 10%, 30%, 15%;
+//     padding-left: 2em;
+//     // background-color: rgba($color: #ffffff, $alpha: 0.1);
+//     background-color: rgba(255, 255, 255, 0.9);
+//   }
+// }
+
+// td:nth-child(1),
+// td:nth-child(3),
+// td:nth-child(4) {
+//   text-align: left;
+// }
+
+// td:nth-child(2),
+// td:nth-child(5) {
+//   text-align: center;
+// }
+
 .all-disciplines{
   display: inline-flex;
   img{
@@ -74,7 +127,7 @@ td:nth-child(5) {
 }
 
 aside{
-  background-color: rgb(226, 224, 224);
+  background-color: rgba(226, 224, 224, 0.8);
   border-radius: 8px;
   height: fit-content;
   padding: 1em;
@@ -154,10 +207,6 @@ aside{
   font-weight: bold;
   border: 2px solid black;
   padding: 0.3em;
-}
-
-table{
-  opacity: 0.9;
 }
 
 .container-logo{

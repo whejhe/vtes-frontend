@@ -1,12 +1,17 @@
 .gallery{
-    text-align: center;
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+  // text-align: center;
+  justify-content: center;
 }
 
 .container-image{
-    margin: auto 1.3em;
+    // padding: 0.5em;
+    // margin: auto 1.3em;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     .customCard{
       min-height: 200px;
       max-height: 280px;
@@ -66,12 +71,13 @@ h4{
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: -5;
 }
 
 
 .logo{
-  width: auto;
-  height: 80vh;
+  width: 98%;
+  height: auto;
   z-index: -1;
-  opacity: 0.2;
+  opacity: 0.8;
 }
