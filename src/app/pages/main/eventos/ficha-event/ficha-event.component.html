@@ -42,7 +42,7 @@
         <p><strong>Max. Participantes: </strong>{{evento.numMaxParticipantes }}</p>
         <p><strong>Description: </strong>{{evento.description}}</p>
         <div class="buttons">
-          <button class="btn btn-dark"        
+          <button class="btn btn-dark"
           (click)="addUserToEvent()"
           >Apuntarse</button>
           <button class="btn btn-dark"
@@ -81,6 +81,26 @@
         </tr>
       </tbody>
     </table>
+  </section>
+
+  <section>
+    <!-- ficha-event.component.html -->
+<form (ngSubmit)="registrarPuntuaciones()">
+  <div *ngFor="let player of eventUsers.userId; let i = index">
+    <div>
+      <label>{{ player.name }}</label>
+      <input type="number" [(ngModel)]="matchResults[i].eliminaciones" name="eliminaciones{{i}}" placeholder="Eliminaciones" required>
+      <!-- <input type="checkbox" [(ngModel)]="matchResults[i].sobrevivió" name="sobrevivió{{i}}"> Sobrevivió
+      <input type="hidden" [(ngModel)]="matchResults[i].userId" [value]="player._id" name="userId{{i}}">
+      <input type="hidden" [(ngModel)]="matchResults[i].mesaId" [value]="mesaId" name="mesaId{{i}}"> -->
+    </div>
+  </div>
+  <button type="submit">Registrar Puntuaciones</button>
+</form>
+
+<div *ngIf="showSucessMessage" class="alert alert-success">{{ mesage }}</div>
+<div *ngIf="showErrorMessage" class="alert alert-danger">{{ mesage }}</div>
+
   </section>
 
 </div>

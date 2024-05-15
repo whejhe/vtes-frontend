@@ -51,6 +51,12 @@ export class FichaEventComponent implements OnInit, OnDestroy {
   showErrorMessage: boolean = false;
   mesage: string = '';
 
+  matchResults: {
+    userId: string,
+    eliminaciones: number,
+    sobrevivió: boolean,
+    mesaId: string }[] = [];
+
   ngOnInit(): void {
     this.getEventById();
     this.getCurrentUser();
@@ -84,6 +90,7 @@ export class FichaEventComponent implements OnInit, OnDestroy {
       this.eventUserSvc.getUsersForEvent(this.evento._id!).subscribe(
         (eventUsers: EventUser) => {
           this.eventUsers = eventUsers;
+          // this.initializeMatchResults();
         },
         (error) => {
           console.log('Error al obtener los usuarios: ', error);
@@ -235,6 +242,40 @@ export class FichaEventComponent implements OnInit, OnDestroy {
           this.showErrorMessage = true;
           this.showSucessMessage = false;
           this.mesage = 'Error al sortear jugadores en mesas.';
+          setTimeout(() => {
+            this.showErrorMessage = false;
+          }, 5000);
+        }
+      );
+    }
+  }
+
+  initializeMatchResults() {
+    this.matchResults = this.eventUsers.userId.map(user => ({
+      userId: user._id,
+      eliminaciones: 0,
+      sobrevivió: false,
+      mesaId: 'mesa1' // Reemplaza 'mesaId' con el ID de mesa correspondiente
+    }));
+  }
+
+  registrarPuntuaciones() {
+    if (this.evento) {
+      this.eventUserSvc.registerMatchScores(this.evento._id!, this.matchResults).subscribe(
+        (resultadosActualizados) => {
+          console.log('Puntuaciones registradas: ', resultadosActualizados);
+          this.showErrorMessage = false;
+          this.showSucessMessage = true;
+          this.mesage = 'Puntuaciones registradas correctamente.';
+          setTimeout(() => {
+            this.showSucessMessage = false;
+          }, 5000);
+        },
+        (error) => {
+          console.log('Error al registrar puntuaciones: ', error);
+          this.showErrorMessage = true;
+          this.showSucessMessage = false;
+          this.mesage = 'Error al registrar puntuaciones.';
           setTimeout(() => {
             this.showErrorMessage = false;
           }, 5000);
