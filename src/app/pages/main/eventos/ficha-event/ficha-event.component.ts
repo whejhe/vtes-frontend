@@ -55,7 +55,10 @@ export class FichaEventComponent implements OnInit, OnDestroy {
     userId: string,
     eliminaciones: number,
     sobrevivió: boolean,
-    mesaId: string }[] = [];
+    mesaId: string
+  }[] = [];
+
+  showButtonStartEvent: boolean = false;
 
   ngOnInit(): void {
     this.getEventById();
@@ -101,6 +104,9 @@ export class FichaEventComponent implements OnInit, OnDestroy {
 
   getCurrentUser(): User | null {
     let currentUser = this.authSvc.getCurrentUser();
+    if (currentUser?.role == 'ADMIN' || currentUser?.role == 'SUPER_ADMIN') {
+      this.showButtonStartEvent = true;
+    }
     return currentUser;
   }
 
@@ -112,7 +118,7 @@ export class FichaEventComponent implements OnInit, OnDestroy {
           this.getUsersForEvent();
           this.showErrorMessage = false;
           this.showSucessMessage = true;
-          this.mesage = 'User added successfully.'
+          this.mesage = 'Usuario agregado correctamente.';
           setTimeout(() => {
             this.showSucessMessage = false;
           }, 5000);
@@ -171,30 +177,34 @@ export class FichaEventComponent implements OnInit, OnDestroy {
   }
 
 
+
+  // ELIMINAR USUARIO DE EVENTO
   deleteUserFromEvent() {
-    if (this.currentUser) {
-      this.eventUserSvc.deleteUserFromEvent(this.evento._id!, this.currentUser._id).subscribe(
-        (eventUsers: EventUser) => {
-          this.eventUsers = eventUsers;
+    if (this.currentUser && this.evento) {
+      this.eventUserSvc.deleteUserFromEvent(this.evento._id!, this.currentUser._id!).subscribe(
+        (response) => {
+          console.log('Usuario eliminado del evento: ', response);
           this.getUsersForEvent();
           this.showErrorMessage = false;
           this.showSucessMessage = true;
-          this.mesage = 'Usuario Eliminado del Evento'
+          this.mesage = 'Usuario Eliminado del Evento';
           setTimeout(() => {
             this.showSucessMessage = false;
           }, 5000);
         },
         (error) => {
+          console.log('Error al eliminar el usuario del evento: ', error);
           this.showErrorMessage = true;
           this.showSucessMessage = false;
-          this.mesage = 'Error al Eliminar el Usuario del Evento'
+          this.mesage = error.error?.error || 'Error al eliminar el usuario del evento';
           setTimeout(() => {
             this.showErrorMessage = false;
           }, 5000);
         }
-      )
+      );
     }
   }
+
 
   // CUENTA ATRAS
   startCountdown() {
@@ -219,68 +229,9 @@ export class FichaEventComponent implements OnInit, OnDestroy {
         this.timeRemaining = 'Finalizado';
         clearInterval(this.intervalId);
       }
-    }else{
+    } else {
       this.timeRemaining = 'Finalizado';
       clearInterval(this.intervalId);
-    }
-  }
-
-  sortPlayersIntoTables() {
-    if (this.evento) {
-      this.eventUserSvc.sortPlayersIntoTables(this.evento._id!).subscribe(
-        (mesas) => {
-          console.log('Mesas sorteadas: ', mesas);
-          this.showErrorMessage = false;
-          this.showSucessMessage = true;
-          this.mesage = 'Jugadores sorteados en mesas correctamente.';
-          setTimeout(() => {
-            this.showSucessMessage = false;
-          }, 5000);
-        },
-        (error) => {
-          console.log('Error al sortear jugadores: ', error);
-          this.showErrorMessage = true;
-          this.showSucessMessage = false;
-          this.mesage = 'Error al sortear jugadores en mesas.';
-          setTimeout(() => {
-            this.showErrorMessage = false;
-          }, 5000);
-        }
-      );
-    }
-  }
-
-  initializeMatchResults() {
-    this.matchResults = this.eventUsers.userId.map(user => ({
-      userId: user._id,
-      eliminaciones: 0,
-      sobrevivió: false,
-      mesaId: 'mesa1' // Reemplaza 'mesaId' con el ID de mesa correspondiente
-    }));
-  }
-
-  registrarPuntuaciones() {
-    if (this.evento) {
-      this.eventUserSvc.registerMatchScores(this.evento._id!, this.matchResults).subscribe(
-        (resultadosActualizados) => {
-          console.log('Puntuaciones registradas: ', resultadosActualizados);
-          this.showErrorMessage = false;
-          this.showSucessMessage = true;
-          this.mesage = 'Puntuaciones registradas correctamente.';
-          setTimeout(() => {
-            this.showSucessMessage = false;
-          }, 5000);
-        },
-        (error) => {
-          console.log('Error al registrar puntuaciones: ', error);
-          this.showErrorMessage = true;
-          this.showSucessMessage = false;
-          this.mesage = 'Error al registrar puntuaciones.';
-          setTimeout(() => {
-            this.showErrorMessage = false;
-          }, 5000);
-        }
-      );
     }
   }
 

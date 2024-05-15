@@ -11,17 +11,15 @@
   @if(showSucessMessage){
     <div class="alert alert-dismissible alert-success">
       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-      <strong>{{mesage}}</strong> You successfully read <a href="#" class="alert-link">this important alert
-        message</a>.
+      <strong>{{mesage}}</strong>
     </div>
     }
 
     @if(showErrorMessage){
-    <div class="alert alert-dismissible alert-danger">
-      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-      <strong>{{mesage}}</strong><br>
-      <p>Please, check your credentials and try submitting again.</p>
-    </div>
+      <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>{{mesage}}</strong><br>
+      </div>
     }
   <header class="header">
     <!-- <img src="../../../../../assets/img/plantilla.png" alt=""> -->
@@ -52,7 +50,9 @@
           <!-- <button class="btn btn-dark" onclick="document.getElementById('fileInput').click()">Subir Mazo</button> -->
           <span id="fileName"></span>
           <button class="btn btn-dark" [routerLink]="['/listar-eventos/']">Back to list of Events</button>
-          <button class="btn btn-dark">Comenzar torneo</button>
+          @if(showButtonStartEvent == true){
+            <button class="btn btn-dark">Comenzar torneo</button>
+          }
         </div>
       </div>
     </div>
@@ -81,26 +81,6 @@
         </tr>
       </tbody>
     </table>
-  </section>
-
-  <section>
-    <!-- ficha-event.component.html -->
-<form (ngSubmit)="registrarPuntuaciones()">
-  <div *ngFor="let player of eventUsers.userId; let i = index">
-    <div>
-      <label>{{ player.name }}</label>
-      <input type="number" [(ngModel)]="matchResults[i].eliminaciones" name="eliminaciones{{i}}" placeholder="Eliminaciones" required>
-      <!-- <input type="checkbox" [(ngModel)]="matchResults[i].sobrevivió" name="sobrevivió{{i}}"> Sobrevivió
-      <input type="hidden" [(ngModel)]="matchResults[i].userId" [value]="player._id" name="userId{{i}}">
-      <input type="hidden" [(ngModel)]="matchResults[i].mesaId" [value]="mesaId" name="mesaId{{i}}"> -->
-    </div>
-  </div>
-  <button type="submit">Registrar Puntuaciones</button>
-</form>
-
-<div *ngIf="showSucessMessage" class="alert alert-success">{{ mesage }}</div>
-<div *ngIf="showErrorMessage" class="alert alert-danger">{{ mesage }}</div>
-
   </section>
 
 </div>

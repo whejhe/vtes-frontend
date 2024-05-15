@@ -1,32 +1,41 @@
 .gallery{
   display: flex;
   flex-wrap: wrap;
-  // text-align: center;
   justify-content: center;
+  gap: 3rem;
 }
 
 .container-image{
-    // padding: 0.5em;
-    // margin: auto 1.3em;
-    flex-grow: 1;
+    flex-grow: 1 1 200px;
+    max-width: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    .customCard{
-      min-height: 200px;
-      max-height: 280px;
-      width: auto;
-      cursor: pointer;
-    }
-    .customCard:hover{
-      border: 2px solid rgb(201, 13, 13);
-    }
-    p{
-      max-width: 200px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+    padding: 0;
+    margin: 0;
+}
+
+.container-image h4,
+.container-image p,
+.container-image button {
+  margin: 0.25rem 0;
+}
+
+.customCard{
+  min-height: 200px;
+  max-height: 280px;
+  width: auto;
+  cursor: pointer;
+}
+.customCard:hover{
+  border: 2px solid rgb(201, 13, 13);
+}
+
+p{
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .page-link{

@@ -29,32 +29,33 @@ export class EventUserService {
   }
 
   // Añadir Usuario a un evento
-  addUserToEvent(eventId: string, userId: string):Observable<any> {
+  addUserToEvent(eventId: string, userId: string): Observable<any> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
     return this.http.post<EventUser>(`${this.apiUrl}/users/${eventId}`, { userId }, { headers });;
   }
 
   // Añadir usuarios a un evento por email
-  addUserByEmail(eventId: string, email: string):Observable<any> {
+  addUserByEmail(eventId: string, email: string): Observable<any> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
     return this.http.post<EventUser>(`${this.apiUrl}/email/${eventId}`, { email }, { headers });
   }
 
   // Obtener todos los usuarios asignados a un evento
-  getUsersForEvent(eventId: string):Observable<EventUser> {
+  getUsersForEvent(eventId: string): Observable<EventUser> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
     return this.http.get<EventUser>(`${this.apiUrl}/${eventId}`, { headers });
   }
 
   // Eliminar usuario de un evento
-  deleteUserFromEvent(eventId: string, userId: string ):Observable<any> {
+  deleteUserFromEvent(eventId: string, userId: string): Observable<any> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
-    return this.http.delete(`${this.apiUrl}/${eventId}`, { headers });
+    return this.http.delete(`${this.apiUrl}/${eventId}/users/${userId}`, { headers });
   }
+
 
   // Sortear jugadores en mesas
   sortPlayersIntoTables(eventId: string): Observable<any> {
