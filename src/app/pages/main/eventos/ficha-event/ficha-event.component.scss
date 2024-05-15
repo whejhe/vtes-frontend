@@ -1,12 +1,8 @@
+.addUsers {
+  margin-top: 2em;
+}
+
 .container {
-  border: 2px solid black;
-  height: 50vh;
-  margin: 5em auto;
-  box-shadow: 3px 0px 5px 0 rgb(63, 2, 2);
-  background-image: url("../../../../../assets/img/others/fondo.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 
   .back {
     margin: 1em;
@@ -18,17 +14,22 @@
   }
 
   .header {
-    margin: 2em;
+    border: 2px solid black;
+    height: fit-content;
+    margin-top: 3em;
+    box-shadow: 3px 0px 5px 0 rgb(63, 2, 2);
+    background-image: url("../../../../../assets/img/others/fondo.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     width: auto;
-    min-width: 300px;
     position: relative;
-    height: auto;
-    // z-index: 1;
 
     .title {
       text-decoration: underline;
       font-size: 1.8em;
       text-align: center;
+      margin-top: 1em;
     }
 
     .info {
@@ -57,7 +58,10 @@ table {
   border: 2px solid rgb(36, 35, 35);
 
   td {
-    background-color: rgba($color: rgb(255, 255, 255), $alpha: 0);
+    // background-color: rgba($color: rgb(255, 255, 255), $alpha: 0);
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
   }
 
   button {
@@ -72,7 +76,7 @@ table {
   border: 2px solid black;
 }
 
-section{
+section {
   .title {
     text-decoration: underline;
     font-size: 1.8em;
@@ -80,13 +84,13 @@ section{
   }
 }
 
-.center{
+.center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.container-logo{
+.container-logo {
   position: fixed;
   top: 5vh;
   left: 0;
@@ -99,32 +103,35 @@ section{
 }
 
 
-.logo{
+.logo {
   width: auto;
   height: 80vh;
   z-index: -1;
   opacity: 0.1;
 }
 
-.reloj{
-  // background-color: rgba($color: #e49d9d, $alpha: 0.3);
+.reloj {
   width: fit-content;
-  // border: 2px solid black;
   padding: 1em;
-  position : absolute;
-  top: 5px;
-  left: 5px;
+  position: absolute;
+  top: 8px;
+  left: 8px;
   font-family: 'Times New Roman', Times, serif;
-  .time{
+
+  .time {
     font-weight: bold;
     font-size: 1.5em;
   }
 }
 
-.alert{
+.alert {
   position: fixed;
   top: 150px;
   left: 150px;
   width: 80%;
   text-align: center;
+}
+
+.trash {
+  cursor: pointer;
 }

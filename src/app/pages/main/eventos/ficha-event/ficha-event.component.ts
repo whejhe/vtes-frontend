@@ -205,6 +205,33 @@ export class FichaEventComponent implements OnInit, OnDestroy {
     }
   }
 
+  // ELIMINAR USUARIO DE EVENTO POR ID
+  deleteUserFormEventById(id: string) {
+    if (this.currentUser && this.evento) {
+      this.eventUserSvc.deleteUserFromEvent(this.evento._id!, id).subscribe(
+        (response) => {
+          console.log('Usuario eliminado del evento: ', response);
+          this.getUsersForEvent();
+          this.showErrorMessage = false;
+          this.showSucessMessage = true;
+          this.mesage = 'Usuario Eliminado del Evento';
+          setTimeout(() => {
+            this.showSucessMessage = false;
+          }, 5000);
+        },
+        (error) => {
+          console.log('Error al eliminar el usuario del evento: ', error);
+          this.showErrorMessage = true;
+          this.showSucessMessage = false;
+          this.mesage = error.error?.error || 'Error al eliminar el usuario del evento';
+          setTimeout(() => {
+            this.showErrorMessage = false;
+          }, 5000);
+        }
+      );
+    }
+  }
+
 
   // CUENTA ATRAS
   startCountdown() {
