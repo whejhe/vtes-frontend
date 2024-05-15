@@ -5,7 +5,7 @@ export interface EventUser {
     _id: string;
     eventId: string;
     userId: User[];
-    score: number;
+    eliminationPoints: number;
+    tablePoints: number;
     registrationStatus: string;
-    // position?: number;
 }

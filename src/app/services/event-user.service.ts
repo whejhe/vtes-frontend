@@ -56,4 +56,18 @@ export class EventUserService {
     return this.http.delete(`${this.apiUrl}/${eventId}`, { headers });
   }
 
+  // Sortear jugadores en mesas
+  sortPlayersIntoTables(eventId: string): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    return this.http.post(`${this.apiUrl}/sort-tables/${eventId}`, {}, { headers });
+  }
+
+  // Registrar puntuaciones de las partidas
+  registerMatchScores(eventId: string, matchResults: any[]): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    return this.http.post(`${this.apiUrl}/register-scores/${eventId}`, { matchResults }, { headers });
+  }
+
 }

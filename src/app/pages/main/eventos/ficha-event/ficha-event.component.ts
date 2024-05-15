@@ -218,6 +218,32 @@ export class FichaEventComponent implements OnInit, OnDestroy {
     }
   }
 
+  sortPlayersIntoTables() {
+    if (this.evento) {
+      this.eventUserSvc.sortPlayersIntoTables(this.evento._id!).subscribe(
+        (mesas) => {
+          console.log('Mesas sorteadas: ', mesas);
+          this.showErrorMessage = false;
+          this.showSucessMessage = true;
+          this.mesage = 'Jugadores sorteados en mesas correctamente.';
+          setTimeout(() => {
+            this.showSucessMessage = false;
+          }, 5000);
+        },
+        (error) => {
+          console.log('Error al sortear jugadores: ', error);
+          this.showErrorMessage = true;
+          this.showSucessMessage = false;
+          this.mesage = 'Error al sortear jugadores en mesas.';
+          setTimeout(() => {
+            this.showErrorMessage = false;
+          }, 5000);
+        }
+      );
+    }
+  }
+
+
 }
 
 
