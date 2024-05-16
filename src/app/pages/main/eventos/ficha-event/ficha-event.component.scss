@@ -18,7 +18,7 @@
     height: fit-content;
     margin-top: 3em;
     box-shadow: 3px 0px 5px 0 rgb(63, 2, 2);
-    background-image: url("../../../../../assets/img/others/fondo.jpg");
+    background-image: url("../../../../../assets/img/others/fondo-transparencia.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -107,20 +107,11 @@ section {
 
 .logo {
   width: auto;
-  height: 80vh;
+  height: 85vh;
   z-index: -1;
-  opacity: 0.1;
+  opacity: 0.2;
 }
 
-// .reloj {
-//   width: fit-content;
-//   padding: 1em;
-//   position: absolute;
-//   top: 8px;
-//   left: 8px;
-//   font-family: 'Times New Roman', Times, serif;
-
-// }
 .time {
   font-weight: bold;
   font-size: 1.2em;
@@ -138,4 +129,27 @@ section {
 
 .trash {
   cursor: pointer;
+}
+
+.mesas{
+  .mesa{
+    font-weight: bold;
+    margin-bottom: 0;
+    text-decoration: underline;
+  }
+  .ronda{
+    margin-top: 1em;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 1.5em
+  }
+}
+
+.avatar{
+  border-radius: 50%;
+  width: 50px;
+  height: auto;
+  padding: 0;
+  margin: 0;
 }

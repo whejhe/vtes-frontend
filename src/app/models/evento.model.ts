@@ -1,22 +1,37 @@
-import { EventUser } from "./event-user.model";
-
 // front/src/app/models/event.model.ts
+
 export interface Evento {
-    _id?: string,
-    creatorId?: string,
-    name?: string,
-    email?: string,
-    type?: String,
-    precio?: string,
-    provincia?: String,
-    localidad?: string,
-    direccion?: string,
-    description?: String,
-    fecha?: Date,
-    hora?: Hora,
-    numMaxParticipantes?: string,
-    // tables?: EventUser[][],
+    _id?: string;
+    creatorId?: string;
+    name?: string;
+    email?: string;
+    type?: string;
+    precio?: string;
+    provincia?: string;
+    localidad?: string;
+    direccion?: string;
+    description?: string;
+    fecha?: string;
+    hora?: string;
+    numMaxParticipantes?: number;
+    mesas?: {
+        numero: number;
+        ronda: number;
+        players: {  
+            userId:{
+                _id: string;
+                name: string;
+                email: string;
+                avatarUrl: string;
+            };
+            tiradaAleatoria: number;
+            tablePoints: number;
+            points: number;
+        }[];
+    }[];
 }
+
+
 
 export enum Hora {
     diez = "10:00",

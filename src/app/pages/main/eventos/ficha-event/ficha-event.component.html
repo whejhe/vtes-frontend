@@ -1,6 +1,6 @@
 <!--front/src/app/pages/main/eventos/ficha-event/ficha-event.component.html-->
 <div class="container-logo">
-  <img class="logo" src="../../../assets/img/icons-vtes/logo/logo-negro.png" alt="">
+  <img class="logo" src="../../../assets/img/icons-vtes/clans/svg/tremere2.svg" alt="">
 </div>
 <div class="row center addUsers">
   <div *ngIf="currentUser && currentUser.role === 'ADMIN' || currentUser.role === 'SUPER_ADMIN'" class="center">
@@ -50,8 +50,14 @@
           <!-- <button class="btn btn-dark" onclick="document.getElementById('fileInput').click()">Subir Mazo</button> -->
           <span id="fileName"></span>
           <button class="btn btn-dark" [routerLink]="['/listar-eventos/']">Back to list of Events</button>
-          @if(showButtonStartEvent == true){
-            <button class="btn btn-dark">Comenzar torneo</button>
+          @if(showButtonStartEvent == true && isStarted == false){
+            <button class="btn btn-dark"
+            (click)="sortearMesa()"
+            >Comenzar torneo</button>
+          }
+          @if(showButtonStartEvent == true && isStarted == true){
+            <button class="btn btn-dark"
+            (click)="stopEvent()">Detener torneo</button>
           }
           <button class="btn btn-dark" disabled>Ranking</button>
         </div>
@@ -59,35 +65,66 @@
     </div>
   </header>
 
-  <section>
-    <h2 class="title">Participantes</h2>
-    <table class="table table-hover" *ngIf="eventUsers">
-      <thead>
-        <tr class="table-dark">
-          <th>Image</th>
-          <th>Participantes</th>
-          <th>Email</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let eventUser of eventUsers.userId let i = index" [class.table-light]="i % 2 === 0"
-          [class.table-secondary]="i % 2 !== 0">
-          <td><img class="avatar" [src]="apiUrl + eventUser.avatarUrl"></td>
-          <td>{{eventUser.name}}</td>
-          <td>{{eventUser.email}}</td>
-          <th>
-            <svg class="trash" id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20"
-                  height="20" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
-                  stroke-width="2"
-                  (click)="deleteUserFormEventById(eventUser._id)">
-                  <path
-                    d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
-                </svg>
-          </th>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+  @if(isStarted === false){
+    <section>
+      <h2 class="title">Participantes</h2>
+      <table class="table table-hover" *ngIf="eventUsers">
+        <thead>
+          <tr class="table-dark">
+            <th>Image</th>
+            <th>Participantes</th>
+            <th>Email</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let eventUser of eventUsers.userId let i = index" [class.table-light]="i % 2 === 0"
+            [class.table-secondary]="i % 2 !== 0">
+            <td><img class="avatar" [src]="apiUrl + eventUser.avatarUrl"></td>
+            <td>{{eventUser.name}}</td>
+            <td>{{eventUser.email}}</td>
+            <th>
+              <svg class="trash" id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20"
+                    height="20" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="2"
+                    (click)="deleteUserFormEventById(eventUser._id)">
+                    <path
+                      d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
+                  </svg>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  }
+
+  @if(isStarted === true){
+    <section class="row mesas">
+      <h1 class="ronda">1ª Ronda</h1>
+      <article class="col-md-6" *ngFor="let mesa of evento.mesas">
+        <h2 class="mesa">Mesa Nº {{mesa.numero}}</h2>
+        <table class="table table-hover">
+          <thead>
+            <tr class="table-dark">
+              <th></th>
+              <th>Participantes</th>
+              <th>Puntos</th>
+              <th>P. Mesa</th>
+              <th>Tirada</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let player of mesa.players">
+              <td><img class="avatar" [src]=" apiUrl + player.userId.avatarUrl" alt=""></td>
+              <td>{{player.userId.name}}</td>
+              <td>{{player.points}}</td>
+              <td>{{player.tablePoints}}</td>
+              <td>{{player.tiradaAleatoria}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+  }
 
 </div>

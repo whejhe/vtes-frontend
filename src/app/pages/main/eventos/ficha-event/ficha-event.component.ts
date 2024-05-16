@@ -25,11 +25,15 @@ import { FormsModule } from '@angular/forms';
 })
 export class FichaEventComponent implements OnInit, OnDestroy {
 
-  // eventDate: Date = new Date('2024-06-01 18:00:00');
+  // FECHA Y CONTADOR
   eventDate: Date | null = null;
   days: string = '';
   timeRemaining: string = '';
   private intervalId: any;
+
+  // TORNEO
+  isStarted: boolean = false;
+  isFinished: boolean = false;
 
   constructor(
     public eventSvc: EventService,
@@ -231,6 +235,43 @@ export class FichaEventComponent implements OnInit, OnDestroy {
       );
     }
   }
+
+  // SORTEO DE MESAS
+  sortearMesa() {
+    if (this.evento) {
+      this.eventSvc.sortearMesa(this.evento._id!).subscribe(
+        (event) => {
+          this.evento = event;
+          this.getUsersForEvent();
+          this.showErrorMessage = false;
+          this.showSucessMessage = true;
+          this.mesage = 'Mesa sorteada';
+          this.isStarted = true;
+          console.log('Mesa sorteada: ', event);
+          setTimeout(() => {
+            this.showSucessMessage = false;
+          }, 5000);
+        },
+        (error) => {
+          console.log('Usuario Actual: ',this.currentUser);
+          console.log('Error al sortear la mesa: ', error);
+          this.showErrorMessage = true;
+          this.showSucessMessage = false;
+          this.mesage = 'Error al sortear la mesa';
+          this.isStarted = false;
+          setTimeout(() => {
+            this.showErrorMessage = false;
+          }, 5000);
+        }
+      );
+    }
+  }
+
+  // COMENZAR TORNEO
+  stopEvent(){
+    this.isStarted = false;
+  }
+
 
 
   // CUENTA ATRAS

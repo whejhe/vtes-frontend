@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { AuthService } from './auth.service';
+import { Evento } from '../models/evento.model';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,12 @@ export class EventService {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
     return this.http.delete<Event>(`${this.apiUrl}admin/${id}`, { headers });
+  }
+
+  sortearMesa(eventId:string):Observable<Event>{
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    return this.http.post<Event>(`${this.apiUrl}admin/sort-tables/${eventId}`,{}, {headers});
   }
 
 }
