@@ -25,9 +25,9 @@
     <!-- <img src="../../../../../assets/img/plantilla.png" alt=""> -->
     <h1 class="title">
       <strong>Titulo: {{evento.name}}</strong>
+      <h3 class="time">{{days}}<br>{{timeRemaining}}</h3>
     </h1>
     <div class="reloj">
-      <h3 class="time">{{days}}<br>{{timeRemaining}}</h3>
     </div>
     <div class="flex">
       <div class="info">
@@ -53,6 +53,7 @@
           @if(showButtonStartEvent == true){
             <button class="btn btn-dark">Comenzar torneo</button>
           }
+          <button class="btn btn-dark" disabled>Ranking</button>
         </div>
       </div>
     </div>

@@ -30,6 +30,8 @@
       font-size: 1.8em;
       text-align: center;
       margin-top: 1em;
+      font-weight: bold;
+      font-family:Verdana, Geneva, Tahoma, sans-serif
     }
 
     .info {
@@ -110,18 +112,20 @@ section {
   opacity: 0.1;
 }
 
-.reloj {
-  width: fit-content;
-  padding: 1em;
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  font-family: 'Times New Roman', Times, serif;
+// .reloj {
+//   width: fit-content;
+//   padding: 1em;
+//   position: absolute;
+//   top: 8px;
+//   left: 8px;
+//   font-family: 'Times New Roman', Times, serif;
 
-  .time {
-    font-weight: bold;
-    font-size: 1.5em;
-  }
+// }
+.time {
+  font-weight: bold;
+  font-size: 1.2em;
+  text-align: left;
+  padding-left: 2em;
 }
 
 .alert {
