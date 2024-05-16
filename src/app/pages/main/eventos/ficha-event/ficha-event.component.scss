@@ -60,7 +60,6 @@ table {
   border: 2px solid rgb(36, 35, 35);
 
   td {
-    // background-color: rgba($color: rgb(255, 255, 255), $alpha: 0);
     justify-content: center;
     align-items: center;
     vertical-align: middle;
@@ -153,3 +152,9 @@ section {
   padding: 0;
   margin: 0;
 }
+
+.points{
+  width: 50%;
+}
+
+

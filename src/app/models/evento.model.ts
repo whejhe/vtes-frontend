@@ -17,14 +17,13 @@ export interface Evento {
     mesas?: {
         numero: number;
         ronda: number;
-        players: {  
+        players: {
             userId:{
                 _id: string;
                 name: string;
                 email: string;
                 avatarUrl: string;
             };
-            tiradaAleatoria: number;
             tablePoints: number;
             points: number;
         }[];

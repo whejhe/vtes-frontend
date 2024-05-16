@@ -106,20 +106,25 @@
         <table class="table table-hover">
           <thead>
             <tr class="table-dark">
-              <th></th>
               <th>Participantes</th>
+              <th></th>
               <th>Puntos</th>
               <th>P. Mesa</th>
-              <th>Tirada</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let player of mesa.players">
-              <td><img class="avatar" [src]=" apiUrl + player.userId.avatarUrl" alt=""></td>
-              <td>{{player.userId.name}}</td>
-              <td>{{player.points}}</td>
-              <td>{{player.tablePoints}}</td>
-              <td>{{player.tiradaAleatoria}}</td>
+              <td>
+                <img class="avatar" [src]=" apiUrl + player.userId.avatarUrl" alt="">
+                {{" "+player.userId.name}}
+              </td>
+              <td> | </td>
+              <td>
+                <input class="points" type="number" value="{{player.points}}">
+              </td>
+              <td>
+                <input class="points" type="number" value="{{player.tablePoints}}">
+              </td>
             </tr>
           </tbody>
         </table>
