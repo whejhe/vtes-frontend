@@ -5,8 +5,9 @@
   </div>
   <form action="" class="form-group" [formGroup]="customCardForm">
     <div class="row">
-      <div class="col-md-4">
-        <h1 class="text-center my-4">Image Gallery</h1>
+      <!--UPLOAD-->
+      <div class="col-md-4 search">
+        <button class="btn btn-dark" [routerLink]="['/upload-card']">Upload your Card</button>
       </div>
       <!--FILTRADO POR NOMBRE-->
       <div class="col-md-4 search">

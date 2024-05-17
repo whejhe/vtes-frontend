@@ -51,6 +51,9 @@ export class FichaEventComponent implements OnInit, OnDestroy {
   avatar: Image[] = [];
   currentUser!: User;
 
+  // Sorteo de posiciones
+  mesas: Evento[] = [];
+
   showSucessMessage: boolean = false;
   showErrorMessage: boolean = false;
   mesage: string = '';
@@ -266,7 +269,7 @@ export class FichaEventComponent implements OnInit, OnDestroy {
       );
     }
   }
-
+  
   // COMENZAR TORNEO
   stopEvent(){
     this.isStarted = false;

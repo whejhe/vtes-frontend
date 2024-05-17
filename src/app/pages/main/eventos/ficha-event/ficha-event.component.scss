@@ -158,3 +158,16 @@ section {
 }
 
 
+.secondRound{
+  border-top: 2px solid black;
+  margin-top: 4em;
+  .cabecera{
+    padding-top: 2em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+  }
+}

@@ -23,6 +23,7 @@ export class CustomComponent {
 
   customCardForm: FormGroup;
   clans = Object.values(Clan);
+  clan:string = '';
   disciplines = Object.values(DisciplineName);
   discipline:string = '';
   logoColors = ['red', 'green', 'blue', 'black', 'white'];
@@ -59,9 +60,17 @@ export class CustomComponent {
     return `assets/img/icons-vtes/disciplinas/svg/${disciplineIcon}.svg`;
   }
 
+  getClanIcon(clan: string): string {
+    const clanIcon = Clan[clan as keyof typeof Clan];
+    return `assets/img/icons-vtes/clans/svg/${clanIcon}.svg`;
+  }
 
   getDisciplinesNames(disciplines: string[]): string {
     return disciplines.join(', ');
+  }
+
+  getClansNames(clans: string[]): string {
+    return clans.join(', ');
   }
 
   getDisciplinePosition(discipline: string): string {

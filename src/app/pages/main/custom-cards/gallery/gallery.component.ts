@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FilterCustomCardsPipe } from '../../../../pipes/filter-custom-cards.pipe';
 import { environment } from '../../../../../environments/environment.development';
 import { SendReportComponent } from '../../../../components/send-report/send-report.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-gallery',
@@ -22,7 +23,8 @@ import { SendReportComponent } from '../../../../components/send-report/send-rep
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    FilterCustomCardsPipe
+    FilterCustomCardsPipe,
+    RouterLink
   ]
 })
 export class GalleryComponent implements OnInit {

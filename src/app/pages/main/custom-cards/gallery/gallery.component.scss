@@ -54,6 +54,12 @@ h4{
 
 .search{
     margin-top: 1.5em;
+    button{
+      margin-left: 6em;
+    }
+    button:hover{
+      background-color: rgb(53, 5, 5);
+    }
 }
 .auth-search{
     margin-top: 1.5em;

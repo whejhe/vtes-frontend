@@ -3,7 +3,7 @@ import { Routes } from "@angular/router";
 
 import { InicioComponent } from "./inicio/inicio.component";
 
-import { CustomComponent } from "./custom-cards/custom/custom.component";
+// import { CustomComponent } from "./custom-cards/custom/custom.component";
 import { GalleryComponent } from "./custom-cards/gallery/gallery.component";
 import { EventsComponent } from "./eventos/events/events.component";
 import { ListaDecksComponent } from "./deck/lista-decks/lista-decks.component";
@@ -21,7 +21,7 @@ export const MAIN_ROUTE:Routes = [
   {path: '', title: 'Inicio',component: InicioComponent},
   {path: 'cripta',title: 'Crypta', component: CriptaComponent},
   {path: 'biblioteca',title: 'Biblioteca', component: BibliotecaComponent},
-  {path: 'custom',title: 'Custom Cards', component: CustomComponent},
+  // {path: 'custom',title: 'Custom Cards', component: CustomComponent},
   {path: 'upload-card', title: 'Upload Card',component: UploadCardComponent},
   {path: 'gallery',title: 'Gallery', component: GalleryComponent},
   {path: 'events', title: 'Events',component: EventsComponent},

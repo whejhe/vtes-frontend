@@ -63,4 +63,10 @@ export class EventService {
     return this.http.post<Event>(`${this.apiUrl}admin/sort-tables/${eventId}`,{}, {headers});
   }
 
+  reordenarMesa(eventId:string):Observable<Event>{
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    return this.http.put<Event>(`${this.apiUrl}admin/sort-tables/${eventId}/reordenar`,{}, {headers});
+  }
+
 }
