@@ -13,6 +13,8 @@
     align-items: center;
     padding: 0;
     margin: 0;
+    // background-color: rgba(56, 3, 3, 0.164);
+
 }
 
 .container-image h4,
@@ -86,7 +88,9 @@ h4{
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: -5;
+  z-index: -1;
+  background-color: rgba(0, 0, 0, 0.192);
+
 }
 
 

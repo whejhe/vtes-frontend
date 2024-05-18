@@ -36,5 +36,7 @@ $App-Vtes-theme: mat.define-light-theme((
 @include mat.all-component-themes($App-Vtes-theme);
 
 
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

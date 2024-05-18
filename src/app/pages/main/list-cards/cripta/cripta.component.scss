@@ -129,6 +129,7 @@ td:nth-child(5) {
 aside{
   background-color: rgba(226, 224, 224, 0.8);
   border-radius: 8px;
+  border: 1px solid rgb(53, 52, 52);
   height: fit-content;
   padding: 1em;
   margin-left: 1.5em;
@@ -218,6 +219,7 @@ aside{
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.192);
 }
 
 

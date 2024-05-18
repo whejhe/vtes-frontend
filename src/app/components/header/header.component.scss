@@ -13,6 +13,7 @@
     min-height: 110px;
     max-height: 200px;
     z-index: 100;
+    background-color: rgb(0, 0, 0);
 }
 
 .profile{
@@ -87,4 +88,20 @@ ul{
   a:hover{
     color: #212529
   }
+}
+
+.nav-list{
+  border-bottom: 2px solid #e6e3e3;
+}
+.nav-list:hover{
+  border-bottom: 2px solid #d60e0e;
+}
+
+.titulo-page{
+  transition-duration: 0.3s;
+  padding-bottom: 0.4em;
+}
+.titulo-page:hover{
+  color: #d60e0e;
+  border-bottom: #d60e0e solid 2px;
 }

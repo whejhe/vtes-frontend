@@ -1,0 +1,124 @@
+Estructura General
+
+    Portada
+        Título del Proyecto
+        Nombre del Autor
+        Fecha
+        Institución (si aplica)
+
+    Índice
+
+    Resumen
+        Breve descripción del proyecto.
+        Objetivos principales.
+        Tecnologías utilizadas.
+
+    Introducción
+        Contexto y motivación del proyecto.
+        Problema que se pretende resolver.
+        Objetivos específicos.
+
+    Descripción del Proyecto
+        Funcionalidades principales.
+        Flujo de usuario.
+
+    Arquitectura del Sistema
+        Descripción general de la arquitectura.
+        Diagrama de arquitectura (Frontend, Backend, Base de Datos, Despliegue).
+
+    Desarrollo del Proyecto
+        Frontend (Angular)
+            Estructura del proyecto.
+            Componentes principales.
+            Servicios utilizados.
+            Comunicación con el Backend.
+        Backend (Node.js con Express)
+            Estructura del proyecto.
+            Principales endpoints.
+            Middleware utilizado.
+        Base de Datos (MongoDB)
+            Modelo de datos.
+            Colecciones y documentos.
+        Despliegue
+            Despliegue en AWS.
+            Despliegue en Vercel.
+
+    Implementación Técnica
+        Configuración del Entorno de Desarrollo
+            Requisitos previos.
+            Instalación y configuración de dependencias.
+        Desarrollo del Frontend
+            Instalación de Angular.
+            Configuración inicial.
+            Componentes y servicios.
+            Manejo de rutas.
+        Desarrollo del Backend
+            Instalación de Node.js y Express.
+            Configuración inicial.
+            Definición de rutas y controladores.
+        Base de Datos
+            Instalación y configuración de MongoDB.
+            Conexión con el Backend.
+        Despliegue
+            Configuración de AWS para el Backend.
+            Configuración de Vercel para el Frontend.
+            Variables de entorno y configuraciones de producción.
+
+    Pruebas
+        Pruebas Unitarias
+            Herramientas utilizadas.
+            Ejemplos de pruebas.
+        Pruebas de Integración
+            Métodos de prueba.
+            Resultados obtenidos.
+
+    Conclusiones
+        Resumen de lo logrado.
+        Dificultades encontradas.
+        Posibles mejoras y futuras ampliaciones.
+
+    Referencias
+        Bibliografía y recursos utilizados.
+
+    Anexos (si aplica)
+        Código fuente relevante.
+        Scripts de configuración.
+        Documentación adicional.
+
+Detalles a Incluir
+
+    Portada y Resumen
+        La portada debe ser clara y profesional.
+        El resumen debe ser conciso y abarcar los puntos más importantes del proyecto.
+
+    Introducción
+        Explica el problema que tu proyecto resuelve y por qué es importante.
+        Define claramente los objetivos que te propusiste al inicio del proyecto.
+
+    Descripción del Proyecto
+        Aquí puedes detallar cómo funciona tu aplicación desde el punto de vista del usuario.
+        Incluye capturas de pantalla o diagramas de flujo para ilustrar el funcionamiento.
+
+    Arquitectura del Sistema
+        Describe la arquitectura de tu aplicación, incluyendo cómo se comunican los diferentes componentes.
+        Incluye un diagrama que muestre la relación entre el frontend, backend, base de datos y los servicios de despliegue.
+
+    Desarrollo del Proyecto
+        Divide esta sección en sub-secciones para frontend, backend, base de datos y despliegue.
+        Detalla las decisiones de diseño, herramientas y frameworks utilizados.
+
+    Implementación Técnica
+        Proporciona instrucciones detalladas para reproducir tu entorno de desarrollo.
+        Explica cómo configurar y desplegar tu aplicación.
+
+    Pruebas
+        Describe el enfoque de las pruebas, incluyendo las herramientas utilizadas.
+        Incluye ejemplos de pruebas y los resultados obtenidos.
+
+    Conclusiones
+        Reflexiona sobre lo que se logró y lo que se podría mejorar en el futuro.
+        Menciona cualquier desafío importante que enfrentaste y cómo lo superaste.
+
+    Referencias y Anexos
+        Asegúrate de citar todas las fuentes y recursos que utilizaste.
+        Incluye cualquier documentación adicional que pueda ser útil para entender tu proyecto.

@@ -1,5 +1,5 @@
 <!--front/src/app/pages/main/deck/new-deck/new-deck.component.html-->
-<form [formGroup]="deckForm">
+<form [formGroup]="deckForm" class="form-group">
   <div class="container-logo">
     <img class="logo" src="../../../assets/img/icons-vtes/clans/svg/ventrue2.svg" alt="">
   </div>
@@ -198,7 +198,7 @@
 
         <!--MAKE PUBLIC OR PRIVATE-->
         <button class="btn btn-dark"
-        type="button" 
+        type="button"
         (click)="changeDeckVisibility()"
         formControlName="isPublic"
         >
