@@ -2,7 +2,7 @@
 
 export interface Evento {
     _id?: string;
-    creatorId?: string;
+    userId?: string;
     name?: string;
     email?: string;
     type?: string;
@@ -14,20 +14,6 @@ export interface Evento {
     fecha?: string;
     hora?: string;
     numMaxParticipantes?: number;
-    mesas?: {
-        numero: number;
-        ronda: number;
-        players: {
-            userId:{
-                _id: string;
-                name: string;
-                email: string;
-                avatarUrl: string;
-            };
-            tablePoints: number;
-            points: number;
-        }[];
-    }[];
 }
 
 

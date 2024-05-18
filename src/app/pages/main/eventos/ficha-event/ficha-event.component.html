@@ -101,8 +101,8 @@
   @if(isStarted === true){
     <section class="row mesas">
       <h1 class="ronda">1ª Ronda</h1>
-      <article class="col-md-6" *ngFor="let mesa of evento.mesas">
-        <h2 class="mesa">Mesa Nº {{mesa.numero}}</h2>
+      <article class="col-md-6">
+        <h2 class="mesa">Mesa Nº </h2>
         <table class="table table-hover">
           <thead>
             <tr class="table-dark">
@@ -113,17 +113,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let player of mesa.players">
+            <tr>
               <td>
-                <img class="avatar" [src]=" apiUrl + player.userId.avatarUrl" alt="">
-                {{" "+player.userId.name}}
+                <img class="avatar" alt="">
+
               </td>
               <td> | </td>
               <td>
-                <input class="points" type="number" value="{{player.points}}">
+                <input class="points" type="number" value="">
               </td>
               <td>
-                <input class="points" type="number" value="{{player.tablePoints}}">
+                <input class="points" type="number" value="">
               </td>
             </tr>
           </tbody>
@@ -139,9 +139,9 @@
     </div>
     @if(isStarted === true){
       <section class="row mesas">
-        <article class="col-md-6" *ngFor="let mesa of evento.mesas">
-          <h1 class="ronda">{{mesa.ronda}}ª Ronda</h1>
-          <h2 class="mesa">Mesa Nº {{mesa.numero}}</h2>
+        <article class="col-md-6">
+          <h1 class="ronda">ª Ronda</h1>
+          <h2 class="mesa">Mesa Nº</h2>
           <table class="table table-hover">
             <thead>
               <tr class="table-dark">
@@ -152,17 +152,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let player of mesa.players">
+              <tr>
                 <td>
-                  <img class="avatar" [src]=" apiUrl + player.userId.avatarUrl" alt="">
-                  {{" "+player.userId.name}}
+                  <img class="avatar" [src]="" alt="">
+
                 </td>
                 <td> | </td>
                 <td>
-                  <input class="points" type="number" value="{{player.points}}">
+                  <input class="points" type="number" value="">
                 </td>
                 <td>
-                  <input class="points" type="number" value="{{player.tablePoints}}">
+                  <input class="points" type="number" value="">
                 </td>
               </tr>
             </tbody>
@@ -181,8 +181,8 @@
     @if(isStarted === true){
       <section class="row mesas">
         <h1 class="ronda">3ª Ronda</h1>
-        <article class="col-md-6" *ngFor="let mesa of evento.mesas">
-          <h2 class="mesa">Mesa Nº {{mesa.numero}}</h2>
+        <article class="col-md-6" >
+          <h2 class="mesa">Mesa Nº</h2>
           <table class="table table-hover">
             <thead>
               <tr class="table-dark">
@@ -193,17 +193,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let player of mesa.players">
+              <tr>
                 <td>
-                  <img class="avatar" [src]=" apiUrl + player.userId.avatarUrl" alt="">
-                  {{" "+player.userId.name}}
+                  <img class="avatar"  alt="">
+
                 </td>
                 <td> | </td>
                 <td>
-                  <input class="points" type="number" value="{{player.points}}">
+                  <input class="points" type="number" value="">
                 </td>
                 <td>
-                  <input class="points" type="number" value="{{player.tablePoints}}">
+                  <input class="points" type="number" value="">
                 </td>
               </tr>
             </tbody>

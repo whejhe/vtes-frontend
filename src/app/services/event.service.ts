@@ -10,7 +10,7 @@ import { Evento } from '../models/evento.model';
   providedIn: 'root'
 })
 export class EventService {
-  events: any;
+  event!: Evento;
 
   constructor(
     private http: HttpClient,
@@ -21,6 +21,9 @@ export class EventService {
     const token = this.authSvc.getToken();
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
+    }else{
+      console.error('No hay token');
+
     }
     return headers;
   }
@@ -28,45 +31,44 @@ export class EventService {
   private apiUrl = environment.apiUrl + '/events/' || 'https://localhost/events/';
 
 
-  createEvent(event: any): Observable<Event> {
+  createEvent(event: Evento): Observable<Evento> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
-    return this.http.post<Event>(`${this.apiUrl}admin/`, event, { headers });
+    return this.http.post<Evento>(`${this.apiUrl}admin/`, event, { headers });
   }
 
 
-  getEvents(): Observable<Event[]> {
-    // console.log(`${this.apiUrl}/users`);
-    return this.http.get<Event[]>(`${this.apiUrl}`);
+  getEvents(): Observable<Evento[]> {
+    return this.http.get<Evento[]>(`${this.apiUrl}`);
   }
 
-  getEventById(id: string): Observable<Event> {
-    return this.http.get<Event>(`${this.apiUrl}users/${id}`);
+  getEventById(id: string): Observable<Evento> {
+    return this.http.get<Evento>(`${this.apiUrl}users/${id}`);
   }
 
-  updateEvent(id: string, event: Event): Observable<Event> {
+  updateEvent(id: string, event: Evento): Observable<Evento> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
     return this.http.put<Event>(`${this.apiUrl}admin/${id}`, event, { headers });
   }
 
 
-  deleteEvent(id: string): Observable<Event> {
+  deleteEvent(id: string): Observable<Evento> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
-    return this.http.delete<Event>(`${this.apiUrl}admin/${id}`, { headers });
+    return this.http.delete<Evento>(`${this.apiUrl}admin/${id}`, { headers });
   }
 
-  sortearMesa(eventId:string):Observable<Event>{
+  sortearMesa(eventId:string):Observable<Evento>{
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
-    return this.http.post<Event>(`${this.apiUrl}admin/sort-tables/${eventId}`,{}, {headers});
+    return this.http.post<Evento>(`${this.apiUrl}admin/sort-tables/${eventId}`,{}, {headers});
   }
 
-  reordenarMesa(eventId:string):Observable<Event>{
+  reordenarMesa(eventId:string):Observable<Evento>{
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
-    return this.http.put<Event>(`${this.apiUrl}admin/sort-tables/${eventId}/reordenar`,{}, {headers});
+    return this.http.put<Evento>(`${this.apiUrl}admin/sort-tables/${eventId}/reordenar`,{}, {headers});
   }
 
 }

@@ -22,8 +22,7 @@ export class EventsComponent implements OnInit {
   currentUser = this.authSvc.getCurrentUser();
 
   eventForm: FormGroup = new FormGroup({
-    _id: new FormControl(''),
-    creatorId: new FormControl(''),
+    userId: new FormControl(''),
     name: new FormControl(''),
     email: new FormControl(''),
     type: new FormControl(''),
@@ -46,7 +45,7 @@ export class EventsComponent implements OnInit {
     public eventSvc: EventService,
     private router: Router,
     private formBuilder: FormBuilder
-  ) { 
+  ) {
     this.eventForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', Validators.required],
@@ -65,7 +64,7 @@ export class EventsComponent implements OnInit {
   createEvent() {
     try {
       const eventData = {
-        creatorId: this.authSvc.getCurrentUser()?._id ?? 'defaultId',
+        userId: this.authSvc.getCurrentUser()!._id ?? 'defaultId',
         name: this.eventForm.get('name')?.value,
         email: this.eventForm.get('email')?.value,
         type: this.eventForm.get('type')?.value,
@@ -78,7 +77,7 @@ export class EventsComponent implements OnInit {
         hora: this.eventForm.get('hora')?.value,
         numMaxParticipantes: this.eventForm.get('numMaxParticipantes')?.value
       };
-  
+
       this.eventSvc.createEvent(eventData).subscribe({
         next: (res) => {
           this.showSucessMessage = true;
@@ -86,6 +85,8 @@ export class EventsComponent implements OnInit {
           this.eventForm.reset();
         },
         error: (err) => {
+          console.log('Error al crear el evento: ', err);
+          console.log('ID de usuario:',this.authSvc.getCurrentUser()?._id)
           this.showErrorMessage = true;
           setTimeout(() => this.showErrorMessage = false, 4000);
           this.errorMesage = err.error.message;
@@ -95,7 +96,7 @@ export class EventsComponent implements OnInit {
       console.log('Error al crear el evento: ', err);
     }
   }
-  
+
 
   ngOnInit(): void {
     console.log('usuario actual:', this.currentUser);
