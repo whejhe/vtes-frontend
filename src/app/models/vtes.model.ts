@@ -64,7 +64,7 @@ export enum Clan {
   Ahrimane = "Ahrimane",
   Akunanse = "Akunanse",
   Avenger = "Avenger",
-  Baali = "baali",
+  Baali = "Baali",
   BanuHaqim = "Banu Haqim",
   BloodBrother = "Blood Brother",
   Brujah = "Brujah",

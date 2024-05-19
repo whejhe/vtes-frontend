@@ -194,9 +194,13 @@ export class CriptaComponent implements OnInit {
     if (target.classList.contains('icon-filter')) {
       target.classList.toggle('clicked');
       this.updateDisciplineSelection(target.alt as Discipline);
+    }else if(target.classList.contains('clicked')){
+      target.classList.remove('clicked');
+      this.updateDisciplineSelection(target.alt as Discipline);
     }
   }
 
+  // UPDATE DISCIPLINE SELECTION
   updateDisciplineSelection(discipline: Discipline): void {
     this.disciplineSelected[discipline] = !this.disciplineSelected[discipline];
     this.onDisciplinesChange();
