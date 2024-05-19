@@ -30,7 +30,7 @@ export class ListaDecksComponent implements OnInit {
 
     decks: Deck[] = [];
     user: User[] = [];
-
+    CurrentUser: User = this.authSvc.getCurrentUser()!;
 
     listDeckForm: FormGroup = new FormGroup({
         category: new FormControl('*'),
