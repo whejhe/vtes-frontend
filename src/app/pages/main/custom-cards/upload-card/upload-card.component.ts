@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { Storage, ref , uploadBytes, listAll, getDownloadURL} from '@angular/fire/storage';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../../models/user.model';
 import { AuthService } from '../../../../services/auth.service';
