@@ -14,6 +14,7 @@ import { UploadCardComponent } from "./custom-cards/upload-card/upload-card.comp
 import { ContactComponent } from "./contact/contact.component";
 import { NewDeckComponent } from "./deck/deck/deck.component";
 import { FichaEventComponent } from "./eventos/ficha-event/ficha-event.component";
+import { PruebaComponent } from "./eventos/prueba/prueba.component";
 
 export const MAIN_ROUTE:Routes = [
   {path: '', title: 'Inicio',component: InicioComponent},
@@ -23,6 +24,7 @@ export const MAIN_ROUTE:Routes = [
   {path: 'upload-card', title: 'Upload Card',component: UploadCardComponent},
   {path: 'gallery',title: 'Gallery', component: GalleryComponent},
   {path: 'events', title: 'Events',component: EventsComponent},
+  {path: 'prueba', title: 'Prueba',component: PruebaComponent},
   {path: 'deck',title: 'Deck', component: NewDeckComponent},
   {path: 'deck/:id',title: 'Deck', component: NewDeckComponent},
   {path: 'ficha-event/:id', title: 'Ficha Event',component: FichaEventComponent},

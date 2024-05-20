@@ -2,39 +2,26 @@
 <div class="container">
     <div class="container-logo">
         <img class="logo" src="../../../assets/img/icons-vtes/clans/svg/gangrel2.svg" alt="">
-      </div>
-    <form action="" class="form-container" 
-    [formGroup]="eventForm"
-    >
+    </div>
+    <form action="" class="form-container" [formGroup]="eventForm">
         <!--NOMBRE-->
         <div class="row">
             <div class="col-md-6">
                 <label for="name" class="form-label">Nombre del Evento</label>
-                <input type="text" class="form-control" id="name" required
-                formControlName="name">
+                <input type="text" class="form-control" id="name" required formControlName="name">
             </div>
             <div class="col-md-6">
                 <label for="name" class="form-label">
                     Hora:
                 </label>
-                <input type="text" class="form-control" id="hora"
-                formControlName="hora" placeholder="example: 10:00">
+                <input type="text" class="form-control" id="hora" formControlName="hora" placeholder="example: 10:00">
             </div>
         </div>
-        
+
         <div class="row">
             <!--EMAIL-->
             <div class="col-md-6">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="name@gmail.com"
-                formControlName="email">
-            </div>
-
-            <!--FECHA-->
-            <div class="col-md-6">
-                <label for="fecha">Fecha</label><br>
-                <input type="date" id="date" class="sm-form-control date"
-                formControlName="fecha">
+                <input type="hidden" class="form-control" id="email" formControlName="email">
             </div>
         </div>
 
@@ -42,69 +29,84 @@
             <!--PROVINCIA-->
             <div class="col-md-6">
                 <label for="country" class="form-label">Provincia</label>
-                <select class="form-select" id="provincia" required
-                formControlName="provincia">
+                <select class="form-select" id="provincia" required formControlName="provincia">
                     <option value="">Choose...</option>
                     <option>Provincia</option>
                 </select>
             </div>
-           
-        </div>
-        <div class="row">
-             <!--LOCALIDAD-->
-             <div class="col-md-6">
+            <!--LOCALIDAD-->
+            <div class="col-md-6">
                 <label for="localidad" class="form-label">Localidad</label>
-                <select class="form-select" id="localidad" required
-                formControlName="localidad">
+                <select class="form-select" id="localidad" required formControlName="localidad">
                     <option value="">Choose...</option>
                     <option>Localidad</option>
                 </select>
             </div>
+        </div>
+        <div class="row">
+            <!--DIRECCION-->
+            <div class="col-md-6">
+                <label for="dirección" class="form-label">Direccion</label>
+                <input type="text" class="form-control" id="dirección" formControlName="direccion"
+                    placeholder="Calle 123">
+            </div>
+            <!--PRECIO-->
             <div class="col-md-6">
                 <label for="precio" class="form-label">Precio</label>
-                <input type="text" class="form-control" id="precio"
-                placeholder="0.00" 
-                required
-                formControlName="precio">
+                <input type="text" class="form-control" id="precio" placeholder="0.00" required
+                    formControlName="precio">
             </div>
         </div>
         <br>
         <!--TYPE-->
-        <select class="form-select" aria-label="Default select example"
-        formControlName="type">
-            <option selected>Tipo de Evento</option>
-            <option value="1">Torneo Regional</option>
-            <option value="2">Torneo Nacional</option>
-            <option value="2">Torneo Europeo</option>
-            <option value="2">Torneo GP</option>
-        </select>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="form-label" for="type">Categoria del Torneo</label>
+                <select class="form-select" aria-label="Default select example" formControlName="type">
+                    <option value="Torneo Regional">Torneo Regional</option>
+                    <option value="Torneo Nacional">Torneo Nacional</option>
+                    <option value="Torneo Europeo">Torneo Europeo</option>
+                    <option value="Torneo GP">Torneo GP</option>
+                </select>
+            </div>
+            <!--NUMERO MAXIMO PARTICIPANTES-->
+            <div class="col-md-6">
+                <label for="Nº Max. Participantes" class="form-label">Nº Max. Participantes</label>
+                <input type="number" class="form-control" id="numMaxParticipantes"
+                min="8" max="1000"
+                    formControlName="numMaxParticipantes">
+            </div>
+        </div>
+        <div class="row">
+            <!--FECHA-->
+            <div class="col-md-6">
+                <label for="fecha" class="form-label">Fecha:&nbsp; &nbsp;</label>
+                <input type="date" id="date" class="sm-form-control date" formControlName="fecha">
+            </div>
+        </div>
         <!--DESCRIPCION-->
-        <div class="mb-3">
-            <label for="Añade la informacion relevante" class="form-label">Añade la informacion relevante</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-            formControlName="description"
-            >Describe el evento...
+        <div class="row">
+            <div class="col-md-11 text-area">
+                <label for="Añade la informacion relevante" class="form-label">Añade la informacion relevante</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="description">Describe el evento...
             </textarea>
+            </div>
         </div>
 
-        <button class="w-100 btn btn-dark btn-lg" type="submit"
-        (click)="createEvent()"
-        >Enviar</button>
+        <button class="w-100 btn btn-dark btn-lg enviar" type="submit" (click)="createEvent()">Enviar</button>
     </form>
     <br>
-        @if(showSucessMessage){
-        <div class="alert alert-dismissible alert-success">
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert
-            message</a>.
-        </div>
-        }
-    
-        @if(showErrorMessage){
-        <div class="alert alert-dismissible alert-danger">
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            <strong>{{errorMesage}}</strong><br>
-            <p>Please, check your credentials and try submitting again.</p>
-        </div>
-        }
+    @if(showSucessMessage){
+    <div class="alert alert-dismissible alert-success">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>{{mesage}}</strong><br>
+    </div>
+    }
+
+    @if(showErrorMessage){
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>{{mesage}}</strong><br>
+    </div>
+    }
 </div>

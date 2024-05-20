@@ -1,0 +1,30 @@
+<div class="container">
+    <div cdkDropListGroup>
+        <div class="example-container">
+            <h2>Lista de Jugadores</h2>
+            <div cdkDropList [cdkDropListData]="jugadores" class="example-list" (cdkDropListDropped)="drop($event)">
+                @for (item of jugadores; track item) {
+                <li class="example-box" cdkDrag>{{item}}</li>
+                }
+            </div>
+        </div>
+
+        <div class="example-container">
+            <h2>Mesas</h2>
+            <button (click)="agregar()">agregar</button>
+            <div class="example-list">
+                @for (mesa of mesas; track mesa) {
+                    <h3>Mesa Nº {{mesas.indexOf(mesa)+1}}</h3>
+                    <button (click)="delete(mesa)">borrar</button>
+                <div class="example-box" cdkDropList [cdkDropListData]="mesa" (cdkDropListDropped)="drop($event)">
+                    @for (jugador of mesa; track jugador) {
+                    <td class="example-list" cdkDrag>{{jugador}}</td>
+                    }
+                </div>
+
+                }
+            </div>
+        </div>
+
+    </div>
+</div>

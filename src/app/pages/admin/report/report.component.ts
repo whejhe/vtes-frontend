@@ -18,8 +18,7 @@ export class ReportComponent implements OnInit {
     private reportSvc: ReportService,
     public dialog: MatDialog
   ) {
-    // this.getReports();
-    // console.log('Reports:',this.getReports())
+
    }
 
   public reports: Report[] = [];

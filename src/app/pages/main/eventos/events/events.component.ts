@@ -24,7 +24,7 @@ export class EventsComponent implements OnInit {
   eventForm: FormGroup = new FormGroup({
     userId: new FormControl(''),
     name: new FormControl(''),
-    email: new FormControl(''),
+    email: new FormControl(this.currentUser?.email),
     type: new FormControl(''),
     precio: new FormControl(''),
     provincia: new FormControl(''),
@@ -33,12 +33,13 @@ export class EventsComponent implements OnInit {
     description: new FormControl(''),
     fecha: new FormControl(),
     hora: new FormControl(''),
-    numMaxParticipantes: new FormControl()
+    numMaxParticipantes: new FormControl(),
+    participantesInscritos: new FormControl()
   });
 
   showSucessMessage: boolean = false;
   showErrorMessage: boolean = false;
-  errorMesage: string = '';
+  mesage: string = '';
 
   constructor(
     private authSvc: AuthService,
@@ -46,9 +47,11 @@ export class EventsComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder
   ) {
+
+    //aqui se cambian los valores predeterminados del formulario
     this.eventForm = this.formBuilder.group({
       name: ['', Validators.required],
-      email: ['', Validators.required],
+      email: [this.currentUser?.email, Validators.required],
       type: ['', Validators.required],
       precio: ['', Validators.required],
       provincia: ['', Validators.required],
@@ -57,7 +60,8 @@ export class EventsComponent implements OnInit {
       description: ['', Validators.required],
       fecha: ['', Validators.required],
       hora: ['', [Validators.required, Validators.pattern(/^([01][0-9]|2[0-3]):[0-5][0-9]$/)]],
-      numMaxParticipantes: ['', Validators.required]
+      numMaxParticipantes: [, Validators.required],
+      participantesInscritos: [, Validators.required]
     })
   }
 
@@ -75,23 +79,30 @@ export class EventsComponent implements OnInit {
         description: this.eventForm.get('description')?.value,
         fecha: this.eventForm.get('fecha')?.value,
         hora: this.eventForm.get('hora')?.value,
-        numMaxParticipantes: this.eventForm.get('numMaxParticipantes')?.value
+        numMaxParticipantes: this.eventForm.get('numMaxParticipantes')?.value,
+        participantesInscritos: this.eventForm.get('participantesInscritos')?.value
       };
 
-      this.eventSvc.createEvent(eventData).subscribe({
-        next: (res) => {
-          this.showSucessMessage = true;
-          setTimeout(() => this.showSucessMessage = false, 4000);
-          this.eventForm.reset();
-        },
-        error: (err) => {
-          console.log('Error al crear el evento: ', err);
-          console.log('ID de usuario:',this.authSvc.getCurrentUser()?._id)
-          this.showErrorMessage = true;
-          setTimeout(() => this.showErrorMessage = false, 4000);
-          this.errorMesage = err.error.message;
-        }
-      });
+    this.eventSvc.createEvent(eventData).subscribe(
+      (response: any) => {
+        console.log('response', response);
+        this.showSucessMessage = true;
+        this.showErrorMessage = false;
+        this.mesage = 'Evento creado con exito';
+        setTimeout(() => this.showSucessMessage = false, 4000);
+        this.eventForm.reset();
+      },
+      (error: any) => {
+        console.log('error', error);
+        this.showErrorMessage = true;
+        this.showSucessMessage = false;
+        this.mesage = this.authSvc.handleRegistrationError(error);
+        setTimeout(() => {
+          this.showErrorMessage = false;
+        }, 5000);
+      }
+    );
+      
     } catch (err) {
       console.log('Error al crear el evento: ', err);
     }
@@ -99,7 +110,6 @@ export class EventsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log('usuario actual:', this.currentUser);
   }
 
 }

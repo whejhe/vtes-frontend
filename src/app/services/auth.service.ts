@@ -122,6 +122,22 @@ export class AuthService implements OnInit{
       return 'La contraseña debe tener al menos 8 caracteres';
     } else if (error.error.error.includes('La contraseña debe contener al menos 8 caracteres, una mayuscula, una minuscula, un numero y un caracter especial de entre !@#$%^&*')) {
       return 'La contraseña debe contener al menos 8 caracteres, una mayuscula, una minuscula, un numero y un caracter especial de entre !@#$%^&*';
+    } else if(error.error.error.includes('La hora es obligatoria')){
+      return 'La hora es obligatoria';
+    } else if (error.error.error.includes('El formato de la hora no es valido. Ejemplo: 00:00')){
+      return 'El formato de la hora no es valido. Ejemplo: 00:00';
+    } else if (error.error.error.includes('La fecha es obligatoria')){
+      return 'La fecha es obligatoria';
+    } else if(error.error.error.includes('La provincia es obligatoria')){
+      return 'La provincia es obligatoria';
+    } else if(error.error.error.includes('La localidad es obligatoria')){
+      return 'La localidad es obligatoria';
+    } else if(error.error.error.includes('El precio del torneo es obligatorio')){
+      return 'El precio del torneo es obligatorio';
+    }else if(error.error.error.includes('El precio del torneo no es valido, Ejemplo: 0.00')){
+      return 'El precio del torneo no es valido, Ejemplo: 0.00';
+    } else if(error.error.error.includes('El tipo de torneo es obligatorio')){
+      return 'El tipo de torneo es obligatorio';
     }
     else {
       return 'Ocurrió un error al registrar el usuario';
@@ -135,7 +151,7 @@ export class AuthService implements OnInit{
   getCurrentUser(): User | null {
     if (!this.currentUser) {
       this.currentUser = this.decodeToken(this.getToken()!);
-      console.log(this.currentUser);
+      console.log('Usuario Actual: ',this.currentUser);
     }
     return this.currentUser;
   }
