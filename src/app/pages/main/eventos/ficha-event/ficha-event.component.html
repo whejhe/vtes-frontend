@@ -76,7 +76,7 @@
             <button class="btn btn-dark"
             >Sortear</button>
           </div>
-          <table class="table table-hover" *ngIf="eventUsers" cdkDropListGroup>
+          <table class="table table-hover" *ngIf="eventUsers">
             <thead>
               <tr class="table-dark">
                 <th>Image</th>
@@ -86,10 +86,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr 
-              *ngFor="let eventUser of eventUsers.userId let i = index" [class.table-light]="i % 2 === 0"
-                [class.table-secondary]="i % 2 !== 0"
-                >
+              <tr *ngFor="let eventUser of eventUsers.userId let i = index" [class.table-light]="i % 2 === 0"
+                [class.table-secondary]="i % 2 !== 0">
                 <td><img class="avatar" [src]="apiUrl + eventUser.avatarUrl"></td>
                 <td>{{eventUser.name}}</td>
                 <td>{{eventUser.email}}</td>
@@ -111,7 +109,7 @@
       <div class="col-md-6">
         <section class="row mesas">
           <h1 class="ronda">1ª Ronda</h1>
-          <article class="col-md-12">
+          <article class="col-md-6">
             <h2 class="mesa">Mesa Nº </h2>
             <table class="table table-hover">
               <thead>
@@ -148,7 +146,7 @@
           </div>
         </div>
           <section class="row mesas">
-            <article class="col-md-12">
+            <article class="col-md-6">
               <h1 class="ronda">ª Ronda</h1>
               <h2 class="mesa">Mesa Nº</h2>
               <table class="table table-hover">
@@ -188,7 +186,7 @@
         </div>
           <section class="row mesas">
             <h1 class="ronda">3ª Ronda</h1>
-            <article class="col-md-12" >
+            <article class="col-md-6" >
               <h2 class="mesa">Mesa Nº</h2>
               <table class="table table-hover">
                 <thead>
@@ -253,10 +251,10 @@
             </table>
           </article>
         </section>
-    
       </div>
     </div>
   }
 
     
+
 </div>
