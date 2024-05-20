@@ -14,6 +14,7 @@ export interface Evento {
     fecha?: string;
     hora?: string;
     numMaxParticipantes?: number;
+    participantesInscritos?: number;
 }
 
 

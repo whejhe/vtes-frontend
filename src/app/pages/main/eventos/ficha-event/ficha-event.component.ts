@@ -1,5 +1,13 @@
 // front/src/app/pages/main/eventos/ficha-event/ficha-event.component.ts
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  CdkDragDrop,
+  CdkDrag,
+  CdkDropList,
+  CdkDropListGroup,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 import { EventService } from '../../../../services/event.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Evento } from '../../../../models/evento.model';
@@ -18,7 +26,10 @@ import { FormsModule } from '@angular/forms';
   imports: [
     RouterLink,
     CommonModule,
-    FormsModule
+    FormsModule,
+    CdkDropListGroup,
+    CdkDropList,
+    CdkDrag
   ],
   templateUrl: './ficha-event.component.html',
   styleUrl: './ficha-event.component.scss'
@@ -73,6 +84,20 @@ export class FichaEventComponent implements OnInit, OnDestroy {
     this.startCountdown();
     console.log('CurrentUser: ', this.getCurrentUser());
   }
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+  }
+
 
   ngOnDestroy(): void {
     clearInterval(this.intervalId);
@@ -273,6 +298,14 @@ export class FichaEventComponent implements OnInit, OnDestroy {
   // COMENZAR TORNEO
   stopEvent(){
     this.isStarted = false;
+  }
+
+  // GENERAR UNA TIRADA ALEATORIA PARA CADA USUARIO 
+  tirada(){
+      for(let user of this.eventUsers.userId){
+        let Newtirada = Math.random()*1000 -1;
+        this.eventUsers.tirada?.push(Newtirada);
+      }
   }
 
 
