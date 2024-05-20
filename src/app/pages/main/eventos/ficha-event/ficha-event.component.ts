@@ -46,6 +46,17 @@ export class FichaEventComponent implements OnInit, OnDestroy {
   isStarted: boolean = false;
   isFinished: boolean = false;
 
+  ronda: string[][] = [];
+  mesas: string[][] = []
+
+  agregarMesa(){
+    this.mesas.push([]);
+  }
+  agregarRonda(){
+    this.ronda.push([]);
+  }
+
+
   constructor(
     public eventSvc: EventService,
     public eventUserSvc: EventUserService,
@@ -82,7 +93,7 @@ export class FichaEventComponent implements OnInit, OnDestroy {
     console.log('CurrentUser: ', this.getCurrentUser());
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -291,13 +302,13 @@ export class FichaEventComponent implements OnInit, OnDestroy {
       );
     }
   }
-  
+
   // COMENZAR TORNEO
   stopEvent(){
     this.isStarted = false;
   }
 
-  // GENERAR UNA TIRADA ALEATORIA PARA CADA USUARIO 
+  // GENERAR UNA TIRADA ALEATORIA PARA CADA USUARIO
   tirada(){
       for(let user of this.eventUsers.userId){
         let Newtirada = Math.random()*1000 -1;
