@@ -9,18 +9,18 @@
 </div>
 <div class="container">
   @if(showSucessMessage){
-    <div class="alert alert-dismissible alert-success">
-      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-      <strong>{{mesage}}</strong>
-    </div>
-    }
+  <div class="alert alert-dismissible alert-success">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>{{mesage}}</strong>
+  </div>
+  }
 
-    @if(showErrorMessage){
-      <div class="alert alert-dismissible alert-danger">
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        <strong>{{mesage}}</strong><br>
-      </div>
-    }
+  @if(showErrorMessage){
+  <div class="alert alert-dismissible alert-danger">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>{{mesage}}</strong><br>
+  </div>
+  }
   <header class="header">
     <!-- <img src="../../../../../assets/img/plantilla.png" alt=""> -->
     <h1 class="title">
@@ -41,30 +41,34 @@
         <!-- <p><strong>Inscritos:</strong>{{evento.participantesInscritos}}</p> -->
         <p><strong>Description: </strong>{{evento.description}}</p>
         <div class="buttons">
-          <button class="btn btn-dark"
-          (click)="addUserToEvent()"
-          >Apuntarse</button>
-          <button class="btn btn-dark"
-          (click)="deleteUserFromEvent()"
-          >Darse de Baja</button>
+          <button class="btn btn-dark" (click)="addUserToEvent()">Apuntarse</button>
+          <button class="btn btn-dark" (click)="deleteUserFromEvent()">Darse de Baja</button>
           <input type="file" id="fileInput" style="display: none;" />
           <!-- <button class="btn btn-dark" onclick="document.getElementById('fileInput').click()">Subir Mazo</button> -->
           <span id="fileName"></span>
           <button class="btn btn-dark" [routerLink]="['/listar-eventos/']">Back to list of Events</button>
           @if(showButtonStartEvent == true && isStarted == false){
-            <button class="btn btn-dark"
-            (click)="sortearMesa()"
-            >Comenzar torneo</button>
+          <button class="btn btn-dark" (click)="sortearMesa()">Comenzar torneo</button>
           }
           @if(showButtonStartEvent == true && isStarted == true){
-            <button class="btn btn-dark"
-            (click)="stopEvent()">Detener torneo</button>
+          <button class="btn btn-dark" (click)="stopEvent()">Detener torneo</button>
           }
           <button class="btn btn-dark" disabled>Ranking</button>
         </div>
       </div>
     </div>
   </header>
+
+
+
+
+
+
+
+
+
+
+
 
   @if(isStarted === false){
     <div class="row">
@@ -105,39 +109,156 @@
           </table>
         </section>
       </div>
+
+      <div class="col-md-6">
+        <section class="row mesas">
+          <h1 class="ronda">1ª Ronda</h1>
+          <article class="col-md-6">
+            <h2 class="mesa">Mesa Nº </h2>
+            <table class="table table-hover">
+              <thead>
+                <tr class="table-dark">
+                  <th>Participantes</th>
+                  <th></th>
+                  <th>Puntos</th>
+                  <th>P. Mesa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <img class="avatar" alt="">
+    
+                  </td>
+                  <td> | </td>
+                  <td>
+                    <input class="points" type="number" value="">
+                  </td>
+                  <td>
+                    <input class="points" type="number" value="">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </section>
+        <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    
+        <div class="secondRound">
+          <div class="cabecera">
+            <button (click)="sortearMesa()" class="btn btn-dark">Comenzar 2ª Ronda</button>
+          </div>
+        </div>
+          <section class="row mesas">
+            <article class="col-md-6">
+              <h1 class="ronda">ª Ronda</h1>
+              <h2 class="mesa">Mesa Nº</h2>
+              <table class="table table-hover">
+                <thead>
+                  <tr class="table-dark">
+                    <th>Participantes</th>
+                    <th></th>
+                    <th>Puntos</th>
+                    <th>P. Mesa</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <img class="avatar" [src]="" alt="">
+    
+                    </td>
+                    <td> | </td>
+                    <td>
+                      <input class="points" type="number" value="">
+                    </td>
+                    <td>
+                      <input class="points" type="number" value="">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </article>
+          </section>
+    
+    
+    <!---------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+        <div class="secondRound">
+          <div class="cabecera">
+            <button (click)="sortearMesa()" class="btn btn-dark">Comenzar 3ª Ronda</button>
+          </div>
+        </div>
+          <section class="row mesas">
+            <h1 class="ronda">3ª Ronda</h1>
+            <article class="col-md-6" >
+              <h2 class="mesa">Mesa Nº</h2>
+              <table class="table table-hover">
+                <thead>
+                  <tr class="table-dark">
+                    <th>Participantes</th>
+                    <th></th>
+                    <th>Puntos</th>
+                    <th>P. Mesa</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <img class="avatar"  alt="">
+    
+                    </td>
+                    <td> | </td>
+                    <td>
+                      <input class="points" type="number" value="">
+                    </td>
+                    <td>
+                      <input class="points" type="number" value="">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </article>
+          </section>
+        <div class="secondRound">
+          <div class="cabecera">
+            <button (click)="sortearMesa()" class="btn btn-dark">Final</button>
+          </div>
+        </div>
+        <section class="row mesas">
+          <h1 class="ronda">Final</h1>
+          <article class="col-md-12">
+            <h2 class="mesa">Mesa Final</h2>
+            <table class="table table-hover">
+              <thead>
+                <tr class="table-dark">
+                  <th>Participantes</th>
+                  <th></th>
+                  <th>Puntos</th>
+                  <th>P. Mesa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <img class="avatar" src="" alt="">
+                    nombres
+                  </td>
+                  <td> | </td>
+                  <td>
+                    <input class="points" type="number" value="">
+                  </td>
+                  <td>
+                    <input class="points" type="number" value="">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </section>
+      </div>
     </div>
-    }
-      
+  }
+
     
 
-@if(isStarted === true){
-  <!--SORTEO DE MESAS-->
-<section class="row mesas container">
-  <h1 class="ronda">1ª Ronda</h1>
-  <article class="col-md-6" *ngFor="let ronda of evento.ronda">
-    <h2 class="mesa">Ronda Nº {{ronda.numero}}</h2>
-    <table class="table table-hover" *ngFor="let mesa of ronda.mesas">
-      <thead>
-        <tr class="table-dark">
-          <th>Mesa Nº {{mesa.numero}}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let player of mesa.players">
-          <td>
-            <img class="avatar" [src]=" apiUrl + player.userId.avatarUrl" alt="">
-            {{" "+player.userId.name}}
-          </td>
-          <td> | </td>
-          <td>
-            <input class="points" type="number" value="{{player.points}}">
-          </td>
-          <td>
-            <input class="points" type="number" value="{{player.tablePoints}}">
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </article>
-</section>
-}
+</div>

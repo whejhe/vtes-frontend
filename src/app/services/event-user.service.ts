@@ -56,6 +56,13 @@ export class EventUserService {
     return this.http.delete(`${this.apiUrl}/${eventId}/users/${userId}`, { headers });
   }
 
+  // Sortear posiciones en las mesas
+  tirada(eventId: string): Observable<EventUser>{
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    return this.http.get<EventUser>(`${this.apiUrl}/tirada/${eventId}`, { headers });
+  }
+
 
   // // Sortear jugadores en mesas
   // sortPlayersIntoTables(eventId: string): Observable<any> {

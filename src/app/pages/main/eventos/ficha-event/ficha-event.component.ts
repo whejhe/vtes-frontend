@@ -46,6 +46,17 @@ export class FichaEventComponent implements OnInit, OnDestroy {
   isStarted: boolean = false;
   isFinished: boolean = false;
 
+  ronda: string[][] = [];
+  mesas: string[][] = []
+
+  agregarMesa(){
+    this.mesas.push([]);
+  }
+  agregarRonda(){
+    this.ronda.push([]);
+  }
+
+
   constructor(
     public eventSvc: EventService,
     public eventUserSvc: EventUserService,
@@ -82,7 +93,7 @@ export class FichaEventComponent implements OnInit, OnDestroy {
     console.log('CurrentUser: ', this.getCurrentUser());
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -261,6 +272,33 @@ export class FichaEventComponent implements OnInit, OnDestroy {
     }
   }
 
+  // SORTEAR POSICION EN LAS MESAS
+  tirada(id: string) {
+    this.eventUserSvc.tirada(this.evento._id!).subscribe(
+      (event) => {
+        this.eventUsers = event;
+        this.getUsersForEvent();
+        this.showErrorMessage = false;
+        this.showSucessMessage = true;
+        this.mesage = 'Posición sorteada';
+        this.isStarted = true;
+        console.log('Posición sorteada: ', event);
+        setTimeout(() => {
+          this.showSucessMessage = false;
+        }, 5000);
+      },
+      (error) => {
+        console.log('Error al sortear la mesa: ', error);
+        this.showErrorMessage = true;
+        this.showSucessMessage = false;
+        this.mesage = 'Se produjo algun error con las tiradas';
+        this.isStarted = false;
+        setTimeout(() => {
+          this.showErrorMessage = false;
+        }, 5000);
+      });
+  }
+
   // SORTEO DE MESAS
   sortearMesa() {
     if (this.evento) {
@@ -291,20 +329,11 @@ export class FichaEventComponent implements OnInit, OnDestroy {
       );
     }
   }
-  
+
   // COMENZAR TORNEO
   stopEvent(){
     this.isStarted = false;
   }
-
-  // GENERAR UNA TIRADA ALEATORIA PARA CADA USUARIO 
-  tirada(){
-      for(let user of this.eventUsers.userId){
-        let Newtirada = Math.random()*1000 -1;
-        this.eventUsers.tirada?.push(Newtirada);
-      }
-  }
-
 
 
   // CUENTA ATRAS

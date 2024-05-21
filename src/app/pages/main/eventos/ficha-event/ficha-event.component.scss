@@ -131,50 +131,66 @@ section {
   cursor: pointer;
 }
 
-.mesas{
-  .mesa{
-    font-weight: bold;
-    margin-bottom: 0;
-    text-decoration: underline;
-  }
-  .ronda{
-    margin-top: 1em;
-    text-align: center;
-    font-weight: bold;
-    text-decoration: underline;
-    font-size: 1.5em
-  }
-}
+// .mesas{
+//   .mesa{
+//     font-weight: bold;
+//     margin-bottom: 0;
+//     text-decoration: underline;
+//   }
+//   .ronda{
+//     margin-top: 1em;
+//     text-align: center;
+//     font-weight: bold;
+//     text-decoration: underline;
+//     font-size: 1.5em
+//   }
+// }
 
-.avatar{
-  border-radius: 50%;
-  width: 50px;
-  height: auto;
-  padding: 0;
-  margin: 0;
-}
-
-.points{
-  width: 50%;
-}
+// .points{
+//   width: 50%;
+// }
 
 
-.secondRound{
-  border-top: 2px solid black;
-  margin-top: 4em;
-  .cabecera{
-    padding-top: 2em;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin: auto;
-  }
-}
+// .secondRound{
+//   border-top: 2px solid black;
+//   margin-top: 4em;
+//   .cabecera{
+//     padding-top: 2em;
+//     display: flex;
+//     flex-wrap: wrap;
+//     justify-content: center;
+//     align-items: center;
+//     text-align: center;
+//     margin: auto;
+//   }
+// }
 
 .tirada{
   display: flex;
   gap: 1em;
   margin-bottom: 1em;
+}
+
+
+/*LISTA JUGADORES*/
+ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  li{
+    .align-left{
+      text-align: left;
+    }
+    .align-center{
+      text-align: center;
+    }
+    width: 20%;
+    display: inline-flex;
+    gap: 1em;
+    padding: 1em;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+  }
 }

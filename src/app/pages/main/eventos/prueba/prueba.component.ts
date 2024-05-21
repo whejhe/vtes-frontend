@@ -26,9 +26,7 @@ export class PruebaComponent {
 
   jugadores = ['Jugador 1', 'Jugador 2', 'Jugador 3', 'Jugador 4', 'Jugador 5'];
 
-  mesas: string[][] = [
-
-  ]
+  mesas: string[][] = []
 
   agregar() {
     this.mesas.push([])
@@ -39,7 +37,7 @@ export class PruebaComponent {
     if (i?.length > 0) {
       for (let jugador of i) {
           this.jugadores.push(jugador)
-        
+
       }
     }
     this.mesas.splice(this.mesas.indexOf(i), 1)
