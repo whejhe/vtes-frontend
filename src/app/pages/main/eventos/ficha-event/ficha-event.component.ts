@@ -49,10 +49,10 @@ export class FichaEventComponent implements OnInit, OnDestroy {
   ronda: string[][] = [];
   mesas: string[][] = []
 
-  agregarMesa(){
+  agregarMesa() {
     this.mesas.push([]);
   }
-  agregarRonda(){
+  agregarRonda() {
     this.ronda.push([]);
   }
 
@@ -273,78 +273,80 @@ export class FichaEventComponent implements OnInit, OnDestroy {
   }
 
   // SORTEAR POSICION EN LAS MESAS
-  tirada(id: string) {
-    this.eventUserSvc.tirada(this.evento._id!).subscribe(
-      (event) => {
-        this.eventUsers = event;
-        this.getUsersForEvent();
-        this.showErrorMessage = false;
-        this.showSucessMessage = true;
-        this.mesage = 'Posición sorteada';
-        this.isStarted = true;
-        console.log('Posición sorteada: ', event);
-        setTimeout(() => {
-          this.showSucessMessage = false;
-        }, 5000);
-      },
-      (error) => {
-        console.log('Error al sortear la mesa: ', error);
-        this.showErrorMessage = true;
-        this.showSucessMessage = false;
-        this.mesage = 'Se produjo algun error con las tiradas';
-        this.isStarted = false;
-        setTimeout(() => {
-          this.showErrorMessage = false;
-        }, 5000);
-      });
-  }
-
-  // SORTEO DE MESAS
-  sortearMesa() {
+  tirada() {
     if (this.evento) {
-      this.eventSvc.sortearMesa(this.evento._id!).subscribe(
-        (event) => {
-          this.evento = event;
+      this.eventUserSvc.tirada(this.evento._id!).subscribe(
+        (tiradas) => {
+          this.eventUsers = tiradas;
           this.getUsersForEvent();
           this.showErrorMessage = false;
-          this.showSucessMessage = true;
-          this.mesage = 'Mesa sorteada';
-          this.isStarted = true;
-          console.log('Mesa sorteada: ', event);
-          setTimeout(() => {
-            this.showSucessMessage = false;
-          }, 5000);
+            this.showSucessMessage = true;
+            this.mesage = 'Todas las tiradas realizadas';
+            console.log('Tiradas:', tiradas);
+            setTimeout(() => {
+              this.showSucessMessage = false;
+            },5000);
         },
         (error) => {
-          console.log('Usuario Actual: ',this.currentUser);
-          console.log('Error al sortear la mesa: ', error);
           this.showErrorMessage = true;
-          this.showSucessMessage = false;
-          this.mesage = 'Error al sortear la mesa';
-          this.isStarted = false;
-          setTimeout(() => {
-            this.showErrorMessage = false;
-          }, 5000);
+            this.showSucessMessage = false;
+            this.mesage = 'Error al realizar las tiradas';
+            this.isStarted = false;
+            console.log('Error en tiradas:', error);
+            setTimeout(() => {
+              this.showErrorMessage = false;
+            }, 5000);
         }
-      );
+      )
     }
   }
 
-  // COMENZAR TORNEO
-  stopEvent(){
-    this.isStarted = false;
-  }
+    // SORTEO DE MESAS
+    sortearMesa() {
+      if (this.evento) {
+        this.eventSvc.sortearMesa(this.evento._id!).subscribe(
+          (event) => {
+            this.evento = event;
+            this.getUsersForEvent();
+            this.showErrorMessage = false;
+            this.showSucessMessage = true;
+            this.mesage = 'Mesa sorteada';
+            this.isStarted = true;
+            console.log('Mesa sorteada: ', event);
+            setTimeout(() => {
+              this.showSucessMessage = false;
+            }, 5000);
+          },
+          (error) => {
+            console.log('Usuario Actual: ', this.currentUser);
+            console.log('Error al sortear la mesa: ', error);
+            this.showErrorMessage = true;
+            this.showSucessMessage = false;
+            this.mesage = 'Error al sortear la mesa';
+            this.isStarted = false;
+            setTimeout(() => {
+              this.showErrorMessage = false;
+            }, 5000);
+          }
+        );
+      }
+    }
+
+    // COMENZAR TORNEO
+    stopEvent(){
+      this.isStarted = false;
+    }
 
 
-  // CUENTA ATRAS
-  startCountdown() {
-    this.intervalId = setInterval(() => {
-      this.updateTimeRemaining();
-    }, 1000);
-  }
+    // CUENTA ATRAS
+    startCountdown() {
+      this.intervalId = setInterval(() => {
+        this.updateTimeRemaining();
+      }, 1000);
+    }
 
-  updateTimeRemaining(): void {
-    if (this.eventDate) {
+    updateTimeRemaining(): void {
+      if(this.eventDate) {
       const currentDate = new Date();
       const timeDiff = this.eventDate!.getTime() - currentDate.getTime();
       if (timeDiff > 0) {

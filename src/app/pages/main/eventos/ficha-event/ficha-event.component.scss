@@ -16,7 +16,7 @@
   .header {
     border: 2px solid black;
     height: fit-content;
-    margin-top: 3em;
+    margin: 3em 0;
     box-shadow: 3px 0px 5px 0 rgb(63, 2, 2);
     background-image: url("../../../../../assets/img/others/fondo-transparencia.png");
     background-size: cover;
@@ -24,7 +24,6 @@
     background-repeat: no-repeat;
     width: auto;
     position: relative;
-
     .title {
       text-decoration: underline;
       font-size: 1.8em;
@@ -55,20 +54,6 @@
   }
 }
 
-
-table {
-  border: 2px solid rgb(36, 35, 35);
-
-  td {
-    justify-content: center;
-    align-items: center;
-    vertical-align: middle;
-  }
-
-  button {
-    margin-left: 0.4em;
-  }
-}
 
 .avatar {
   width: 50px;
@@ -131,39 +116,24 @@ section {
   cursor: pointer;
 }
 
-// .mesas{
-//   .mesa{
-//     font-weight: bold;
-//     margin-bottom: 0;
-//     text-decoration: underline;
-//   }
-//   .ronda{
-//     margin-top: 1em;
-//     text-align: center;
-//     font-weight: bold;
-//     text-decoration: underline;
-//     font-size: 1.5em
-//   }
-// }
+.mesas{
+  .mesa{
+    font-weight: bold;
+    margin-bottom: 0;
+    text-decoration: underline;
+  }
+  .ronda{
+    margin-top: 1em;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 1.5em
+  }
+}
 
-// .points{
-//   width: 50%;
-// }
-
-
-// .secondRound{
-//   border-top: 2px solid black;
-//   margin-top: 4em;
-//   .cabecera{
-//     padding-top: 2em;
-//     display: flex;
-//     flex-wrap: wrap;
-//     justify-content: center;
-//     align-items: center;
-//     text-align: center;
-//     margin: auto;
-//   }
-// }
+.points{
+  width: 50%;
+}
 
 .tirada{
   display: flex;
