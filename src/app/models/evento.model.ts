@@ -15,9 +15,24 @@ export interface Evento {
     hora?: string;
     numMaxParticipantes?: number;
     participantesInscritos?: number;
-    ronda?: number;
-    mesa?: string[];
+    ronda?: {
+        numero: number;
+        mesas: {
+            numero: number;
+            players: {
+                userId: {
+                    _id: string;
+                    name: string;
+                    email: string;
+                    avatarUrl: string;
+                };
+                tablePoints: number;
+                points: number;
+            }[];
+        }[];
+    }[];
 }
+
 
 
 
