@@ -1,47 +1,48 @@
 <!--front/src/app/pages/main/custom-cards/custom/custom.component.html-->
 <!--CARTA PERSONALIZADA-->
-<!-- <div class="container"> -->
-  <!-- <div class="container-logo">
+<div class="container">
+  <div class="container-logo">
     <img class="logo" src="../../../assets/img/icons-vtes/clans/svg/tzimisce.svg" alt="">
-  </div> -->
-  <!-- <div class="upload-container">
+  </div>
+
+  <div class="upload-container">
     <h4>Upload your Card</h4>
     <button class="btn btn-dark" [routerLink]="['/upload-card']">Upload Card</button>
-  </div> -->
+  </div>
 
   <!--CARTA PERSONALIZADA-->
-  <!-- <div class="container-form">
+  <div class="container-form">
 
     <div class="custom-card">
-      <div class="background-overlay"></div> -->
+      <div class="background-overlay"></div>
       <!--IMAGEN DE LA CARTA-->
-      <!-- <div class="image-fondo">
+      <div class="image-fondo">
         <img class="image-card-border" src="../../../../assets/img/borde.png" alt="">
         <img class="image-card" [src]="imageUrl" />
-      </div> -->
+      </div>
       <!--NOMBRE DE LA CARTA-->
-      <!-- <h1 class="card-name">{{ customCardForm.get('name')?.value }}</h1> -->
+      <h1 class="card-name">{{ customCardForm.get('name')?.value }}</h1>
       <!--CLAN-->
-      <!-- <div class="icono-clan" *ngFor="let clan of customCardForm.get('clan')?.value">
+      <div class="icono-clan" *ngFor="let clan of customCardForm.get('clan')?.value">
       <img [src]="getClanIcon(clan)" alt="{{clan}}">
-      </div> -->
+      </div>
       <!--LOGOTIPO-->
-      <!-- <img src="../../../../assets/img/icons-vtes/logo/logo-negro.png" alt="" class="icono-logo" /> -->
+      <img src="../../../../assets/img/icons-vtes/logo/logo-negro.png" alt="" class="icono-logo" />
       <!--CAPACIDAD-->
-      <!-- <div class="icono-capacidad">
+      <div class="icono-capacidad">
         <p class="texto-capacidad">{{ customCardForm.get('capacity')?.value }}</p>
-      </div> -->
+      </div>
       <!--DISCIPLINAS-->
-      <!-- <div class="iconos-disciplina" *ngFor="let discipline of customCardForm.get('disciplines')?.value; let i = index">
+      <div class="iconos-disciplina" *ngFor="let discipline of customCardForm.get('disciplines')?.value; let i = index">
         <div class="discipline-container" [style.top]="getDisciplinePosition(discipline)">
           <img class="discipline-icon" [src]="getDisciplineIcon(discipline)" alt="{{ discipline }}" />
         </div>
-      </div> -->
+      </div>
 
       <!--DESCRIPCION-->
       <!-- <div> -->
         <!--GRUPO-->
-        <!-- <div class="group">
+        <div class="group">
           <span class="group-styles">{{ customCardForm.get('group')?.value }}</span>
         </div>
         <p class="texto-carta">
@@ -52,7 +53,7 @@
       </div>
     </div>
 
-    <div class="spacio"></div> -->
+    <div class="spacio"></div>
 
     <!--FORMULARIO REACTIVO PARA CARTA PERSONALIZADA-->
     <!-- <div class="formulario">

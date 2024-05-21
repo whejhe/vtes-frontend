@@ -13,7 +13,10 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [
+    FormsModule, 
+    ReactiveFormsModule
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -29,7 +32,7 @@ export class LoginComponent {
 
   showSucessMessage: boolean = false;
   showErrorMessage: boolean = false;
-  errorMesage: string = '';
+  message: string = '';
 
   constructor(private authSvc: AuthService, private router: Router) {}
 
@@ -45,6 +48,7 @@ export class LoginComponent {
           console.log('response', response);
           this.showSucessMessage = true;
           this.showErrorMessage = false;
+          this.message = 'Login exitoso';
           setTimeout(() => {
             this.showSucessMessage = false;
           }, 5000);
@@ -56,7 +60,7 @@ export class LoginComponent {
           console.log('error', error);
           this.showErrorMessage = true;
           this.showSucessMessage = false;
-          this.errorMesage = this.authSvc.handleRegistrationError(error);
+          this.message = this.authSvc.handleRegistrationError(error);
           setTimeout(() => {
             this.showErrorMessage = false;
           }, 5000);

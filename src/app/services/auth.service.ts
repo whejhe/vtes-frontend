@@ -102,6 +102,7 @@ export class AuthService implements OnInit{
 
   //MENSAJES DE ERROR
   handleRegistrationError(error: any): string {
+    //USER
     if (error.error.error.includes('El nombre debe tener al menos 3 caracteres')) {
       return 'El nombre debe tener al menos 3 caracteres';
     } else if (error.error.error.includes('El nombre debe tener un maximo de 30 caracteres')) {
@@ -118,10 +119,14 @@ export class AuthService implements OnInit{
       return 'El email no es valido';
     } else if (error.error.error.includes('La contraseña es obligatoria')) {
       return 'La contraseña es obligatoria';
+    } else if(error.error.error.includes('Las contraseñas no coinciden')){
+      return 'Las contraseñas no coinciden'
     } else if (error.error.error.includes('La contraseña debe tener al menos 8 caracteres')) {
       return 'La contraseña debe tener al menos 8 caracteres';
     } else if (error.error.error.includes('La contraseña debe contener al menos 8 caracteres, una mayuscula, una minuscula, un numero y un caracter especial de entre !@#$%^&*')) {
       return 'La contraseña debe contener al menos 8 caracteres, una mayuscula, una minuscula, un numero y un caracter especial de entre !@#$%^&*';
+    } else if(error.error.error.includes('El email ya está registrado')){
+      return 'El email ya está registrado';
     } else if(error.error.error.includes('La hora es obligatoria')){
       return 'La hora es obligatoria';
     } else if (error.error.error.includes('El formato de la hora no es valido. Ejemplo: 00:00')){

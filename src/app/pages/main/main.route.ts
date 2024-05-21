@@ -15,12 +15,13 @@ import { ContactComponent } from "./contact/contact.component";
 import { NewDeckComponent } from "./deck/deck/deck.component";
 import { FichaEventComponent } from "./eventos/ficha-event/ficha-event.component";
 import { PruebaComponent } from "./eventos/prueba/prueba.component";
+import { CustomComponent } from "./custom-cards/custom/custom.component";
 
 export const MAIN_ROUTE:Routes = [
   {path: '', title: 'Inicio',component: InicioComponent},
   {path: 'cripta',title: 'Crypta', component: CriptaComponent},
   {path: 'biblioteca',title: 'Biblioteca', component: BibliotecaComponent},
-  // {path: 'custom',title: 'Custom Cards', component: CustomComponent},
+  {path: 'custom',title: 'Custom Cards', component: CustomComponent},
   {path: 'upload-card', title: 'Upload Card',component: UploadCardComponent},
   {path: 'gallery',title: 'Gallery', component: GalleryComponent},
   {path: 'events', title: 'Events',component: EventsComponent},

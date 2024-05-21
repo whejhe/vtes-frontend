@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
   selectedAvatar:Image | null = null;
 
   register() {
-    if(this.registerForm.valid){
+    if(this.registerForm.valid) {
       const userData = {
         name: this.registerForm.get('name')?.value,
         nick: this.registerForm.get('nick')?.value,
