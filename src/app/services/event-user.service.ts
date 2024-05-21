@@ -57,10 +57,10 @@ export class EventUserService {
   }
 
   // Sortear posiciones en las mesas
-  tirada(eventId: string): Observable<EventUser>{
+  tirada(eventId: string): Observable<EventUser> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
-    return this.http.get<EventUser>(`${this.apiUrl}/tirada/${eventId}`, { headers });
+    return this.http.put<EventUser>(`${this.apiUrl}/tirada/${eventId}`, null, { headers });
   }
 
   // // Registrar puntuaciones de las partidas

@@ -47,7 +47,7 @@
           <!-- <button class="btn btn-dark" onclick="document.getElementById('fileInput').click()">Subir Mazo</button> -->
           <span id="fileName"></span>
           <button class="btn btn-dark" [routerLink]="['/listar-eventos/']">Back to list of Events</button>
-          <button class="btn btn-dark" (click)="tirada()">Sortear posiciones</button>
+          <!-- <button class="btn btn-dark" (click)="tirada()">Sortear posiciones</button> -->
           @if(showButtonStartEvent == true && isStarted == false){
           <button class="btn btn-dark" (click)="sortearMesa()">Comenzar torneo</button>
           }
@@ -64,136 +64,72 @@
 
 
 
-
-
-
-
-
-
-
   @if(isStarted === false){
   <div class="row">
+
+    <div class="col-md-10 container-jugadores">
+      <div class="lista-jugadores">
+        <h2>Lista de Jugadores Inscritos</h2>
+        <ul class="table-dark">
+          <li>Image</li>
+          <li>Participantes</li>
+          <li></li>
+          <li>Email</li>
+          <li>Acciones</li>
+        </ul>
+        <ul *ngFor="let eventUser of eventUsers.userId let i = index" [class.table-light]="i % 2 === 0"
+          [class.table-secondary]="i % 2 !== 0">
+          <li><img class="avatar" [src]="apiUrl + eventUser.avatarUrl" alt=""></li>
+          <li>{{eventUser.name}}</li>
+          <li></li>
+          <li>{{eventUser.email}}</li>
+          <li>
+            <svg class="trash" id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20"
+              height="20" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2" (click)="deleteUserFormEventById(eventUser._id)">
+              <path
+                d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
+            </svg>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
+
     
-     <!--LISTA DE JUGADORES CON TIRADAS PARA RONDA 1º-->
-     <div class="col-md-4">
-      <div class="lista-jugadores">
-        <h2>Orden de Jugadores para la Ronda 1º</h2>
-        <ul class="table-dark">
-          <li>Image</li>
-          <li>Participantes</li>
-          <li>Email</li>
-          <li>Tirada</li>
-          <li>Acciones</li>
-        </ul>
-        <ul *ngFor="let eventUser of eventUsers.userId let i = index" [class.table-light]="i % 2 === 0"
-          [class.table-secondary]="i % 2 !== 0">
-          <li><img class="avatar" [src]="apiUrl + eventUser.avatarUrl" alt=""></li>
-          <li>{{eventUser.name}}</li>
-          <li>{{eventUser.email}}</li>
-          <li></li>
-          <li>
-            <svg class="trash" id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20"
-              height="20" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
-              stroke-width="2" (click)="deleteUserFormEventById(eventUser._id)">
-              <path
-                d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
-            </svg>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <!--LISTA DE JUGADORES CON TIRADAS PARA RONDA 2º-->
-    <div class="col-md-4">
-      <div class="lista-jugadores">
-        <h2>Orden de Jugadores para la Ronda 2º</h2>
-        <ul class="table-dark">
-          <li>Image</li>
-          <li>Participantes</li>
-          <li>Email</li>
-          <li>Tirada</li>
-          <li>Acciones</li>
-        </ul>
-        <ul *ngFor="let eventUser of eventUsers.userId let i = index" [class.table-light]="i % 2 === 0"
-          [class.table-secondary]="i % 2 !== 0">
-          <li><img class="avatar" [src]="apiUrl + eventUser.avatarUrl" alt=""></li>
-          <li>{{eventUser.name}}</li>
-          <li>{{eventUser.email}}</li>
-          <li></li>
-          <li>
-            <svg class="trash" id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20"
-              height="20" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
-              stroke-width="2" (click)="deleteUserFormEventById(eventUser._id)">
-              <path
-                d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
-            </svg>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-
-     <!--LISTA DE JUGADORES CON TIRADAS PARA RONDA 3º-->
-     <div class="col-md-4">
-      <div class="lista-jugadores">
-        <h2>Orden de Jugadores para la Ronda 3º</h2>
-        <ul class="table-dark">
-          <li>Image</li>
-          <li>Participantes</li>
-          <li>Email</li>
-          <li>Tirada</li>
-          <li>Acciones</li>
-        </ul>
-        <ul *ngFor="let eventUser of eventUsers.userId let i = index" [class.table-light]="i % 2 === 0"
-          [class.table-secondary]="i % 2 !== 0">
-          <li><img class="avatar" [src]="apiUrl + eventUser.avatarUrl" alt=""></li>
-          <li>{{eventUser.name}}</li>
-          <li>{{eventUser.email}}</li>
-          <li></li>
-          <li>
-            <svg class="trash" id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20"
-              height="20" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round"
-              stroke-width="2" (click)="deleteUserFormEventById(eventUser._id)">
-              <path
-                d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
-            </svg>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-
   </div>
   }
 
   @if(isStarted === true){
-  <section class="row mesas">
-    <h1 class="ronda">1ª Ronda</h1>
-    <article class="col-md-6" *ngFor="let ronda of evento.ronda">
+  <section class="row torneo-container">
+    <div class="col-md-6" *ngFor="let ronda of evento.ronda"
+    >
       <h2 class="mesa">Ronda Nº {{ronda.numero}}</h2>
-      <table class="table table-hover" *ngFor="let mesa of ronda.mesas">
-        <thead>
-          <tr class="table-dark">
-            <th>Mesa Nº {{mesa.numero}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let player of mesa.players">
-            <td>
+      <div *ngFor="let mesa of ronda.mesas let i = index"
+      [class.table-light]="i % 2 === 0"
+    [class.table-secondary]="i % 2 !== 0">
+        <ul class="table-dark container-mesa">
+          <li>Mesa Nº {{mesa.numero}}</li>
+          <li></li>
+          <li>Ronda Nº {{ronda.numero}}</li>
+          <li></li>
+          <li></li>
+        </ul>
+        <div>
+          <ul class="jugadores" *ngFor="let player of mesa.players">
+            <li>
               <img class="avatar" [src]=" apiUrl + player.userId.avatarUrl" alt="">
               {{" "+player.userId.name}}
-            </td>
-            <td> | </td>
-            <td>
-              <input class="points" type="number" value="{{player.points}}">
-            </td>
-            <td>
-              <input class="points" type="number" value="{{player.tablePoints}}">
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </article>
+            </li>
+            <li></li>
+            <li>Puntos: </li>
+            <li></li>
+            <li>Mesa</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </section>
   }
 

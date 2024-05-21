@@ -62,14 +62,6 @@
   border: 2px solid black;
 }
 
-section {
-  .title {
-    text-decoration: underline;
-    font-size: 1.8em;
-    text-align: center;
-  }
-}
-
 .center {
   display: flex;
   justify-content: center;
@@ -116,31 +108,6 @@ section {
   cursor: pointer;
 }
 
-.mesas{
-  .mesa{
-    font-weight: bold;
-    margin-bottom: 0;
-    text-decoration: underline;
-  }
-  .ronda{
-    margin-top: 1em;
-    text-align: center;
-    font-weight: bold;
-    text-decoration: underline;
-    font-size: 1.5em
-  }
-}
-
-.points{
-  width: 50%;
-}
-
-.tirada{
-  display: flex;
-  gap: 1em;
-  margin-bottom: 1em;
-}
-
 
 /*LISTA JUGADORES*/
 ul{
@@ -157,10 +124,33 @@ ul{
     width: 20%;
     display: inline-flex;
     gap: 1em;
-    padding: 1em;
+    padding: 0.2em 1em;
     margin: 0;
     align-items: center;
     justify-content: center;
     vertical-align: middle;
   }
+}
+
+.container-jugadores{
+   margin: auto;
+}
+
+.torneo-container{
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 2px solid black;
+  margin: 1em auto;
+  width: 100%;
+  h2{
+    text-align: center;
+    font-weight: bold;
+    margin-top: 1em;
+  }
+}
+
+.container-mesa{
+  margin-top: 2em;
 }

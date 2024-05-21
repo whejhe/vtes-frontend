@@ -34,8 +34,6 @@ export interface Evento {
 }
 
 
-
-
 export enum Hora {
     diez = "10:00",
     once = "11:00",
