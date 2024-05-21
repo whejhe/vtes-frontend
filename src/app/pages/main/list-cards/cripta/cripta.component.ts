@@ -53,6 +53,8 @@ export class CriptaComponent implements OnInit {
     searchSect: new FormControl(''),
   });
 
+  isActive: boolean = false;
+
   cards: Card[] = [];
 
   //Paginacion
@@ -76,7 +78,7 @@ export class CriptaComponent implements OnInit {
   sect = '';
 
   disciplines = Object.values(Discipline);
-  disciplineSelected: { [key: string]: boolean } = {};
+  disciplineName: { [key: string]: boolean } = {};
 
   disciplineImages = this.iconSvc.disciplineImages;
   clanImages = this.iconSvc.clanImages;
@@ -189,28 +191,28 @@ export class CriptaComponent implements OnInit {
     }
   }
 
+
   toggleOpacity(event: MouseEvent): void {
     const target = event.target as HTMLImageElement;
     if (target.classList.contains('icon-filter')) {
       target.classList.toggle('clicked');
-      this.updateDisciplineSelection(target.alt as Discipline);
     }else if(target.classList.contains('clicked')){
       target.classList.remove('clicked');
-      this.updateDisciplineSelection(target.alt as Discipline);
     }
+    this.updateDisciplineSelection(target.alt as Discipline);
   }
 
   // UPDATE DISCIPLINE SELECTION
   updateDisciplineSelection(discipline: Discipline): void {
-    this.disciplineSelected[discipline] = !this.disciplineSelected[discipline];
+    this.disciplineName[discipline] = !this.disciplineName[discipline];
     this.onDisciplinesChange();
   }
 
   onDisciplinesChange(): void {
     this.cryptForm.value.selectedDisciplines = Object.keys(
-      this.disciplineSelected
+      this.disciplineName
     )
-      .filter((discipline) => this.disciplineSelected[discipline as Discipline])
+      .filter((discipline) => this.disciplineName[discipline as Discipline])
       .map((discipline) => discipline as Discipline);
   }
 
@@ -232,6 +234,5 @@ export class CriptaComponent implements OnInit {
         .toLowerCase()
         .replace(/\s/g, '')}.svg`,
     }));
-
   }
 }

@@ -7,7 +7,7 @@ export interface Card {
   title: Title;
   clans: Clan[];
   capacity: number;
-  disciplines: Discipline[];
+  disciplines?: Discipline[];
   multidisc: boolean;
   card_text: string;
   ordered_sets: string[];

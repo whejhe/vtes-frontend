@@ -1,0 +1,76 @@
+.vista-carta{
+  margin: 0;
+  padding: 0;
+  border: 15px solid black;
+  border-radius: 8px;
+  width: 420px;
+  height: 580px;
+  position: relative;
+  .icono-logo{
+    width: 60px;
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+  }
+  .name{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    padding-left: 0.5em;
+    padding-top: 0.3em;
+  }
+  .clan{
+    position: absolute;
+    top: 1em;
+    left: 0.5em;
+    margin: 1.5em 0;
+    background-color: black;
+    width: 50px;
+    height: 50px;
+  }
+  .icono-capacidad{
+    position: absolute;
+    bottom: 0;
+    right: 0.2em;
+    width: 50px;
+    height: 50px;
+    background-image: url("../../../assets/img/icons-vtes/others/capacity.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+  .disciplines-container{
+    position: absolute;
+    bottom: 2em;
+    left: 1em;
+    width: fit-content;
+    height: auto;
+    justify-content: center;
+    // border: 1px solid black;
+    .discipline{
+      margin: 1.5em 0;
+      background-color: black;
+      width: 30px;
+      height: 30px;
+      rotate: 45deg;
+    }
+  }
+  .description{
+    position: absolute;
+    border: 1px solid black;
+    width: 310px;
+    min-height: 100px ;
+    bottom: 2em;
+    right: 1.5em;
+    z-index: -1;
+    .text-description{
+      padding: 0.5em;
+    }
+  }
+  .image-card{
+    width: 100%;
+    height: auto;
+    opacity: 0.7;
+    margin: 0;
+    padding: 0;
+  }
+
+}

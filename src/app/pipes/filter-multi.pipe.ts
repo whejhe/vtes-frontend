@@ -53,7 +53,6 @@ export class FilterMultiPipe implements PipeTransform {
         }
       }
 
-
       //Filtrar entre capacidad minima y maxima
       if(card.capacity){
         if (!(filters.searchMinCapacity <= card.capacity! && card.capacity! <= filters.searchMaxCapacity)) {

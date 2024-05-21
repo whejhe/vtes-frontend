@@ -6,18 +6,20 @@ import { CustomCardsService } from '../../../../services/custom-cards.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { IconService } from '../../../../services/icon.service';
+import { VistaDeCreacionCartaComponent } from "../../../../components/vista-de-creacion-carta/vista-de-creacion-carta.component";
 
 @Component({
-  selector: 'app-custom',
-  standalone: true,
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    CommonModule,
-    RouterLink
-  ],
-  templateUrl: './custom.component.html',
-  styleUrl: './custom.component.scss'
+    selector: 'app-custom',
+    standalone: true,
+    templateUrl: './custom.component.html',
+    styleUrl: './custom.component.scss',
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        CommonModule,
+        RouterLink,
+        VistaDeCreacionCartaComponent
+    ]
 })
 export class CustomComponent {
 

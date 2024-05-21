@@ -2,7 +2,12 @@
   padding-bottom: 2em;
 }
 
+.vista-carta{
+  float: right;
+}
+
 .formulario{
+  width: 100%;
   background-color: #d8d7d7;
   z-index: 1;
   background-color: rgba($color: #dad7d7, $alpha: 0.7);

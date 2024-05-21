@@ -1,119 +1,71 @@
 <!--front/src/app/pages/main/custom-cards/custom/custom.component.html-->
-<!--CARTA PERSONALIZADA-->
 <div class="container">
+
   <div class="container-logo">
     <img class="logo" src="../../../assets/img/icons-vtes/clans/svg/tzimisce.svg" alt="">
   </div>
 
-  <div class="upload-container">
-    <h4>Upload your Card</h4>
-    <button class="btn btn-dark" [routerLink]="['/upload-card']">Upload Card</button>
-  </div>
+  <app-vista-de-creacion-carta
+  class="vista-carta"></app-vista-de-creacion-carta>
 
-  <!--CARTA PERSONALIZADA-->
-  <div class="container-form">
 
-    <div class="custom-card">
-      <div class="background-overlay"></div>
-      <!--IMAGEN DE LA CARTA-->
-      <div class="image-fondo">
-        <img class="image-card-border" src="../../../../assets/img/borde.png" alt="">
-        <img class="image-card" [src]="imageUrl" />
+  <!--FORMULARIO REACTIVO PARA CARTA PERSONALIZADA-->
+  <div class="formulario">
+    <form [formGroup]="customCardForm" (ngSubmit)="onSubmit()">
+      <!--NOMBRE CARTA-->
+      <div class="mb-3">
+        <input placeholder="Name" type="text" class="form-control" formControlName="name" />
       </div>
-      <!--NOMBRE DE LA CARTA-->
-      <h1 class="card-name">{{ customCardForm.get('name')?.value }}</h1>
-      <!--CLAN-->
-      <div class="icono-clan" *ngFor="let clan of customCardForm.get('clan')?.value">
-      <img [src]="getClanIcon(clan)" alt="{{clan}}">
-      </div>
-      <!--LOGOTIPO-->
-      <img src="../../../../assets/img/icons-vtes/logo/logo-negro.png" alt="" class="icono-logo" />
+
       <!--CAPACIDAD-->
-      <div class="icono-capacidad">
-        <p class="texto-capacidad">{{ customCardForm.get('capacity')?.value }}</p>
+      <div class="mb-3">
+        <label for="capacity" class="form-label">Capacity:</label>
+        <input placeholder="Capacity" min="1" max="11" type="number" class="form-control" formControlName="capacity" />
+      </div>
+      <!--IMAGEN-->
+      <div class="mb-3">
+        <label for="imagen" class="form-label">Imagen</label>
+        <input type="file" class="form-control" id="imagen" (change)="onFileSelected($event)" accept="image/*" />
+      </div>
+      <!--CLAN-->
+      <div class="mb-3">
+        <label for="clan" class="form-label">Clan</label>
+        <select class="form-select" id="clan" formControlName="clan">
+          <option *ngFor="let clan of clans" [value]="clan">{{ clan }}</option>
+        </select>
       </div>
       <!--DISCIPLINAS-->
-      <div class="iconos-disciplina" *ngFor="let discipline of customCardForm.get('disciplines')?.value; let i = index">
-        <div class="discipline-container" [style.top]="getDisciplinePosition(discipline)">
-          <img class="discipline-icon" [src]="getDisciplineIcon(discipline)" alt="{{ discipline }}" />
-        </div>
+      <div class="mb-3 disciplines">
+        <label for="disciplines" class="form-label">Disciplinas</label>
+        <select class="form-select" id="disciplines" formControlName="disciplines" data-mdb-select-init multiple>
+          <option *ngFor="let discipline of disciplines" [value]="discipline">{{ discipline }}</option>
+        </select>
       </div>
 
-      <!--DESCRIPCION-->
-      <!-- <div> -->
+      <div class="row">
         <!--GRUPO-->
-        <div class="group">
-          <span class="group-styles">{{ customCardForm.get('group')?.value }}</span>
+        <div class="col-md-6">
+          <label for="grupo" class="form-label">Grupo</label>
+          <input type="number" min="1" max="7" class="form-control" id="grupo"
+            [value]="customCardForm.get('group')?.value" formControlName="group" />
         </div>
-        <p class="texto-carta">
-          <span class="description">
-            {{ customCardForm.get('description')?.value }}
-          </span>
-        </p>
+
+        <!--COLOR LOGO-->
+        <div class="col-md-6">
+          <label for="logo-color" class="form-label">Color logo</label>
+          <select class="form-select" formControlName="logoColor">
+            <option *ngFor="let color of logoColors" [value]="color">{{ color }}</option>
+          </select>
+        </div>
       </div>
-    </div>
+      <!--DESCRIPCION DE LA CARTA-->
+      <div class="mb-3 description">
+        <textarea placeholder="Descripción" class="form-control" id="description"
+          formControlName="description"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary guardar">Guardar</button>
+    </form>
+  </div>
+</div>
 
-    <div class="spacio"></div>
-
-    <!--FORMULARIO REACTIVO PARA CARTA PERSONALIZADA-->
-    <!-- <div class="formulario">
-      <form [formGroup]="customCardForm" (ngSubmit)="onSubmit()"> -->
-        <!--NOMBRE CARTA-->
-        <!-- <div class="mb-3">
-          <input placeholder="Name" type="text" class="form-control" formControlName="name" />
-        </div> -->
-
-        <!--CAPACIDAD-->
-        <!-- <div class="mb-3">
-          <label for="capacity" class="form-label">Capacity:</label>
-          <input placeholder="Capacity" min="1" max="11" type="number" class="form-control" formControlName="capacity" />
-        </div> -->
-        <!--IMAGEN-->
-        <!-- <div class="mb-3">
-          <label for="imagen" class="form-label">Imagen</label>
-          <input type="file" class="form-control" id="imagen" (change)="onFileSelected($event)" accept="image/*" />
-        </div> -->
-        <!--CLAN-->
-        <!-- <div class="mb-3">
-          <label for="clan" class="form-label">Clan</label>
-          <select class="form-select" id="clan" formControlName="clan">
-            <option *ngFor="let clan of clans" [value]="clan">{{ clan }}</option>
-          </select>
-        </div> -->
-        <!--DISCIPLINAS-->
-        <!-- <div class="mb-3 disciplines">
-          <label for="disciplines" class="form-label">Disciplinas</label>
-          <select class="form-select" id="disciplines" formControlName="disciplines" data-mdb-select-init multiple>
-            <option *ngFor="let discipline of disciplines" [value]="discipline">{{ discipline }}</option>
-          </select>
-        </div>
-
-        <div class="row"> -->
-          <!--GRUPO-->
-          <!-- <div class="col-md-6">
-            <label for="grupo" class="form-label">Grupo</label>
-            <input type="number" min="1" max="7"
-            class="form-control" id="grupo"
-            [value]="customCardForm.get('group')?.value"
-            formControlName="group" />
-          </div> -->
-
-          <!--COLOR LOGO-->
-          <!-- <div class="col-md-6">
-            <label for="logo-color" class="form-label">Color logo</label>
-            <select class="form-select" formControlName="logoColor">
-              <option *ngFor="let color of logoColors" [value]="color">{{ color }}</option>
-            </select>
-          </div>
-        </div> -->
-        <!--DESCRIPCION DE LA CARTA-->
-        <!-- <div class="mb-3 description">
-          <textarea placeholder="Descripción" class="form-control" id="description"
-            formControlName="description"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary guardar">Guardar</button>
-      </form>
-    </div>
-  </div> -->
-
-  <!-- <div> -->
+<!-- <div> -->

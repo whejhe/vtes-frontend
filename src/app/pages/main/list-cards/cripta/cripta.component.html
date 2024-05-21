@@ -44,25 +44,35 @@
     </div>
 
     <!--DISCIPLINAS-->
-    <div class="disciplines">
+    <div class="disciplines"
+    formControlName="selectedDisciplines">
       <div class="all-disciplines" *ngFor="let discipline of disciplineImages">
         @if(discipline.type === 'inf') {
-        <img class="imageIcons icon-filter" [src]="discipline.url" [alt]="discipline.name"
-          (click)="toggleOpacity($event)" />
+        <img class="imageIcons icon-filter"
+        [src]="discipline.url" [alt]="discipline.name"
+        (click)="toggleOpacity($event)"
+        [class.clicked]="disciplineName[discipline.name]"
+        />
         }
       </div>
       <br />
       <div class="all-disciplines" *ngFor="let discipline of disciplineImages">
         @if(discipline.type === 'sup') {
-        <img class="imageIcons icon-filter" [src]="discipline.url" [alt]="discipline.name"
-          (click)="toggleOpacity($event)" [class.clicked]="disciplineSelected[discipline.name]" />
+        <img class="imageIcons icon-filter"
+        [src]="discipline.url" [alt]="discipline.name"
+        (click)="toggleOpacity($event)"
+        [class.clicked]="disciplineName[discipline.name]"
+        />
         }
       </div>
       <br />
       <div class="all-disciplines" *ngFor="let discipline of disciplineImages">
         @if(discipline.type === 'others') {
-        <img class="imageIcons icon-filter" [src]="discipline.url" [alt]="discipline.name"
-          (click)="toggleOpacity($event)" />
+        <img class="imageIcons icon-filter"
+        [src]="discipline.url" [alt]="discipline.name"
+        (click)="toggleOpacity($event)"
+        [class.clicked]="disciplineName[discipline.name]"
+        />
         }
       </div>
     </div>
@@ -138,8 +148,6 @@
           </tbody>
         </table>
 
-        <!-- <button (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
-        <button (click)="nextPage()" [disabled]="currentPage * pageSize >= totalCards">Next</button> -->
 
       </section>
 
