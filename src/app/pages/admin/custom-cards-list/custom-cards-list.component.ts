@@ -16,6 +16,10 @@ export class CustomCardsListComponent implements OnInit {
 
   customCards: CustomCard[] = [];
 
+  showSucessMessage: boolean = false;
+  showErrorMessage: boolean = false;
+  message: string = '';
+
   constructor(
     public customCardsSvc: CustomCardsService
   ) { }
@@ -27,8 +31,25 @@ export class CustomCardsListComponent implements OnInit {
   }
 
   deleteCustomCard(id: string){
-    this.customCardsSvc.deleteCustomCard(id).subscribe(() => {
+    this.customCardsSvc.deleteCustomCard(id).subscribe(
+      (response) => {
       this.getCustomCards();
+      console.log('Customs deleted: ',response);
+      this.showErrorMessage = false;
+      this.showSucessMessage = true;
+      this.message = 'Carta personalizada eliminada correctamente';
+      setTimeout(() => {
+        this.showSucessMessage = false;
+      },5000);
+    },
+    (error) => {
+      console.log('Error al eliminar la Carta personalizada: ', error);
+      this.showErrorMessage = true;
+      this.showSucessMessage = false;
+      this.message = this.customCardsSvc.handleRegistrationError(error);
+      setTimeout(()=>{
+        this.showErrorMessage = false;
+      },5000);
     })
   }
   ngOnInit(): void {

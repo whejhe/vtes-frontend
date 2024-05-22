@@ -24,6 +24,10 @@ export class SendReportComponent implements OnInit {
 
   user: User | null = null;
 
+  showSucessMessage: boolean = false;
+  showErrorMessage: boolean = false;
+  message: string = '';
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { card: CustomCard },
     public dialogRef: MatDialogRef<SendReportComponent>,
@@ -71,9 +75,21 @@ export class SendReportComponent implements OnInit {
       this.reportSvc.createReport(reportData).subscribe(
         (response: any) => {
           console.log('response', response);
+          this.showSucessMessage = true;
+          this.showErrorMessage = false;
+          this.message = 'Reporte enviado correctamente';
+          setTimeout(() => {
+            this.showSucessMessage = false; 
+          },5000)
           this.closeModal();
         },
         (error: any) => {
+          this.showErrorMessage = true;
+          this.showSucessMessage = false;
+          this.message = this.reportSvc.handleRegistrationError(error);
+          setTimeout(() => {
+            this.showErrorMessage = false;
+          },5000);
           console.log('error', error);
         }
       );

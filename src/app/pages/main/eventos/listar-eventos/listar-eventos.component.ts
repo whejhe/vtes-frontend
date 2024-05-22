@@ -20,6 +20,10 @@ import { environment } from '../../../../../environments/environment.development
 })
 export class ListarEventosComponent implements OnInit {
 
+  showSucessMessage: boolean = false;
+  showErrorMessage: boolean = false;
+  message: string = '';
+
   private apiUrl = environment.apiUrl + '/events' || 'http://localhost:3000/events';
 
   constructor(
@@ -46,9 +50,21 @@ export class ListarEventosComponent implements OnInit {
       (response) => {
         console.log('Evento eliminado:', response);
         this.getEvents();
+        this.showSucessMessage = true;
+        this.showErrorMessage = false;
+        this.message = 'Evento eliminado correctamente';
+        setTimeout(() => {
+          this.showSucessMessage = false;
+        },5000);
       },
       (error) => {
         console.log('Error al eliminar el evento:', error);
+        this.showErrorMessage = true;
+        this.showSucessMessage = false;
+        this.message = this.eventSvc.handleRegistrationError(error);
+        setTimeout(() => {
+          this.showErrorMessage = false;
+        },5000);
       }
     );
   }

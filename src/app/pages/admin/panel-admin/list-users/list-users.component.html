@@ -1,22 +1,6 @@
 <!--front/src/app/pages/admin/panel-admin/list-users/list-users.component.html-->
 <div class="container">
 
-  @if(showSucessMessage){
-  <div class="alert alert-dismissible alert-success">
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    <strong>{{message}}</strong> You successfully read <a href="#" class="alert-link">this important alert
-      message</a>.
-  </div>
-  }
-
-  @if(showErrorMessage){
-  <div class="alert alert-dismissible alert-danger">
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    <strong>{{message}}</strong><br>
-    <p>Please, check your credentials and try submitting again.</p>
-  </div>
-  }
-
   <table class="table table-hover">
     <thead>
       <tr class="table-dark">
@@ -38,7 +22,6 @@
         <td>{{user.role}}</td>
         <td>
           <select name="" id="roles" (change)="changeRole(user.email, $event)">
-            <!-- <option value="*">{{user.role}}</option> -->
             <option [value]="role.value" [selected]="role.value === user.role" *ngFor="let role of roleOptions">
               {{role.label}}
             </option>
@@ -46,10 +29,22 @@
         </td>
         <td>
           <button type="button" class="btn btn-danger btn-sm" (click)="deleteUser(user._id)">Eliminar</button>
-          <!-- <button type="button" class="btn btn-warning btn-sm" (click)="unblockUser(this.user)">DesBloquear</button>
-          <button type="button" class="btn btn-warning btn-sm" (click)="blockUser(this.user._id)">Bloquear</button> -->
-        </td>
       </tr>
     </tbody>
   </table>
 </div>
+
+
+@if(showSucessMessage){
+  <div class="alert alert-dismissible alert-success">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>{{message}}</strong> 
+  </div>
+  }
+
+  @if(showErrorMessage){
+  <div class="alert alert-dismissible alert-danger">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>{{message}}</strong><br>
+  </div>
+  }

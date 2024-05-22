@@ -82,4 +82,18 @@ export class CustomCardsService {
     headers = this.addAuthHeader(headers);
     return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers });
   }
+
+
+  handleRegistrationError(error: any): string {
+    //USER
+    if (error.error.error.includes('El identificador de usuario es obligatorio')) {
+      return 'El identificador de usuario es obligatorio';
+    } else if (error.error.error.includes('El nombre de la carta es obligatoria')) {
+      return 'El nombre de la carta es obligatoria';
+    } else if('El tipo de la carta es obligatorio'){
+      return 'El tipo de la carta es obligatorio';
+    } else {
+      return 'Ocurrió un error al registrar el usuario';
+    }
+  }
 }

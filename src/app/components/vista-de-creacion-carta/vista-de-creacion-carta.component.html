@@ -11,7 +11,7 @@
     <h2 class="name">{{customCardForm.get('name')?.value}}</h2>
     <!--CLAN-->
     <div class="clan">
-      <!-- <img [src]="getClanIcon(customCardForm.get('clan')?.value)" alt=""> -->
+      <img [src]="getClanIcon(customCardForm.get('clan')?.value)" alt="">
     </div>
     <!--LOGOTIPO-->
     <img class="icono-logo" src="../../../../assets/img/icons-vtes/logo/logo-blanco.png" alt="" />
@@ -21,11 +21,12 @@
     </div>
     <!--DISCIPLINAS-->
     <div class="disciplines-container">
-      <div class="discipline" *ngFor="let discipline of customCardForm.get('disciplines')?.value"
+      <div *ngFor="let discipline of customCardForm.get('disciplines')?.value"
       >
-      <!-- <img src="{{getDisciplineIcon(discipline)}}" alt="{{discipline.name}}"> -->
+      <img class="discipline" src="{{getDisciplineIcon(discipline)}}" alt="{{discipline.name}}">
     </div>
     </div>
+    
     <!--DESCRIPCION-->
     <div class="description">
       <p class="text-description">

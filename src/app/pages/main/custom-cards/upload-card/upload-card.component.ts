@@ -130,7 +130,7 @@ export class UploadCardComponent implements OnInit {
             console.log('Error al crear la carta:', error);
             this.showErrorMessage = true;
             this.showSucessMessage = false;
-            this.message = 'Error al crear la carta';
+            this.message = this.customCardSvc.handleRegistrationError(error);
             setTimeout(() => {
               this.showErrorMessage = false;
             },5000)

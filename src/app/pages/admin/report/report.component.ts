@@ -21,6 +21,10 @@ export class ReportComponent implements OnInit {
 
    }
 
+  showSucessMessage: boolean = false;
+  showErrorMessage: boolean = false;
+  message: string = '';
+
   public reports: Report[] = [];
   selectedReport: Report | undefined;
 
@@ -50,9 +54,21 @@ export class ReportComponent implements OnInit {
       (response) =>{
         console.log('Reporte eliminado:', response);
         this.getReports();
+        this.showSucessMessage = true;
+        this.showErrorMessage = false;
+        this.message = 'Reporte eliminado correctamente';
+        setTimeout(() => {
+          this.showSucessMessage = false;
+        }, 5000);
       },
       (error) =>{
         console.log('Error al eliminar el reporte:', error);
+        this.showErrorMessage = true;
+        this.showSucessMessage = false;
+        this.message = this.reportSvc.handleRegistrationError(error);
+        setTimeout(() => {
+          this.showErrorMessage = false;
+        }, 5000);
       }
     );
   }

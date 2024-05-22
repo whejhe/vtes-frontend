@@ -169,6 +169,21 @@ export class DeckService {
       a.remove();
     });
   }
+
+
+  handleRegistrationError(error: any): string {
+    if (error.error.error.includes('El identificador de usuario es obligatorio')) {
+      return 'El identificador de usuario es obligatorio';
+    } else if('El nombre del mazo es obligatorio') {
+      return 'El nombre del mazo es obligatorio';
+    }else if('El autor del mazo es obligatorio'){
+      return 'El autor del mazo es obligatorio';
+    }else if('El estado del mazo es obligatorio'){
+      return 'El estado del mazo es obligatorio';
+    }else{
+      return 'Ocurrio un error al crear el mazo';
+    }
+  }
 }
 
 

@@ -71,7 +71,7 @@ export class ListUsersComponent implements OnInit {
           console.log('Error al eliminar el usuario: ', error);
           this.showErrorMessage = true;
           this.showSucessMessage = false;
-          this.message = 'Error al eliminar el usuario';
+          this.message = this.authSvc.handleRegistrationError(error);
           setTimeout(() => {
             this.showErrorMessage = false;
           },5000)
@@ -86,6 +86,12 @@ export class ListUsersComponent implements OnInit {
       (updateUser) => {
         console.log('Usuario actualizado: ', updateUser);
         this.getUsers();
+        this.showSucessMessage = true;
+        this.showErrorMessage = false;
+        this.message = 'Usuario actualizado correctamente';
+        setTimeout(() => {
+          this.showSucessMessage = false;
+        },5000)
       },
       (error) => {
         if(error.status === 404){
@@ -98,6 +104,12 @@ export class ListUsersComponent implements OnInit {
           console.log('Ocurrio algun error al actualizar el usuario')
           return error.message;
         }
+        this.showErrorMessage = true;
+        this.showSucessMessage = false;
+        this.message = this.authSvc.handleRegistrationError(error);
+        setTimeout(() => {
+          this.showErrorMessage = false;
+        },5000)
       }
     );
   }

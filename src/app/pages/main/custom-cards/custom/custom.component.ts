@@ -34,6 +34,9 @@ export class CustomComponent {
 
   public disciplineImages = this.iconSvc.disciplineImages;
   public clanImages = this.iconSvc.clanImages;
+  public selectedDisciplines: Discipline[] = [];
+  public disciplineSelected: { [key: string]: boolean } = {};
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -67,6 +70,7 @@ export class CustomComponent {
 
   getClanIcon(clan: string): string {
     const clanIcon = Clan[clan as keyof typeof Clan];
+    console.log('ClanIcon: ',clanIcon);
     return `assets/img/icons-vtes/clans/svg/${clanIcon}.svg`;
   }
 
@@ -82,6 +86,29 @@ export class CustomComponent {
   const disciplines = this.customCardForm.get('disciplines')?.value || [];
   const index = disciplines.indexOf(discipline);
   return `${48 - (index * 8)}%`;
+}
+
+toggleOpacity(event: MouseEvent): void {
+  const target = event.target as HTMLImageElement;
+  if (target.classList.contains('icon-filter')) {
+    console.log('Discipline:',target.alt)
+    target.classList.toggle('clicked');
+    this.updateDisciplineSelection(target.alt as Discipline);
+  }
+}
+
+updateDisciplineSelection(discipline: Discipline): void {
+  this.customCardForm.value.disciplines[discipline] = !this.customCardForm.value.disciplines[discipline];
+  this.onDisciplinesChange();
+  console.log('Disciplinas seleccionadas:',this.customCardForm.value.disciplines)
+}
+
+onDisciplinesChange(): void {
+  this.selectedDisciplines = Object.keys(this.customCardForm.value.disciplines)
+    .filter(discipline => this.customCardForm.value.disciplines[discipline as Discipline])
+    .map(discipline => discipline as Discipline);
+
+  console.log('Disciplinas seleccionadas:',this.selectedDisciplines)
 }
 
   onSubmit(): void {

@@ -237,3 +237,33 @@
   z-index: -1;
   opacity: 0.2;
 }
+
+
+.disciplines{
+  margin: 1em auto;
+  width: 100%;
+  z-index: 5;
+}
+
+.all-disciplines{
+  display: inline-flex;
+  img{
+    margin: auto;
+  }
+}
+
+.imageIcons{
+  height: auto;
+  margin: -0.5em;
+  width: 30px;
+}
+
+.icon-filter{
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+}
+
+.icon-filter.clicked{
+  opacity: 1;
+}

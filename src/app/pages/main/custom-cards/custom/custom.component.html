@@ -31,12 +31,35 @@
         </select>
       </div>
       <!--DISCIPLINAS-->
-      <div class="mb-3 disciplines">
+      <!-- <div class="mb-3 disciplines">
         <label for="disciplines" class="form-label">Disciplinas</label>
         <select class="form-select" id="disciplines" formControlName="disciplines" data-mdb-select-init multiple>
           <option *ngFor="let discipline of disciplines" [value]="discipline">{{ discipline }}</option>
         </select>
+      </div> -->
+      <!--DISCIPLINAS-->
+    <div class="disciplines">
+      <div class="all-disciplines" *ngFor="let discipline of disciplineImages">
+        @if(discipline.type === 'inf') {
+        <img class="imageIcons icon-filter" [src]="discipline.url" [alt]="discipline.name"
+          (click)="toggleOpacity($event)" />
+        }
       </div>
+      <br />
+      <div class="all-disciplines" *ngFor="let discipline of disciplineImages">
+        @if(discipline.type === 'sup') {
+        <img class="imageIcons icon-filter" [src]="discipline.url" [alt]="discipline.name"
+          (click)="toggleOpacity($event)" [class.clicked]="disciplineSelected[discipline.name]" />
+        }
+      </div>
+      <br />
+      <div class="all-disciplines" *ngFor="let discipline of disciplineImages">
+        @if(discipline.type === 'others') {
+        <img class="imageIcons icon-filter" [src]="discipline.url" [alt]="discipline.name"
+          (click)="toggleOpacity($event)" />
+        }
+      </div>
+    </div>
 
       <div class="row">
         <!--GRUPO-->

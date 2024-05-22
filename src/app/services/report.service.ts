@@ -61,4 +61,12 @@ export class ReportService {
     headers = this.addAuthHeader(headers);
     return this.hhtp.delete(`${this.apiUrl}/${id}`, { headers });
   }
+
+  handleRegistrationError(error: any): string {
+    if (error.error.error.includes('No puedes mandar un reporte vacio')) {
+      return 'No puedes mandar un reporte vacio';
+    } else {
+      return 'Ocurrió un error al mandar el reporte';
+    }
+  }
 }

@@ -40,30 +40,19 @@
         </tr>
     </table>
   </div>
-  <!-- <div>
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi eos ut quae, natus recusandae sed veritatis
-      ducimus asperiores nesciunt laboriosam, dolor dignissimos a reprehenderit itaque repudiandae, quia voluptate
-      maxime obcaecati.
-      Non tempora, reprehenderit maxime omnis excepturi tempore quam, alias id rerum nesciunt dolore consectetur est! Ab
-      voluptatum reiciendis dolor amet nulla officia nisi vel laudantium debitis qui. Fuga, voluptate aspernatur!
-      Magnam odio sint debitis, nostrum nisi molestiae ipsam laboriosam eum, dignissimos, dolore beatae neque dolorem
-      enim placeat exercitationem nulla quis maiores architecto et quo. Doloremque itaque alias quisquam accusamus?
-      Modi.
-      Rem aliquid repellendus perspiciatis officiis nulla quisquam debitis nemo veritatis sed est? Facilis, dolore
-      ducimus! Atque libero hic, esse dolorum maiores necessitatibus quis numquam est quo sint ipsum, suscipit autem!
-      Accusamus voluptates totam unde fugiat minus hic repellendus magni deserunt neque? Doloribus eum tenetur
-      laboriosam veniam est deleniti eius repudiandae qui reprehenderit cupiditate recusandae nostrum neque possimus,
-      modi optio amet.
-      Quam, expedita tempora rerum quos ipsam architecto enim ad aut earum dicta provident eum odit obcaecati, beatae,
-      mollitia quas dolorum unde eligendi voluptas doloremque fuga suscipit. Itaque necessitatibus minima suscipit!
-      Molestiae, maiores iure cum, dolorum ullam omnis dolore nam quidem enim ipsa, inventore perspiciatis dicta est
-      delectus rem velit excepturi pariatur expedita eum. Fugit illo eveniet placeat maxime aliquid! Laboriosam.
-      Nemo repudiandae iure sunt, repellendus vero ipsa. Modi corporis odio magni ea, nobis delectus iure ut nisi, fuga
-      repudiandae iusto voluptates nulla. Ratione consequuntur nam voluptatibus, quae quaerat distinctio maxime.
-      Sequi recusandae fugit deleniti sunt temporibus enim aliquam repudiandae tempora sint? Nobis molestiae maxime
-      exercitationem. Delectus voluptatem optio recusandae, cumque, facere quia, eos a ea possimus illum maiores
-      doloremque ipsam!
-      Iure deserunt fugit laboriosam error fugiat vero dicta ab nulla ratione rerum, incidunt saepe pariatur inventore
-      cupiditate minima. In error harum sapiente sequi explicabo. Ducimus minima dignissimos recusandae in hic?</p>
-  </div> -->
 </div>
+
+
+@if(showSucessMessage){
+  <div class="alert alert-dismissible alert-success">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>{{message}}</strong> 
+  </div>
+  }
+
+  @if(showErrorMessage){
+  <div class="alert alert-dismissible alert-danger">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>{{message}}</strong><br>
+  </div>
+  }

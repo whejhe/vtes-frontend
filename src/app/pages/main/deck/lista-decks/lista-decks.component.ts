@@ -32,6 +32,10 @@ export class ListaDecksComponent implements OnInit {
     user: User[] = [];
     CurrentUser: User = this.authSvc.getCurrentUser()!;
 
+    showSucessMessage: boolean = false;
+    showErrorMessage: boolean = false;
+    message: string = '';
+
     listDeckForm: FormGroup = new FormGroup({
         category: new FormControl('*'),
         author: new FormControl('*'),
@@ -74,11 +78,25 @@ export class ListaDecksComponent implements OnInit {
     // ELIMINAR DECK
     deleteDeck(id: string): void {
         this.deckSvc.deleteDeck(id).subscribe(
-            () => {
+            (response) => {
                 this.getDecks();
+                console.log('Deck eliminado: ', id);
+                console.log('Response Deck eliminado: ', response);
+                this.showSucessMessage = true;
+                this.showErrorMessage = false;
+                this.message = 'Deck eliminado correctamente';
+                setTimeout(() => {
+                    this.showSucessMessage = false;
+                }, 5000);
             },
             (error) => {
                 console.log('Error al eliminar el deck: ', error);
+                this.showErrorMessage = true;
+                this.showSucessMessage = false;
+                this.message = this.deckSvc.handleRegistrationError(error);
+                setTimeout(() => {
+                    this.showErrorMessage = false;
+                }, 5000);
             }
         )
     }
