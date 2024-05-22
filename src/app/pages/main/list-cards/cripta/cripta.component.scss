@@ -43,10 +43,17 @@ label{
 
 tr {
   width: 100%;
+  .aling-left{
+    text-align: left;
+  }
+  th{
+    width: 30%, 10%, 10%, 40%, 10%;
+    padding-left: 1em;
+  }
 
   td {
-    width: 30%, 15%, 10%, 30%, 15%;
-    padding-left: 2em;
+    width: fit-content;
+    padding-left: 1em;
     background-color: rgba(255, 255, 255, 0.5);
   }
 }
@@ -58,7 +65,7 @@ table {
     width: 100%;
 
     td {
-      padding-left: 2em;
+      padding-left: 1em;
       background-color: rgba(255, 255, 255, 0.5);
 
       &:nth-child(1) {
@@ -80,17 +87,6 @@ table {
   }
 }
 
-// Otros estilos
-td:nth-child(1),
-td:nth-child(3),
-td:nth-child(4) {
-  text-align: left;
-}
-
-td:nth-child(2),
-td:nth-child(5) {
-  text-align: center;
-}
 
 
 .all-disciplines{
@@ -205,4 +201,23 @@ aside{
   height: 90%;
   z-index: -1;
   opacity: 0.2;
+}
+
+
+.loading-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5em auto;
+  .spinner-border{
+    width: 5rem;
+    height: 5rem;
+    color: rgb(49, 2, 2);
+  }
+}
+
+.agregar{
+  font-size: 2em;
+  cursor: pointer;
 }

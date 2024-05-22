@@ -53,14 +53,15 @@
 
     <!--LISTA DE CARTAS-->
     <main class="row">
-      <section class="col-md-8">
-        <table class="table table-hover">
+      <section class="col-md-8 section1">
+        <table class="table table-hover" *ngIf="!isLoading; else loadingTemplate">
           <thead>
             <tr class="table-dark">
-              <th>Nombre</th>
-              <th>Disciplines</th>
-              <th>Tipo</th>
-              <th>Coste</th>
+              <th class="aling-left">Nombre</th>
+              <th class="aling-left">Disciplines</th>
+              <th class="aling-left">Tipo</th>
+              <th class="aling-left">Coste</th>
+              <th>Agregar</th>
             </tr>
           </thead>
           <tbody>
@@ -79,10 +80,10 @@
 
             let i=index" (click)="openModal(card)" [class.table-light]="i % 2 === 0"
               [class.table-secondary]="i % 2 !== 0">
-              <td class="imageFloat" style="cursor: pointer" (mouseenter)="setUrlImage(card.url)"
+              <td class="imageFloat aling-left" style="cursor: pointer" (mouseenter)="setUrlImage(card.url)"
                 (mouseleave)="clearUrlImage()">
                 {{card.name}}</td>
-              <td>
+              <td class="aling-left">
                 <div class="container-image" *ngFor="let discipline of card.disciplines">
                   @defer (on viewport){
                   <img class="imageIcons" [src]="getDisciplineUrl(discipline)" alt="">
@@ -91,8 +92,8 @@
                   }
                 </div>
               </td>
-              <td>{{card.types}}</td>
-              <td>
+              <td class="aling-left">{{card.types}}</td>
+              <td class="aling-left">
                 <div class="container-image">
                   @defer (on viewport) {
                   <img class="imageIcons" [src]="getBloodCostImage(card.blood_cost) || getPoolCostImage(card.pool_cost)"
@@ -102,22 +103,36 @@
                   }
                 </div>
               </td>
+              <td>
+                <span class="agregar">&nbsp;&nbsp;  +</span>
+              </td>
             </tr>
           </tbody>
         </table>
 
+
+        <!--CARGA-->
+        <ng-template #loadingTemplate>
+          <div class="loading-container">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </ng-template>
+
       </section>
 
-      <section class="col-md-4">
-        <aside>
+
+      <section class="col-md-4 section2">
+        <aside class="aside-container row">
           <!--SEARCH BY CARD TEXT-->
-          <div>
+          <div class="col-md-12">
             <h4 class="select">Search By Card Text:</h4>
             <input name="filter" class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
               formControlName="searchByCardText" />
           </div>
           <!--SEARCH BY SECT-->
-           <div>
+           <div class="col-md-12">
             <h4 class="select">Sect:</h4>
             <select id="sect" class="form-select form-select-sm"
             formControlName="searchSect">
@@ -132,7 +147,7 @@
             </select>
           </div>
           <!--SEARCH BY TRAITS-->
-          <div>
+          <div class="col-md-12">
             <h4 class="select">Search By Traits:</h4>
             <select class="form-select form-select-sm"
             formControlName="searchByTraits">
@@ -147,7 +162,7 @@
             </select>
           </div>
           <!--SEARCH BY TITLES-->
-          <div>
+          <div class="col-md-12">
             <h4 class="select">Title:</h4>
             <select id="title" class="form-select form-select-sm"
               formControlName="searchTitle">
@@ -161,7 +176,6 @@
               </option>
             </select>
           </div>
-
         </aside>
       </section>
     </main>

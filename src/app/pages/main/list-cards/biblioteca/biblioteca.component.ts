@@ -60,12 +60,7 @@ export class BibliotecaComponent implements OnInit {
     searchByTraits: new FormControl(''),
   });
 
-  //Paginación
-  // currentPage: number = 1;
-  // itemsPerPage: number = 10;
-  // totalItems: number = 0;
-  // paginatedCards: any[] = [];
-  // filteredCards!: Card[];
+  isLoading: boolean = true;
 
 
   // user: User | null = null;
@@ -261,6 +256,7 @@ export class BibliotecaComponent implements OnInit {
     this.cardSvc.getCards().subscribe((cards) => {
       this.cards = cards;
       console.log('Cards: ', this.cards);
+      this.isLoading = false;
     });
   }
 

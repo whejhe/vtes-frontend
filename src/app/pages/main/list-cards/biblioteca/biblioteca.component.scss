@@ -38,8 +38,15 @@ label{
 
 tr{
   width: 100%;
+  .aling-left{
+    text-align: left;
+  }
+  th{
+    width: 25%, 45%, 20%, 10%;
+    padding-left: 2em;
+  }
   td{
-    width: 30%, 30%, 30%, 10%;
+    width: 25%, 45%, 20%, 10%;
     padding-left: 2em;
   }
 }
@@ -56,17 +63,37 @@ tr{
   z-index: 5;
 }
 
-
-aside{
+/* Estilos por defecto */
+.aside-container {
   background-color: rgba(226, 224, 224, 0.8);
   border-radius: 8px;
   height: fit-content;
   padding: 1em;
   margin-left: 1.5em;
-  div{
-    margin: 1em;
+}
+
+.section1 {
+  order: 1;
+}
+
+.section2 {
+  order: 2;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .section1 {
+    order: 2;
+  }
+
+  .section2 {
+    order: 1;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
   }
 }
+
+
 
 .traits{
   padding-top: 1em;
@@ -133,4 +160,22 @@ aside{
   height: 100%;
   z-index: -1;
   opacity: 0.3;
+}
+
+.loading-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5em auto;
+  .spinner-border{
+    width: 5rem;
+    height: 5rem;
+    color: rgb(49, 2, 2);
+  }
+}
+
+.agregar{
+  font-size: 2em;
+  cursor: pointer;
 }

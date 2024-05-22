@@ -53,6 +53,8 @@ export class CriptaComponent implements OnInit {
     searchSect: new FormControl(''),
   });
 
+
+  isLoading: boolean = true;
   isActive: boolean = false;
 
   cards: Card[] = [];
@@ -219,6 +221,7 @@ export class CriptaComponent implements OnInit {
   loadCards(): void {
     this.cardSvc.getCards().subscribe((cards) => {
       this.cards = cards;
+      this.isLoading = false;
     });
   }
 
