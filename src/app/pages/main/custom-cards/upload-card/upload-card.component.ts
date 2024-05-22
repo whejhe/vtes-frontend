@@ -77,6 +77,7 @@ export class UploadCardComponent implements OnInit {
   toggleOpacity(event: MouseEvent): void {
     const target = event.target as HTMLImageElement;
     if (target.classList.contains('icon-filter')) {
+      console.log('Discipline:',target.alt)
       target.classList.toggle('clicked');
       this.updateDisciplineSelection(target.alt as Discipline);
     }

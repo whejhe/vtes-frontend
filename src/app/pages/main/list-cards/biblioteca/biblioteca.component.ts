@@ -160,7 +160,7 @@ export class BibliotecaComponent implements OnInit {
     this.onDisciplinesChange();
   }
   onDisciplinesChange(): void {
-    this.selectedDisciplines = Object.keys(this.disciplineSelected)
+    this.libraryForm.value.selectedDisciplines = Object.keys(this.disciplineSelected)
       .filter((discipline) => this.disciplineSelected[discipline as Discipline])
       .map((discipline) => discipline as Discipline);
   }

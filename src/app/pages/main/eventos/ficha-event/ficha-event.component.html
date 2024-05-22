@@ -8,19 +8,6 @@
   </div>
 </div>
 <div class="container">
-  @if(showSucessMessage){
-  <div class="alert alert-dismissible alert-success">
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    <strong>{{mesage}}</strong>
-  </div>
-  }
-
-  @if(showErrorMessage){
-  <div class="alert alert-dismissible alert-danger">
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    <strong>{{mesage}}</strong><br>
-  </div>
-  }
   <header class="header">
     <!-- <img src="../../../../../assets/img/plantilla.png" alt=""> -->
     <h1 class="title">
@@ -102,7 +89,7 @@
   }
 
   @if(isStarted === true){
-  <section class="row torneo-container">
+  <form class="row torneo-container" [formGroup]="fichaEventForm">
     <div class="col-md-6" *ngFor="let ronda of evento.ronda"
     >
       <h2 class="mesa">Ronda Nº {{ronda.numero}}</h2>
@@ -114,7 +101,7 @@
           <li></li>
           <li>Ronda Nº {{ronda.numero}}</li>
           <li></li>
-          <li></li>
+          <li><button class="btn btn-dark" (click)="updateEventPoints()">Update Points</button></li>
         </ul>
         <div>
           <ul class="jugadores" *ngFor="let player of mesa.players">
@@ -123,15 +110,37 @@
               {{" "+player.userId.name}}
             </li>
             <li></li>
-            <li>Puntos: </li>
+            <li class="quantity">
+              <input name="quantity" min="0" max="5" [value]="player.points"
+                type="number" cardForm="quantity"
+                formControlName="points" 
+                />
+            </li>
             <li></li>
-            <li>Mesa</li>
+            <li>Mesa: <input type="checkbox" value="{{player.tablePoints}}"
+              formControlName="tablePoints"
+              ></li>
           </ul>
         </div>
       </div>
     </div>
-  </section>
+  </form>
   }
 
 
 </div>
+
+
+@if(showSucessMessage){
+  <div class="alert alert-dismissible alert-success">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong>{{message}}</strong><br>
+  </div>
+  }
+
+  @if(showErrorMessage){
+  <div class="alert alert-dismissible alert-danger">
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      <strong>{{message}}</strong><br>
+  </div>
+  }

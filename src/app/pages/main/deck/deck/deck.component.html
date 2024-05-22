@@ -48,16 +48,16 @@
         <div class="search col-md-12">
           <label class="form-label">Search By Name: </label>
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-            formControlName="searchCryptCard" (change)="filtradoCrypt()" />
+            formControlName="searchCryptCard" />
         </div>
 
         <!--LISTADO DE CARTAS POR BUSQUEDA-->
         <div *ngIf="filteredCardsCrypt.length > 0" class="listaCrypta">
           <ul>
             <li *ngFor="let card of filteredCardsCrypt">
-              <span (click)="addCardToCrypt(card)" style="cursor: pointer">{{
-                card.name
-                }}</span><br />
+              <span (click)="addCardToCrypt(card)" style="cursor: pointer">
+              {{ card.name }}</span>
+              <br />
             </li>
           </ul>
         </div>
@@ -108,7 +108,7 @@
         <div class="search col-md-12">
           <label class="form-label">Search By Name:</label>
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-            formControlName="searchLibraryCard" (change)="filtradoLibrary()" />
+            formControlName="searchLibraryCard" />
         </div>
 
         <!--LISTADO DE CARTAS POR BUSQUEDA-->
@@ -214,14 +214,12 @@
 @if (showSucessMessage) {
 <div class="alert alert-dismissible alert-success">
   <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-  <!-- <strong>Cambios guardados con exito</strong> -->
-  <strong>{{ successMessage }}</strong>
+  <strong>{{ message }}</strong>
 </div>
 } @if(showErrorMessage){
 <div class="alert alert-dismissible alert-danger">
   <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-  <!-- <strong>Se produjo algun error al guardar los cambios</strong><br> -->
-  <strong>{{ errorMesage }}</strong><br />
+  <strong>{{ message }}</strong><br />
 </div>
 }
 

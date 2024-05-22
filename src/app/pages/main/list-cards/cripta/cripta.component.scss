@@ -34,6 +34,7 @@ label{
 .icon-filter{
   opacity: 0.5;
   transition: opacity 0.3s ease;
+  cursor: pointer;
 }
 
 .icon-filter.clicked{
@@ -175,6 +176,8 @@ aside{
 
 .disciplines{
   margin-top: 1em;
+
+  z-index: 5;
 }
 
 .group-styles{

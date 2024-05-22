@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { IconService } from '../../../../services/icon.service';
 import { VistaDeCreacionCartaComponent } from "../../../../components/vista-de-creacion-carta/vista-de-creacion-carta.component";
+import { CreateCardService } from '../../../../services/create-card.service';
 
 @Component({
     selector: 'app-custom',
@@ -37,18 +38,20 @@ export class CustomComponent {
   constructor(
     private formBuilder: FormBuilder,
     private customCardsService: CustomCardsService,
-    private iconSvc: IconService
+    private iconSvc: IconService,
+    private CreateCardSvc: CreateCardService
   ) {
-    this.customCardForm = this.formBuilder.group({
-      name: ['Choose a name', Validators.required],
-      capacity: [1, [Validators.required, Validators.min(1), Validators.max(11)]],
-      image: ['', Validators.required],
-      clan: ['', Validators.required],
-      disciplines: [[], Validators.required],
-      group: [1, [Validators.required, Validators.min(1), Validators.max(7)]],
-      logoColor: ['red', Validators.required],
-      description: ['Sect. Your description here', Validators.required]
-    });
+    this.customCardForm = this.CreateCardSvc.getForm();
+    // this.customCardForm = this.formBuilder.group({
+    //   name: ['Choose a name', Validators.required],
+    //   capacity: [1, [Validators.required, Validators.min(1), Validators.max(11)]],
+    //   image: ['', Validators.required],
+    //   clan: ['', Validators.required],
+    //   disciplines: [[], Validators.required],
+    //   group: [1, [Validators.required, Validators.min(1), Validators.max(7)]],
+    //   logoColor: ['red', Validators.required],
+    //   description: ['Sect. Your description here', Validators.required]
+    // });
   }
 
   onFileSelected(event: any): void {

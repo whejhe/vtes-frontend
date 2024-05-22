@@ -1,13 +1,23 @@
 .container{
   padding-bottom: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 3em auto;
+  gap: 10em;
+  // border: 1px solid black;
 }
 
-.vista-carta{
-  float: right;
-}
+// .vista-carta{
+//   float: right;
+// }
 
 .formulario{
-  width: 100%;
+  width: 50%;
+  min-width: 500px;
   background-color: #d8d7d7;
   z-index: 1;
   background-color: rgba($color: #dad7d7, $alpha: 0.7);
@@ -196,7 +206,7 @@
   padding-top: 30px;
   height: auto;
   width: 100%;
-  z-index: -50;
+  z-index: -5;
   opacity: 1;
 }
 
@@ -217,7 +227,7 @@
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.192);
-
+  z-index: -3;
 }
 
 

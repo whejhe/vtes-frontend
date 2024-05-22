@@ -194,10 +194,10 @@ export class CriptaComponent implements OnInit {
 
   toggleOpacity(event: MouseEvent): void {
     const target = event.target as HTMLImageElement;
-    if (target.classList.contains('icon-filter')) {
-      target.classList.toggle('clicked');
-    }else if(target.classList.contains('clicked')){
+    if (target.classList.contains('clicked')) {
       target.classList.remove('clicked');
+    }else{
+      target.classList.toggle('clicked');
     }
     this.updateDisciplineSelection(target.alt as Discipline);
   }

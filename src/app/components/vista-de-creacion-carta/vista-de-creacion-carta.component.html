@@ -1,3 +1,5 @@
+<!--front/src/app/components/vista-de-creacion-carta/vista-de-creacion-carta.component.html-->
+
 <!--CARTA PERSONALIZADA-->
 <div class="vista-carta">
 
@@ -6,42 +8,38 @@
     <!--IMAGEN DE LA CARTA-->
 
     <!--NOMBRE DE LA CARTA-->
-    <h2 class="name">Nombre de la Carta</h2>
+    <h2 class="name">{{customCardForm.get('name')?.value}}</h2>
     <!--CLAN-->
     <div class="clan">
+      <!-- <img [src]="getClanIcon(customCardForm.get('clan')?.value)" alt=""> -->
     </div>
     <!--LOGOTIPO-->
-    <img class="icono-logo" src="../../../../assets/img/icons-vtes/logo/logo-negro.png" alt="" />
+    <img class="icono-logo" src="../../../../assets/img/icons-vtes/logo/logo-blanco.png" alt="" />
     <!--CAPACIDAD-->
     <div class="icono-capacidad">
+      <p>{{customCardForm.get('capacity')?.value}}</p>
     </div>
     <!--DISCIPLINAS-->
     <div class="disciplines-container">
-      <div class="discipline">1</div>
-      <div class="discipline">2</div>
-      <div class="discipline">3</div>
-      <div class="discipline">4</div>
-      <div class="discipline">5</div>
-      <div class="discipline">6</div>
-      <div class="discipline">7</div>
-      <div class="discipline">8</div>
+      <div class="discipline" *ngFor="let discipline of customCardForm.get('disciplines')?.value"
+      >
+      <!-- <img src="{{getDisciplineIcon(discipline)}}" alt="{{discipline.name}}"> -->
+    </div>
     </div>
     <!--DESCRIPCION-->
     <div class="description">
       <p class="text-description">
-        Texto de prueba
+        {{customCardForm.get('description')?.value}}
       </p>
     </div>
     <!--IMAGEN DE LA CARTA-->
     <div class="container-image">
-      <img class="image-card" src="../../../../assets/img/plantilla.png" alt="">
+      <img class="image-card" src="../../../assets/img/plantilla.png" alt="" />
+      <!-- <img [src]="imageUrl" alt="Card Image"> -->
     </div>
     <!--GRUPO-->
     <div class="group">
+      <p>{{customCardForm.get('group')?.value}}</p>
     </div>
-    <p class="texto-carta">
-      <span class="description">
-      </span>
-    </p>
   </div>
 </div>

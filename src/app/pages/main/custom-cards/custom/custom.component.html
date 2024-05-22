@@ -5,10 +5,6 @@
     <img class="logo" src="../../../assets/img/icons-vtes/clans/svg/tzimisce.svg" alt="">
   </div>
 
-  <app-vista-de-creacion-carta
-  class="vista-carta"></app-vista-de-creacion-carta>
-
-
   <!--FORMULARIO REACTIVO PARA CARTA PERSONALIZADA-->
   <div class="formulario">
     <form [formGroup]="customCardForm" (ngSubmit)="onSubmit()">
@@ -66,6 +62,12 @@
       <button type="submit" class="btn btn-primary guardar">Guardar</button>
     </form>
   </div>
+
+  <!--VISTA DE CREACION DE CARTA-->
+  <app-vista-de-creacion-carta
+  class="vista-carta"></app-vista-de-creacion-carta>
 </div>
+
+
 
 <!-- <div> -->
