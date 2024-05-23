@@ -78,7 +78,7 @@
 
     <!--LISTA DE CARTAS-->
     <main class="row">
-      <section class="col-md-8">
+      <section class="col-md-8 section1">
         <table class="table table-hover" *ngIf="!isLoading; else loadingTemplate">
           <thead>
             <tr class="table-dark">
@@ -161,16 +161,16 @@
 
       </section>
 
-      <section class="col-md-4">
-        <aside>
+      <section class="col-md-4 section2">
+        <aside class="aside-container row">
           <!--SEARCH BY CARD TEXT-->
-          <div>
+          <div class="col-md-4 col-lg-12">
             <h4 class="select">Search By Card Text:</h4>
             <input name="filter" class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
               formControlName="searchByCardText" />
           </div>
           <!--TITLES-->
-          <div>
+          <div class="col-md-4 col-lg-12">
             <h4 class="select">Title:</h4>
             <select id="title" class="form-select form-select-sm"
               formControlName="searchTitle">
@@ -185,7 +185,7 @@
             </select>
           </div>
           <!--SECT-->
-          <div>
+          <div class="col-md-4 col-lg-12">
             <h4 class="select">Sect:</h4>
             <select id="sect" class="form-select form-select-sm"
             formControlName="searchSect">
@@ -200,7 +200,7 @@
             </select>
           </div>
           <!--CAPACITY MIN-->
-          <div class="capacity">
+          <div class="capacity col-md-4 col-lg-12">
             <label for="customRange2" class="form-label">Min. Capacity</label>
             <input type="range" class="form-range" min="1" max="11" id="minCapacity"
             formControlName="searchMinCapacity"
@@ -208,7 +208,7 @@
             />
           </div>
           <!--CAPACITY MAX-->
-          <div class="capacity">
+          <div class="capacity col-md-4 col-lg-12">
             <label for="customRange2" class="form-label">Max. Capacity</label>
             <input type="range" class="form-range" min="1" max="11" id="maxCapacity"
             formControlName="searchMaxCapacity"
@@ -217,7 +217,7 @@
           </div>
 
           <!--SEARCH BY HABILITIES-->
-          <div>
+          <div class="col-md-4 col-lg-12">
             <h4 class="select">Habilities:</h4>
             <select id="actionModifier" class="form-select form-select-sm"
             formControlName="searchHabilities">
@@ -233,23 +233,24 @@
           </div>
 
           <!--ENLACES-->
-          <div class="enlaces">
-            <h4>Pages</h4>
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <li class="nav-item">
-                <a class="nav-link" target="_blank" href="https://static.krcg.org/">VTES Static Files</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" target="_blank"
-                  href="https://www.blackchantry.com/vampire-the-eternal-struggle-fifth-edition/">Black Chantry</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" target="_blank" href="https://www.gamepod.es/">Gamepod</a>
-              </li>
-              <li>
-                <a class="nav-link" target="_blank" href="https://www.youtube.com/channel/UCQ5KNtwHlM5KZLm6YuazAhQ">Bleed de 3</a>
-              </li>
-            </ul>
+          <div class="col-md-4 col-lg-12 enlaces-container">
+            <div class="enlaces">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                  <a class="nav-link" target="_blank" href="https://static.krcg.org/">VTES Static Files</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" target="_blank"
+                    href="https://www.blackchantry.com/vampire-the-eternal-struggle-fifth-edition/">Black Chantry</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" target="_blank" href="https://www.gamepod.es/">Gamepod</a>
+                </li>
+                <li>
+                  <a class="nav-link" target="_blank" href="https://www.youtube.com/channel/UCQ5KNtwHlM5KZLm6YuazAhQ">Bleed de 3</a>
+                </li>
+              </ul>
+            </div>
           </div>
         </aside>
       </section>

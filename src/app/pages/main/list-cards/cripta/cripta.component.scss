@@ -96,15 +96,30 @@ table {
   }
 }
 
-aside{
+.aside-container{
   background-color: rgba(226, 224, 224, 0.8);
   border-radius: 8px;
   border: 1px solid rgb(53, 52, 52);
   height: fit-content;
   padding: 1em;
-  margin-left: 1.5em;
-  div{
-    margin: 1em;
+  margin: auto 1em;
+  .enlaces{
+    background-color: rgb(36, 35, 35);
+    color: antiquewhite;
+    font-size: larger;
+    font-weight: bold;
+    margin: 1em 0 1em 1em;
+    padding: 1em 2em;
+    border-radius: 8px;
+    border: 2px solid green;
+  
+    h4{
+      text-decoration: underline;
+      text-align: center;
+    }
+    li:hover{
+      color: rgb(153, 6, 6);
+    }
   }
 }
 
@@ -150,24 +165,6 @@ aside{
 
 .content-traits > div > input{
   margin-right: 0.5em;
-}
-
-.enlaces{
-  background-color: rgb(36, 35, 35);
-  color: antiquewhite;
-  font-size: larger;
-  font-weight: bold;
-  margin-left: 1.5em;
-  padding: 2em 1em;
-  border-radius: 8px;
-
-  h4{
-    text-decoration: underline;
-    text-align: center;
-  }
-  li:hover{
-    color: rgb(153, 6, 6);
-  }
 }
 
 .disciplines{
@@ -220,4 +217,31 @@ aside{
 .agregar{
   font-size: 2em;
   cursor: pointer;
+}
+
+
+@media (min-width: 300px) and (max-width: 991px) {
+  .section1 {
+    order: 2;
+  }
+  .section2 {
+    order: 1;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    .aside-container{
+      border: none;
+    }
+    .enlaces-container{
+      visibility: hidden;
+    }
+    // border: 1px solid black;
+  }
+  .aside-container{
+    background-color: rgba(226, 224, 224, 0);
+    margin: 0 0 2em 0;
+    padding: 0;
+  }
 }
