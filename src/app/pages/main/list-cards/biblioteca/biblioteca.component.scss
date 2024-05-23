@@ -80,19 +80,20 @@ tr{
   order: 2;
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 300px) and (max-width: 991px) {
   .section1 {
     order: 2;
   }
-
   .section2 {
     order: 1;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
   }
+  .aside-container{
+    background-color: rgba(226, 224, 224, 0);
+  }
 }
-
 
 
 .traits{

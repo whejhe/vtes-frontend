@@ -58,9 +58,9 @@
   }
 }
 
-.titulo{
-  display: inline;
-}
+// .titulo{
+//   display: inline;
+// }
 
 ul{
   padding-right: 0;
@@ -104,4 +104,24 @@ ul{
 .titulo-page:hover{
   color: #d60e0e;
   border-bottom: #d60e0e solid 2px;
+}
+
+@media (min-width: 300px) and (max-width: 991px) {
+
+  // .titulo-page{
+  //   visibility: hidden;
+  // }
+
+}
+
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+  .nav-icon {
+    display: block;
+  }
+  .nav-icon:hover + .nav {
+    display: block;
+  }
 }
