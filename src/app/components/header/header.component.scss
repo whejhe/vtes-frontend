@@ -92,6 +92,7 @@ ul{
 
 .nav-list{
   border-bottom: 2px solid #e6e3e3;
+  width: fit-content;
 }
 .nav-list:hover{
   border-bottom: 2px solid #d60e0e;
@@ -106,22 +107,22 @@ ul{
   border-bottom: #d60e0e solid 2px;
 }
 
-@media (min-width: 300px) and (max-width: 991px) {
+@media (min-width: 200px) and (max-width: 991px) {
 
-  // .titulo-page{
-  //   visibility: hidden;
-  // }
+  .container-logo{
+    visibility: hidden;
+  }
 
 }
 
-@media (max-width: 768px) {
-  .nav {
-    display: none;
-  }
-  .nav-icon {
-    display: block;
-  }
-  .nav-icon:hover + .nav {
-    display: block;
-  }
-}
+// @media (max-width: 768px) {
+//   .nav {
+//     display: none;
+//   }
+//   .nav-icon {
+//     display: block;
+//   }
+//   .nav-icon:hover + .nav {
+//     display: block;
+//   }
+// }
