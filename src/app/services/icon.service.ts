@@ -1,11 +1,37 @@
 //src/app/services/icon.service.ts
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Icon } from '../models/icon.model';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class IconService {
-  constructor() {}
+  constructor(
+    private http: HttpClient
+  ) {}
+
+  private apiUrl = environment.apiUrl + '/icon' || 'https://localhost/icon';
+
+  createIcon(icon: Icon):Observable<Icon>{
+    return this.http.post<Icon>(`${this.apiUrl}/create`, icon);
+  }
+
+  getIcons(): Observable<Icon[]> {
+    return this.http.get<Icon[]>(`${this.apiUrl}/get`);
+  }
+
+  getIconsByType(type: string): Observable<Icon[]> {
+    return this.http.get<Icon[]>(`${this.apiUrl}/getByType/${type}`);
+  }
+
+  getIconsByName(name: string): Observable<Icon[]> {
+    return this.http.get<Icon[]>(`${this.apiUrl}/getIconByName/${name}`);
+  }
+
+  /*----------------------------------------------------------------------------------------------------------------------------------------------------*/
 
   getCapacityCostImage(capacityCost: number | undefined): any {
     if (capacityCost) {
@@ -191,7 +217,7 @@ export class IconService {
     { name: 'vision' },
     { name: 'vengeance' },
   ];
-
+  
   clanImages = [
   {name: 'abominations', url: 'https://static.krcg.org/svg/clan/abominations.svg'},
   {name: 'ahrimanes', url: 'https://static.krcg.org/svg/clan/ahrimanes.svg'},

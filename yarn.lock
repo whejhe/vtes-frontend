@@ -5822,6 +5822,13 @@ neo-async@^2.6.2:
   resolved "https://registry.npmjs.org/neo-async/-/neo-async-2.6.2.tgz"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+ngx-image-cropper@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-image-cropper/-/ngx-image-cropper-8.0.0.tgz#2d7c5d365f85be1c086178d734d770c224a2d0eb"
+  integrity sha512-3f16nJYg2TK6QbwpxdeAh5wYG8huMUuX+vjSnMgZRsHnOAQ72gtFAJ6QBDIn3TYJmR/WhWEIx4pRVHxVnKAhJw==
+  dependencies:
+    tslib "^2.3.0"
+
 ngx-infinite-scroll@^17.0.0:
   version "17.0.0"
   resolved "https://registry.npmjs.org/ngx-infinite-scroll/-/ngx-infinite-scroll-17.0.0.tgz"

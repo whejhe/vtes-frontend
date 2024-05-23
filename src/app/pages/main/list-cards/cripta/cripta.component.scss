@@ -223,6 +223,7 @@ table {
 @media (min-width: 300px) and (max-width: 991px) {
   .section1 {
     order: 2;
+    width: 100%;
   }
   .section2 {
     order: 1;
@@ -233,9 +234,11 @@ table {
     padding: 0;
     .aside-container{
       border: none;
+      height: fit-content;
     }
     .enlaces-container{
       visibility: hidden;
+      display: none;
     }
     // border: 1px solid black;
   }

@@ -116,6 +116,7 @@ export class CriptaComponent implements OnInit {
     return clan ? clan.url : '';
   }
 
+
   getCapacityCostImage(capacityCost: number | undefined) {
     this.iconSvc.getCapacityCostImage(capacityCost);
     return this.iconSvc.getCapacityCostImage(capacityCost);

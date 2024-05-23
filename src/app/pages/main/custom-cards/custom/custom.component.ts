@@ -8,6 +8,8 @@ import { RouterLink } from '@angular/router';
 import { IconService } from '../../../../services/icon.service';
 import { VistaDeCreacionCartaComponent } from "../../../../components/vista-de-creacion-carta/vista-de-creacion-carta.component";
 import { CreateCardService } from '../../../../services/create-card.service';
+import { ImageCroppedEvent, ImageCropperComponent, LoadedImage } from 'ngx-image-cropper';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-custom',
@@ -19,7 +21,8 @@ import { CreateCardService } from '../../../../services/create-card.service';
         ReactiveFormsModule,
         CommonModule,
         RouterLink,
-        VistaDeCreacionCartaComponent
+        VistaDeCreacionCartaComponent,
+        ImageCropperComponent
     ]
 })
 export class CustomComponent {
@@ -37,24 +40,15 @@ export class CustomComponent {
   public selectedDisciplines: Discipline[] = [];
   public disciplineSelected: { [key: string]: boolean } = {};
 
-
   constructor(
     private formBuilder: FormBuilder,
     private customCardsService: CustomCardsService,
     private iconSvc: IconService,
-    private CreateCardSvc: CreateCardService
+    private CreateCardSvc: CreateCardService,
+    private sanitizer: DomSanitizer
+
   ) {
     this.customCardForm = this.CreateCardSvc.getForm();
-    // this.customCardForm = this.formBuilder.group({
-    //   name: ['Choose a name', Validators.required],
-    //   capacity: [1, [Validators.required, Validators.min(1), Validators.max(11)]],
-    //   image: ['', Validators.required],
-    //   clan: ['', Validators.required],
-    //   disciplines: [[], Validators.required],
-    //   group: [1, [Validators.required, Validators.min(1), Validators.max(7)]],
-    //   logoColor: ['red', Validators.required],
-    //   description: ['Sect. Your description here', Validators.required]
-    // });
   }
 
   onFileSelected(event: any): void {
@@ -66,12 +60,6 @@ export class CustomComponent {
   getDisciplineIcon(discipline: string): string {
     const disciplineIcon = DisciplineName[discipline as keyof typeof DisciplineName];
     return `assets/img/icons-vtes/disciplinas/svg/${disciplineIcon}.svg`;
-  }
-
-  getClanIcon(clan: string): string {
-    const clanIcon = Clan[clan as keyof typeof Clan];
-    console.log('ClanIcon: ',clanIcon);
-    return `assets/img/icons-vtes/clans/svg/${clanIcon}.svg`;
   }
 
   getDisciplinesNames(disciplines: string[]): string {
@@ -91,7 +79,7 @@ export class CustomComponent {
 toggleOpacity(event: MouseEvent): void {
   const target = event.target as HTMLImageElement;
   if (target.classList.contains('icon-filter')) {
-    console.log('Discipline:',target.alt)
+    // console.log('Discipline:',target.alt)
     target.classList.toggle('clicked');
     this.updateDisciplineSelection(target.alt as Discipline);
   }
@@ -100,7 +88,7 @@ toggleOpacity(event: MouseEvent): void {
 updateDisciplineSelection(discipline: Discipline): void {
   this.customCardForm.value.disciplines[discipline] = !this.customCardForm.value.disciplines[discipline];
   this.onDisciplinesChange();
-  console.log('Disciplinas seleccionadas:',this.customCardForm.value.disciplines)
+  // console.log('Disciplinas seleccionadas:',this.customCardForm.value.disciplines)
 }
 
 onDisciplinesChange(): void {
