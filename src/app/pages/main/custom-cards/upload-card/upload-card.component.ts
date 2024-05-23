@@ -136,8 +136,8 @@ export class UploadCardComponent implements OnInit {
             },5000)
           }
         );
-    }catch(error){
-      console.log('Error al subir la Imagen: ',error);
+    }catch(err){
+      console.log('Error al subir la Imagen: ',err);
     }
   }
 
