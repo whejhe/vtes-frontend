@@ -37,10 +37,10 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 })
 export class FichaEventComponent implements OnInit, OnDestroy {
 
-  fichaEventForm:FormGroup = new FormGroup({
-    points: new FormControl(),
-    tablePoints: new FormControl(),
-  });
+  // fichaEventForm: FormGroup = new FormGroup({
+  //   points: new FormControl(),
+  //   tablePoints: new FormControl(),
+  // });
 
   //MESSAGES
   showSucessMessage: boolean = false;
@@ -56,6 +56,7 @@ export class FichaEventComponent implements OnInit, OnDestroy {
   // TORNEO
   isStarted: boolean = false;
   isFinished: boolean = false;
+  isLoaded: boolean = false;
 
   ronda: string[][] = [];
   mesas: string[][] = []
@@ -67,7 +68,6 @@ export class FichaEventComponent implements OnInit, OnDestroy {
     this.ronda.push([]);
   }
 
-
   constructor(
     public eventSvc: EventService,
     public eventUserSvc: EventUserService,
@@ -76,34 +76,47 @@ export class FichaEventComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder
   ) {
     this.currentUser = this.authSvc.getCurrentUser()!;
-    this.fichaEventForm = this.formBuilder.group({
-      points: [0, Validators.required],
-      tablePoints: [0, Validators.required],
-    })
+    // this.fichaEventForm = this.formBuilder.group({
+    //   points: [0, Validators.required],
+    //   tablePoints: [0, Validators.required],
+    // })
   }
 
-  updateEventPoints(){
-    const eventData = this.fichaEventForm.value;
+  loggng(val: any, event: any, tipo: String) {
+    if (tipo == 'points') {
+      val.points = parseInt(event.target.value)
+    }
+    if (tipo == 'mesa') {
+      val.tablePoints == 1 ? val.tablePoints = 0 : val.tablePoints = 1
+      // val.tablePoints = parseInt(event.target.value)
+    }
+    console.log(val, event.target.value)
+    console.log(this.evento.ronda![0].mesas[0].players)
+  }
+
+  updateEventPoints() {
+    // const eventData = this.fichaEventForm.value;
+    console.log(this.evento)
     if (this.evento && this.evento._id) {
-      this.eventSvc.updateEvent(this.evento._id, eventData).subscribe(
-        (response:any) => {
-          console.log('Response: ',response);
+      this.eventSvc.updateEvent(this.evento._id, this.evento).subscribe(
+        (response: any) => {
+          console.log('Response: ', response);
           this.showSucessMessage = true;
           this.showErrorMessage = false;
           this.message = 'Puntos actualizados correctamente';
           setTimeout(() => {
             this.showSucessMessage = false;
-          },5000);
-          this.fichaEventForm.reset();
+          }, 5000);
+          // this.fichaEventForm.reset();
         },
         (error) => {
-          console.log('Error: ',error);
+          console.log('Error: ', error);
           this.showErrorMessage = true;
           this.showSucessMessage = false;
           this.message = this.authSvc.handleRegistrationError(error);
-          setTimeout(()=>{
+          setTimeout(() => {
             this.showErrorMessage = false;
-          },5000);
+          }, 5000);
         }
       );
     } else {
@@ -128,10 +141,18 @@ export class FichaEventComponent implements OnInit, OnDestroy {
   showButtonStartEvent: boolean = false;
 
   ngOnInit(): void {
-    this.getEventById();
+    this.getEventById()
+    // console.log(r, 'probando si devuelve bien')
     this.getCurrentUser();
     this.startCountdown();
     console.log('CurrentUser: ', this.getCurrentUser());
+
+    setTimeout(() => {
+      this.isLoaded = true
+      if (this.evento.iniciado) {
+        this.isStarted = true
+      }
+    }, 1500)
   }
 
   // drop(event: CdkDragDrop<any[]>) {
@@ -152,7 +173,7 @@ export class FichaEventComponent implements OnInit, OnDestroy {
     clearInterval(this.intervalId);
   }
 
-  getEventById(): void {
+  getEventById(): Evento | undefined {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.eventSvc.getEventById(id).subscribe(
@@ -161,12 +182,14 @@ export class FichaEventComponent implements OnInit, OnDestroy {
           this.eventDate = new Date(`${this.evento?.fecha!} ${this.evento?.hora!}`);
           // console.log('Evento: ',this.evento);
           this.getUsersForEvent();
+          return newEvent
         },
         (error) => {
           console.log('Error al obtener el evento: ', error);
         }
       )
     }
+    return undefined
   }
 
   getUsersForEvent() {
@@ -314,80 +337,92 @@ export class FichaEventComponent implements OnInit, OnDestroy {
   }
 
   // SORTEAR POSICION EN LAS MESAS
-  tirada() {
+  // tirada() {
+  //   if (this.evento) {
+  //     this.eventUserSvc.tirada(this.evento._id!).subscribe(
+  //       (tiradas) => {
+  //         this.eventUsers = tiradas;
+  //         this.getUsersForEvent();
+  //         this.showErrorMessage = false;
+  //         this.showSucessMessage = true;
+  //         this.message = 'Todas las tiradas realizadas';
+  //         console.log('Tiradas:', tiradas);
+  //         setTimeout(() => {
+  //           this.showSucessMessage = false;
+  //         }, 5000);
+  //       },
+  //       (error) => {
+  //         this.showErrorMessage = true;
+  //         this.showSucessMessage = false;
+  //         this.message = 'Error al realizar las tiradas';
+  //         this.isStarted = false;
+  //         console.log('Error en tiradas:', error);
+  //         setTimeout(() => {
+  //           this.showErrorMessage = false;
+  //         }, 5000);
+  //       }
+  //     )
+  //   }
+  // }
+
+  getTotalPoints(players: any[]): number {
+    let totalPoints = 0;
+    players.forEach(player => {
+      totalPoints += player.points;
+    });
+    console.log('Total de puntos: ', totalPoints);
+    return totalPoints;
+  }
+
+
+  // SORTEO DE MESAS
+  sortearMesa() {
     if (this.evento) {
-      this.eventUserSvc.tirada(this.evento._id!).subscribe(
-        (tiradas) => {
-          this.eventUsers = tiradas;
+      this.eventSvc.sortearMesa(this.evento._id!).subscribe(
+        (event) => {
+          this.evento = event;
           this.getUsersForEvent();
           this.showErrorMessage = false;
-            this.showSucessMessage = true;
-            this.message = 'Todas las tiradas realizadas';
-            console.log('Tiradas:', tiradas);
-            setTimeout(() => {
-              this.showSucessMessage = false;
-            },5000);
+          this.showSucessMessage = true;
+          this.message = 'Mesa sorteada';
+          this.isStarted = true;
+          console.log('Mesa sorteada: ', event);
+          setTimeout(() => {
+            this.showSucessMessage = false;
+          }, 5000);
         },
         (error) => {
+          console.log('Usuario Actual: ', this.currentUser);
+          console.log('Error al sortear la mesa: ', error);
           this.showErrorMessage = true;
-            this.showSucessMessage = false;
-            this.message = 'Error al realizar las tiradas';
-            this.isStarted = false;
-            console.log('Error en tiradas:', error);
-            setTimeout(() => {
-              this.showErrorMessage = false;
-            }, 5000);
+          this.showSucessMessage = false;
+          this.message = 'Error al sortear la mesa';
+          this.isStarted = false;
+          setTimeout(() => {
+            this.showErrorMessage = false;
+          }, 5000);
         }
-      )
+      );
     }
   }
 
-    // SORTEO DE MESAS
-    sortearMesa() {
-      if (this.evento) {
-        this.eventSvc.sortearMesa(this.evento._id!).subscribe(
-          (event) => {
-            this.evento = event;
-            this.getUsersForEvent();
-            this.showErrorMessage = false;
-            this.showSucessMessage = true;
-            this.message = 'Mesa sorteada';
-            this.isStarted = true;
-            console.log('Mesa sorteada: ', event);
-            setTimeout(() => {
-              this.showSucessMessage = false;
-            }, 5000);
-          },
-          (error) => {
-            console.log('Usuario Actual: ', this.currentUser);
-            console.log('Error al sortear la mesa: ', error);
-            this.showErrorMessage = true;
-            this.showSucessMessage = false;
-            this.message = 'Error al sortear la mesa';
-            this.isStarted = false;
-            setTimeout(() => {
-              this.showErrorMessage = false;
-            }, 5000);
-          }
-        );
-      }
-    }
-
-    // COMENZAR TORNEO
-    stopEvent(){
-      this.isStarted = false;
-    }
+  // COMENZAR TORNEO
+  stopEvent() {
+    this.isStarted = false
+    this.evento.iniciado=false
+    // this.eventSvc.sortearMesa(this.evento._id!)
+  }
 
 
-    // CUENTA ATRAS
-    startCountdown() {
-      this.intervalId = setInterval(() => {
-        this.updateTimeRemaining();
-      }, 1000);
-    }
+  // CUENTA ATRAS
+  startCountdown() {
+    this.intervalId = setInterval(() => {
+      this.updateTimeRemaining();
+    }, 1000);
+  }
 
-    updateTimeRemaining(): void {
-      if(this.eventDate) {
+  updateTimeRemaining(): void {
+    if (this.eventDate) {
       const currentDate = new Date();
       const timeDiff = this.eventDate!.getTime() - currentDate.getTime();
       if (timeDiff > 0) {

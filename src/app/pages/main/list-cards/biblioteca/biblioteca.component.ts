@@ -23,6 +23,8 @@ import { FilterPipe } from '../../../../pipes/filter.pipe';
 import { FilterMultiPipe } from '../../../../pipes/filter-multi.pipe';
 import { IconService } from '../../../../services/icon.service';
 import { CardService } from '../../../../services/card.service';
+import { Deck } from '../../../../models/deck.model';
+import { AuthService } from '../../../../services/auth.service';
 
 // import { __values } from 'tslib';
 // import { User } from '../../../../models/user.model';
@@ -46,7 +48,8 @@ export class BibliotecaComponent implements OnInit {
     private jsonSvc: JsonServiceService,
     public dialog: MatDialog,
     public iconSvc: IconService,
-    public cardSvc: CardService
+    public cardSvc: CardService,
+    public authSvc: AuthService
   ) {}
 
   libraryForm: FormGroup = new FormGroup({
@@ -60,10 +63,11 @@ export class BibliotecaComponent implements OnInit {
     searchByTraits: new FormControl(''),
   });
 
+  userDecks: Deck[] = []; 
+  currentUser = this.authSvc.getCurrentUser();
+
   isLoading: boolean = true;
-
-
-  // user: User | null = null;
+  agregar:boolean = false;
 
   sects = Object.values(Sect);
   sect = '';
@@ -258,6 +262,13 @@ export class BibliotecaComponent implements OnInit {
       console.log('Cards: ', this.cards);
       this.isLoading = false;
     });
+  }
+
+  viewListDeck(){
+    if(this.agregar === false){
+      this.agregar = true;
+    }
+    console.log('Agregar:',this.agregar)
   }
 
   ngOnInit(): void {

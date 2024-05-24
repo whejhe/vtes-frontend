@@ -65,6 +65,7 @@ export class RegisterComponent implements OnInit {
             this.showSucessMessage = false;
           }, 5000);
           this.router.navigate(['/auth']);
+          console.log('selected Avatar',this.selectedAvatar)
         },
         (error: any) => {
           console.log('error', error);

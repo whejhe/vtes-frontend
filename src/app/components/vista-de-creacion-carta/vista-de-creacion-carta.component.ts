@@ -50,7 +50,6 @@ export class VistaDeCreacionCartaComponent {
     } else {
       clanIcon = Clan[clan]
     }
-
     this.lowerCaseIcon = clanIcon.toLowerCase();
     // console.log('ClanIcon: ', lowerCaseIcon);
     return `assets/img/icons-vtes/clans/svg/${this.lowerCaseIcon}.svg`;
@@ -70,15 +69,26 @@ export class VistaDeCreacionCartaComponent {
     }
   }
 
+  // updateDisciplineSelection(discipline: Discipline): void {
+  //   this.customCardForm.value.disciplines[discipline] = !this.customCardForm.value.disciplines[discipline];
+  //   this.onDisciplinesChange();
+  // }
   updateDisciplineSelection(discipline: Discipline): void {
-    this.customCardForm.value.disciplines[discipline] = !this.customCardForm.value.disciplines[discipline];
+    this.customCardForm.get('disciplines')?.get(discipline)?.setValue(!this.customCardForm.get('disciplines')?.get(discipline)?.value);
     this.onDisciplinesChange();
   }
+  
 
+  // onDisciplinesChange(): void {
+  //   this.selectedDisciplines = Object.keys(this.customCardForm.value.disciplines)
+  //     .filter(discipline => this.customCardForm.value.disciplines[discipline as Discipline])
+  //     .map(discipline => discipline as Discipline);
+  // }
   onDisciplinesChange(): void {
-    this.selectedDisciplines = Object.keys(this.customCardForm.value.disciplines)
-      .filter(discipline => this.customCardForm.value.disciplines[discipline as Discipline])
+    this.selectedDisciplines = Object.keys(this.customCardForm.get('disciplines')?.value || {})
+      .filter(discipline => this.customCardForm.get('disciplines')?.get(discipline)?.value)
       .map(discipline => discipline as Discipline);
   }
+  
 
 }

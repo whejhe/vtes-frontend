@@ -18,11 +18,11 @@ import { environment } from '../../../environments/environment.development';
 })
 export class SideBarComponent {
 
-  apiUrl = environment.apiUrl || 'https://localhost:3000';
+  apiUrl = environment.apiUrl || 'https://localhost';
   public avatarImage:Image | null = null;
   // user: any | null = null;
   user: User | null = null;
-  public defaultImage = `${this.apiUrl}/vtes-backend/uploads/avatars/default-avatar.png`;
+  public defaultImage = `${this.apiUrl}/uploads/avatars/default-avatar.png`;
 
   constructor(
     private authSvc: AuthService,
@@ -52,7 +52,6 @@ export class SideBarComponent {
 
   ngOnInit() {
     this.getLoggedInUser();
-    // console.log('Usuario en sideBar:',this.user);
   }
 
 }

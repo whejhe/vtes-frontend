@@ -27,16 +27,10 @@
       <div class="mb-3">
         <label for="clan" class="form-label">Clan</label>
         <select class="form-select" id="clan" formControlName="clan">
-          <option *ngFor="let clan of clans" [value]="clan">{{ clan }}</option>
+          <option *ngFor="let clan of clans" [value]="clan">{{ clan }}
+          </option>
         </select>
       </div>
-      <!--DISCIPLINAS-->
-      <!-- <div class="mb-3 disciplines">
-        <label for="disciplines" class="form-label">Disciplinas</label>
-        <select class="form-select" id="disciplines" formControlName="disciplines" data-mdb-select-init multiple>
-          <option *ngFor="let discipline of disciplines" [value]="discipline">{{ discipline }}</option>
-        </select>
-      </div> -->
       <!--DISCIPLINAS-->
     <div class="disciplines">
       <div class="all-disciplines" *ngFor="let discipline of disciplineImages">
@@ -90,7 +84,3 @@
   <app-vista-de-creacion-carta
   class="vista-carta"></app-vista-de-creacion-carta>
 </div>
-
-
-
-<!-- <div> -->

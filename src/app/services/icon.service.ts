@@ -13,18 +13,18 @@ export class IconService {
     private http: HttpClient
   ) {}
 
-  private apiUrl = environment.apiUrl + '/icon' || 'https://localhost/icon';
+  private apiUrl = environment.apiUrl + '/uploads/icons' || 'https://localhost/icon';
 
   createIcon(icon: Icon):Observable<Icon>{
     return this.http.post<Icon>(`${this.apiUrl}/create`, icon);
   }
 
   getIcons(): Observable<Icon[]> {
-    return this.http.get<Icon[]>(`${this.apiUrl}/get`);
+    return this.http.get<Icon[]>(`${this.apiUrl}`);
   }
 
-  getIconsByType(type: string): Observable<Icon[]> {
-    return this.http.get<Icon[]>(`${this.apiUrl}/getByType/${type}`);
+  getIconsByType(type: string, name:string): Observable<Icon[]> {
+    return this.http.get<Icon[]>(`${this.apiUrl}/${type}/${name}`);
   }
 
   getIconsByName(name: string): Observable<Icon[]> {

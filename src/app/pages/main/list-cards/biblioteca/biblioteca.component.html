@@ -78,9 +78,11 @@
             searchByTraits:libraryForm.value.searchByTraits
             };
 
-            let i=index" (click)="openModal(card)" [class.table-light]="i % 2 === 0"
+            let i=index" [class.table-light]="i % 2 === 0"
               [class.table-secondary]="i % 2 !== 0">
-              <td class="imageFloat aling-left" style="cursor: pointer" (mouseenter)="setUrlImage(card.url)"
+              <td class="imageFloat aling-left" style="cursor: pointer" 
+              (mouseenter)="setUrlImage(card.url)"
+              (click)="openModal(card)"
                 (mouseleave)="clearUrlImage()">
                 {{card.name}}</td>
               <td class="aling-left">
@@ -104,12 +106,23 @@
                 </div>
               </td>
               <td>
-                <span class="agregar">&nbsp;&nbsp;  +</span>
+                <span class="agregar"
+                (click)="viewListDeck()">&nbsp;&nbsp;  +</span>
               </td>
             </tr>
           </tbody>
         </table>
 
+        <!--CARGAR LISTA DE MAZOS DEL USUARIO-->
+        @if(agregar === true){
+        }
+        <div class="lista-decks">
+          <ul *ngFor="let deck of userDecks">
+            <li>{{deck.name}}</li>
+            @if(deck.author === currentUser?.nick){
+            }
+          </ul>
+        </div>
 
         <!--CARGA-->
         <ng-template #loadingTemplate>

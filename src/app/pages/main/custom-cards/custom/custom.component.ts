@@ -1,5 +1,5 @@
 //front/src/app/pages/main/custom-cards/custom/custom.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Card, Clan, Discipline, DisciplineName } from '../../../../models/vtes.model';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CustomCardsService } from '../../../../services/custom-cards.service';
@@ -10,6 +10,7 @@ import { VistaDeCreacionCartaComponent } from "../../../../components/vista-de-c
 import { CreateCardService } from '../../../../services/create-card.service';
 import { ImageCroppedEvent, ImageCropperComponent, LoadedImage } from 'ngx-image-cropper';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Icon } from '../../../../models/icon.model';
 
 @Component({
     selector: 'app-custom',
@@ -25,7 +26,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
         ImageCropperComponent
     ]
 })
-export class CustomComponent {
+export class CustomComponent implements OnInit {
 
   customCardForm: FormGroup;
   clans = Object.values(Clan);
@@ -39,6 +40,8 @@ export class CustomComponent {
   public clanImages = this.iconSvc.clanImages;
   public selectedDisciplines: Discipline[] = [];
   public disciplineSelected: { [key: string]: boolean } = {};
+  iconsClans: Icon[] = [];
+  iconName:string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -50,6 +53,19 @@ export class CustomComponent {
   ) {
     this.customCardForm = this.CreateCardSvc.getForm();
   }
+
+  // getIconByType(type:string, name:string):void{
+  //   this.iconSvc.getIconsByType('clans',name).subscribe(
+  //     (icons: Icon[]) => {
+  //       console.log('Icons: ',icons)
+  //       this.iconsClans = icons;
+  //       console.log(this.iconsClans)
+  //     },
+  //     (error) => {
+  //       console.error('Error al obtener los iconos:', error);
+  //     }
+  //   )
+  // }
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];
@@ -110,5 +126,8 @@ onDisciplinesChange(): void {
         }
       );
     }
+  }
+
+  ngOnInit(): void {
   }
 }

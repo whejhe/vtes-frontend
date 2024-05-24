@@ -1,4 +1,5 @@
 <!--front/src/app/pages/main/eventos/ficha-event/ficha-event.component.html-->
+@if (isLoaded==true) {
 <div class="container-logo">
   <img class="logo" src="../../../assets/img/icons-vtes/clans/svg/tremere2.svg" alt="">
 </div>
@@ -84,18 +85,16 @@
 
 
 
-    
+
   </div>
   }
 
   @if(isStarted === true){
-  <form class="row torneo-container" [formGroup]="fichaEventForm">
-    <div class="col-md-6" *ngFor="let ronda of evento.ronda"
-    >
+  <form class="row torneo-container" >
+    <div class="col-md-6" *ngFor="let ronda of evento.ronda">
       <h2 class="mesa">Ronda Nº {{ronda.numero}}</h2>
-      <div *ngFor="let mesa of ronda.mesas let i = index"
-      [class.table-light]="i % 2 === 0"
-    [class.table-secondary]="i % 2 !== 0">
+      <div *ngFor="let mesa of ronda.mesas let i = index" [class.table-light]="i % 2 === 0"
+        [class.table-secondary]="i % 2 !== 0">
         <ul class="table-dark container-mesa">
           <li>Mesa Nº {{mesa.numero}}</li>
           <li></li>
@@ -104,6 +103,7 @@
           <li><button class="btn btn-dark" (click)="updateEventPoints()">Update Points</button></li>
         </ul>
         <div>
+          
           <ul class="jugadores" *ngFor="let player of mesa.players">
             <li>
               <img class="avatar" [src]=" apiUrl + player.userId.avatarUrl" alt="">
@@ -111,36 +111,59 @@
             </li>
             <li></li>
             <li class="quantity">
-              <input name="quantity" min="0" max="5" [value]="player.points"
-                type="number" cardForm="quantity"
-                formControlName="points" 
-                />
+              <input name="quantity" min="0" max="5" [value]="player.points" type="number"
+                (change)="loggng(player, $event, 'points')" />
             </li>
             <li></li>
-            <li>Mesa: <input type="checkbox" value="{{player.tablePoints}}"
-              formControlName="tablePoints"
-              ></li>
+            <li>Mesa: <input type="checkbox" [checked]="!!player.tablePoints"
+                (change)="loggng(player, $event, 'mesa')"></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="col-md-6 ranking">
+      <div class="lista-jugadores">
+        <h2>Ranking de Torneo</h2>
+        <ul class="table-dark">
+          <li>Image</li>
+          <li>Participantes</li>
+          <li></li>
+          <li>Points</li>
+          <li>Mesas</li>
+        </ul>
+        <div *ngFor="let player of eventUsers.userId let i = index" [class.table-light]="i % 2 === 0"
+        [class.table-secondary]="i % 2 !== 0">
+          <ul class="table-light list-ranking">
+            <div>
+              <li><img class="avatar" [src]=" apiUrl + player.avatarUrl" alt=""></li>
+              <li>{{player.name}}</li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </div>
           </ul>
         </div>
       </div>
     </div>
   </form>
   }
-
-
 </div>
 
 
 @if(showSucessMessage){
-  <div class="alert alert-dismissible alert-success">
-      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-      <strong>{{message}}</strong><br>
-  </div>
-  }
+<div class="alert alert-dismissible alert-success">
+  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  <strong>{{message}}</strong><br>
+</div>
+}
 
-  @if(showErrorMessage){
-  <div class="alert alert-dismissible alert-danger">
-      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-      <strong>{{message}}</strong><br>
-  </div>
-  }
+@if(showErrorMessage){
+<div class="alert alert-dismissible alert-danger">
+  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  <strong>{{message}}</strong><br>
+</div>
+}
+}

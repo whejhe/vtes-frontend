@@ -20,7 +20,7 @@ export class ImageService {
   private apiUrl = environment.apiUrl || 'https://localhost';
   private jsonImage = environment.apiUrl + '/data/image.json' || 'https://localhost/data/image.json';
   private uploadUrl = environment.apiUrl + '/uploads/' || 'https://localhost/uploads/';
-  private uploadAvatarsUrl = environment.apiUrl + '/vtes-backend/uploads/avatars/' || 'https://localhost/vtes-backend/uploads/avatars/';
+  private uploadAvatarsUrl = environment.apiUrl + '/uploads/avatars/' || 'https://localhost/uploads/avatars/';
 
 
   createImage(image: Image): Observable<Image> {
