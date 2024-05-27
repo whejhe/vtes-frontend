@@ -42,19 +42,22 @@
 }
 
 .container-logo{
-  position: fixed;
+  position: relative;
   display: inline;
   width: 30px;
   top: 10px;
   left: 150px;
   .logo{
-    width: 60px
-  }
-  a{
+    width: 90px;
+    top: -0.8em;
     position: absolute;
-    top: 35%;
-    left: 60px;
-    font-size: 2em;
+  }
+  .titulo-page{
+    position: absolute;
+    top: 0.8em;
+    left: -1.2em;
+    font-size: 3em;
+    opacity: 0.7;
   }
 }
 
