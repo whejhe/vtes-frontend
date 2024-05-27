@@ -111,7 +111,7 @@ export class CustomComponent implements OnInit {
     console.log(captureElement, ' exsiste caprture element')
     // Check if captureElement is not null before calling html2canvas
     if (captureElement) {
-      html2canvas(captureElement).then((canvas) => {
+      html2canvas(captureElement, { scale:1}).then((canvas) => {
         // Get the image data as a base64-encoded string
         const imageData = canvas.toDataURL("image/png");
         console.log(canvas, ' adios !!')
@@ -141,8 +141,6 @@ export class CustomComponent implements OnInit {
       );
     }
   }
-
-
 
   ngOnInit(): void {
   }

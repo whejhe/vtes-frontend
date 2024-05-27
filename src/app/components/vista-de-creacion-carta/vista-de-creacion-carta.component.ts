@@ -1,7 +1,7 @@
 //front/src/app/components/vista-de-creacion-carta/vista-de-creacion-carta.component.ts
 
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CreateCardService } from '../../services/create-card.service';
 import { Clan, Discipline, DisciplineName } from '../../models/vtes.model';
@@ -35,7 +35,7 @@ export class VistaDeCreacionCartaComponent {
   }
   @Input() selectedDisciplines: Discipline[] = [];
   @Input() colorLogo: string = 'black';
-  @Input() imageUrl: string = '';
+  @Output() imageSelected = new EventEmitter<string>();
 
   // public selectedDisciplines: Discipline[] = [];
   public disciplineImages = this.iconSvc.disciplineImages;
@@ -117,8 +117,5 @@ export class VistaDeCreacionCartaComponent {
       .filter(discipline => this.customCardForm.get('disciplines')?.get(discipline)?.value)
       .map(discipline => discipline as Discipline);
   }
-
-
-
 
 }
