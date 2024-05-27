@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   standalone: true,
   imports: [
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule
   ],
   templateUrl: './login.component.html',
@@ -68,4 +68,24 @@ export class LoginComponent {
       );
     }
   }
+
+
+changeVisibilityPassword() {
+  try{
+    const input = document.querySelector(".input__field");
+    const inputIcon = document.querySelector(".input__icon");
+
+    if(input?.getAttribute("type") == "password"){
+      input.setAttribute("type", "text");
+      inputIcon?.setAttribute("src", "assets/img/eye.svg");
+    }else{
+      input?.setAttribute("type", "password");
+      inputIcon?.setAttribute("src", "assets/img/eye-off.svg");
+    }
+
+  }catch(error){
+    console.log('Error al cambiar la visibilidad',error);
+  }
+}
+
 }
