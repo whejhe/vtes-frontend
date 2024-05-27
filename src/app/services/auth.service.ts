@@ -186,7 +186,7 @@ export class AuthService implements OnInit{
   deleteUser(id: string): Observable<any> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
-    return this.http.delete(`${this.apiUrl}/users/${id}`,{headers}); /*{ headers: { 'Authorization': `Bearer ${this.getToken()}` } });*/
+    return this.http.delete(`${this.apiUrl}/users/${id}`,{headers});
   }
 
   // BLOQUEAR USUARIOS

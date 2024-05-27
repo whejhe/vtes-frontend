@@ -61,3 +61,12 @@
   z-index: -1;
   opacity: 0.2;
 }
+
+.input__wrapper{
+  position: relative;
+  .input__icon{
+    position: absolute;
+    top: 15px;
+    right: 10px;
+  }
+}
