@@ -7,8 +7,8 @@
   width: 375px;
   height: 525px;
   position: relative;
-  .icono-logo{
-    width: 60px;
+  .logo{
+    width: 75px;
     position: absolute;
     top: 0.5em;
     right: 0.5em;
@@ -20,16 +20,20 @@
     padding-top: 0.3em;
     color: aliceblue;
   }
-  .clan{
+  .clan-container{
     position: absolute;
     top: 1em;
     left: 0.5em;
     margin: 1.5em 0;
-    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    color: aliceblue;
+    max-width: 60px;
+    .clan{
+      fill: wheat;
+      background-color:rgba($color: #fffefe, $alpha: 0.8);
+      border-radius: 50%;
+
+      border: 1px solid rgb(90, 8, 8);
+    }
   }
   .icono-capacidad{
     position: absolute;
@@ -55,16 +59,17 @@
   .disciplines-container{
     position: absolute;
     bottom: 2em;
-    left: 1.5em;
+    left: 1.1em;
     width: fit-content;
     height: auto;
+    min-height: 100px;
+    max-width: 40px;
     justify-content: center;
-    border: 1px solid rgb(255, 255, 255);
     .discipline{
-      margin: 1.5em 0;
-      background-color: rgb(255, 255, 255);
-      width: 30px;
-      height: 30px;
+      margin: 0.25em 0;
+      // background-color: rgb(255, 255, 255);
+      width: 40px;
+      height: 40px;
       // rotate: 45deg;
     }
   }
@@ -97,6 +102,20 @@
     margin: 0;
     padding: 0;
     z-index: -1;
+  }
+
+  .group{
+    background-color: black;
+    width: fit-content;
+    color: white;
+    font-size: 1.5em;
+    position: relative;
+    p{
+      position: absolute;
+      bottom: -355px;
+      left: 55px;
+      z-index: 10;
+    }
   }
 
 }

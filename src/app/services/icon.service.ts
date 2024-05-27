@@ -108,6 +108,14 @@ export class IconService {
     }
   }
 
+  iconLogo = [
+    { name: 'black', url: 'assets/img/icons-vtes/logo/logo.svg'},
+    { name: 'white', url: 'assets/img/icons-vtes/logo/logo-white.svg'},
+    { name: 'red', url: 'assets/img/icons-vtes/logo/logo-rojo.svg'},
+    { name: 'blue', url: 'assets/img/icons-vtes/logo/logo-azul.svg'},
+    { name: 'green', url: 'assets/img/icons-vtes/logo/logo-verde.svg'},
+  ]
+
   disciplineImages = [
     {name: 'abo',type: 'inf',url: 'https://static.krcg.org/svg/disc/inf/abo.svg',},
     {name: 'ani',type: 'inf',url: 'https://static.krcg.org/svg/disc/inf/ani.svg',},

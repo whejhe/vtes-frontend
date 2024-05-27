@@ -1,13 +1,14 @@
 //front/src/app/components/vista-de-creacion-carta/vista-de-creacion-carta.component.ts
 
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CreateCardService } from '../../services/create-card.service';
 import { Clan, Discipline, DisciplineName } from '../../models/vtes.model';
 import { IconService } from '../../services/icon.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ImageCroppedEvent, ImageCropperComponent, LoadedImage } from 'ngx-image-cropper';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-vista-de-creacion-carta',
@@ -30,34 +31,70 @@ export class VistaDeCreacionCartaComponent {
     private sanitizer: DomSanitizer
   ) {
     this.customCardForm = this.CreateCardSvc.getForm();
-  }
 
-  public selectedDisciplines: Discipline[] = [];
+  }
+  @Input() selectedDisciplines: Discipline[] = [];
+  @Input() colorLogo: string = 'black';
+  @Input() imageUrl: string = '';
+
+  // public selectedDisciplines: Discipline[] = [];
   public disciplineImages = this.iconSvc.disciplineImages;
   public disciplineSelected: { [key: string]: boolean } = {};
 
-  public lowerCaseIcon?: string = '';
+  public logoColors = ['red', 'green', 'blue', 'black', 'white'];
+  // public lowerCaseIcon: string = '';
 
   getClanIcon(clan: keyof typeof Clan): string {
     let nombreCompuesto = '';
-    let clanIcon
+    let lowerCaseIcon = '';
+    let clanIcon;
     if (clan.split(' ').length > 1) {
       for (let palabra of clan.split(' ')) {
         nombreCompuesto += palabra.charAt(0).toUpperCase() + palabra.slice(1);
       }
       clanIcon = Clan[nombreCompuesto as keyof typeof Clan];
       clanIcon = clanIcon.split(' ').join('');
+      if (clanIcon === 'DaughterofCacophony') {
+        clanIcon = 'daughtersofcacophony';
+      } else if (clanIcon === 'HarbingerofSkulls') {
+        clanIcon = 'harbingersofskulls';
+      }
     } else {
       clanIcon = Clan[clan]
     }
-    this.lowerCaseIcon = clanIcon.toLowerCase();
-    // console.log('ClanIcon: ', lowerCaseIcon);
-    return `assets/img/icons-vtes/clans/svg/${this.lowerCaseIcon}.svg`;
+    lowerCaseIcon = clanIcon.toLowerCase();
+    if (lowerCaseIcon === 'abomination') {
+      lowerCaseIcon = 'abominations';
+    } else if (lowerCaseIcon === 'gargoyle') {
+      lowerCaseIcon = 'gargoyles';
+    }
+    console.log('ClanIcon: ', lowerCaseIcon);
+    return `assets/img/icons-vtes/clans/svg/${lowerCaseIcon}.svg`;
   }
 
   getDisciplineIcon(discipline: string): string {
-    const disciplineIcon = DisciplineName[discipline as keyof typeof DisciplineName];
-    return `assets/img/icons-vtes/disciplinas/svg/${disciplineIcon}.svg`;
+    console.log(discipline)
+    if (/[A-Z]/.test(discipline[0])) {
+      return `assets/img/icons-vtes/disciplinas/svg/sup/${discipline}.svg`;
+    } else {
+      return `assets/img/icons-vtes/disciplinas/svg/inf/${discipline}.svg`;
+    }
+    // const disciplineIcon = DisciplineName[discipline as keyof typeof DisciplineName];
+  }
+
+  setLogoColor(color: string): string {
+    if (color === 'white') {
+      return "assets/img/icons-vtes/logo/logo-white.svg";
+    } else if (color === 'black') {
+      return "assets/img/icons-vtes/logo/logo-black.svg";
+    } else if (color === 'blue') {
+      return "assets/img/icons-vtes/logo/logo-blue.svg";
+    } else if (color === 'green') {
+      return "assets/img/icons-vtes/logo/logo-green.svg";
+    } else if (color === 'red') {
+      return "assets/img/icons-vtes/logo/logo-red.svg";
+    }
+    return `assets/img/icons-vtes/logo/logo-black.svg`;
   }
 
   toggleOpacity(event: MouseEvent): void {
@@ -69,26 +106,19 @@ export class VistaDeCreacionCartaComponent {
     }
   }
 
-  // updateDisciplineSelection(discipline: Discipline): void {
-  //   this.customCardForm.value.disciplines[discipline] = !this.customCardForm.value.disciplines[discipline];
-  //   this.onDisciplinesChange();
-  // }
   updateDisciplineSelection(discipline: Discipline): void {
     this.customCardForm.get('disciplines')?.get(discipline)?.setValue(!this.customCardForm.get('disciplines')?.get(discipline)?.value);
     this.onDisciplinesChange();
   }
-  
 
-  // onDisciplinesChange(): void {
-  //   this.selectedDisciplines = Object.keys(this.customCardForm.value.disciplines)
-  //     .filter(discipline => this.customCardForm.value.disciplines[discipline as Discipline])
-  //     .map(discipline => discipline as Discipline);
-  // }
+
   onDisciplinesChange(): void {
     this.selectedDisciplines = Object.keys(this.customCardForm.get('disciplines')?.value || {})
       .filter(discipline => this.customCardForm.get('disciplines')?.get(discipline)?.value)
       .map(discipline => discipline as Discipline);
   }
-  
+
+
+
 
 }

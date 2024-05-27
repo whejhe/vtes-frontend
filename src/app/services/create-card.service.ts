@@ -16,10 +16,10 @@ export class CreateCardService {
       name: ['Choose a name', Validators.required],
       capacity: [1, [Validators.required, Validators.min(1), Validators.max(11)]],
       image: ['', Validators.required],
-      clan: ['', Validators.required],
+      clan: ['Abomination', Validators.required],
       disciplines: [[], Validators.required],
       group: [1, [Validators.required, Validators.min(1), Validators.max(7)]],
-      logoColor: ['red', Validators.required],
+      logoColor: ['black', Validators.required],
       description: ['Sect. Your description here', Validators.required]
     });
   }

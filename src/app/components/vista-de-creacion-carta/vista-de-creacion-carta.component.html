@@ -8,23 +8,26 @@
     <!--NOMBRE DE LA CARTA-->
     <h2 class="name">{{customCardForm.get('name')?.value}}</h2>
     <!--CLAN-->
-    <div class="clan">
-      <img [src]="getClanIcon(customCardForm.get('clan')?.value)" alt="{{customCardForm.get('clan')?.value}}">
+    <div class="clan-container">
+      @if(customCardForm.get('clan')?.value){
+      <img class="clan" [src]="getClanIcon(customCardForm.get('clan')?.value)" alt="{{customCardForm.get('clan')?.value}}" height="60px" width="60px"/>
+      }
     </div>
     <!--LOGOTIPO-->
-    <img class="icono-logo" src="../../../../assets/img/icons-vtes/logo/logo-blanco.png" alt="" />
+    <div class="container-logo">
+     <img class="logo" [src]="setLogoColor(colorLogo)" alt="{{colorLogo}}">
+    </div>
     <!--CAPACIDAD-->
     <div class="icono-capacidad">
       <p>{{customCardForm.get('capacity')?.value}}</p>
     </div>
     <!--DISCIPLINAS-->
     <div class="disciplines-container">
-      <div *ngFor="let discipline of customCardForm.get('disciplines')?.value"
-      >
-      <img class="discipline" src="{{getDisciplineIcon(discipline)}}" alt="{{discipline.name}}">
+      @for (discipline of selectedDisciplines; track $index) {
+      <img class="discipline" [src]="getDisciplineIcon(discipline)" alt="{{discipline}}">
+      }
     </div>
-    </div>
-    
+
     <!--DESCRIPCION-->
     <div class="description">
       <p class="text-description">
@@ -33,12 +36,18 @@
     </div>
     <!--IMAGEN DE LA CARTA-->
     <div class="container-image">
-    <!-- <img class="image-card" src="../../../assets/img/plantilla.png" alt="" /> -->
-    <!-- <img [src]="imageUrl" alt="Card Image"> -->
-  </div>
-  <!--GRUPO-->
-  <div class="group">
-    <p>{{customCardForm.get('group')?.value}}</p>
+      @if(customCardForm.get('image')?.value){
+        <img class="image-card" [src]="customCardForm.get('image')?.value" alt="" />
+      }@else{
+        <img class="image-card" src="../../../assets/img/plantilla.png" alt="" />
+      }
+
+      <!-- <img [src]="imageUrl" alt="Card Image"> -->
+    </div>
+    <!--GRUPO-->
+    <div class="group">
+      <p>{{customCardForm.get('group')?.value}}</p>
+    </div>
   </div>
 </div>
-</div>
+

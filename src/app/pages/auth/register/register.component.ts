@@ -88,6 +88,34 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  changeVisibilityPassword() {
+    try{
+      const input = document.querySelector(".input__field");
+      const inputIcon = document.querySelector(".icon-password");
+      const inputConfirm = document.querySelector(".input-field-confirm");
+      const inputConfirmIcon = document.querySelector(".icon-confirm-password");
+
+      if(inputConfirm?.getAttribute("type") == "password"){
+        inputConfirm?.setAttribute("type", "text");
+        inputConfirmIcon?.setAttribute("src", "assets/img/eye.svg");
+      }else{
+        inputConfirm?.setAttribute("type", "password");
+        inputConfirmIcon?.setAttribute("src", "assets/img/eye-off.svg");
+      }
+  
+      if(input?.getAttribute("type") == "password"){
+        input.setAttribute("type", "text");
+        inputIcon?.setAttribute("src", "assets/img/eye.svg");
+      }else{
+        input?.setAttribute("type", "password");
+        inputIcon?.setAttribute("src", "assets/img/eye-off.svg");
+      }
+  
+    }catch(error){
+      console.log('Error al cambiar la visibilidad',error);
+    }
+  }
+
 
   ngOnInit(): void {
     console.log('this.image', this.image);

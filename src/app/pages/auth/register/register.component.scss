@@ -83,3 +83,20 @@ p {
   z-index: -1;
   opacity: 0.2;
 }
+
+.password{
+  position: relative;
+  .icon-password{
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+  }
+  .icon-confirm-password{
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+  }
+
+}

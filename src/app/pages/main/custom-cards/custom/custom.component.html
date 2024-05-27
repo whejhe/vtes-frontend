@@ -32,28 +32,28 @@
         </select>
       </div>
       <!--DISCIPLINAS-->
-    <div class="disciplines">
-      <div class="all-disciplines" *ngFor="let discipline of disciplineImages">
-        @if(discipline.type === 'inf') {
-        <img class="imageIcons icon-filter" [src]="discipline.url" [alt]="discipline.name"
-          (click)="toggleOpacity($event)" />
-        }
+      <div class="disciplines">
+        <div class="all-disciplines" *ngFor="let discipline of disciplineImages">
+          @if(discipline.type === 'inf') {
+          <img class="imageIcons icon-filter" [src]="discipline.url" [alt]="discipline.name"
+            (click)="toggleOpacity($event)" />
+          }
+        </div>
+        <br />
+        <div class="all-disciplines" *ngFor="let discipline of disciplineImages">
+          @if(discipline.type === 'sup') {
+          <img class="imageIcons icon-filter" [src]="discipline.url" [alt]="discipline.name"
+            (click)="toggleOpacity($event)" [class.clicked]="disciplineSelected[discipline.name]" />
+          }
+        </div>
+        <br />
+        <div class="all-disciplines" *ngFor="let discipline of disciplineImages">
+          @if(discipline.type === 'others') {
+          <img class="imageIcons icon-filter" [src]="discipline.url" [alt]="discipline.name"
+            (click)="toggleOpacity($event)" />
+          }
+        </div>
       </div>
-      <br />
-      <div class="all-disciplines" *ngFor="let discipline of disciplineImages">
-        @if(discipline.type === 'sup') {
-        <img class="imageIcons icon-filter" [src]="discipline.url" [alt]="discipline.name"
-          (click)="toggleOpacity($event)" [class.clicked]="disciplineSelected[discipline.name]" />
-        }
-      </div>
-      <br />
-      <div class="all-disciplines" *ngFor="let discipline of disciplineImages">
-        @if(discipline.type === 'others') {
-        <img class="imageIcons icon-filter" [src]="discipline.url" [alt]="discipline.name"
-          (click)="toggleOpacity($event)" />
-        }
-      </div>
-    </div>
 
       <div class="row">
         <!--GRUPO-->
@@ -66,8 +66,8 @@
         <!--COLOR LOGO-->
         <div class="col-md-6">
           <label for="logo-color" class="form-label">Color logo</label>
-          <select class="form-select" formControlName="logoColor">
-            <option *ngFor="let color of logoColors" [value]="color">{{ color }}</option>
+          <select class="form-select" formControlName="logoColor" (change)="changeColor($event)">
+            <option *ngFor="let color of logoColors" [value]="color" [selected]="color === 'black'">{{ color }}</option>
           </select>
         </div>
       </div>
@@ -77,10 +77,11 @@
           formControlName="description"></textarea>
       </div>
       <button type="submit" class="btn btn-primary guardar">Guardar</button>
+      <button class="btn guardar btn-primary" (click)="screenshot()">Capture</button>
     </form>
   </div>
 
   <!--VISTA DE CREACION DE CARTA-->
-  <app-vista-de-creacion-carta
-  class="vista-carta"></app-vista-de-creacion-carta>
+  <app-vista-de-creacion-carta class="vista-carta" [selectedDisciplines]="selectedDisciplines"
+    [colorLogo]="selectedColor"></app-vista-de-creacion-carta>
 </div>

@@ -11,29 +11,32 @@ import { CreateCardService } from '../../../../services/create-card.service';
 import { ImageCroppedEvent, ImageCropperComponent, LoadedImage } from 'ngx-image-cropper';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Icon } from '../../../../models/icon.model';
+import html2canvas from 'html2canvas';
 
 @Component({
-    selector: 'app-custom',
-    standalone: true,
-    templateUrl: './custom.component.html',
-    styleUrl: './custom.component.scss',
-    imports: [
-        FormsModule,
-        ReactiveFormsModule,
-        CommonModule,
-        RouterLink,
-        VistaDeCreacionCartaComponent,
-        ImageCropperComponent
-    ]
+  selector: 'app-custom',
+  standalone: true,
+  templateUrl: './custom.component.html',
+  styleUrl: './custom.component.scss',
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+    RouterLink,
+    VistaDeCreacionCartaComponent,
+    ImageCropperComponent
+  ]
 })
 export class CustomComponent implements OnInit {
 
   customCardForm: FormGroup;
   clans = Object.values(Clan);
-  clan:string = '';
+  clan: string = '';
   disciplines = Object.values(DisciplineName);
-  discipline:string = '';
+  discipline: string = '';
   logoColors = ['red', 'green', 'blue', 'black', 'white'];
+  // color = '';
+  selectedColor = 'black';
   imageUrl: string = '';
 
   public disciplineImages = this.iconSvc.disciplineImages;
@@ -41,7 +44,7 @@ export class CustomComponent implements OnInit {
   public selectedDisciplines: Discipline[] = [];
   public disciplineSelected: { [key: string]: boolean } = {};
   iconsClans: Icon[] = [];
-  iconName:string = '';
+  iconName: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -53,19 +56,6 @@ export class CustomComponent implements OnInit {
   ) {
     this.customCardForm = this.CreateCardSvc.getForm();
   }
-
-  // getIconByType(type:string, name:string):void{
-  //   this.iconSvc.getIconsByType('clans',name).subscribe(
-  //     (icons: Icon[]) => {
-  //       console.log('Icons: ',icons)
-  //       this.iconsClans = icons;
-  //       console.log(this.iconsClans)
-  //     },
-  //     (error) => {
-  //       console.error('Error al obtener los iconos:', error);
-  //     }
-  //   )
-  // }
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];
@@ -87,33 +77,57 @@ export class CustomComponent implements OnInit {
   }
 
   getDisciplinePosition(discipline: string): string {
-  const disciplines = this.customCardForm.get('disciplines')?.value || [];
-  const index = disciplines.indexOf(discipline);
-  return `${48 - (index * 8)}%`;
-}
-
-toggleOpacity(event: MouseEvent): void {
-  const target = event.target as HTMLImageElement;
-  if (target.classList.contains('icon-filter')) {
-    // console.log('Discipline:',target.alt)
-    target.classList.toggle('clicked');
-    this.updateDisciplineSelection(target.alt as Discipline);
+    const disciplines = this.customCardForm.get('disciplines')?.value || [];
+    const index = disciplines.indexOf(discipline);
+    return `${48 - (index * 8)}%`;
   }
-}
 
-updateDisciplineSelection(discipline: Discipline): void {
-  this.customCardForm.value.disciplines[discipline] = !this.customCardForm.value.disciplines[discipline];
-  this.onDisciplinesChange();
-  // console.log('Disciplinas seleccionadas:',this.customCardForm.value.disciplines)
-}
+  toggleOpacity(event: MouseEvent): void {
+    const target = event.target as HTMLImageElement;
+    if (target.classList.contains('icon-filter')) {
+      // console.log('Discipline:',target.alt)
+      target.classList.toggle('clicked');
+      this.updateDisciplineSelection(target.alt as Discipline);
+    }
+  }
 
-onDisciplinesChange(): void {
-  this.selectedDisciplines = Object.keys(this.customCardForm.value.disciplines)
-    .filter(discipline => this.customCardForm.value.disciplines[discipline as Discipline])
-    .map(discipline => discipline as Discipline);
+  updateDisciplineSelection(discipline: Discipline): void {
+    this.customCardForm.value.disciplines[discipline] = !this.customCardForm.value.disciplines[discipline];
+    this.onDisciplinesChange();
+    // console.log('Disciplinas seleccionadas:',this.customCardForm.value.disciplines)
+  }
 
-  console.log('Disciplinas seleccionadas:',this.selectedDisciplines)
-}
+  onDisciplinesChange(): void {
+    this.selectedDisciplines = Object.keys(this.customCardForm.value.disciplines)
+      .filter(discipline => this.customCardForm.value.disciplines[discipline as Discipline])
+      .map(discipline => discipline as Discipline);
+
+    console.log('Disciplinas seleccionadas:', this.selectedDisciplines)
+  }
+
+  screenshot() {
+    // Select the element that you want to capture
+    const captureElement = document.querySelector(".vista-carta") as HTMLElement;
+    console.log(captureElement, ' exsiste caprture element')
+    // Check if captureElement is not null before calling html2canvas
+    if (captureElement) {
+      html2canvas(captureElement).then((canvas) => {
+        // Get the image data as a base64-encoded string
+        const imageData = canvas.toDataURL("image/png");
+        console.log(canvas, ' adios !!')
+        // Do something with the image data, such as saving it as a file or sending it to a server
+        // For example, you can create an anchor element and trigger a download action
+        const link = document.createElement("a");
+        link.setAttribute("download", "yourCustomCard.png");
+        link.setAttribute("href", imageData);
+        link.click();
+      });
+    }
+  }
+
+  changeColor(event: any): void {
+    this.selectedColor = event.target.value;
+  }
 
   onSubmit(): void {
     if (this.customCardForm.valid) {
@@ -127,6 +141,8 @@ onDisciplinesChange(): void {
       );
     }
   }
+
+
 
   ngOnInit(): void {
   }

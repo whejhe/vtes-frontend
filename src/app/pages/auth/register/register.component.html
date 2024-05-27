@@ -34,19 +34,23 @@
 
       <div class="row">
         <!--PASSWORD-->
-        <div class="form-floating password">
-          <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+        <div class="form-floating password input__wrapper">
+          <input type="password" class="form-control input__field" id="floatingPassword" placeholder="Password"
             formControlName="password">
-          <label for="floatingPassword">Password</label>
+            <img class="icon-password" src="assets/img/eye-off.svg" alt=""
+            (click)="changeVisibilityPassword()">
+          <label class="input__label" for="floatingPassword">Password</label>
         </div>
       </div>
 
       <div class="row">
         <!--CONFIRMAR PASSWORD-->
-        <div class="form-floating password">
-          <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+        <div class="form-floating password input__wrapper">
+          <input type="password" class="form-control input-field-confirm" id="floatingPassword" placeholder="Password"
             formControlName="confirmPassword">
-          <label for="floatingPassword">Confirmar Password</label>
+            <img class="icon-confirm-password" src="assets/img/eye-off.svg" alt=""
+            (click)="changeVisibilityPassword()">
+          <label class="input__label" for="floatingPassword">Confirmar Password</label>
         </div>
       </div>
 
