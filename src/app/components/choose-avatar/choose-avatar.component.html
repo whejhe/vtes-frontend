@@ -4,7 +4,7 @@
     <div *ngFor="let avatar of avatars" class="image-container"
     (click)="selectAvatar(avatar)">
         <div class="image" [class.selected]="selectedAvatar === avatar">
-            <img [src]="avatar.imageUrl" alt="{{avatar.name}}">
+            <img [src]="apiUrl + avatar.imageUrl" alt="{{avatar.name}}">
         </div>
     </div>
     <button class="btn btn-dark" (click)="saveAvatar()">Select</button>

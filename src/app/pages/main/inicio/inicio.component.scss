@@ -61,3 +61,36 @@ a:hover{
   scale:1.1;
   background-color: rgb(58, 4, 4);
 }
+
+
+
+.container-card{
+  position: relative;
+}
+
+.card {
+  cursor: pointer;
+  transition: 1s ease-in-out;
+  transform-style: preserve-3d;
+}
+
+.card:hover {
+  transform: rotateY(0.5turn);
+}
+
+.front-card {
+  backface-visibility: hidden;
+  transition: 1s ease-in-out;
+}
+
+.back-card {
+  position: absolute;
+  top: 0;
+  left: 4.8em;
+  transition: 1s ease-in-out;
+  z-index: -1;
+}
+
+.container-card>img {
+  object-fit: cover;
+}

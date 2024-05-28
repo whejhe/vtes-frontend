@@ -59,8 +59,10 @@ export class CustomComponent implements OnInit {
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];
-    this.customCardForm.get('image')?.setValue(file);
-    this.imageUrl = URL.createObjectURL(file);
+    const fileUrl = URL.createObjectURL(file);
+    console.log(file, 'file a ver', fileUrl)
+    this.customCardForm.get('image')?.setValue(fileUrl);
+    this.imageUrl = fileUrl;
   }
 
   getDisciplineIcon(discipline: string): string {
