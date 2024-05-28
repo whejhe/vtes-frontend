@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment.development';
 import { MatDialog } from '@angular/material/dialog';
 import { ChooseAvatarComponent } from '../choose-avatar/choose-avatar.component';
+import { ModalNewAvatarComponent } from '../modal-new-avatar/modal-new-avatar.component';
 
 @Component({
   selector: 'app-side-bar',
@@ -56,7 +57,7 @@ export class SideBarComponent {
   }
 
   openModal():void{
-    this.dialog.open(ChooseAvatarComponent, {
+    this.dialog.open(ModalNewAvatarComponent, {
       data: {avatar: this.selectedAvatar },
     }).afterClosed().subscribe((avatar: Image | null) => {
       this.selectedAvatar = avatar;

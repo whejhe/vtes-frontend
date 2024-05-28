@@ -64,7 +64,7 @@ export class UploadCardComponent implements OnInit {
 
   handleFileChange(event: any){
     const file = event.target.files[0];
-    console.log(file)
+    // console.log(file)
     this.updateCardForm.patchValue({
       image: file
     });

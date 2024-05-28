@@ -2,7 +2,8 @@
   margin: 0;
   padding: 0;
   // border: 15px solid black;
-  outline: 5px solid black;
+  // outline: 15px solid black;
+  border: 15px solid black;
   border-radius: 8px;
   width: 375px;
   height: 525px;
@@ -16,7 +17,8 @@
   }
 
   .name {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
     text-shadow: #615c5c 1px 0 5px;
     padding-left: 0.5em;
     padding-top: 0.3em;
@@ -64,7 +66,7 @@
   .disciplines-container {
     position: absolute;
     bottom: 2em;
-    left: 1.1em;
+    left: 0.8em;
     width: fit-content;
     height: auto;
     min-height: 100px;
@@ -83,10 +85,10 @@
     border: 1px solid rgb(0, 0, 0);
     color: rgb(0, 0, 0);
     // text-shadow: #615c5c 1px 0 5px;
-    width: 300px;
+    width: 280px;
     min-height: 100px;
     bottom: 2em;
-    right: 1.5em;
+    right: 1em;
     z-index: 1;
     background-color: rgba($color: #ffffff, $alpha: 0.7);
 
@@ -123,17 +125,16 @@
 
 
   .group {
-    background-color: black;
     width: fit-content;
-    color: white;
-    font-size: 1.5em;
+    color: rgb(0, 0, 0);
+    font-size: 1.3em;
     position: relative;
-
     p {
       position: absolute;
-      bottom: -355px;
+      bottom: -328px;
       left: 55px;
       z-index: 10;
+      background-color: rgba($color: #ffffff, $alpha: 0.3);
     }
   }
 

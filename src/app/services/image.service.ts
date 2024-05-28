@@ -71,6 +71,10 @@ export class ImageService {
     return this.http.put<Image>(`${this.uploadUrl}/${image._id}`, image);
   }
 
+  uploadAvatar(UserId: String): Observable<Image>{
+    return this.http.put<Image>(`${this.uploadUrl}/images/${UserId}`, UserId);
+  }
+
   deleteImage(image: Image): Observable<Image> {
     return this.http.delete<Image>(`${this.uploadUrl}/${image._id}`);
   }
