@@ -6,32 +6,40 @@
             <img src="{{data.card.url}}" alt="">
         </div>
         <div class="info-details">
-            <h2 class="underline">{{data.card.name }}</h2>
+            <h1 class="underline">{{data.card.name }}</h1>
             <div *ngIf="data.card.pool_cost !== undefined">
               <!-- <h2>Pool Cost: {{data.card.pool_cost}}</h2> -->
               <span class="coste">
-                <h2>Pool Cost: </h2>
+                <h2><strong>Cost Pool:</strong></h2>
                 <img [src]="getPoolCostImage(data.card.pool_cost)" alt="Pool Cost Image">
               </span>
             </div>
             <div>
-              <h2>Type: {{data.card.types }}</h2>
+              <h2><strong>Type:</strong> {{data.card.types }}</h2>
             </div>
             <div *ngIf="data.card.blood_cost !== undefined">
               <!-- <h2>Blood cost: {{data.card.blood_cost}}</h2> -->
               <span class="coste">
-                <h2>Bood cost: </h2>
+                <h2><strong>Bood cost:</strong></h2>
                 <img [src]="getBloodCostImage(data.card.blood_cost)" alt="Blood Cost Image">
               </span>
             </div>
-            <div *ngIf="data.card.clans !== undefined">
-              <h2>Clan: {{data.card.clans }}</h2>
+            <div>
+              @if(data.card.clans && data.card.clans.length > 0){
+                <h2><strong>Clan:</strong> {{data.card.clans }}</h2>
+              }@else {
+                <h2><strong>Clan:</strong> No required</h2>
+              }
             </div>
-            <div *ngIf="data.card.disciplines !== undefined">
-              <h2>Disciplinas: {{data.card.disciplines }}</h2>
+            <div>
+            @if(data.card.disciplines && data.card.disciplines.length > 0){
+                <h2><strong>Disciplinas:</strong> {{data.card.disciplines }}</h2>
+              }@else{
+                <h2><strong>Disciplinas:</strong> No required</h2>
+              }
             </div>
             <br>
-            <p class="underline">Desciption:</p>
+            <p class="underline"><strong>Description:</strong></p>
             <p>{{data.card.card_text }}</p>
             <div *ngIf="data.card.rulings !== undefined">
               <p>Rulings: {{data.card.rulings.text }}</p>
