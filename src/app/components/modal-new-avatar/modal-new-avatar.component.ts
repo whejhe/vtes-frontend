@@ -5,6 +5,7 @@ import { Image } from '../../models/image.model';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-modal-new-avatar',
@@ -24,32 +25,25 @@ export class ModalNewAvatarComponent implements OnInit{
   ){}
 
   public image!: Image;
+  file!: File;
+  userId = this.authSvc.getCurrentUser()?._id;;
 
-  newAvatarForm: FormGroup = new FormGroup({});
-  selectedAvatar:Image | null = null;
+  apiUrl = environment.apiUrl || 'https://localhost';
 
-  file?: File;
-  currentUser = this.authSvc.getCurrentUser()?.name;
-  currentId = this.authSvc.getCurrentUser()?._id;
-
-
-  AvatarForm: FormGroup = new FormGroup({
-    name: new FormControl(this.currentUser),
-    id: new FormControl(this.currentId),
-    image: new FormControl(),
-  });
-
-  uploadAvatar(): void {
+  uploadAvatar() {
     try{
-      if (this.file) {
-        this.imageSvc.uploadAvatar(this.AvatarForm.value).subscribe((image: Image) => {
-          this.selectedAvatar = image;
-          this.AvatarForm.patchValue({ image: image });
-        });
+      if(this.userId){
+        this.imageSvc.uploadAvatar(this.userId, this.file).subscribe(
+          (response) => {
+            console.log('Avatar uploaded successfully:', response);
+          },
+          (error) => {
+            console.error('Error uploading avatar:', error);
+          }
+        );
       }
-      console.log('Avatar: ',this.AvatarForm.value);
-    }catch(error) {
-      console.log('Error al actualizar la imagen de Avatar: ',error);
+    }catch(error){
+      console.log('Error uploading avatar:', error);
     }
   }
 
@@ -65,7 +59,6 @@ export class ModalNewAvatarComponent implements OnInit{
     return this.authSvc.getCurrentUser();
   }
   
-
   ngOnInit(): void {
     this.authSvc.getCurrentUser();
     console.log('CurrentUser en modal-new-avatar: ',this.authSvc.getCurrentUser());

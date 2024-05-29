@@ -26,8 +26,7 @@ export class UploadCardComponent implements OnInit {
     public dialog: MatDialog,
     public customCardSvc: CustomCardsService,
     // private storage:Storage
-  ) {
-  }
+  ) {}
 
   showSucessMessage: boolean = false;
   showErrorMessage: boolean = false;
@@ -104,6 +103,7 @@ export class UploadCardComponent implements OnInit {
       const formData = new FormData();
       formData.append('name', this.updateCardForm.value.name);
       formData.append('disciplines', this.updateCardForm.value.disciplines.join(','));
+      console.log('Disciplinas enviadas:',this.updateCardForm.value.disciplines)
       formData.append('clan', this.updateCardForm.value.clan);
       formData.append('capacity', this.updateCardForm.value.capacity.toString());
       formData.append('group', this.updateCardForm.value.group);
@@ -148,6 +148,5 @@ export class UploadCardComponent implements OnInit {
       name: clan,
       url: `https://static.krcg.org/svg/clan/${clan.toLowerCase().replace(/\s/g, '')}.svg`
     }));
-
   }
 }

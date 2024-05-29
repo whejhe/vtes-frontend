@@ -98,9 +98,9 @@
 
 .alert {
   position: fixed;
-  top: 150px;
-  left: 150px;
-  width: 80%;
+  top: 40dvh;
+  left: 45dvw;
+  width: fit-content;
   text-align: center;
 }
 
