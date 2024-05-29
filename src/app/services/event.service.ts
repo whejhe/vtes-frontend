@@ -49,7 +49,7 @@ export class EventService {
   updateEvent(id: string, event: Evento): Observable<Evento> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
-    return this.http.put<Event>(`${this.apiUrl}admin/${id}`, event, { headers });
+    return this.http.put<Evento>(`${this.apiUrl}admin/${id}`, event, { headers });
   }
 
 
@@ -63,6 +63,11 @@ export class EventService {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
     return this.http.post<Evento>(`${this.apiUrl}admin/sort-tables/${eventId}`,{}, {headers});
+  }
+
+  sumarPuntuaciones(eventId:string):Observable<Evento>{
+    console.log('Ruta sumarPuntuaciones:',`${this.apiUrl}sumarPuntuaciones/${eventId}`)
+    return this.http.get<Evento>(`${this.apiUrl}sumarPuntuaciones/${eventId}`);
   }
 
   reordenarMesa(eventId:string):Observable<Evento>{
