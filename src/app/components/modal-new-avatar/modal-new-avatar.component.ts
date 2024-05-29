@@ -1,8 +1,10 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ImageService } from '../../services/image.service';
 import { Image } from '../../models/image.model';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-modal-new-avatar',
@@ -13,11 +15,12 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './modal-new-avatar.component.html',
   styleUrl: './modal-new-avatar.component.scss'
 })
-export class ModalNewAvatarComponent {
+export class ModalNewAvatarComponent implements OnInit{
 
   constructor(
     public dialogRef: MatDialogRef<ModalNewAvatarComponent>,
-    public imageSvc: ImageService
+    public imageSvc: ImageService,
+    public authSvc: AuthService
   ){}
 
   public image!: Image;
@@ -25,32 +28,46 @@ export class ModalNewAvatarComponent {
   newAvatarForm: FormGroup = new FormGroup({});
   selectedAvatar:Image | null = null;
 
+  file?: File;
+  currentUser = this.authSvc.getCurrentUser()?.name;
+  currentId = this.authSvc.getCurrentUser()?._id;
+
+
+  AvatarForm: FormGroup = new FormGroup({
+    name: new FormControl(this.currentUser),
+    id: new FormControl(this.currentId),
+    image: new FormControl(),
+  });
+
+  uploadAvatar(): void {
+    try{
+      if (this.file) {
+        this.imageSvc.uploadAvatar(this.AvatarForm.value).subscribe((image: Image) => {
+          this.selectedAvatar = image;
+          this.AvatarForm.patchValue({ image: image });
+        });
+      }
+      console.log('Avatar: ',this.AvatarForm.value);
+    }catch(error) {
+      console.log('Error al actualizar la imagen de Avatar: ',error);
+    }
+  }
+
   closeModal(): void {
     this.dialogRef.close();
   }
 
-  uploadAvatar() {
-    if(this.newAvatarForm.valid){
-      const avatarData = {
-        profileImage: this.selectedAvatar?.name! + this.selectedAvatar?.extension!
-      }
-    };
+  onFileChange(event: any) {
+    this.file = event.target.files[0];
   }
 
-  handleFileChange(event: any) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      this.selectedAvatar = {
-        _id: 'some_id',
-        type: 'some_type',
-        imageUrl: 'some_url',
-        public: true,
-        name: file.name,
-        extension: file.type,
-      };
-    };
+  getCurrentUser(): User | null {
+    return this.authSvc.getCurrentUser();
   }
+  
 
+  ngOnInit(): void {
+    this.authSvc.getCurrentUser();
+    console.log('CurrentUser en modal-new-avatar: ',this.authSvc.getCurrentUser());
+  }
 }
