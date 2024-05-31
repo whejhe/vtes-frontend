@@ -20,6 +20,7 @@
       position: relative;
       padding-left: 1em;
       height: auto;
+      min-height: 60px;
       .register-text{
         position: absolute;
         top: -2em;
@@ -28,6 +29,9 @@
         position: absolute;
         top: 0;
       }
+    }
+    button{
+      margin-bottom: 1em;
     }
     button:hover{
       background-color: rgb(68, 2, 2);

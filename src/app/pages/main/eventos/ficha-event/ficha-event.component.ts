@@ -157,6 +157,7 @@ export class FichaEventComponent implements OnInit, OnDestroy {
       if (this.evento.iniciado) {
         this.isStarted = true
       }
+      console.log(this.evento, 'viendo evento')
     }, 1500)
   }
 

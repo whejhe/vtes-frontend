@@ -44,20 +44,13 @@
       </div>
 
       <div class="row">
-        <!--CONFIRMAR PASSWORD-->
-        <div class="form-floating password input__wrapper">
-          <input type="password" class="form-control input-field-confirm" id="floatingPassword" placeholder="Password"
-            formControlName="confirmPassword">
-            <img class="icon-confirm-password" src="assets/img/eye-off.svg" alt=""
-            (click)="changeVisibilityPassword()">
-          <label class="input__label" for="floatingPassword">Confirmar Password</label>
-        </div>
-      </div>
-
-      <div class="row">
         <!--AVATAR-->
         <div class="choose-image" (click)="openModal()">
-          <img class="rounded-circle" alt="" [src]="selectedAvatar || '../../../../assets/img/default-avatar.png'">
+          @if(selectedAvatar===null){
+          <img class="rounded-circle" alt="" src="../../../../assets/img/default-avatar.png">
+          }@else {
+            <img class="rounded-circle" alt="" [src]="avatarUrl + selectedAvatar.name + selectedAvatar.extension">
+          }
         </div>
       </div>
 

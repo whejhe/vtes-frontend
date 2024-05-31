@@ -33,7 +33,7 @@ export class CustomCardsService {
     formData.append('disciplines', customCard.disciplines.join(','));
     formData.append('group', customCard.group.toString());
     formData.append('type', customCard.type.join(','));
-    formData.append('logoColor', customCard.logoColor);
+    formData.append('logoColor', customCard.logoColor!);
     formData.append('description', customCard.description);
     formData.append('publico', String(customCard.publico));
     formData.append('costBlood', customCard.costBlood.toString());

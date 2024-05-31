@@ -6,6 +6,7 @@ import { Image } from '../../../models/image.model';
 import { ImageService } from '../../../services/image.service';
 import { ChooseAvatarComponent } from '../../../components/choose-avatar/choose-avatar.component';
 import { MatDialog } from '@angular/material/dialog';
+import { environment } from '../../../../environments/environment.development';
 
 @Component({
   selector: 'app-register',
@@ -19,6 +20,9 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class RegisterComponent implements OnInit {
 
+
+  public apiUrl = environment.apiUrl || 'https://localhost'
+  public avatarUrl = `${this.apiUrl}/uploads/avatars/`;
   public image!: Image[];
 
   registerForm:FormGroup = new FormGroup({
@@ -26,7 +30,6 @@ export class RegisterComponent implements OnInit {
     nick: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
-    confirmPassword: new FormControl('', Validators.required)
   });
 
   showSucessMessage: boolean = false;

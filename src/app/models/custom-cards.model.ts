@@ -10,7 +10,7 @@ export interface CustomCard {
   disciplines: string[];
   group: number;
   type: string[];
-  logoColor: string;
+  logoColor?: string;
   description: string;
   publico: boolean;
   costBlood: number;

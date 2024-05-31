@@ -7,6 +7,8 @@ import { Clan, Discipline, Type } from '../../../../models/vtes.model';
 import { IconService } from '../../../../services/icon.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomCardsService } from '../../../../services/custom-cards.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-upload-card',
@@ -24,9 +26,9 @@ export class UploadCardComponent implements OnInit {
     public authSvc: AuthService,
     public iconSvc: IconService,
     public dialog: MatDialog,
+    public http: HttpClient,
     public customCardSvc: CustomCardsService,
-    // private storage:Storage
-  ) {}
+  ) { }
 
   showSucessMessage: boolean = false;
   showErrorMessage: boolean = false;
@@ -35,14 +37,14 @@ export class UploadCardComponent implements OnInit {
   updateCardForm: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
     author: new FormControl(''),
-    disciplines: new FormControl([]),
-    clan: new FormControl('not defined'),
     capacity: new FormControl('1'),
+    clan: new FormControl('not defined'),
+    disciplines: new FormControl([]),
     group: new FormControl('not defined'),
     type: new FormControl('not defined'),
     isPublic: new FormControl('true'),
     description: new FormControl('not defined'),
-    image: new FormControl(''),
+    image: new FormControl(),
   });
 
 
@@ -61,13 +63,16 @@ export class UploadCardComponent implements OnInit {
   user: User[] = [];
   public selectedDisciplines: Discipline[] = [];
 
-  handleFileChange(event: any){
-    const file = event.target.files[0];
-    // console.log(file)
-    this.updateCardForm.patchValue({
-      image: file
-    });
-  }
+  apiUrl = environment.apiUrl || 'https://localhost';
+
+
+  handleFileChange(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      this.updateCardForm.patchValue({ image: file });
+    }
+  }  
+
 
   getCurrentUser(): User | null {
     return this.authSvc.getCurrentUser();
@@ -76,7 +81,7 @@ export class UploadCardComponent implements OnInit {
   toggleOpacity(event: MouseEvent): void {
     const target = event.target as HTMLImageElement;
     if (target.classList.contains('icon-filter')) {
-      console.log('Discipline:',target.alt)
+      console.log('Discipline:', target.alt)
       target.classList.toggle('clicked');
       this.updateDisciplineSelection(target.alt as Discipline);
     }
@@ -98,20 +103,20 @@ export class UploadCardComponent implements OnInit {
     return clan ? clan.url : '';
   }
 
+
   uploadCard(): void {
-    try{
+    try {
       const formData = new FormData();
       formData.append('name', this.updateCardForm.value.name);
       formData.append('disciplines', this.updateCardForm.value.disciplines.join(','));
-      console.log('Disciplinas enviadas:',this.updateCardForm.value.disciplines)
       formData.append('clan', this.updateCardForm.value.clan);
       formData.append('capacity', this.updateCardForm.value.capacity.toString());
       formData.append('group', this.updateCardForm.value.group);
       formData.append('type', JSON.stringify(this.updateCardForm.value.type));
       formData.append('isPublic', this.updateCardForm.value.isPublic);
       formData.append('description', this.updateCardForm.value.description);
-      console.log(this.updateCardForm.value.image)
       formData.append('image', this.updateCardForm.value.image);
+      console.log('Form Data:', formData);
 
       const userId = this.authSvc.getCurrentUser()?._id ?? 'defaultId';
       this.customCardSvc.uploadCustomCardImage(formData)
@@ -124,7 +129,7 @@ export class UploadCardComponent implements OnInit {
             setTimeout(() => {
               this.showSucessMessage = false;
               this.updateCardForm.reset();
-            },5000)
+            }, 5000)
           },
           (error) => {
             console.log('Error al crear la carta:', error);
@@ -133,11 +138,11 @@ export class UploadCardComponent implements OnInit {
             this.message = this.customCardSvc.handleRegistrationError(error);
             setTimeout(() => {
               this.showErrorMessage = false;
-            },5000)
+            }, 5000)
           }
         );
-    }catch(err){
-      console.log('Error al subir la Imagen: ',err);
+    } catch (err) {
+      console.log('Error al subir la Imagen: ', err);
     }
   }
 

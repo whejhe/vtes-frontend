@@ -11,7 +11,6 @@ import { ListarEventosComponent } from "./eventos/listar-eventos/listar-eventos.
 import { CriptaComponent } from "./list-cards/cripta/cripta.component";
 import { BibliotecaComponent } from "./list-cards/biblioteca/biblioteca.component";
 import { UploadCardComponent } from "./custom-cards/upload-card/upload-card.component";
-import { ContactComponent } from "./contact/contact.component";
 import { NewDeckComponent } from "./deck/deck/deck.component";
 import { FichaEventComponent } from "./eventos/ficha-event/ficha-event.component";
 import { CustomComponent } from "./custom-cards/custom/custom.component";
@@ -29,5 +28,4 @@ export const MAIN_ROUTE:Routes = [
   {path: 'ficha-event/:id', title: 'Ficha Event',component: FichaEventComponent},
   {path: 'lista-decks',title: 'Lista Decks', component: ListaDecksComponent},
   {path: 'listar-eventos',title: 'Lista de Eventos', component: ListarEventosComponent},
-  {path: 'contact',title: 'Contact', component: ContactComponent}
 ]
