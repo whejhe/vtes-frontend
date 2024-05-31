@@ -12,6 +12,7 @@ export class CardService {
 
   private apiUrl = environment.apiUrl + '/cards' || 'https://localhost/cards';
   private cardsCache:Card[] | null = null;
+  private localJsonCads = 'assets/cards.json'
 
   constructor(
     private http: HttpClient
@@ -23,11 +24,21 @@ export class CardService {
   }
 
   // Obtener todas las cartas
+  // getCards(): Observable<any> {
+  //   if(this.cardsCache){
+  //     return of(this.cardsCache);
+  //   }
+  //   return this.http.get<any>(this.apiUrl).pipe(
+  //     tap((cards)=>{
+  //       this.cardsCache = cards;
+  //     })
+  //   )
+  // }
   getCards(): Observable<any> {
     if(this.cardsCache){
       return of(this.cardsCache);
     }
-    return this.http.get<any>(this.apiUrl).pipe(
+    return this.http.get<any>(this.localJsonCads).pipe(
       tap((cards)=>{
         this.cardsCache = cards;
       })
