@@ -1,17 +1,19 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ImageService } from '../../services/image.service';
 import { Image } from '../../models/image.model';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
 import { environment } from '../../../environments/environment.development';
+import { ChooseAvatarComponent } from '../choose-avatar/choose-avatar.component';
 
 @Component({
   selector: 'app-modal-new-avatar',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   templateUrl: './modal-new-avatar.component.html',
   styleUrl: './modal-new-avatar.component.scss'
@@ -19,16 +21,21 @@ import { environment } from '../../../environments/environment.development';
 export class ModalNewAvatarComponent implements OnInit{
 
   constructor(
-    public dialogRef: MatDialogRef<ModalNewAvatarComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { avatar: Image },
+    public dialogRef: MatDialogRef<ChooseAvatarComponent>,
     public imageSvc: ImageService,
-    public authSvc: AuthService
+    public authSvc: AuthService,
+    public dialog: MatDialog
   ){}
 
-  public image!: Image;
+  public apiUrl = environment.apiUrl || 'https://localhost'
+  public avatarUrl = `${this.apiUrl}/uploads/avatars/`;
+  selectedAvatar:Image | null = null;
+  avatars: Image[] = [];
+  // public image!: Image;
   file!: File;
   userId = this.authSvc.getCurrentUser()?._id;;
 
-  apiUrl = environment.apiUrl || 'https://localhost';
 
   uploadAvatar() {
     try{
@@ -47,6 +54,28 @@ export class ModalNewAvatarComponent implements OnInit{
     }
   }
 
+  selectAvatar(avatar: Image): void {
+    this.selectedAvatar = avatar;
+    // this.avatars.userId = this.authSvc.getCurrentUser()?._id
+    console.log("SelectedAvatar",this.selectedAvatar);
+  }
+
+  openModal():void{
+    this.dialog.open(ChooseAvatarComponent, {
+      data: {avatar: this.selectedAvatar },
+    }).afterClosed().subscribe((avatar: Image | null) => {
+      this.selectedAvatar = avatar;
+    });
+  }
+
+  saveAvatar(): void {
+    if (this.selectedAvatar) {
+      this.dialogRef.close(this.selectedAvatar);
+    }
+    console.log("SelectedAvatar",this.selectedAvatar);
+  }
+
+
   closeModal(): void {
     this.dialogRef.close();
   }
@@ -61,6 +90,10 @@ export class ModalNewAvatarComponent implements OnInit{
   
   ngOnInit(): void {
     this.authSvc.getCurrentUser();
+    this.imageSvc.getJsonImages().subscribe((images)=>{
+      this.avatars = images;
+    })
+    console.log('Avatars: ',this.avatars);
     console.log('CurrentUser en modal-new-avatar: ',this.authSvc.getCurrentUser());
   }
 }

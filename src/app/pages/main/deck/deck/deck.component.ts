@@ -62,7 +62,7 @@ export class NewDeckComponent implements OnInit {
     library: new FormControl([]),
     searchCryptCard: new FormControl(''),
     searchLibraryCard: new FormControl(''),
-    author: new FormControl(''),
+    author: new FormControl('anonimo'),
     isPublic: new FormControl(true),
   });
 
@@ -206,15 +206,17 @@ export class NewDeckComponent implements OnInit {
   }
 
   resetForm(): void {
-    this.deckForm.get('author')!.setValue(this.user.nick);
-    this.deckForm.get('name')!.setValue('Sin nombre');
-    this.deckForm.get('isPublic')!.setValue(true);
-    this.deckForm.get('category')!.setValue('');
-    this.deckForm.get('description')!.setValue('Descripcion');
-    this.deckForm.get('crypt')!.setValue([]);
-    this.deckForm.get('library')!.setValue([]);
-    this.deckForm.get('searchCryptCard')!.setValue('')
-    this.deckForm.get('searchLibraryCard')!.setValue('');
+    if(this.deckForm){
+      this.deckForm.get('author')!.setValue(this.user.nick);
+      this.deckForm.get('name')!.setValue('Sin nombre');
+      this.deckForm.get('isPublic')!.setValue(true);
+      this.deckForm.get('category')!.setValue('');
+      this.deckForm.get('description')!.setValue('Descripcion');
+      this.deckForm.get('crypt')!.setValue([]);
+      this.deckForm.get('library')!.setValue([]);
+      this.deckForm.get('searchCryptCard')!.setValue('')
+      this.deckForm.get('searchLibraryCard')!.setValue('');
+    }
   }
 
   updateDeck(): void {

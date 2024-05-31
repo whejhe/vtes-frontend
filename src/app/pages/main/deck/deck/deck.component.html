@@ -13,13 +13,15 @@
         <input class="form-control" placeholder="Title" type="text" formControlName="name" />
       </div>
       <!--AUTOR-->
-      <div class="col-md-6">
-        <input class="form-control" placeholder="Author" type="text" disabled="true" [value]="
-            deckForm.get('author')!.value
-              ? deckForm.get('author')!.value
-              : 'Anonymous'
-          " />
-      </div>
+      @if(deckForm){
+        <div class="col-md-6">
+          <input class="form-control" placeholder="Author" type="text" disabled="true" [value]="
+              deckForm.get('author')!.value
+                ? deckForm.get('author')!.value
+                : 'Anonymous'
+            " />
+        </div>
+      }
       <!--DESCRIPCION DE MAZO-->
       <div class="col-md-6">
         <br />
@@ -162,12 +164,14 @@
           Create Deck</button><br />
 
         <!--SAVE-->
+       @if(user.nick === this.deck$.author){
         <button class="btn btn-dark" (click)="updateDeck()" type="submit">
           <svg id="i-file" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="24" height="24" fill="none"
             stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
             <path d="M6 2 L6 30 26 30 26 10 18 2 Z M18 2 L18 10 26 10" />
           </svg>
           Save change</button><br />
+       }
 
         <!--PRINT TXT-->
         <button class="btn btn-dark" (click)="printTxt()">
@@ -197,7 +201,8 @@
           Delete</button><br />
 
         <!--MAKE PUBLIC OR PRIVATE-->
-        <button class="btn btn-dark"
+        @if(user.nick === this.deck$.author){
+          <button class="btn btn-dark"
         type="button"
         (click)="changeDeckVisibility()"
         formControlName="isPublic"
@@ -205,6 +210,9 @@
         <p *ngIf="deckForm.get('isPublic')?.value;">Make Private</p>
         <p *ngIf="!deckForm.get('isPublic')?.value;">Make Public</p>
         </button><br />
+        }@else {
+          <div></div>
+        }
       </div>
     </div>
   </div>

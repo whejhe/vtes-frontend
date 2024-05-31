@@ -1,18 +1,21 @@
 <div class="container">
     <span class="close" (click)="closeModal()">X</span>
-    <form class="container-form">
+    <form class="container-form" (ngSubmit)="uploadAvatar()" enctype="multipart/form-data">
         <h2 class="title">Upload your new Avatar</h2>
         <div class="drop-area">
-            <div class="file-upload-icon">
-                <img class="rounded-circle" alt=""
-                    [src]="'../../../../assets/img/default-avatar.png'">
-                <input type="file" name="upload"
-                (change)="onFileChange($event)">
+            <div class="file-upload-icon" (click)="openModal()">
+                @if(selectedAvatar===null){
+                    <img class="rounded-circle" alt="" src="../../../../assets/img/default-avatar.png">
+                    }@else {
+                      <img class="rounded-circle" alt="" [src]="avatarUrl + selectedAvatar.name + selectedAvatar.extension">
+                    }
+                <!-- <input type="file" name="upload"
+                (change)="onFileChange($event)"> -->
             </div>
         </div>
         <div class="actions">
             <button class="btn btn-dark" id="submit-button" type="submit" 
-            (click)="uploadAvatar()"
+            (click)="saveAvatar()"
             >
                 Save
             </button>

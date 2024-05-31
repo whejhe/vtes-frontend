@@ -105,7 +105,7 @@
         <div>
 
           <ul class="jugadores" *ngFor="let player of mesa.players">
-            <li>
+            <li class="icon">
               <img class="avatar" [src]=" apiUrl + player.userId.avatarUrl" alt="">
               {{" "+player.userId.name}}
             </li>

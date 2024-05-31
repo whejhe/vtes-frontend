@@ -1,9 +1,11 @@
 //front/src/app/services/image.service.ts
 import { Injectable } from '@angular/core';
 import { Image } from '../models/image.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +13,13 @@ import { Observable } from 'rxjs';
 export class ImageService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    public authSvc: AuthService
   ) { }
 
   image: Image | null = null;
+  private tokenData: any;
+
 
   private jsonVtesUrl = environment.apiUrl + '/data/vtes.json' || 'https://localhost/data/vtes.json';
   private apiUrl = environment.apiUrl || 'https://localhost';
@@ -22,6 +27,24 @@ export class ImageService {
   private uploadUrl = environment.apiUrl + '/uploads/' || 'https://localhost/uploads/';
   private uploadAvatarsUrl = environment.apiUrl + '/uploads/avatars/' || 'https://localhost/uploads/avatars/';
 
+
+  getTokenData(): void {
+    const token = this.authSvc.getToken();
+    if (token) {
+      this.tokenData = jwtDecode(token);
+    }
+  }
+
+  addAuthHeader(headers: HttpHeaders): HttpHeaders {
+    const token = this.authSvc.getToken();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }else{
+      console.log('No se encontro el token', token);
+
+    }
+    return headers;
+  }
 
   createImage(image: Image): Observable<Image> {
     return this.http.post<Image>(this.uploadUrl, image);
@@ -72,7 +95,9 @@ export class ImageService {
   }
 
   uploadAvatar(userId: string, file: File): Observable<Image> {
-    return this.http.put<Image>(`${this.apiUrl}/images/upload/${userId}`, userId);
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    return this.http.put<Image>(`${this.apiUrl}/images/upload/${userId}`, userId, { headers });
   }
 
   deleteImage(image: Image): Observable<Image> {
