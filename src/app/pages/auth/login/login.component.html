@@ -28,18 +28,11 @@
       <button class="btn btn-dark w-100 py-2" type="submit"
       [disabled]="!loginForm.valid">Iniciar Sesiòn</button>
 
-      <div class="row">
-        <!-- <div class="col-6">
-          <p class="mt-5 mb-3 text-body-secondary">
-            <a class="link-secondary forgot" href="auth/forgot-password">¿Forgot password?</a>
-          </p>
-        </div> -->
-        <div class="col-12">
-          <p class="no-acount">¿Aún no tienes cuenta?</p>
-          <p class="mt-5 mb-3 text-body-secondary">
-            <a class="link-secondary register" href="auth/register">Register</a>
-          </p>
-        </div>
+      <div class="register">
+        <p class="no-acount question">¿Aún no tienes cuenta?</p>
+        <p class="mt-5 mb-3 register-text">
+          <a class="link-secondary" href="auth/register">Register</a>
+        </p>
       </div>
       <!--MANTENER SESIÓN ABIERTA-->
       <div class="form-check">

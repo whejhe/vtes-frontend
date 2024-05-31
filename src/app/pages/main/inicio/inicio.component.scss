@@ -1,13 +1,13 @@
-.inicio{
+.inicio {
   text-align: center;
   background-color: orange;
 }
 
-.space-top{
+.space-top {
   margin-top: 5em;
 }
 
-.intro{
+.intro {
   margin-top: 2em;
   padding-bottom: 2em;
   text-align: center;
@@ -17,21 +17,21 @@
 }
 
 
-.line{
+.line {
   // border-bottom: 1px solid rgb(71, 71, 71);
   border-bottom: 1px solid rgb(43, 2, 2);
 
 }
 
 
-section{
+section {
   text-align: center;
   font-weight: bold;
   padding-top: 1em;
   font-size: 1.5em;
 }
 
-img{
+img {
   view-timeline-name: --image;
   view-timeline-axis: block;
   animation-timeline: --image;
@@ -47,17 +47,60 @@ img{
     opacity: 0;
     scale: 25%;
   }
+
   to {
     opacity: 1;
     scale: 100%;
   }
 }
 
-a{
-  scale:1em;
+a {
+  scale: 1em;
   transition-duration: 0.5s;
 }
-a:hover{
-  scale:1.1;
+
+a:hover {
+  scale: 1.1;
   background-color: rgb(58, 4, 4);
 }
+
+.container-card {
+  position: relative;
+  width: 370px;
+}
+
+.card {
+  cursor: pointer;
+  transition: 1s ease-in-out;
+  transform-style: preserve-3d;
+  width: fit-content;
+  height: 450px;
+}
+
+.container-card:hover {
+
+  .card {
+    transform: rotateY(0.5turn);
+  }
+
+  .back-card {
+    transform: scaleX(1);
+  }
+}
+
+.front-card {
+  backface-visibility: hidden;
+  transition: 1s ease-in-out;
+  width: 320px;
+}
+
+.back-card {
+  position: absolute;
+  top: 0;
+  transition: 1s ease-in-out;
+  z-index: -1;
+  width: 320px;
+  transform: scaleX(-1);
+  background-color: black;
+}
+

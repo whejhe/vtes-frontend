@@ -1,6 +1,7 @@
 // front/src/app/models/event.model.ts
 
 export interface Evento {
+    ranking: any;
     _id?: string;
     userId?: string;
     name?: string;
@@ -41,7 +42,7 @@ export enum Hora {
     doce = "12:00",
     una = "13:00",
     dos = "14:00",
-    tres ="15:00",
+    tres = "15:00",
     cuatro = "16:00",
     cinco = "17:00",
     seis = "18:00",

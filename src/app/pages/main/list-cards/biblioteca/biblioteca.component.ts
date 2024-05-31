@@ -25,6 +25,7 @@ import { IconService } from '../../../../services/icon.service';
 import { CardService } from '../../../../services/card.service';
 import { Deck } from '../../../../models/deck.model';
 import { AuthService } from '../../../../services/auth.service';
+import { ModalAgregarCartaComponent } from '../../../../components/modal-agregar-carta/modal-agregar-carta.component';
 
 // import { __values } from 'tslib';
 // import { User } from '../../../../models/user.model';
@@ -44,6 +45,7 @@ import { AuthService } from '../../../../services/auth.service';
   ],
 })
 export class BibliotecaComponent implements OnInit {
+decks: any;
   constructor(
     private jsonSvc: JsonServiceService,
     public dialog: MatDialog,
@@ -118,6 +120,12 @@ export class BibliotecaComponent implements OnInit {
       data: { card },
     });
   }
+
+  // openModalListDecks(decks: Deck): void {
+  //   this.dialog.open(ModalAgregarCartaComponent, {
+  //     data: { decks: this.userDecks },
+  //   });
+  // }
 
   //URL IMAGENES DISCIPLINAS
   getDisciplineUrl(disciplineName: string): string {
@@ -262,13 +270,6 @@ export class BibliotecaComponent implements OnInit {
       console.log('Cards: ', this.cards);
       this.isLoading = false;
     });
-  }
-
-  viewListDeck(){
-    if(this.agregar === false){
-      this.agregar = true;
-    }
-    console.log('Agregar:',this.agregar)
   }
 
   ngOnInit(): void {

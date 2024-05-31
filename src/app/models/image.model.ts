@@ -4,9 +4,10 @@ export interface Image{
     userId?: string;
     customCardId?: string;
     name: string;
+    image: string;
     type: string;
-    imageUrl: string;
+    author: string;
     extension: string;
+    imageUrl: string;
     public: boolean;
-    __v?: number;
 }

@@ -14,7 +14,7 @@ export interface Card {
   blood_cost: string;
   pool_cost: string;
   rulings: Rulings;
-  sets: string[];
+  // sets: string[];
   group: number;
   traits?:string[];
   disciplineNames?: string[];

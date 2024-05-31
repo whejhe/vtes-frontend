@@ -22,6 +22,7 @@ import { FilterDecksPipe } from '../../../../pipes/filter-decks.pipe';
 import { Card } from '../../../../models/card.model';
 import { CardService } from '../../../../services/card.service';
 import { FilterAnyPipe } from '../../../../pipes/filter-any.pipe';
+import { FilterPipe } from '../../../../pipes/filter.pipe';
 
 @Component({
   selector: 'app-deck',
@@ -35,6 +36,7 @@ import { FilterAnyPipe } from '../../../../pipes/filter-any.pipe';
     FilterDecksPipe,
     FormsModule,
     FilterAnyPipe,
+    FilterPipe
   ],
 })
 export class NewDeckComponent implements OnInit {

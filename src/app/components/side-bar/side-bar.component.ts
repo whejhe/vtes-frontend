@@ -8,6 +8,9 @@ import { ImageService } from '../../services/image.service';
 import { Image } from '../../models/image.model';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment.development';
+import { MatDialog } from '@angular/material/dialog';
+import { ChooseAvatarComponent } from '../choose-avatar/choose-avatar.component';
+import { ModalNewAvatarComponent } from '../modal-new-avatar/modal-new-avatar.component';
 
 @Component({
   selector: 'app-side-bar',
@@ -23,11 +26,14 @@ export class SideBarComponent {
   // user: any | null = null;
   user: User | null = null;
   public defaultImage = `${this.apiUrl}/uploads/avatars/default-avatar.png`;
+  selectedAvatar:Image | null = null;
+
 
   constructor(
     private authSvc: AuthService,
     private imageSvc: ImageService,
     private router: Router,
+    public dialog: MatDialog
   ){
     this.user = this.authSvc.getCurrentUser();
   }
@@ -48,6 +54,14 @@ export class SideBarComponent {
 
   getLoggedInUser(){
     this.user = this.authSvc.getCurrentUser();
+  }
+
+  openModal():void{
+    this.dialog.open(ModalNewAvatarComponent, {
+      data: {avatar: this.selectedAvatar },
+    }).afterClosed().subscribe((avatar: Image | null) => {
+      this.selectedAvatar = avatar;
+    });
   }
 
   ngOnInit() {

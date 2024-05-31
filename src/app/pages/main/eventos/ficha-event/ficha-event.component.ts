@@ -94,6 +94,10 @@ export class FichaEventComponent implements OnInit, OnDestroy {
     console.log(this.evento.ronda![0].mesas[0].players)
   }
 
+  sumarPuntuaciones(){
+    this.eventSvc.sumarPuntuaciones(this.evento._id!);
+  }
+
   updateEventPoints() {
     // const eventData = this.fichaEventForm.value;
     console.log(this.evento)
@@ -103,6 +107,7 @@ export class FichaEventComponent implements OnInit, OnDestroy {
           console.log('Response: ', response);
           this.showSucessMessage = true;
           this.showErrorMessage = false;
+          this.sumarPuntuaciones();
           this.message = 'Puntos actualizados correctamente';
           setTimeout(() => {
             this.showSucessMessage = false;

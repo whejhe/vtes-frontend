@@ -20,6 +20,8 @@ export class InicioComponent {
   public decodedToken: any;
   public user: string = 'invitado';
 
+  
+
 
   constructor(
     private authSvc: AuthService,

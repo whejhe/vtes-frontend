@@ -20,8 +20,9 @@
       <div class="col-md-4 auth-search">
         <select name="auth" class="form-select" id="auth"
         formControlName="searchByAuthor">
-          @for(user of user; track user._id){
-            <option value="{{user.nick}}">{{user.nick}}</option>
+        <!-- <option value="*" (click)="resetFilterAuthor()">All Authors</option> -->
+        @for(user of user; track user._id){
+          <option value="{{user.nick}}">{{user.nick}}</option>
           }
         </select>
       </div>

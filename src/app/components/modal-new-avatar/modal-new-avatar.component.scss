@@ -1,0 +1,39 @@
+.container{
+    border: 20px solid rgb(27, 26, 26);
+    border-radius: 8px;
+    width: fit-content;
+    padding: 1em;
+    margin: 1em;
+}
+
+.close{
+    cursor: pointer;
+}
+
+.drop-area{
+    // background-color: aliceblue;
+    width: 200px;
+    height: fit-content;
+}
+
+.actions{
+    margin: 0.5em auto;
+    button{
+        width: 100%;
+        margin-top: 1em;
+    }
+    .btn:hover{
+        cursor: pointer;
+        background-color: rgb(71, 7, 7);
+    }
+}   
+
+img{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    margin: auto;
+    width: 130px;
+    height: 130px;
+    cursor: pointer;
+}

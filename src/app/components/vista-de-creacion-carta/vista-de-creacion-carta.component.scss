@@ -1,40 +1,46 @@
-.vista-carta{
+.vista-carta {
   margin: 0;
   padding: 0;
   // border: 15px solid black;
-  outline: 5px solid black;
+  // outline: 15px solid black;
+  border: 15px solid black;
   border-radius: 8px;
   width: 375px;
   height: 525px;
   position: relative;
-  .logo{
+
+  .logo {
     width: 75px;
     position: absolute;
     top: 0.5em;
     right: 0.5em;
   }
-  .name{
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
+  .name {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
     text-shadow: #615c5c 1px 0 5px;
     padding-left: 0.5em;
     padding-top: 0.3em;
     color: aliceblue;
   }
-  .clan-container{
+
+  .clan-container {
     position: absolute;
     top: 2.5em;
     left: 0.5em;
     border-radius: 50%;
-    max-width: 60px;
-    .clan{
-      background-color:rgba($color: #fffefe, $alpha: 0.8);
+
+    .clan {
+      background-color: rgba($color: #fffefe, $alpha: 0.8);
       border-radius: 50%;
       transform: scale(1);
       border: 1px solid rgb(90, 8, 8);
       box-shadow: 0 0 10px 0 rgba(255, 253, 253, 0.664);
     }
   }
-  .icono-capacidad{
+
+  .icono-capacidad {
     position: absolute;
     bottom: 0;
     right: 0.2em;
@@ -45,7 +51,8 @@
     background-size: contain;
     background-position: center;
     z-index: 2;
-    p{
+
+    p {
       font-size: 2em;
       color: aliceblue;
       display: flex;
@@ -55,33 +62,37 @@
       padding-top: 0.8em;
     }
   }
-  .disciplines-container{
+
+  .disciplines-container {
     position: absolute;
     bottom: 2em;
-    left: 1.1em;
+    left: 0.8em;
     width: fit-content;
     height: auto;
     min-height: 100px;
     max-width: 40px;
     justify-content: center;
-    .discipline{
+
+    .discipline {
       margin: 0.05em 0;
       width: 40px;
       height: 40px;
     }
   }
-  .description{
+
+  .description {
     position: absolute;
     border: 1px solid rgb(0, 0, 0);
     color: rgb(0, 0, 0);
     // text-shadow: #615c5c 1px 0 5px;
-    width: 300px;
-    min-height: 100px ;
+    width: 280px;
+    min-height: 100px;
     bottom: 2em;
-    right: 1.5em;
+    right: 1em;
     z-index: 1;
     background-color: rgba($color: #ffffff, $alpha: 0.7);
-    .text-description{
+
+    .text-description {
       padding: 0.5em;
       display: flex;
       flex-wrap: wrap;
@@ -89,29 +100,41 @@
       word-break: break-all;
     }
   }
-  .image-card{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: auto;
+
+  .image-card {
+    // position: relative;
+    // left: auto;
     opacity: 1;
-    margin: 0;
-    padding: 0;
-    z-index: -1;
+    object-fit: cover;
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
   }
 
-  .group{
-    background-color: black;
+  .container-image {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+
+  .group {
     width: fit-content;
-    color: white;
-    font-size: 1.5em;
+    color: rgb(0, 0, 0);
+    font-size: 1.3em;
     position: relative;
-    p{
+    p {
       position: absolute;
-      bottom: -355px;
+      bottom: -328px;
       left: 55px;
       z-index: 10;
+      background-color: rgba($color: #ffffff, $alpha: 0.3);
     }
   }
 

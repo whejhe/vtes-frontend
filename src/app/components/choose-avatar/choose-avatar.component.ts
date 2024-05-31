@@ -4,6 +4,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Image } from '../../models/image.model';
 import { ImageService } from '../../services/image.service';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-choose-avatar',
@@ -22,6 +23,8 @@ export class ChooseAvatarComponent implements OnInit{
     public imageSvc: ImageService
   ){
   }
+
+  apiUrl = environment.apiUrl || 'https://localhost';
 
   avatars: Image[] = [];
   selectedAvatar: Image | null = null;

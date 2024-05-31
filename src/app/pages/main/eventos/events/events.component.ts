@@ -80,7 +80,8 @@ export class EventsComponent implements OnInit {
         fecha: this.eventForm.get('fecha')?.value,
         hora: this.eventForm.get('hora')?.value,
         numMaxParticipantes: this.eventForm.get('numMaxParticipantes')?.value,
-        participantesInscritos: this.eventForm.get('participantesInscritos')?.value
+        participantesInscritos: this.eventForm.get('participantesInscritos')?.value,
+        ranking: []
       };
 
     this.eventSvc.createEvent(eventData).subscribe(

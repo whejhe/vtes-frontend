@@ -90,7 +90,7 @@
   }
 
   @if(isStarted === true){
-  <form class="row torneo-container" >
+  <form class="row torneo-container">
     <div class="col-md-6" *ngFor="let ronda of evento.ronda">
       <h2 class="mesa">Ronda Nº {{ronda.numero}}</h2>
       <div *ngFor="let mesa of ronda.mesas let i = index" [class.table-light]="i % 2 === 0"
@@ -103,7 +103,7 @@
           <li><button class="btn btn-dark" (click)="updateEventPoints()">Update Points</button></li>
         </ul>
         <div>
-          
+
           <ul class="jugadores" *ngFor="let player of mesa.players">
             <li>
               <img class="avatar" [src]=" apiUrl + player.userId.avatarUrl" alt="">
@@ -115,8 +115,8 @@
                 (change)="loggng(player, $event, 'points')" />
             </li>
             <li></li>
-            <li>Mesa: <input type="checkbox" [checked]="!!player.tablePoints"
-                (change)="loggng(player, $event, 'mesa')"></li>
+            <li>Mesa: <input type="checkbox" [checked]="!!player.tablePoints" (change)="loggng(player, $event, 'mesa')">
+            </li>
           </ul>
         </div>
       </div>
@@ -130,19 +130,21 @@
         <ul class="table-dark">
           <li>Image</li>
           <li>Participantes</li>
-          <li></li>
+          <li>Puesto</li>
           <li>Points</li>
           <li>Mesas</li>
         </ul>
-        <div *ngFor="let player of eventUsers.userId let i = index" [class.table-light]="i % 2 === 0"
-        [class.table-secondary]="i % 2 !== 0">
+        <div *ngFor="let player of evento.ranking let i = index" [class.table-light]="i % 2 === 0"
+          [class.table-secondary]="i % 2 !== 0">
           <ul class="table-light list-ranking">
-            <div>
-              <li><img class="avatar" [src]=" apiUrl + player.avatarUrl" alt=""></li>
-              <li>{{player.name}}</li>
-              <li></li>
-              <li></li>
-              <li></li>
+            <div class="container-list">
+              <li><img class="avatar" [src]=" apiUrl + player.userId.avatarUrl" alt=""></li>
+              <li>{{player.userId.name}}</li>
+              <li>{{i+1}}</li>
+              <!-- puntos -->
+              <li>{{player.points}}</li>
+              <!-- puntos mesa -->
+              <li>{{player.tablePoints}}</li>
             </div>
           </ul>
         </div>
@@ -154,10 +156,10 @@
 
 
 @if(showSucessMessage){
-<div class="alert alert-dismissible alert-success">
-  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-  <strong>{{message}}</strong><br>
-</div>
+  <div class="alert alert-dismissible alert-success">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>{{message}}</strong><br>
+  </div>
 }
 
 @if(showErrorMessage){

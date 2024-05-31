@@ -1,0 +1,8 @@
+.container-decks{
+    display: flex;
+    flex-wrap: wrap;
+    width: 300px;
+    max-height: 600px;
+    overflow-y: scroll;
+    overflow: hidden;
+}

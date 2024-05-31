@@ -13,6 +13,7 @@ import { FilterCustomCardsPipe } from '../../../../pipes/filter-custom-cards.pip
 import { environment } from '../../../../../environments/environment.development';
 import { SendReportComponent } from '../../../../components/send-report/send-report.component';
 import { RouterLink } from '@angular/router';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-gallery',
@@ -66,6 +67,12 @@ export class GalleryComponent implements OnInit {
       });
   }
 
+  //RESET FILTER AUTHOR
+  resetFilterAuthor() {
+    this.customCardForm.get('searchByAuthor')?.setValue('');
+    this.getCustomCards();
+  }
+
   getCustomCards() {
     this.customSvc.getAllCustomCards().subscribe(
       (response) => {
@@ -90,7 +97,7 @@ export class GalleryComponent implements OnInit {
   openModalReport(card: CustomCard): void {
     this.dialog.open(SendReportComponent, {
       data: { card },
-    })
+    });
   }
 
   // Metodos para la paginación
