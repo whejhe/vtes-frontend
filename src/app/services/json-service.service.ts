@@ -11,14 +11,19 @@ import { environment } from '../../environments/environment.development';
 export class JsonServiceService {
 
   private apiUrl = environment.apiUrl + '/cards' || 'https://localhost/cards';
+  private fontUrl = 'assets/cards.json'
 
   constructor(
     private http: HttpClient
   ) { }
 
-  getJsonData():Observable<Card[]>{
-    const data = this.http.get<Card[]>(this.apiUrl);
-    return data;
+  // getJsonData():Observable<Card[]>{
+  //   const data = this.http.get<Card[]>(this.apiUrl);
+  //   return data;
+  // }
+
+  getJsonData(): Observable<Card[]> {
+    return this.http.get<Card[]>(this.fontUrl);
   }
 
   clans = [
