@@ -25,6 +25,7 @@ https://front-vtes.vercel.app/
 https://vtesapp.duckdns.org/
 https://aws.amazon.com/es/
 https://cloud.mongodb.com/v2/65f7eb073f265f287debd21a#/overview
+https://my.kinsta.com/?lang=es&idCompany=bb0e44ac-3eea-4238-ac9f-78b7e2a9ecba
 
 INTEGRACION BOOTSTRAP EN ANGULAR
 https://fbellod.medium.com/como-integrar-el-framework-bootstrap-en-un-proyecto-angular-a5d53fa79e03
