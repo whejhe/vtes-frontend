@@ -68,7 +68,7 @@ export class VistaDeCreacionCartaComponent {
     } else if (lowerCaseIcon === 'gargoyle') {
       lowerCaseIcon = 'gargoyles';
     }
-    console.log('ClanIcon: ', lowerCaseIcon);
+    // console.log('ClanIcon: ', lowerCaseIcon);
     return `assets/img/icons-vtes/clans/svg/${lowerCaseIcon}.svg`;
   }
 
