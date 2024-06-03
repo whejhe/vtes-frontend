@@ -65,9 +65,8 @@ export class EventService {
     return this.http.post<Evento>(`${this.apiUrl}admin/sort-tables/${eventId}`,{}, {headers});
   }
 
-  sumarPuntuaciones(eventId:string):Observable<Evento>{
-    console.log('Ruta sumarPuntuaciones:',`${this.apiUrl}sumarPuntuaciones/${eventId}`)
-    return this.http.get<Evento>(`${this.apiUrl}sumarPuntuaciones/${eventId}`);
+  sumarPuntuaciones(eventId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/sumarPuntuaciones/${eventId}`);
   }
 
   reordenarMesa(eventId:string):Observable<Evento>{

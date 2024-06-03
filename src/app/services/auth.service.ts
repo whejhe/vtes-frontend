@@ -30,6 +30,13 @@ export class AuthService implements OnInit{
     return headers;
   }
 
+  newAvatar(id: string, profileImage: string): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('profileImage', profileImage);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`);
+    return this.http.put(`${this.apiUrl}/users/newAvatar/${id}`, formData, { headers });
+  }
+
   //TOKEN
   saveToken(token: string): void {
     localStorage.setItem('token', token);

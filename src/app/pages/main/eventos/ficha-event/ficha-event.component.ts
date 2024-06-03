@@ -1,12 +1,9 @@
 // front/src/app/pages/main/eventos/ficha-event/ficha-event.component.ts
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
-  CdkDragDrop,
   CdkDrag,
   CdkDropList,
   CdkDropListGroup,
-  moveItemInArray,
-  transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { EventService } from '../../../../services/event.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -18,7 +15,7 @@ import { EventUser } from '../../../../models/event-user.model';
 import { CommonModule } from '@angular/common';
 import { User } from '../../../../models/user.model';
 import { environment } from '../../../../../environments/environment';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder,FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-ficha-event',
@@ -36,11 +33,6 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
   styleUrl: './ficha-event.component.scss'
 })
 export class FichaEventComponent implements OnInit, OnDestroy {
-
-  // fichaEventForm: FormGroup = new FormGroup({
-  //   points: new FormControl(),
-  //   tablePoints: new FormControl(),
-  // });
 
   //MESSAGES
   showSucessMessage: boolean = false;
@@ -76,10 +68,6 @@ export class FichaEventComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder
   ) {
     this.currentUser = this.authSvc.getCurrentUser()!;
-    // this.fichaEventForm = this.formBuilder.group({
-    //   points: [0, Validators.required],
-    //   tablePoints: [0, Validators.required],
-    // })
   }
 
   loggng(val: any, event: any, tipo: String) {
@@ -161,19 +149,6 @@ export class FichaEventComponent implements OnInit, OnDestroy {
     }, 1500)
   }
 
-  // drop(event: CdkDragDrop<any[]>) {
-  //   if (event.previousContainer === event.container) {
-  //     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-  //   } else {
-  //     transferArrayItem(
-  //       event.previousContainer.data,
-  //       event.container.data,
-  //       event.previousIndex,
-  //       event.currentIndex,
-  //     );
-  //   }
-  // }
-
 
   ngOnDestroy(): void {
     clearInterval(this.intervalId);
@@ -203,7 +178,6 @@ export class FichaEventComponent implements OnInit, OnDestroy {
       this.eventUserSvc.getUsersForEvent(this.evento._id!).subscribe(
         (eventUsers: EventUser) => {
           this.eventUsers = eventUsers;
-          // this.initializeMatchResults();
         },
         (error) => {
           console.log('Error al obtener los usuarios: ', error);
@@ -342,34 +316,6 @@ export class FichaEventComponent implements OnInit, OnDestroy {
     }
   }
 
-  // SORTEAR POSICION EN LAS MESAS
-  // tirada() {
-  //   if (this.evento) {
-  //     this.eventUserSvc.tirada(this.evento._id!).subscribe(
-  //       (tiradas) => {
-  //         this.eventUsers = tiradas;
-  //         this.getUsersForEvent();
-  //         this.showErrorMessage = false;
-  //         this.showSucessMessage = true;
-  //         this.message = 'Todas las tiradas realizadas';
-  //         console.log('Tiradas:', tiradas);
-  //         setTimeout(() => {
-  //           this.showSucessMessage = false;
-  //         }, 5000);
-  //       },
-  //       (error) => {
-  //         this.showErrorMessage = true;
-  //         this.showSucessMessage = false;
-  //         this.message = 'Error al realizar las tiradas';
-  //         this.isStarted = false;
-  //         console.log('Error en tiradas:', error);
-  //         setTimeout(() => {
-  //           this.showErrorMessage = false;
-  //         }, 5000);
-  //       }
-  //     )
-  //   }
-  // }
 
   getTotalPoints(players: any[]): number {
     let totalPoints = 0;
@@ -416,7 +362,6 @@ export class FichaEventComponent implements OnInit, OnDestroy {
   stopEvent() {
     this.isStarted = false
     this.evento.iniciado=false
-    // this.eventSvc.sortearMesa(this.evento._id!)
   }
 
 

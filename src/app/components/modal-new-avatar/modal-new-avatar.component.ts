@@ -32,10 +32,14 @@ export class ModalNewAvatarComponent implements OnInit{
   public avatarUrl = `${this.apiUrl}/uploads/avatars/`;
   selectedAvatar:Image | null = null;
   avatars: Image[] = [];
-  // public image!: Image;
   file!: File;
-  userId = this.authSvc.getCurrentUser()?._id;;
+  userId = this.authSvc.getCurrentUser()?._id;
+  selectedFile: File | null = null;
+  profileImage?:string = '';
 
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
 
   uploadAvatar() {
     try{
@@ -56,7 +60,6 @@ export class ModalNewAvatarComponent implements OnInit{
 
   selectAvatar(avatar: Image): void {
     this.selectedAvatar = avatar;
-    // this.avatars.userId = this.authSvc.getCurrentUser()?._id
     console.log("SelectedAvatar",this.selectedAvatar);
   }
 
@@ -68,6 +71,19 @@ export class ModalNewAvatarComponent implements OnInit{
     });
   }
 
+  newAvatar(): void {
+    this.profileImage = this.selectedAvatar?.name + this.selectedAvatar!.extension;
+    if (this.profileImage) {
+      this.authSvc.newAvatar(this.userId || '' ,this.profileImage ).subscribe(
+        response => {
+          console.log('Avatar actualizado correctamente', response);
+        },
+        error => {
+          console.error('Error al actualizar el avatar', error);
+        }
+      );
+    }
+  }
   saveAvatar(): void {
     if (this.selectedAvatar) {
       this.dialogRef.close(this.selectedAvatar);
