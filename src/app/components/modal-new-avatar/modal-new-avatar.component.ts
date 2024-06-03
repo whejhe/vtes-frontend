@@ -18,7 +18,7 @@ import { ChooseAvatarComponent } from '../choose-avatar/choose-avatar.component'
   templateUrl: './modal-new-avatar.component.html',
   styleUrl: './modal-new-avatar.component.scss'
 })
-export class ModalNewAvatarComponent implements OnInit{
+export class ModalNewAvatarComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { avatar: Image },
@@ -26,46 +26,19 @@ export class ModalNewAvatarComponent implements OnInit{
     public imageSvc: ImageService,
     public authSvc: AuthService,
     public dialog: MatDialog
-  ){}
+  ) { }
 
   public apiUrl = environment.apiUrl || 'https://localhost'
   public avatarUrl = `${this.apiUrl}/uploads/avatars/`;
-  selectedAvatar:Image | null = null;
+  selectedAvatar: Image | null = null;
   avatars: Image[] = [];
-  file!: File;
   userId = this.authSvc.getCurrentUser()?._id;
-  selectedFile: File | null = null;
-  profileImage?:string = '';
+  profileImage?: string = '';
 
-  onFileSelected(event: any): void {
-    this.selectedFile = event.target.files[0];
-  }
 
-  uploadAvatar() {
-    try{
-      if(this.userId){
-        this.imageSvc.uploadAvatar(this.userId, this.file).subscribe(
-          (response) => {
-            console.log('Avatar uploaded successfully:', response);
-          },
-          (error) => {
-            console.error('Error uploading avatar:', error);
-          }
-        );
-      }
-    }catch(error){
-      console.log('Error uploading avatar:', error);
-    }
-  }
-
-  selectAvatar(avatar: Image): void {
-    this.selectedAvatar = avatar;
-    console.log("SelectedAvatar",this.selectedAvatar);
-  }
-
-  openModal():void{
+  openModal(): void {
     this.dialog.open(ChooseAvatarComponent, {
-      data: {avatar: this.selectedAvatar },
+      data: { avatar: this.selectedAvatar },
     }).afterClosed().subscribe((avatar: Image | null) => {
       this.selectedAvatar = avatar;
     });
@@ -73,10 +46,13 @@ export class ModalNewAvatarComponent implements OnInit{
 
   newAvatar(): void {
     this.profileImage = this.selectedAvatar?.name + this.selectedAvatar!.extension;
+    console.log('ProfileImage: ', this.profileImage);
     if (this.profileImage) {
-      this.authSvc.newAvatar(this.userId || '' ,this.profileImage ).subscribe(
+      this.authSvc.newAvatar(this.userId || '', this.profileImage).subscribe(
         response => {
           console.log('Avatar actualizado correctamente', response);
+          window.location.reload();
+          this.closeModal();
         },
         error => {
           console.error('Error al actualizar el avatar', error);
@@ -84,32 +60,23 @@ export class ModalNewAvatarComponent implements OnInit{
       );
     }
   }
-  saveAvatar(): void {
-    if (this.selectedAvatar) {
-      this.dialogRef.close(this.selectedAvatar);
-    }
-    console.log("SelectedAvatar",this.selectedAvatar);
-  }
 
 
   closeModal(): void {
     this.dialogRef.close();
   }
 
-  onFileChange(event: any) {
-    this.file = event.target.files[0];
-  }
 
   getCurrentUser(): User | null {
     return this.authSvc.getCurrentUser();
   }
-  
+
   ngOnInit(): void {
     this.authSvc.getCurrentUser();
-    this.imageSvc.getJsonImages().subscribe((images)=>{
+    this.imageSvc.getJsonImages().subscribe((images) => {
       this.avatars = images;
     })
-    console.log('Avatars: ',this.avatars);
-    console.log('CurrentUser en modal-new-avatar: ',this.authSvc.getCurrentUser());
+    // console.log('Avatars: ',this.avatars);
+    // console.log('CurrentUser en modal-new-avatar: ',this.authSvc.getCurrentUser());
   }
 }

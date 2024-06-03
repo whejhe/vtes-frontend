@@ -34,7 +34,7 @@ export class AuthService implements OnInit{
     const formData: FormData = new FormData();
     formData.append('profileImage', profileImage);
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`);
-    return this.http.put(`${this.apiUrl}/users/newAvatar/${id}`, formData, { headers });
+    return this.http.put(`${this.apiUrl}/users/newAvatar/${id}`, { profileImage }, { headers });
   }
 
   //TOKEN

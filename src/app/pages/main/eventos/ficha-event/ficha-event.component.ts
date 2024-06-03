@@ -15,7 +15,7 @@ import { EventUser } from '../../../../models/event-user.model';
 import { CommonModule } from '@angular/common';
 import { User } from '../../../../models/user.model';
 import { environment } from '../../../../../environments/environment';
-import { FormBuilder,FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-ficha-event',
@@ -82,16 +82,25 @@ export class FichaEventComponent implements OnInit, OnDestroy {
     console.log(this.evento.ronda![0].mesas[0].players)
   }
 
-  sumarPuntuaciones(){
-    this.eventSvc.sumarPuntuaciones(this.evento._id!);
+  sumarPuntuaciones() {
+    this.eventSvc.sumarPuntuaciones(this.evento._id!).subscribe(
+      (response: any) => {
+        this.evento.ranking = response.ranking
+        console.log('Response: ', response);
+      },
+      (error) => {
+        console.log('Error: ', error);
+      }
+    );
   }
 
   updateEventPoints() {
     // const eventData = this.fichaEventForm.value;
-    console.log(this.evento)
+    console.log(this.evento, 'antes de nadaa')
     if (this.evento && this.evento._id) {
       this.eventSvc.updateEvent(this.evento._id, this.evento).subscribe(
         (response: any) => {
+
           console.log('Response: ', response);
           this.showSucessMessage = true;
           this.showErrorMessage = false;
@@ -101,6 +110,7 @@ export class FichaEventComponent implements OnInit, OnDestroy {
             this.showSucessMessage = false;
           }, 5000);
           // this.fichaEventForm.reset();
+          console.log(this.evento, 'Actualizado');
         },
         (error) => {
           console.log('Error: ', error);
@@ -112,6 +122,7 @@ export class FichaEventComponent implements OnInit, OnDestroy {
           }, 5000);
         }
       );
+
     } else {
       console.log('Evento o id no definido');
     }
@@ -272,6 +283,8 @@ export class FichaEventComponent implements OnInit, OnDestroy {
           this.showErrorMessage = false;
           this.showSucessMessage = true;
           this.message = 'Usuario Eliminado del Evento';
+          // // recargar la lista de usuarios
+          // this.getUsersForEvent();
           setTimeout(() => {
             this.showSucessMessage = false;
           }, 5000);
@@ -332,7 +345,6 @@ export class FichaEventComponent implements OnInit, OnDestroy {
     if (this.evento) {
       this.eventSvc.sortearMesa(this.evento._id!).subscribe(
         (event) => {
-          this.evento = event;
           this.getUsersForEvent();
           this.showErrorMessage = false;
           this.showSucessMessage = true;
@@ -355,13 +367,14 @@ export class FichaEventComponent implements OnInit, OnDestroy {
           }, 5000);
         }
       );
+
     }
   }
 
   // COMENZAR TORNEO
   stopEvent() {
     this.isStarted = false
-    this.evento.iniciado=false
+    this.evento.iniciado = false
   }
 
 
