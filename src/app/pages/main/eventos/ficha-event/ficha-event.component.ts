@@ -78,30 +78,30 @@ export class FichaEventComponent implements OnInit, OnDestroy {
       val.tablePoints == 1 ? val.tablePoints = 0 : val.tablePoints = 1
       // val.tablePoints = parseInt(event.target.value)
     }
-    console.log(val, event.target.value)
-    console.log(this.evento.ronda![0].mesas[0].players)
+    
+    
   }
 
   sumarPuntuaciones() {
     this.eventSvc.sumarPuntuaciones(this.evento._id!).subscribe(
       (response: any) => {
         this.evento.ranking = response.ranking
-        console.log('Response: ', response);
+        
       },
       (error) => {
-        console.log('Error: ', error);
+        
       }
     );
   }
 
   updateEventPoints() {
     // const eventData = this.fichaEventForm.value;
-    console.log(this.evento, 'antes de nadaa')
+    
     if (this.evento && this.evento._id) {
       this.eventSvc.updateEvent(this.evento._id, this.evento).subscribe(
         (response: any) => {
 
-          console.log('Response: ', response);
+          
           this.showSucessMessage = true;
           this.showErrorMessage = false;
           this.sumarPuntuaciones();
@@ -110,10 +110,10 @@ export class FichaEventComponent implements OnInit, OnDestroy {
             this.showSucessMessage = false;
           }, 5000);
           // this.fichaEventForm.reset();
-          console.log(this.evento, 'Actualizado');
+          
         },
         (error) => {
-          console.log('Error: ', error);
+          
           this.showErrorMessage = true;
           this.showSucessMessage = false;
           this.message = this.authSvc.handleRegistrationError(error);
@@ -124,7 +124,7 @@ export class FichaEventComponent implements OnInit, OnDestroy {
       );
 
     } else {
-      console.log('Evento o id no definido');
+      
     }
   }
 
@@ -146,17 +146,17 @@ export class FichaEventComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getEventById()
-    // console.log(r, 'probando si devuelve bien')
+    // 
     this.getCurrentUser();
     this.startCountdown();
-    console.log('CurrentUser: ', this.getCurrentUser());
+    
 
     setTimeout(() => {
       this.isLoaded = true
       if (this.evento.iniciado) {
         this.isStarted = true
       }
-      console.log(this.evento, 'viendo evento')
+      
     }, 1500)
   }
 
@@ -172,12 +172,12 @@ export class FichaEventComponent implements OnInit, OnDestroy {
         (newEvent) => {
           this.evento = newEvent;
           this.eventDate = new Date(`${this.evento?.fecha!} ${this.evento?.hora!}`);
-          // console.log('Evento: ',this.evento);
+          // 
           this.getUsersForEvent();
           return newEvent
         },
         (error) => {
-          console.log('Error al obtener el evento: ', error);
+          
         }
       )
     }
@@ -191,7 +191,7 @@ export class FichaEventComponent implements OnInit, OnDestroy {
           this.eventUsers = eventUsers;
         },
         (error) => {
-          console.log('Error al obtener los usuarios: ', error);
+          
         }
       )
     }
@@ -219,11 +219,11 @@ export class FichaEventComponent implements OnInit, OnDestroy {
           }, 5000);
         },
         (error) => {
-          console.log('Error al añadir usuario: ', error);
+          
         }
       )
     } else {
-      console.log('No hay usuario', this.currentUser);
+      
     }
     this.showErrorMessage = true;
     this.showSucessMessage = false;
@@ -251,7 +251,7 @@ export class FichaEventComponent implements OnInit, OnDestroy {
             }, 5000);
           },
           (error) => {
-            console.log('Error al añadir usuario: ', error);
+            
             this.showErrorMessage = true;
             this.showSucessMessage = false;
             this.message = 'Ocurrió un error al agregar el usuario.';
@@ -278,7 +278,7 @@ export class FichaEventComponent implements OnInit, OnDestroy {
     if (this.currentUser && this.evento) {
       this.eventUserSvc.deleteUserFromEvent(this.evento._id!, this.currentUser._id!).subscribe(
         (response) => {
-          console.log('Usuario eliminado del evento: ', response);
+          
           this.getUsersForEvent();
           this.showErrorMessage = false;
           this.showSucessMessage = true;
@@ -290,7 +290,7 @@ export class FichaEventComponent implements OnInit, OnDestroy {
           }, 5000);
         },
         (error) => {
-          console.log('Error al eliminar el usuario del evento: ', error);
+          
           this.showErrorMessage = true;
           this.showSucessMessage = false;
           this.message = error.error?.error || 'Error al eliminar el usuario del evento';
@@ -307,7 +307,7 @@ export class FichaEventComponent implements OnInit, OnDestroy {
     if (this.currentUser && this.evento) {
       this.eventUserSvc.deleteUserFromEvent(this.evento._id!, id).subscribe(
         (response) => {
-          console.log('Usuario eliminado del evento: ', response);
+          
           this.getUsersForEvent();
           this.showErrorMessage = false;
           this.showSucessMessage = true;
@@ -317,7 +317,7 @@ export class FichaEventComponent implements OnInit, OnDestroy {
           }, 5000);
         },
         (error) => {
-          console.log('Error al eliminar el usuario del evento: ', error);
+          
           this.showErrorMessage = true;
           this.showSucessMessage = false;
           this.message = error.error?.error || 'Error al eliminar el usuario del evento';
@@ -335,7 +335,7 @@ export class FichaEventComponent implements OnInit, OnDestroy {
     players.forEach(player => {
       totalPoints += player.points;
     });
-    console.log('Total de puntos: ', totalPoints);
+    
     return totalPoints;
   }
 
@@ -350,14 +350,14 @@ export class FichaEventComponent implements OnInit, OnDestroy {
           this.showSucessMessage = true;
           this.message = 'Mesa sorteada';
           this.isStarted = true;
-          console.log('Mesa sorteada: ', event);
+          
           setTimeout(() => {
             this.showSucessMessage = false;
           }, 5000);
         },
         (error) => {
-          console.log('Usuario Actual: ', this.currentUser);
-          console.log('Error al sortear la mesa: ', error);
+          
+          
           this.showErrorMessage = true;
           this.showSucessMessage = false;
           this.message = 'Error al sortear la mesa';

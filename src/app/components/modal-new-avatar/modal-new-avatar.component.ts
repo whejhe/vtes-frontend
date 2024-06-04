@@ -46,11 +46,11 @@ export class ModalNewAvatarComponent implements OnInit {
 
   newAvatar(): void {
     this.profileImage = this.selectedAvatar?.name + this.selectedAvatar!.extension;
-    console.log('ProfileImage: ', this.profileImage);
+    
     if (this.profileImage) {
       this.authSvc.newAvatar(this.userId || '', this.profileImage).subscribe(
         response => {
-          console.log('Avatar actualizado correctamente', response);
+          
           window.location.reload();
           this.closeModal();
         },
@@ -76,7 +76,7 @@ export class ModalNewAvatarComponent implements OnInit {
     this.imageSvc.getJsonImages().subscribe((images) => {
       this.avatars = images;
     })
-    // console.log('Avatars: ',this.avatars);
-    // console.log('CurrentUser en modal-new-avatar: ',this.authSvc.getCurrentUser());
+    // 
+    // 
   }
 }

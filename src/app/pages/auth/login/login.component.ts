@@ -45,7 +45,7 @@ export class LoginComponent {
 
       this.authSvc.loginUser(userData).subscribe(
         (response: any) => {
-          console.log('response', response);
+          
           this.showSucessMessage = true;
           this.showErrorMessage = false;
           this.message = 'Login exitoso';
@@ -57,7 +57,7 @@ export class LoginComponent {
           });
         },
         (error: any) => {
-          console.log('error', error);
+          
           this.showErrorMessage = true;
           this.showSucessMessage = false;
           this.message = this.authSvc.handleRegistrationError(error);
@@ -84,7 +84,7 @@ changeVisibilityPassword() {
     }
 
   }catch(error){
-    console.log('Error al cambiar la visibilidad',error);
+    
   }
 }
 

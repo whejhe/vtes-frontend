@@ -40,7 +40,7 @@ export class ImageService {
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }else{
-      console.log('No se encontro el token', token);
+      
 
     }
     return headers;

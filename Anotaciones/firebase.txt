@@ -10,17 +10,17 @@ images:string[];
 
 uploadImage($event:any){
   const file = $event.target.file[0];
-  console.log(file)
+  
 }
 
 const imgRef = ref(this.storage, `CustomCards/${file.name}`)
 
 uploadBytes(imgRef, file)
   .then(response => {
-    console.log(response)
+    
     this.getImages();//Actualizar vista
   })
-  .catch(error => console.log(error));
+  .catch(error => 
 
 //Listar Imagenes
 getImages(){
@@ -28,15 +28,15 @@ getImages(){
 
   listAll(imagesRef){
     .then(async response =>{
-      console.log(response);
+      
       this.images = []; //Para evitar que se vayan duplicando
       for(let item of response.items){
         const url = await getDownloadURL(item);
-        console.log(url);
+        
         this.images.push(url);
       }
     })
-    .catch(error => console.log(error));
+    .catch(error => 
   }
 }
 

@@ -227,7 +227,7 @@ export class CriptaComponent implements OnInit {
   }
 
   formSubmit() {
-    console.log('Crypt Form: ', this.cryptForm.value);
+    
   }
 
   ngOnInit(): void {

@@ -86,7 +86,7 @@ export class EventsComponent implements OnInit {
 
     this.eventSvc.createEvent(eventData).subscribe(
       (response: any) => {
-        console.log('response', response);
+        
         this.showSucessMessage = true;
         this.showErrorMessage = false;
         this.mesage = 'Evento creado con exito';
@@ -94,7 +94,7 @@ export class EventsComponent implements OnInit {
         this.eventForm.reset();
       },
       (error: any) => {
-        console.log('error', error);
+        
         this.showErrorMessage = true;
         this.showSucessMessage = false;
         this.mesage = this.authSvc.handleRegistrationError(error);
@@ -105,7 +105,7 @@ export class EventsComponent implements OnInit {
     );
       
     } catch (err) {
-      console.log('Error al crear el evento: ', err);
+      
     }
   }
 

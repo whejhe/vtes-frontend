@@ -19,7 +19,7 @@ import { FormsModule } from '@angular/forms';
 export class ViewReportComponent implements OnInit{
 
   reports?: Report[];
-  notification: boolean = true;
+  notification: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { report: Report },
@@ -36,10 +36,10 @@ export class ViewReportComponent implements OnInit{
   getReportById(id: string): void {
     this.reportSvc.getReportById(id).subscribe(
       (response) => {
-        console.log('Reporte:', response);
+        this.notification = !response.notification;
       },
       (error) => {
-        console.log('Error al obtener el reporte:', error);
+        
       }
     );
   }
@@ -47,10 +47,7 @@ export class ViewReportComponent implements OnInit{
   updateReport(id: string, notification: boolean): void {
     this.reportSvc.updateReport(id, notification).subscribe(
       (response) => {
-        console.log('Reporte actualizado:', response);
-      },
-      (error) => {
-        console.log('Error al actualizar el reporte:', error);
+        this.notification = notification;
       }
     );
   }
@@ -61,7 +58,6 @@ export class ViewReportComponent implements OnInit{
 
   ngOnInit(): void {
     this.getReportById(this.data.report._id);
-    // this.getReports();
   }
 
 }

@@ -47,7 +47,7 @@ export class CustomCardsService {
   uploadCustomCardImage(customCard: FormData): Observable<CustomCard> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
-    console.log('Esto es apiUrl 🤣🤣 ==> ', this.apiUrl);
+    
 
     return this.http.put<CustomCard>(`${this.apiUrl}/upload`, customCard, { headers });
   }
@@ -60,7 +60,7 @@ export class CustomCardsService {
       page: page,
       limit: itemsPerPage,
     };
-    console.log('Params: ', params);
+    
     return this.http.get<any>(this.apiUrl);
   }
 

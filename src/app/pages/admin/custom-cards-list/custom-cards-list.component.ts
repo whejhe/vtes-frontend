@@ -34,7 +34,7 @@ export class CustomCardsListComponent implements OnInit {
     this.customCardsSvc.deleteCustomCard(id).subscribe(
       (response) => {
       this.getCustomCards();
-      console.log('Customs deleted: ',response);
+      
       this.showErrorMessage = false;
       this.showSucessMessage = true;
       this.message = 'Carta personalizada eliminada correctamente';
@@ -43,7 +43,7 @@ export class CustomCardsListComponent implements OnInit {
       },5000);
     },
     (error) => {
-      console.log('Error al eliminar la Carta personalizada: ', error);
+      
       this.showErrorMessage = true;
       this.showSucessMessage = false;
       this.message = this.customCardsSvc.handleRegistrationError(error);

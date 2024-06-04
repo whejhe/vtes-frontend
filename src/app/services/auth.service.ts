@@ -163,7 +163,7 @@ export class AuthService implements OnInit{
   getCurrentUser(): User | null {
     if (!this.currentUser) {
       this.currentUser = this.decodeToken(this.getToken()!);
-      console.log('Usuario Actual: ',this.currentUser);
+      
     }
     return this.currentUser;
   }
@@ -228,6 +228,6 @@ changeRole(email: string, newRole: string): Observable<any> {
   }
 
   ngOnInit(): void {
-      console.log(this.getProfileImage());
+      
   }
 }

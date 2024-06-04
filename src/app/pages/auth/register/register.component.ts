@@ -61,17 +61,17 @@ export class RegisterComponent implements OnInit {
 
       this.authSvc.registerUser(userData).subscribe(
         (response: any) => {
-          console.log('response', response);
+          
           this.showSucessMessage = true;
           this.showErrorMessage = false;
           setTimeout(() => {
             this.showSucessMessage = false;
           }, 5000);
           this.router.navigate(['/auth']);
-          console.log('selected Avatar',this.selectedAvatar)
+          
         },
         (error: any) => {
-          console.log('error', error);
+          
           this.showErrorMessage = true;
           this.showSucessMessage = false;
           this.errorMesage = this.authSvc.handleRegistrationError(error);
@@ -115,13 +115,13 @@ export class RegisterComponent implements OnInit {
       }
   
     }catch(error){
-      console.log('Error al cambiar la visibilidad',error);
+      
     }
   }
 
 
   ngOnInit(): void {
-    console.log('this.image', this.image);
+    
   }
 
 }

@@ -267,7 +267,7 @@ decks: any;
   loadCards(): void {
     this.cardSvc.getCards().subscribe((cards) => {
       this.cards = cards;
-      console.log('Cards: ', this.cards);
+      
       this.isLoading = false;
     });
   }

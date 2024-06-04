@@ -81,7 +81,7 @@ export class UploadCardComponent implements OnInit {
   toggleOpacity(event: MouseEvent): void {
     const target = event.target as HTMLImageElement;
     if (target.classList.contains('icon-filter')) {
-      console.log('Discipline:', target.alt)
+      
       target.classList.toggle('clicked');
       this.updateDisciplineSelection(target.alt as Discipline);
     }
@@ -116,13 +116,13 @@ export class UploadCardComponent implements OnInit {
       formData.append('isPublic', this.updateCardForm.value.isPublic);
       formData.append('description', this.updateCardForm.value.description);
       formData.append('image', this.updateCardForm.value.image);
-      console.log('Form Data:', formData);
+      
 
       const userId = this.authSvc.getCurrentUser()?._id ?? 'defaultId';
       this.customCardSvc.uploadCustomCardImage(formData)
         .subscribe(
           (response) => {
-            console.log('Carta creada:', response);
+            
             this.showSucessMessage = true;
             this.showErrorMessage = false;
             this.message = 'Carta creada correctamente';
@@ -132,7 +132,7 @@ export class UploadCardComponent implements OnInit {
             }, 5000)
           },
           (error) => {
-            console.log('Error al crear la carta:', error);
+            
             this.showErrorMessage = true;
             this.showSucessMessage = false;
             this.message = this.customCardSvc.handleRegistrationError(error);
@@ -142,7 +142,7 @@ export class UploadCardComponent implements OnInit {
           }
         );
     } catch (err) {
-      console.log('Error al subir la Imagen: ', err);
+      
     }
   }
 

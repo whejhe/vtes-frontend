@@ -60,7 +60,7 @@ export class CustomComponent implements OnInit {
   onFileSelected(event: any): void {
     const file = event.target.files[0];
     const fileUrl = URL.createObjectURL(file);
-    console.log(file, 'file a ver', fileUrl)
+    
     this.customCardForm.get('image')?.setValue(fileUrl);
     this.imageUrl = fileUrl;
   }
@@ -87,7 +87,7 @@ export class CustomComponent implements OnInit {
   toggleOpacity(event: MouseEvent): void {
     const target = event.target as HTMLImageElement;
     if (target.classList.contains('icon-filter')) {
-      // console.log('Discipline:',target.alt)
+      // 
       target.classList.toggle('clicked');
       this.updateDisciplineSelection(target.alt as Discipline);
     }
@@ -96,7 +96,7 @@ export class CustomComponent implements OnInit {
   updateDisciplineSelection(discipline: Discipline): void {
     this.customCardForm.value.disciplines[discipline] = !this.customCardForm.value.disciplines[discipline];
     this.onDisciplinesChange();
-    // console.log('Disciplinas seleccionadas:',this.customCardForm.value.disciplines)
+    // 
   }
 
   onDisciplinesChange(): void {
@@ -104,19 +104,19 @@ export class CustomComponent implements OnInit {
       .filter(discipline => this.customCardForm.value.disciplines[discipline as Discipline])
       .map(discipline => discipline as Discipline);
 
-    console.log('Disciplinas seleccionadas:', this.selectedDisciplines)
+    
   }
 
   screenshot() {
     // Select the element that you want to capture
     const captureElement = document.querySelector(".vista-carta") as HTMLElement;
-    console.log(captureElement, ' exsiste caprture element')
+    
     // Check if captureElement is not null before calling html2canvas
     if (captureElement) {
       html2canvas(captureElement, { scale:1}).then((canvas) => {
         // Get the image data as a base64-encoded string
         const imageData = canvas.toDataURL("image/png");
-        console.log(canvas, ' adios !!')
+        
         // Do something with the image data, such as saving it as a file or sending it to a server
         // For example, you can create an anchor element and trigger a download action
         const link = document.createElement("a");
@@ -135,7 +135,7 @@ export class CustomComponent implements OnInit {
     if (this.customCardForm.valid) {
       this.customCardsService.createCustomCard(this.customCardForm.value).subscribe(
         (response) => {
-          console.log('Carta personalizada creada:', response);
+          
         },
         (error) => {
           console.error('Error al crear la carta personalizada:', error);

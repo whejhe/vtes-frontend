@@ -38,3 +38,5 @@ yarn add @ngx-translate/http-loader
 npm install -g json-ts (generar interface apartir de archivo.json)
 con el comando: json-ts vtes.json -o vtes.d.ts
 
+PRODUCCION
+ng build --prod

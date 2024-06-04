@@ -45,10 +45,10 @@ export class ListaDecksComponent implements OnInit {
         this.authSvc.getUsers().subscribe(
             (users: User[]) => {
                 this.user = users;
-                console.log('Users: ', this.user);
+                
             },
             (error) => {
-                console.log('Error al obtener los usuarios: ', error);
+                
             });
     }
 
@@ -68,10 +68,10 @@ export class ListaDecksComponent implements OnInit {
         this.deckSvc.getDecks().subscribe(
             (decks: Deck[]) => {
                 this.decks = decks;
-                console.log('Decks: ', this.decks);
+                
             },
             (error) => {
-                console.log('Error al obtener los decks: ', error);
+                
             });
     }
 
@@ -80,8 +80,8 @@ export class ListaDecksComponent implements OnInit {
         this.deckSvc.deleteDeck(id).subscribe(
             (response) => {
                 this.getDecks();
-                console.log('Deck eliminado: ', id);
-                console.log('Response Deck eliminado: ', response);
+                
+                
                 this.showSucessMessage = true;
                 this.showErrorMessage = false;
                 this.message = 'Deck eliminado correctamente';
@@ -90,7 +90,7 @@ export class ListaDecksComponent implements OnInit {
                 }, 5000);
             },
             (error) => {
-                console.log('Error al eliminar el deck: ', error);
+                
                 this.showErrorMessage = true;
                 this.showSucessMessage = false;
                 this.message = this.deckSvc.handleRegistrationError(error);
@@ -109,7 +109,7 @@ export class ListaDecksComponent implements OnInit {
             this.getDecks();
         } else if (selectedCategory !== '*') {
             this.decks = this.decks.filter(deck => deck.category === selectedCategory);
-            console.log('Categoria Actual: ', selectedCategory);
+            
         }
     }
 
@@ -121,7 +121,7 @@ export class ListaDecksComponent implements OnInit {
             this.getDecks();
         } else if (selectedAuthor !== '*') {
             this.decks = this.decks.filter(deck => deck.author === selectedAuthor);
-            console.log('Author Actual: ', selectedAuthor);
+            
         }
     }
 

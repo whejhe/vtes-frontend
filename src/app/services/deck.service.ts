@@ -38,7 +38,7 @@ export class DeckService {
     if (token) {
       headers = headers.set('Authorization', `Bearer ${token}`);
     }else{
-      console.log('No se encontro el token', token);
+      
 
     }
     return headers;
@@ -113,7 +113,7 @@ export class DeckService {
   updateDeck(id: string, deck: Deck): Observable<Deck> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
-    console.log('Deck to update(Service):', deck);
+    
     return this.http.put<Deck>(`${this.apiUrl}/${id}`, deck, { headers });
   }
 

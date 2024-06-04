@@ -35,20 +35,20 @@ export class ListarEventosComponent implements OnInit {
   user: User[] = [];
   
   getEvents(){
-    console.log(this.eventSvc.getEvents());
+    
     this.eventSvc.getEvents().subscribe(
       (events: Evento[]) => {
       this.events = events;
     },
     (error) => {
-      console.log('Error al obtener los eventos: ', error);
+      
     });
   }
 
   deleteEvent(eventId: string): void {
     this.eventSvc.deleteEvent(eventId).subscribe(
       (response) => {
-        console.log('Evento eliminado:', response);
+        
         this.getEvents();
         this.showSucessMessage = true;
         this.showErrorMessage = false;
@@ -58,7 +58,7 @@ export class ListarEventosComponent implements OnInit {
         },5000);
       },
       (error) => {
-        console.log('Error al eliminar el evento:', error);
+        
         this.showErrorMessage = true;
         this.showSucessMessage = false;
         this.message = this.eventSvc.handleRegistrationError(error);
@@ -73,7 +73,7 @@ export class ListarEventosComponent implements OnInit {
   ngOnInit(): void {
     this.eventSvc.getEvents();
     this.getEvents();
-    console.log('Lista de Eventos: ', this.events);
+    
   }
 
 }

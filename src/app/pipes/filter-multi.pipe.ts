@@ -10,7 +10,7 @@ export class FilterMultiPipe implements PipeTransform {
   transform(cards: Card[], filters: any): Card[] {
     if (!cards || !Array.isArray(cards)) return [];
 
-    console.log('Cards en filtro ==> ', cards);
+    
 
     return cards.filter(card => {
       let match = true;

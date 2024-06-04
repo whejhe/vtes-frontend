@@ -55,7 +55,7 @@ export class SendReportComponent implements OnInit {
 
   ngOnInit(): void {
     this.authSvc.getCurrentUser();
-    console.log('CurrentUser: ',this.authSvc.getCurrentUser());
+    
     this.reportForm.get('authorOfCard')?.setValue(this.card?.author);
     this.reportForm.get('nameOfCard')?.setValue(this.card?.name);
   }
@@ -74,7 +74,7 @@ export class SendReportComponent implements OnInit {
 
       this.reportSvc.createReport(reportData).subscribe(
         (response: any) => {
-          console.log('response', response);
+          
           this.showSucessMessage = true;
           this.showErrorMessage = false;
           this.message = 'Reporte enviado correctamente';
@@ -90,7 +90,7 @@ export class SendReportComponent implements OnInit {
           setTimeout(() => {
             this.showErrorMessage = false;
           },5000);
-          console.log('error', error);
+          
         }
       );
     }
@@ -105,10 +105,10 @@ export class SendReportComponent implements OnInit {
       (response) => {
         this.reportForm.get('nameOfCard')?.setValue(response.name);
         this.reportForm.get('authorOfCard')?.setValue(response.author);
-        console.log('response', response);
+        
       },
       (error) => {
-        console.log('Error al obtener la tarjeta personalizada:', error);
+        
       }
     );
   }

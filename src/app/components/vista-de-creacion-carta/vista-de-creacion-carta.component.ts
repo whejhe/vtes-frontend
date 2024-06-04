@@ -68,12 +68,12 @@ export class VistaDeCreacionCartaComponent {
     } else if (lowerCaseIcon === 'gargoyle') {
       lowerCaseIcon = 'gargoyles';
     }
-    // console.log('ClanIcon: ', lowerCaseIcon);
+    // 
     return `assets/img/icons-vtes/clans/svg/${lowerCaseIcon}.svg`;
   }
 
   getDisciplineIcon(discipline: string): string {
-    console.log(discipline)
+    
     if (/[A-Z]/.test(discipline[0])) {
       return `assets/img/icons-vtes/disciplinas/svg/sup/${discipline}.svg`;
     } else {
@@ -100,7 +100,7 @@ export class VistaDeCreacionCartaComponent {
   toggleOpacity(event: MouseEvent): void {
     const target = event.target as HTMLImageElement;
     if (target.classList.contains('icon-filter')) {
-      // console.log('Discipline:', target.alt)
+      // 
       target.classList.toggle('clicked');
       this.updateDisciplineSelection(target.alt as Discipline);
     }

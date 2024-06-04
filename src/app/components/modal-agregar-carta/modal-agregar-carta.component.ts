@@ -29,10 +29,10 @@ export class ModalAgregarCartaComponent {
   getDecks(): void{
     this.deckSvc.getDecksByUserId(this.data.decks.userId).subscribe(
       (response) => {
-        console.log(response);
+        
       },
       (error) => {
-        console.log(error);
+        
       }
     )
   }

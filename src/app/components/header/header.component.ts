@@ -34,7 +34,7 @@ export class HeaderComponent {
   navigateToLastDeck(): void {
     const lastDeckId = localStorage.getItem('lastDeck');
     if (lastDeckId && lastDeckId != undefined) {
-      // console.log('HOLA!!!!!!!!!!')
+      // 
       this.router.navigateByUrl(`/deck/${lastDeckId}`);
     }
   }
@@ -43,7 +43,7 @@ export class HeaderComponent {
   ngOnInit() {
     if (this.user) {
       localStorage.setItem('user', JSON.stringify(this.user));
-      console.log('Usuario actual :', this.user);
+      
     }
     this.deckForm = new FormGroup({
       userId: new FormControl(''),

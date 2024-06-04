@@ -41,10 +41,10 @@ export class ReportComponent implements OnInit {
   getReportById():void{
     this.reportSvc.getReportById('').subscribe(
       (response) =>{
-        console.log('Reporte:', response);
+        
       },
       (error) =>{
-        console.log('Error al obtener el reporte:', error);
+        
       }
     )
   }
@@ -52,7 +52,7 @@ export class ReportComponent implements OnInit {
   deleteReport(reportId: string):void{
     this.reportSvc.deleteReportById(reportId).subscribe(
       (response) =>{
-        console.log('Reporte eliminado:', response);
+        
         this.getReports();
         this.showSucessMessage = true;
         this.showErrorMessage = false;
@@ -62,7 +62,7 @@ export class ReportComponent implements OnInit {
         }, 5000);
       },
       (error) =>{
-        console.log('Error al eliminar el reporte:', error);
+        
         this.showErrorMessage = true;
         this.showSucessMessage = false;
         this.message = this.reportSvc.handleRegistrationError(error);
@@ -81,10 +81,10 @@ export class ReportComponent implements OnInit {
           data: { report: reportData },
           
         });
-        console.log('Reporte:', reportData);
+        
       },
       (error) => {
-        console.log('Error al obtener el reporte:', error);
+        
       }
     );
   }

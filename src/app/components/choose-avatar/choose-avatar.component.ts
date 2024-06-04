@@ -48,7 +48,7 @@ export class ChooseAvatarComponent implements OnInit{
     this.imageSvc.getJsonImages().subscribe((images)=>{
       this.avatars = images;
     })
-    console.log('Avatars: ',this.avatars);
+    
   }
 
 }

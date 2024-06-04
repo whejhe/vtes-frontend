@@ -60,10 +60,10 @@ export class GalleryComponent implements OnInit {
     this.authSvc.getUsers().subscribe(
       (users: User[]) => {
         this.user = users;
-        // console.log('Users: ', this.user);
+        // 
       },
       (error) => {
-        console.log('Error al obtener los usuarios: ', error);
+        
       });
   }
 
@@ -79,11 +79,11 @@ export class GalleryComponent implements OnInit {
         this.customCards = response;
         this.filteredCards = response;
         this.totalItems = response.length;
-        console.log('CustomCards: ', this.customCards);
+        
         this.paginate();
       },
       (error) => {
-        console.log('Error al obtener las tarjetas personalizadas: ', error);
+        
       }
     );
   }
@@ -126,7 +126,7 @@ export class GalleryComponent implements OnInit {
   changePage(page: number) {
     this.currentPage = page;
     this.paginate()
-    // console.log(page)
+    // 
   }
   getPageNumbers(): number[] {
     const pageCount = this.getPageCount();

@@ -157,9 +157,9 @@ export class NewDeckComponent implements OnInit {
         this.message = 'Mazo creado correctamente';
         setTimeout(() => {
         }, 5000);
-        // console.log('Id deck: ', this.newDeckId);
-        // console.log('CurrentDeck: ', this.deckSvc.getCurrentDeck());
-        // console.log('Response: ', response);
+        // 
+        // 
+        // 
       },
       (error) =>{
         console.error(error);
@@ -222,13 +222,13 @@ export class NewDeckComponent implements OnInit {
   updateDeck(): void {
     const deck = this.deckForm.value;
     deck._id = this.currentDeckId;
-    console.log('Deck to update:', deck);
+    
     if (!deck._id) {
       console.error('Error: deck._id is undefined');
     }
     this.deckSvc.updateDeck(this.currentDeckId, deck).subscribe(
       (response) => {
-        console.log('Carta personalizada actualizada:', response);
+        
         this.showErrorMessage = false;
         this.showSucessMessage = true;
         this.message = 'Carta personalizada actualizada correctamente';
@@ -252,7 +252,7 @@ export class NewDeckComponent implements OnInit {
   deleteDeck(): void {
     this.deckSvc.deleteDeck(this.currentDeckId).subscribe(
       (response) => {
-        console.log('Mazo eliminado:', response);
+        
         this.router.navigate(['/lista-decks']);
         this.showSucessMessage = true;
         this.showErrorMessage = false;
@@ -279,10 +279,10 @@ export class NewDeckComponent implements OnInit {
 
   // CAMBIAR ESTADO DE MAZO PUBLICO O PRIVADO
   public changeDeckVisibility(): void {
-    console.log('isPublic: ', this.deckForm.get('isPublic')?.value, ' Opuesto:', !this.deckForm.get('isPublic')?.value);
+    
     this.deckSvc.updateDeckVisibility(this.currentDeckId, !this.deckForm.get('isPublic')?.value).subscribe(
       (response) => {
-        console.log('Mazo actualizado:', response);
+        
         this.deckForm.get('isPublic')?.setValue(!this.deckForm.get('isPublic')?.value);
         this.showSucessMessage = true;
         this.showErrorMessage = false;
@@ -328,7 +328,7 @@ export class NewDeckComponent implements OnInit {
         this.showSucessMessage = false;
       },5000);
     }catch(error){
-      console.log(error);
+      
       this.showErrorMessage = true;
       this.showSucessMessage = false;
       this.message = 'Error al agregar la carta';
@@ -348,7 +348,7 @@ export class NewDeckComponent implements OnInit {
     };
     valor.push(obj);
     this.deckForm.get('library')?.setValue(valor);
-    console.log(card);
+    
     this.showSucessMessage = true;
     this.showErrorMessage = false;
     this.message = 'Carta agregada correctamente';
@@ -356,7 +356,7 @@ export class NewDeckComponent implements OnInit {
       this.showSucessMessage = false;
     },5000);
     }catch(error){
-      console.log(error);
+      
       this.showErrorMessage = true;
       this.showSucessMessage = false;
       this.message = 'Error al agregar la carta';
@@ -412,7 +412,7 @@ export class NewDeckComponent implements OnInit {
   public changeQuantity(event: Event, item: any): void {
     let qty = event.target as HTMLInputElement;
     item.quantity = qty.value;
-    console.log(qty.value, 'FUNCIONA!!!!!!!!!!!!!!', event);
+    
   }
 
   // FILTRADO DE CARTAS CRYPT
@@ -456,7 +456,7 @@ export class NewDeckComponent implements OnInit {
         this.showSucessMessage = false;
       },5000);
     }catch(error){
-      console.log(error);
+      
       this.showErrorMessage = true;
       this.showSucessMessage = false;
       this.message = 'Error al agregar la lista de cartas';
@@ -476,7 +476,7 @@ export class NewDeckComponent implements OnInit {
         this.showSucessMessage = false;
       }, 5000);
     }catch(error){
-      console.log(error);
+      
       this.showErrorMessage = true;
       this.showSucessMessage = false;
       this.message = 'Error al descargar las imagenes de las cartas';

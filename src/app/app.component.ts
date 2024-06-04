@@ -43,8 +43,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     if (this.user) {
       localStorage.setItem('user', JSON.stringify(this.user));
-      console.log('Usuario actual :',this.user);
-      console.log(this.token);
+      
+      
     }
   }
 
