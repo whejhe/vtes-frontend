@@ -1,0 +1,90 @@
+.container {
+    width: auto;
+    height: fit-content;
+
+    img {
+        margin: auto;
+        display: block;
+        padding: 1em 0;
+    }
+
+    form {
+        padding: 2em 1em;
+        border: 2px solid #212529;
+        box-shadow: 5px 0px 18px 0 rgb(68, 2, 2);
+        background-color: rgb(224, 220, 216);
+        position: relative;
+        align-items: center;
+        margin: 2em auto 0 auto;
+
+        .register {
+            position: relative;
+            padding-left: 1em;
+            height: auto;
+            min-height: 60px;
+
+            .register-text {
+                position: absolute;
+                top: -2em;
+            }
+
+            .question {
+                position: absolute;
+                top: 0;
+            }
+        }
+
+        button {
+            margin-bottom: 1em;
+        }
+
+        button:hover {
+            background-color: rgb(68, 2, 2);
+        }
+    }
+}
+
+.password {
+    margin-top: 1em;
+}
+
+.link-secondary {
+    font-weight: bold;
+}
+
+.container-logo {
+    position: fixed;
+    top: 5vh;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -5;
+    background-color: rgba(0, 0, 0, 0.192);
+
+}
+
+
+.logo {
+    width: auto;
+    height: 90vh;
+    z-index: -1;
+    opacity: 0.2;
+}
+
+.input__wrapper {
+    position: relative;
+
+    .input__icon {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        cursor: pointer;
+    }
+}
+
+.close{
+    cursor: pointer;
+}

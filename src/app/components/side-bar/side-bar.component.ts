@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment.development';
 import { MatDialog } from '@angular/material/dialog';
 import { ChooseAvatarComponent } from '../choose-avatar/choose-avatar.component';
+import { DarBajaComponent } from '../dar-baja/dar-baja.component';
 import { ModalNewAvatarComponent } from '../modal-new-avatar/modal-new-avatar.component';
 
 @Component({
@@ -58,6 +59,14 @@ export class SideBarComponent {
 
   openModal():void{
     this.dialog.open(ModalNewAvatarComponent, {
+      data: {avatar: this.selectedAvatar },
+    }).afterClosed().subscribe((avatar: Image | null) => {
+      this.selectedAvatar = avatar;
+    });
+  }
+
+  openModalDarBaja():void{
+    this.dialog.open(DarBajaComponent, {
       data: {avatar: this.selectedAvatar },
     }).afterClosed().subscribe((avatar: Image | null) => {
       this.selectedAvatar = avatar;

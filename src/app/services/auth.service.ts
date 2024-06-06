@@ -227,6 +227,12 @@ changeRole(email: string, newRole: string): Observable<any> {
     return this.http.put<User>(url, body);
   }
 
+  darBaja(userId: string,userData: { email: string; password: string }): Observable<User> {
+    let headers = new HttpHeaders();
+    headers = this.addAuthHeader(headers);
+    const url = `${this.apiUrl}/users/darBaja/${userId}`;
+    return this.http.post<User>(url, userData, { headers });
+  }
   ngOnInit(): void {
       
   }
