@@ -16,7 +16,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   templateUrl: './dar-baja.component.html',
   styleUrl: './dar-baja.component.scss'
 })
-export class DarBajaComponent implements OnInit{
+export class DarBajaComponent implements OnInit {
 
   darBajaForm: FormGroup = new FormGroup({
     userId: new FormControl(this.authSvc.getCurrentUser()?._id),
@@ -35,7 +35,7 @@ export class DarBajaComponent implements OnInit{
   constructor(
     private authSvc: AuthService,
     private router: Router,
-    @Inject(MAT_DIALOG_DATA) public data: {  },
+    @Inject(MAT_DIALOG_DATA) public data: {},
     public dialogRef: MatDialogRef<DarBajaComponent>,
   ) { }
 
@@ -43,37 +43,37 @@ export class DarBajaComponent implements OnInit{
     this.dialogRef.close();
   }
   changeVisibilityPassword() {
-    try{
+    try {
       const input = document.querySelector(".input__field");
       const inputIcon = document.querySelector(".input__icon");
-  
-      if(input?.getAttribute("type") == "password"){
+
+      if (input?.getAttribute("type") == "password") {
         input.setAttribute("type", "text");
         inputIcon?.setAttribute("src", "assets/img/eye.svg");
-      }else{
+      } else {
         input?.setAttribute("type", "password");
         inputIcon?.setAttribute("src", "assets/img/eye-off.svg");
       }
-  
-    }catch(error){
-      
+
+    } catch (error) {
+
     }
   }
 
   darBaja() {
-    if(this.userId){
-      this.darBajaForm.get('userId')?.setValue(this.userId);
-      console.log('UserId:',this.darBajaForm.get('userId')?.value)
-    }
+    const userId = this.authSvc.getCurrentUser()?._id;
     if (this.darBajaForm.valid) {
       const userData = {
-        // userId: this.userId,
         email: this.darBajaForm.get('email')?.value,
         password: this.darBajaForm.get('password')?.value,
-      };
-
-      this.authSvc.darBaja(userData, this.userId).subscribe(
-        (response: any) => {
+        };
+        
+        this.authSvc.darBaja(userId!, userData.email, userData.password).subscribe(
+          (response: any) => {
+          const confirmacion = confirm("¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.");
+          if (!confirmacion) {
+            return;
+          }
           this.showSucessMessage = true;
           this.showErrorMessage = false;
           this.message = 'Cuenta dada de baja';
@@ -83,6 +83,7 @@ export class DarBajaComponent implements OnInit{
           this.router.navigateByUrl('/').then(() => {
             window.location.reload();
           });
+          localStorage.removeItem('token');
         },
         (error: any) => {
           this.showErrorMessage = true;
@@ -97,7 +98,7 @@ export class DarBajaComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    console.log('email',this.darBajaForm.get('email')?.value)
+    console.log('email', this.darBajaForm.get('email')?.value)
   }
 
 }

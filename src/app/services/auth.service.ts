@@ -9,7 +9,7 @@ import { User } from '../models/user.model';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements OnInit{
+export class AuthService implements OnInit {
 
   constructor(
     private http: HttpClient
@@ -22,7 +22,7 @@ export class AuthService implements OnInit{
   public token: string | null = localStorage.getItem('token');
 
 
-  addAuthHeader(headers:HttpHeaders): HttpHeaders {
+  addAuthHeader(headers: HttpHeaders): HttpHeaders {
     const token = this.getToken();
     if (token) {
       headers = headers.append('Authorization', `Bearer ${token}`);
@@ -126,30 +126,32 @@ export class AuthService implements OnInit{
       return 'El email no es valido';
     } else if (error.error.error.includes('La contraseña es obligatoria')) {
       return 'La contraseña es obligatoria';
-    } else if(error.error.error.includes('Las contraseñas no coinciden')){
+    } else if (error.error.error.includes('Las contraseñas no coinciden')) {
       return 'Las contraseñas no coinciden'
     } else if (error.error.error.includes('La contraseña debe tener al menos 8 caracteres')) {
       return 'La contraseña debe tener al menos 8 caracteres';
     } else if (error.error.error.includes('La contraseña debe contener al menos 8 caracteres, una mayuscula, una minuscula, un numero y un caracter especial de entre !@#$%^&*')) {
       return 'La contraseña debe contener al menos 8 caracteres, una mayuscula, una minuscula, un numero y un caracter especial de entre !@#$%^&*';
-    } else if(error.error.error.includes('El email ya está registrado')){
+    } else if (error.error.error.includes('El email ya está registrado')) {
       return 'El email ya está registrado';
-    } else if(error.error.error.includes('La hora es obligatoria')){
+    } else if (error.error.error.includes('La hora es obligatoria')) {
       return 'La hora es obligatoria';
-    } else if (error.error.error.includes('El formato de la hora no es valido. Ejemplo: 00:00')){
+    } else if (error.error.error.includes('El formato de la hora no es valido. Ejemplo: 00:00')) {
       return 'El formato de la hora no es valido. Ejemplo: 00:00';
-    } else if (error.error.error.includes('La fecha es obligatoria')){
+    } else if (error.error.error.includes('La fecha es obligatoria')) {
       return 'La fecha es obligatoria';
-    } else if(error.error.error.includes('La provincia es obligatoria')){
+    } else if (error.error.error.includes('La provincia es obligatoria')) {
       return 'La provincia es obligatoria';
-    } else if(error.error.error.includes('La localidad es obligatoria')){
+    } else if (error.error.error.includes('La localidad es obligatoria')) {
       return 'La localidad es obligatoria';
-    } else if(error.error.error.includes('El precio del torneo es obligatorio')){
+    } else if (error.error.error.includes('El precio del torneo es obligatorio')) {
       return 'El precio del torneo es obligatorio';
-    }else if(error.error.error.includes('El precio del torneo no es valido, Ejemplo: 0.00')){
+    } else if (error.error.error.includes('El precio del torneo no es valido, Ejemplo: 0.00')) {
       return 'El precio del torneo no es valido, Ejemplo: 0.00';
-    } else if(error.error.error.includes('El tipo de torneo es obligatorio')){
+    } else if (error.error.error.includes('El tipo de torneo es obligatorio')) {
       return 'El tipo de torneo es obligatorio';
+    } else if(error.error.error.includes('El email no coincide')) {
+      return 'El email no coincide';
     }
     else {
       return 'Ocurrió un error al registrar el usuario';
@@ -163,7 +165,7 @@ export class AuthService implements OnInit{
   getCurrentUser(): User | null {
     if (!this.currentUser) {
       this.currentUser = this.decodeToken(this.getToken()!);
-      
+
     }
     return this.currentUser;
   }
@@ -193,7 +195,7 @@ export class AuthService implements OnInit{
   deleteUser(id: string): Observable<any> {
     let headers = new HttpHeaders();
     headers = this.addAuthHeader(headers);
-    return this.http.delete(`${this.apiUrl}/users/${id}`,{headers});
+    return this.http.delete(`${this.apiUrl}/users/${id}`, { headers });
   }
 
   // BLOQUEAR USUARIOS
@@ -206,15 +208,15 @@ export class AuthService implements OnInit{
     return this.http.post(`${this.apiUrl}/users/unblockUser/${userId}`, { headers: { 'Authorization': `Bearer ${this.getToken()}` } });
   }
 
-// CAMBIAR ROL DE USUARIO
-changeRole(email: string, newRole: string): Observable<any> {
-  const body = { email, newRole };
-  return this.http.put(`${this.apiUrl}/admin/permisos`, body, {
-    headers: {
-      'Authorization': `Bearer ${this.getToken()}`
-    }
-  });
-}
+  // CAMBIAR ROL DE USUARIO
+  changeRole(email: string, newRole: string): Observable<any> {
+    const body = { email, newRole };
+    return this.http.put(`${this.apiUrl}/admin/permisos`, body, {
+      headers: {
+        'Authorization': `Bearer ${this.getToken()}`
+      }
+    });
+  }
 
   // ACTUALIZAR USUARIOS
   updateUser(id: string): Observable<any> {
@@ -227,13 +229,14 @@ changeRole(email: string, newRole: string): Observable<any> {
     return this.http.put<User>(url, body);
   }
 
-  darBaja(userId: string,userData: { email: string; password: string }): Observable<User> {
+  darBaja(userId: string, email: string, password: string): Observable<User> {
     let headers = new HttpHeaders();
+    const userData = { email, password };
     headers = this.addAuthHeader(headers);
     const url = `${this.apiUrl}/users/darBaja/${userId}`;
     return this.http.post<User>(url, userData, { headers });
   }
   ngOnInit(): void {
-      
+
   }
 }
