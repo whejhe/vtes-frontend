@@ -61,20 +61,20 @@ export class RegisterComponent implements OnInit {
 
       this.authSvc.registerUser(userData).subscribe(
         (response: any) => {
-          
+
           this.showSucessMessage = true;
           this.showErrorMessage = false;
           setTimeout(() => {
             this.showSucessMessage = false;
           }, 5000);
           this.router.navigate(['/auth']);
-          
+
         },
         (error: any) => {
-          
+
           this.showErrorMessage = true;
           this.showSucessMessage = false;
-          this.errorMesage = this.authSvc.handleRegistrationError(error);
+          this.errorMesage = 'Ocurrio algun error durante el registro';
           setTimeout(() => {
             this.showErrorMessage = false;
           }, 5000);
@@ -105,7 +105,7 @@ export class RegisterComponent implements OnInit {
         inputConfirm?.setAttribute("type", "password");
         inputConfirmIcon?.setAttribute("src", "assets/img/eye-off.svg");
       }
-  
+
       if(input?.getAttribute("type") == "password"){
         input.setAttribute("type", "text");
         inputIcon?.setAttribute("src", "assets/img/eye.svg");
@@ -113,15 +113,15 @@ export class RegisterComponent implements OnInit {
         input?.setAttribute("type", "password");
         inputIcon?.setAttribute("src", "assets/img/eye-off.svg");
       }
-  
+
     }catch(error){
-      
+
     }
   }
 
 
   ngOnInit(): void {
-    
+
   }
 
 }

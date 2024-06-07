@@ -184,6 +184,25 @@ export class AuthService implements OnInit {
     }
   }
 
+  loginError(error: any): string {
+    const errorMessage = error?.error.error;
+
+    if (typeof errorMessage === 'string') {
+      if (errorMessage.includes('El email no es válido')) {
+        return 'El email no es válido';
+      } else if (errorMessage.includes('La contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial de entre !@#$%^&*')) {
+        return 'La contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial de entre !@#$%^&*';
+      } else if (errorMessage.includes('El usuario no existe')) {
+        return 'El usuario no existe';
+      } else if (errorMessage.includes('Contraseña incorrecta')) {
+        return 'Contraseña incorrecta';
+      }
+    }
+
+    return 'Ocurrió un error al iniciar sesión';
+  }
+
+
   getAvatarOptions(): Observable<string[]> {
     return this.http.get<string[]>(`${this.apiUrl}/vtes-backend/uploads/avatars/${name}`);
   }
