@@ -85,10 +85,7 @@
 
       <!--TIPO-->
       <div class="col-md-3">
-        <label for="marca" class="form-label">Type:</label>
-        <select id="type" class="form-select" formControlName="type">
-          <option value="{{type}}" *ngFor="let type of types">{{type}}</option>
-        </select>
+        <input type="hidden" class="form-control" formControlName="type">
       </div>
 
     </div>

@@ -41,7 +41,7 @@ export class UploadCardComponent implements OnInit {
     clan: new FormControl('not defined'),
     disciplines: new FormControl([]),
     group: new FormControl('not defined'),
-    type: new FormControl('not defined'),
+    type: new FormControl('Vampire'),
     isPublic: new FormControl('true'),
     description: new FormControl('not defined'),
     image: new FormControl(),

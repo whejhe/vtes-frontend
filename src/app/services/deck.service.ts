@@ -180,8 +180,17 @@ export class DeckService {
       return 'El autor del mazo es obligatorio';
     }else if('El estado del mazo es obligatorio'){
       return 'El estado del mazo es obligatorio';
-    }else{
+    }
+    else{
       return 'Ocurrio un error al crear el mazo';
+    }
+  }
+
+  deleteDeckError(error: any): string {
+    if (error.status === 400) {
+      return 'No tienes permiso para eliminar este mazo.';
+    } else {
+      return 'Ocurrio un error al eliminar el mazo.';
     }
   }
 }

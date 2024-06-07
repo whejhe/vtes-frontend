@@ -68,7 +68,7 @@ export class ListaDecksComponent implements OnInit {
         this.deckSvc.getDecks().subscribe(
             (decks: Deck[]) => {
                 this.decks = decks;
-                
+                console.log(this.decks);
             },
             (error) => {
                 
@@ -93,7 +93,7 @@ export class ListaDecksComponent implements OnInit {
                 
                 this.showErrorMessage = true;
                 this.showSucessMessage = false;
-                this.message = this.deckSvc.handleRegistrationError(error);
+                this.message = this.deckSvc.deleteDeckError(error);
                 setTimeout(() => {
                     this.showErrorMessage = false;
                 }, 5000);
