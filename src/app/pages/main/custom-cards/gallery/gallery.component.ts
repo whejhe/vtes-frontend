@@ -76,6 +76,8 @@ export class GalleryComponent implements OnInit {
   getCustomCards() {
     this.customSvc.getAllCustomCards().subscribe(
       (response) => {
+
+        response.reverse();
         this.customCards = response;
         this.filteredCards = response;
         this.totalItems = response.length;
