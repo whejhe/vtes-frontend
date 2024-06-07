@@ -107,4 +107,12 @@ export class EventService {
     }
   }
 
+  deleteEventError(error: any): string {
+    if (error.error.error.includes('No existe el evento')) {
+      return 'No existe el evento';
+    } else {
+      return 'No tienes permisos para eliminar el evento';
+    }
+  }
+
 }

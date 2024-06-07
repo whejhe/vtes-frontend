@@ -49,7 +49,8 @@ export class SideBarComponent {
   }
 
   getProfileImage(){
-    return this.imageSvc.getAvatarByName(this.user?.profileImage!);
+    console.log(this.authSvc, 'authSvc');
+    return this.imageSvc.getAvatarByName(this.authSvc?.avatarUrl);
   }
 
 

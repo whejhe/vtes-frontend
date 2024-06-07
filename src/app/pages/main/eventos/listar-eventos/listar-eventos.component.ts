@@ -61,7 +61,7 @@ export class ListarEventosComponent implements OnInit {
         
         this.showErrorMessage = true;
         this.showSucessMessage = false;
-        this.message = this.eventSvc.handleRegistrationError(error);
+        this.message = this.eventSvc.deleteEventError(error);
         setTimeout(() => {
           this.showErrorMessage = false;
         },5000);

@@ -1,5 +1,5 @@
 //front/src/app/services/auth.service.ts
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable, catchError, map, of, tap } from 'rxjs';
 import { environment } from '../../environments/environment.development';
@@ -19,6 +19,8 @@ export class AuthService implements OnInit {
 
   private apiUrl = environment.apiUrl || 'https://localhost';
   private currentUser: User | null = null;
+  private newImage: Boolean = false;
+  public avatarUrl: string = '';
   public token: string | null = localStorage.getItem('token');
 
 
@@ -33,8 +35,20 @@ export class AuthService implements OnInit {
   newAvatar(id: string, profileImage: string): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('profileImage', profileImage);
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`);
-    return this.http.put(`${this.apiUrl}/users/newAvatar/${id}`, { profileImage }, { headers });
+    this.setAvatar(profileImage);
+    this.newImage = true;
+    const req = new HttpRequest('PUT', `${this.apiUrl}/users/newAvatar/${id}`, formData, {
+      headers: this.addAuthHeader(new HttpHeaders()),
+      reportProgress: true,
+      responseType: 'text'
+    })
+    return this.http.request(req);
+    // const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getToken()}`);
+    // return this.http.put(`${this.apiUrl}/users/newAvatar/${id}`, { profileImage }, { headers });
+  }
+
+  setAvatar(profileImage: string): void {
+    this.avatarUrl = profileImage;
   }
 
   //TOKEN
@@ -42,6 +56,9 @@ export class AuthService implements OnInit {
     localStorage.setItem('token', token);
     this.isToken = true;
     this.currentUser = this.decodeToken(token);
+    console.log(this.decodeToken(token), 'tokean decodeado');
+
+    this.avatarUrl = this.currentUser?.profileImage || '';
     this.token = token;
   }
   getToken(): string | null {
@@ -51,11 +68,17 @@ export class AuthService implements OnInit {
       this.removeToken();
       this.currentUser = null;
       this.isToken = false;
+    } else {
+      if (!this.newImage) {
+        let decoded = this.decodeToken(localStorage.getItem("token")!)
+        this.avatarUrl = decoded?.profileImage!
+      }
     }
     return this.token;
   }
   removeToken(): void {
     localStorage.removeItem('token');
+    this.avatarUrl = '';
     this.token = null;
     this.currentUser = null;
     this.isToken = false;
@@ -64,6 +87,8 @@ export class AuthService implements OnInit {
   setToken(token: string) {
     localStorage.setItem('token', token);
     this.currentUser = this.decodeToken(token);
+    console.log(this.decodeToken(token), 'tokean decodeado');
+    this.avatarUrl = this.currentUser?.profileImage || '';
     this.isToken = true;
     this.token = token;
   }
@@ -98,6 +123,7 @@ export class AuthService implements OnInit {
       tap((data) => {
         this.saveToken(data.token);
         this.currentUser = data.user;
+        this.avatarUrl = data.user.profileImage;
       })
     );
   }
@@ -150,7 +176,7 @@ export class AuthService implements OnInit {
       return 'El precio del torneo no es valido, Ejemplo: 0.00';
     } else if (error.error.error.includes('El tipo de torneo es obligatorio')) {
       return 'El tipo de torneo es obligatorio';
-    } else if(error.error.error.includes('El email no coincide')) {
+    } else if (error.error.error.includes('El email no coincide')) {
       return 'El email no coincide';
     }
     else {

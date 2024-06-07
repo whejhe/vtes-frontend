@@ -10,6 +10,7 @@ export class StorageService {
 
   saveImage(key: string, image: string | null | undefined): void {
     localStorage.setItem(key, image || '');
+    
   }
 
   getImage(key: string): string | null | undefined {
