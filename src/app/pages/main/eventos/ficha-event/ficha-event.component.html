@@ -5,7 +5,9 @@
 </div>
 <div class="row center addUsers">
   <div *ngIf="currentUser && currentUser.role === 'ADMIN' || currentUser.role === 'SUPER_ADMIN'" class="center">
-    <button class="btn btn-dark" (click)="addUserByEmail()">Agregar Usuario por Correo Electrónico</button>
+    @if(isStarted == false){
+      <button class="btn btn-dark" (click)="addUserByEmail()">Agregar Usuario por Correo Electrónico</button>
+    }
   </div>
 </div>
 <div class="container">
@@ -29,8 +31,10 @@
         <!-- <p><strong>Inscritos:</strong>{{evento.participantesInscritos}}</p> -->
         <p><strong>Description: </strong>{{evento.description}}</p>
         <div class="buttons">
-          <button class="btn btn-dark" (click)="addUserToEvent()">Apuntarse</button>
-          <button class="btn btn-dark" (click)="deleteUserFromEvent()">Darse de Baja</button>
+          @if(isStarted == false){
+            <button class="btn btn-dark" (click)="addUserToEvent()">Apuntarse</button>
+            <button class="btn btn-dark" (click)="deleteUserFromEvent()">Darse de Baja</button>
+          }
           <input type="file" id="fileInput" style="display: none;" />
           <!-- <button class="btn btn-dark" onclick="document.getElementById('fileInput').click()">Subir Mazo</button> -->
           <span id="fileName"></span>
@@ -42,7 +46,7 @@
           @if(showButtonStartEvent == true && isStarted == true){
           <button class="btn btn-dark" (click)="stopEvent()">Detener torneo</button>
           }
-          <button class="btn btn-dark" disabled>Ranking</button>
+          <!-- <button class="btn btn-dark" disabled>Ranking</button> -->
         </div>
       </div>
     </div>

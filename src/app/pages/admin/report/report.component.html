@@ -11,24 +11,18 @@
           <th>Author of Card</th>
           <th>Name of Card</th>
           <th></th>
-          <th></th>
           <!-- <th>ID</th> -->
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let report of reports" 
+        <tr *ngFor="let report of reports"
         [class.selected]="report === selectedReport">
           <td>{{report.name}}</td>
-          <td><img class="view" src="../../../../assets/img/ojo.png" width="30" alt="" 
+          <td><img class="view" src="../../../../assets/img/ojo.png" width="30" alt=""
             (click)="viewReport(report)"></td>
           <td>{{report.email}}</td>
           <td>{{report.authorOfCard}}</td>
           <td>{{report.nameOfCard}}</td>
-          @if(report.notification == true){
-          <td><img src="../../../../assets/img/notification.png" width="40" alt=""></td>
-          }@else{
-          <td><img src="../../../../assets/img/check.png" width="40" alt=""></td>
-          }
           <td>
             <svg class="trash" id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20"
             fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -46,7 +40,7 @@
 @if(showSucessMessage){
   <div class="alert alert-dismissible alert-success">
     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    <strong>{{message}}</strong> 
+    <strong>{{message}}</strong>
   </div>
   }
 

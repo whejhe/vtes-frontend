@@ -3,7 +3,22 @@
 }
 
 .container{
-  width: 100%;
+  width: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2em auto;
+  padding-top: 1em;
+  align-items: center;
+  justify-content: center;
+}
+
+.container .nav{
+  justify-content: center;
+  width: fit-content;
+  font-size: 1.3em;
+  font-weight: lighter;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .header{
@@ -13,7 +28,7 @@
     min-height: 110px;
     max-height: 200px;
     z-index: 100;
-    background-color: rgb(0, 0, 0);
+    background-color: rgba(26, 25, 25, 0.959);
 }
 
 .profile{
@@ -41,39 +56,9 @@
     padding: 0;
 }
 
-.container-logo{
-  position: relative;
-  display: inline;
-  width: 30px;
-  top: 10px;
-  left: 150px;
-  z-index: -1;
-  .logo{
-    width: 90px;
-    top: -0.8em;
-    position: absolute;
-    z-index: -1;
-  }
-  .titulo-page{
-    position: absolute;
-    top: 0.9em;
-    left: 3em;
-    font-size: 2em;
-    opacity: 1;
-  }
-}
-
-// .titulo{
-//   display: inline;
-// }
-
-ul{
-  padding-right: 0;
-  margin-right: -3em;
-  padding-top: 2em;
-}
 
 .menu-decks{
+  color: whitesmoke;
   a{
     color: white
   }
@@ -83,7 +68,10 @@ ul{
 }
 
 .decks{
-  background-color: #212529;
+  background-color: #202020;
+  border-bottom: 2px solid #d60e0e;
+  border-left: 2px solid #d60e0e;
+  border-right: 2px solid #d60e0e;
   li{
     padding: 0.2em;
   }
@@ -95,14 +83,6 @@ ul{
   }
 }
 
-.nav-list{
-  border-bottom: 2px solid #e6e3e3;
-  width: fit-content;
-}
-.nav-list:hover{
-  border-bottom: 2px solid #d60e0e;
-}
-
 .titulo-page{
   transition-duration: 0.3s;
   padding-bottom: 0.4em;
@@ -112,22 +92,22 @@ ul{
   border-bottom: #d60e0e solid 2px;
 }
 
-@media (min-width: 200px) and (max-width: 991px) {
+@media (min-width: 200px) and (max-width: 691px) {
 
-  .container-logo{
-    visibility: hidden;
+  .container{
+    width: fit-content;
+    display: block;
+    justify-content: right;
   }
+  .container .nav{
+    display: block;
+    margin-top: -1.3em;
+  }
+
+  .top-space{
+    height: 220px;
+  }
+
 
 }
 
-// @media (max-width: 768px) {
-//   .nav {
-//     display: none;
-//   }
-//   .nav-icon {
-//     display: block;
-//   }
-//   .nav-icon:hover + .nav {
-//     display: block;
-//   }
-// }
